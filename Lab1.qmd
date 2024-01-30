@@ -277,7 +277,7 @@ abs(x[50])
 
 -   To plot values of $X_t$ against $t\in\{1,2,\ldots,n\}$, we can use `plot` function
 
-```{r}
+```{r dev.args = list(bg = 'transparent')}
 #| echo: true
 t <- 1:n
 plot(t,x)

@@ -27,10 +27,6 @@ ul > li > ul > li > a.nav-link::before {
   }
 
 
-.cell-output-display {
-    background-color: rgb(255, 245, 231);
-}
-
 .cell-output-display::after {
     box-sizing: content-box;
 }
@@ -82,23 +78,29 @@ ul {
   padding-left: 1rem;
 }
 
-.sourceCode.cell-code {  border-left: 4px solid rgb(8, 71, 12);
+.sourceCode.cell-code {  
+  border-left: 4px solid rgb(8, 71, 12);
   margin-top: 0px;
   margin-left: 1rem;
 }
 
-.cell-output.cell-output-display{
+.cell-output-display{
   border-left: 4px double rgb(71, 8, 24);
   padding-left: 5px;
+  margin-top: 0px;
+  margin-left: 1rem;
+  background-color: rgb(255, 245, 231);
 }
 
+
+/* 
 .img .cell-output.cell-output-display{
   border-left: 0px;
-}
+} */
 
-.img .cell-output-display {
+/* .img .cell-output-display {
   background-color: white;
-}
+} */
 
 .remark.proof {
   margin-top: 10px;
