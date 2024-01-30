@@ -1,0 +1,18 @@
+---
+title: "Lab Assignments"
+subtitle: "MA-365/M65: Risk and Survival Models"
+format: html
+---
+
+# Site overview {.unnumbered}
+
+This site contains Lab assignments and their solutions.
+
+# [Lab 1](Lab1.qmd) {.unnumbered}
+In this lab you may learn about the following topics:
+
+* a
+
+* b 
+
+<!-- You may try first or proceed straight to  [Lab 1 - Solutions](Lab1-solutions.qmd) -->
