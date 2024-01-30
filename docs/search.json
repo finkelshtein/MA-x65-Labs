@@ -58,7 +58,7 @@
     "href": "Lab1.html#section-3",
     "title": "Lab 1: Introduction",
     "section": "5.1 ",
-    "text": "5.1 \n\n\nConsider now the simple symmetric random walk: \\[\nX_0=0, \\qquad X_n=\\sum_{i=1}^n Z_i.\n\\]\nVector \\(X=(X_1,\\ldots,X_n)\\) can be then obtained using cumsum function.\nSet set.seed(100) and choose \\(n=50\\). Get vector \\(X\\).\n\n\nCheck its \\(48\\)-th component:\n\nx[48]\n\n[1] -6\n\n\n\nFind the distance from \\(X_{50}\\) to the origin, using function abs which return the absolute value of a number.\n\nCheck the answer.\n\n\n[1] 4",
+    "text": "5.1 \n\nPlot graph of \\(y=x^2\\) on \\(x\\in[-10,10]\\). (Hint: divide \\([-10,10]\\) on many small pieces and connect values of \\(y\\) at ends of these pieces by straight lines).\n\nCheck the answer:",
     "crumbs": [
       "Labs - Problems",
       "Lab 1 - Problems"

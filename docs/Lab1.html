@@ -213,6 +213,10 @@ window.Quarto = {
   <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1"><span class="header-section-number">4.2</span> </a></li>
   <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2"><span class="header-section-number">4.3</span> </a></li>
   </ul></li>
+  <li><a href="#plotting" id="toc-plotting" class="nav-link" data-scroll-target="#plotting"><span class="header-section-number">5</span> Plotting</a>
+  <ul class="collapse">
+  <li><a href="#section-3" id="toc-section-3" class="nav-link" data-scroll-target="#section-3"><span class="header-section-number">5.1</span> </a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -628,6 +632,53 @@ Y_k = X_1+\ldots+X_k, \qquad 1\leq k\leq 2024.
 <pre><code>[1]  6 14  2</code></pre>
 </div>
 </div>
+</section>
+</section>
+<section id="plotting" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Plotting</h1>
+<ul>
+<li>To plot values of a vector <span class="math inline">\(y\)</span> against vector <span class="math inline">\(x\)</span>, we can use <code>plot</code> function, e.g.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">16</span></span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>,<span class="dv">8</span>)</span>
+<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x,y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Lab1_files/figure-html/unnamed-chunk-37-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>To have a graph made by lines, use the following modification</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, y, <span class="at">type=</span><span class="st">'l'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Lab1_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="section-3" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="section-3"><span class="header-section-number">5.1</span> </h2>
+<div class="task">
+<p>Plot graph of <span class="math inline">\(y=x^2\)</span> on <span class="math inline">\(x\in[-10,10]\)</span>. (<em>Hint:</em> divide <span class="math inline">\([-10,10]\)</span> on many small pieces and connect values of <span class="math inline">\(y\)</span> at ends of these pieces by straight lines).</p>
+</div>
+<p>Check the answer:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Lab1_files/figure-html/unnamed-chunk-39-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 <!-- # Discrete random variables
 
 -   To generate several *independent identically distributed discrete* random variables, one uses function `sample`.
@@ -650,7 +701,7 @@ z
 ::: {.cell-output .cell-output-stdout}
 
 ```
- [1]  1 -1 -1  1  1  1  1  1 -1  1
+ [1]  1 -1 -1  1 -1  1  1  1  1 -1
 ```
 
 
@@ -671,7 +722,7 @@ z
 ::: {.cell-output .cell-output-stdout}
 
 ```
- [1]  1  1  1 -1  1 -1  1  1  1  1
+ [1]  1 -1 -1 -1 -1 -1 -1  1  1  1
 ```
 
 
@@ -751,7 +802,7 @@ plot(t,x)
 ```
 
 ::: {.cell-output-display}
-![](Lab1_files/figure-html/unnamed-chunk-42-1.png){width=672}
+![](Lab1_files/figure-html/unnamed-chunk-45-1.png){width=672}
 :::
 :::
 
@@ -766,7 +817,7 @@ plot(t,x,type='l')
 ```
 
 ::: {.cell-output-display}
-![](Lab1_files/figure-html/unnamed-chunk-43-1.png){width=672}
+![](Lab1_files/figure-html/unnamed-chunk-46-1.png){width=672}
 :::
 :::
 
@@ -804,7 +855,7 @@ Compare the output (your graphs do not need to be aligned in the same line):
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](Lab1_files/figure-html/unnamed-chunk-45-1.png){width=672}
+![](Lab1_files/figure-html/unnamed-chunk-48-1.png){width=672}
 :::
 :::
 
@@ -814,7 +865,7 @@ Compare the output (your graphs do not need to be aligned in the same line):
 
 ::: {.cell}
 ::: {.cell-output-display}
-![](Lab1_files/figure-html/unnamed-chunk-46-1.png){width=672}
+![](Lab1_files/figure-html/unnamed-chunk-49-1.png){width=672}
 :::
 :::
 
