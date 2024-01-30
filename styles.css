@@ -85,7 +85,7 @@ ul {
   background-color: #d9e3e4;
 }
 
-.cell-output-display{
+.cell-output-display, .cell-output.cell-output-stdout{
   border-left: 4px double rgb(71, 8, 24);
   padding-left: 5px;
   margin-top: 0px;
