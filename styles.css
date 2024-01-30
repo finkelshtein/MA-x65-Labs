@@ -82,6 +82,7 @@ ul {
   border-left: 4px solid rgb(8, 71, 12);
   margin-top: 0px;
   margin-left: 1rem;
+  background-color: #d9e3e4;
 }
 
 .cell-output-display{
@@ -127,5 +128,9 @@ ul {
 }
 
 body {
+  background-color: rgba(236, 233, 240, 0.95);
+}
+
+nav.sidebar.sidebar-navigation:not(.rollup) {
   background-color: rgba(236, 233, 240, 0.95);
 }
