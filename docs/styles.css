@@ -123,3 +123,7 @@ ul {
   margin-inline-start: 0px;
   margin-inline-end: 0px;
 }
+
+body {
+  background-color: rgba(236, 233, 240, 0.95);
+}
