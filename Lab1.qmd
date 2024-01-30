@@ -1,5 +1,5 @@
 ---
-title: "Lab 1"
+title: "Lab 1:  Introduction"
 format: 
     html:
         echo: false
@@ -12,10 +12,10 @@ $$
 $$
 :::
 
-# Introduction to R
+# About R
 
 :::{.topic}
-Links1
+Links
 :::
 
 -   [R](https://en.wikipedia.org/wiki/R_(programming_language)) is a programming language widely used for statistical computing, (big) data analysis, machine learning, and other areas aimed to retrieve, clean, analyze, visualize, and present data.
@@ -24,11 +24,12 @@ Links1
 
 -   [RStudio](https://en.wikipedia.org/wiki/RStudio) Links to an external site.is an Integrated Development Environment (IDE) for R that includes various tools for effective and comfortable work with R.
 
--   You can download the free version of RStudio Desktop from [www.rstudio.com](https://www.rstudio.com)
+-   You can download the free version of RStudio Desktop from [posit.co](https://posit.co/)
 
-:::{.topic}
-Arithmetic operations
-:::
+-  You can also use a cloud version of RStudio at [posit.cloud](https://posit.cloud/). 
+
+# Arithmetic operations
+
 
 -   R can be used as a calculator:
 
@@ -51,22 +52,48 @@ or
 2/3
 ```
 
-:::{.topic}
-Vectors
+- We can also use powers:
+```{r}
+#| echo: true
+2**3
+```
+and BODMAS works
+```{r}
+#| echo: true
+5*2**3
+```
+
+Note that `a**b` and `a^b` mean the same.
+
+- We can also check some equalities or inequalities with R:
+```{r}
+#| echo: true
+4**2 == 2**4
+```
+or
+```{r}
+#| echo: true
+24 ** 23 > 23 ** 24
+```
+
+:::{.remark}
+Remember that `TRUE` is just `1` and `FALSE` is just `0`.
 :::
+
+# Vectors
 
 -   One of the basic and widely used data types in R is *vectors*. To create a vector, one uses function `c(...)`:
 
 ```{r}
 #| echo: true
-c(1,2,3,4,5)
+c(2,7,4,1,3)
 ```
 
--   One can, of course, assign the result to a variable. A good style is to use `<-` instead of `=` for the assigning (though the latter will not lead to a mistake in the most of cases). The RStudio shortcut for this is "Alt -".
+-   One can, of course, assign the result to a variable. A good style is to use `<-` instead of `=` for the assigning (though the latter will not lead to a mistake in the most of cases). The RStudio shortcut for this is `Alt -`.
 
 ```{r}
 #| echo: true
-a <- c(1,2,3,4,5) 
+a <- c(2,7,4,1,3)
 ```
 
 -   Operations with vectors are made component-wise. For multiplication on a scalar, it is as expected:
@@ -80,7 +107,7 @@ a <- c(1,2,3,4,5)
 
 ```{r}
 #| echo: true
-b <- c(10,15,20,25,30)
+b <- c(5,10,20,15,10)
 ```
 
 then
@@ -94,11 +121,28 @@ a*b
 
 ```{r}
 #| echo: true
-a^2
+a**2
 ```
 
+- We can compare vectors component-wise:
+```{r}
+#| echo: true
+c(1,2) < c(2,3)
+```
+and
+```{r}
+#| echo: true
+c(1,2) < c(1,3)
+```
+Moreover, one can compare vector with a number, in this case, we compare **each** vector's component with that number:
+```{r}
+#| echo: true
+a**2 > 10
+```
+
+
 :::{.topic}
-Defining vectors
+Patterns
 :::
 
 -   If coordinates of a vector follow some pattern, one can use special function to define it
@@ -122,12 +166,65 @@ or
 seq(1,10,0.2)
 ```
 
+Strictly speaking, all arguments of the function `seq` (and any other function in R) has special names:
+```{r}
+#| echo: true
+seq(from=1, to=10, by=0.2)
+```
+However, if we keep the order of arguments, we may omit their names.
+
+On the other hand, we may change the order if needed, but then we need to specify the names:
+
+```{r}
+#| echo: true
+seq(to=10, from=1, by=0.2)
+```
+whereas `seq(10,1,0.2)` would lead to an error (as R understands the latter as `seq(to=1, from=10, by=0.2)`).
+
+
+Also this function has other arguments. You may read more about this (and any other function) by typing `?seq` **in RStudio console**.
+
+- If the step `by` is equal to $\pm1$, there is a shorter form:
+```{r}
+#| echo: true
+1:10
+```
+or 
+```{r}
+#| echo: true
+10:1
+```
+
 -   To get a vector with identical coordinates, we use `rep` function:
 
 ```{r}
 #| echo: true
 rep(1,10)
 ```
+
+We can also repeat a vector:
+```{r}
+#| echo: true
+rep(1:3,5)
+```
+or
+```{r}
+#| echo: true
+rep(seq(2,3,0.5), 4)
+```
+
+- Finally, if we want to repeat each coordinate of a vector, we use argument `each`:
+```{r}
+#| echo: true
+rep(1:3, each=5)
+```
+or
+```{r}
+#| echo: true
+rep(seq(2,3,0.5), each=4)
+```
+
+# Further operations with vectors
 
 :::{.topic}
 Summation
@@ -184,7 +281,7 @@ of the probabilities, and assign it to R-variable `p`.
 $$
 \E(X)=\sum_{i=1}^6 x_ip_i=x_1p_1+\ldots x_6p_6=x\cdot p.
 $$ 
-Calculate $\E(X)$.
+Calculate $\E(X)$ (using the previously considered functions).
 ::: 
 
 Check the answer.
@@ -195,6 +292,8 @@ p <- rep(1/6, 6)
 sum(x*p)
 ```
 
+
+
 ##
 :::{.task}
 Recall that the variance of a random variable can be found by the following formulas: 
@@ -202,15 +301,90 @@ $$
 \begin{aligned}\mathrm{Var}(X) &= \mathbb{E}\Bigl(\bigl(X-\mathbb{E}(X)\bigr)^2\Bigr)\\
     &= \sum_{i=1}^6 \bigl(x_i-\mathbb{E}(X)\bigr)^2p_i\end{aligned}.
 $$
-Find $\mathrm{Var}(X)$. 
+Find $\mathrm{Var}(X)$ (using the previously considered functions). 
 :::
 
 Check the answer:
 ```{r}
-sum(p*(x-sum(x*p))^2)
+sum(p*(x-sum(x*p))**2)
 ```
 
-# Random variables
+## 
+:::{.task}
+Let $X=(1,2,\ldots,2024)$ and $Y=(Y_1,\ldots,Y_{2024})$ with 
+
+$$
+Y_k = X_1+\ldots+X_k, \qquad 1\leq k\leq 2024.
+$$
+
+Find how many components of $Y$ are bigger than $10^6$. (*Hint*: remember that `True` stands for `1`).
+
+:::
+
+Check the answer:
+```{r}
+x <- 1:2024
+y <- cumsum(x)
+sum(y>10**6)
+```
+
+:::{.topic}
+Slicing
+:::
+
+- If `x` is a vector, to access its component with index `i` one needs to use `x[i]`:
+```{r}
+#| echo: true
+a <- seq(2,20,2)
+a[3]
+```
+
+:::{.remark}
+Note that the indexation in R starts with `1` (in contrast to e.g. Python).
+:::
+
+- We can also get a slice of a vector by specifying the range of indexes, e.g.
+```{r}
+#| echo: true
+a[3:5]
+```
+
+- The indexes do not need to follow some order:
+```{r}
+#| echo: true
+a[c(3,7,1)]
+```
+
+# Plotting
+
+-   To plot values of a vector $y$ against vector $x$, we can use `plot` function, e.g.
+```{r dev.args = list(bg = 'transparent')}
+#| echo: true
+x <- 1:10
+y <- cumsum(x)
+plot(x,y)
+```
+
+-   To have a graph made by lines, use the following modification
+
+```{r dev.args = list(bg = 'transparent')}
+#| echo: true
+plot(x,y, type='l')
+```
+
+## 
+:::{.task}
+Plot graph of $y=x^2$ on $x\in[-10,10]$. (*Hint:* divide $[-10,10]$ on many small pieces and connect values of $y$ at ends of these pieces by straight lines).
+:::
+
+Check the answer:
+```{r dev.args = list(bg = 'transparent')}
+x <- seq(-10, 10, 0.1)
+y <- x**2
+plot(x,y, type='l')
+```
+
+<!-- # Discrete random variables
 
 -   To generate several *independent identically distributed discrete* random variables, one uses function `sample`.
 
@@ -235,7 +409,7 @@ z <- sample(x=c(-1,1),prob=c(1/2,1/2),size = n, replace = T)
 z
 ```
 
--   If we want to fix the output of a random variable, we should type `set.seed(N)` at the beginning of the code, where `N` is an arbitrary natural number.
+-   If we want to fix the output of a random variable, we should type `set.seed(N)` right before the code, where `N` is an arbitrary natural number.
 
 ##
 :::{.task}
@@ -264,7 +438,7 @@ x[48]
 ```
 
 :::{.subtask}
- Find the distance from $X_{50}$ to the origin, using function `abs`. 
+ Find the distance from $X_{50}$ to the origin, using function `abs` which return the absolute value of a number. 
 :::
 
 Check the answer.
@@ -328,4 +502,4 @@ SimpleRW(0.6,1000)
 :::
 :::
 
-One can see the trend: in the first case, the probability $q=1-p$ that $Z=-1$ is smaller hence process $X_n$ will go down more often.
+One can see the trend: in the first case, the probability $q=1-p$ that $Z=-1$ is smaller hence process $X_n$ will go down more often. -->
