@@ -166,7 +166,7 @@ or
 seq(1,10,0.2)
 ```
 
-Strictly speaking, all arguments of the function `seq` (and any other function in R) has special names:
+Strictly speaking, all arguments of the function `seq` (and any other function in R) have special names:
 ```{r}
 #| echo: true
 seq(from=1, to=10, by=0.2)
@@ -179,7 +179,7 @@ On the other hand, we may change the order if needed, but then we need to specif
 #| echo: true
 seq(to=10, from=1, by=0.2)
 ```
-whereas `seq(10,1,0.2)` would lead to an error (as R understands the latter as `seq(to=1, from=10, by=0.2)`).
+whereas `seq(10,1,0.2)` would lead to an error (as R understands the latter as `seq(from=10, to=1, by=0.2)`).
 
 
 Also this function has other arguments. You may read more about this (and any other function) by typing `?seq` **in RStudio console**.
