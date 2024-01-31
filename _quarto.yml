@@ -34,6 +34,11 @@ website:
         contents:
           - href: Lab1.qmd
             text: Lab 1 - Problems
+      - text: "---"
+      - section: "Labs - Solutions"
+        contents:
+          - href: Lab1-Solutions.qmd
+            text: Lab 1 - Solutions
 
 
 format:
