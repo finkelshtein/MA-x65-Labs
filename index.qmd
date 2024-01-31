@@ -19,4 +19,6 @@ In this lab you may learn about the following topics:
 
 * Further operations with vectors
 
+* First steps in plotting
+
 <!-- You may try first or proceed straight to  [Lab 1 - Solutions](Lab1-solutions.qmd) -->

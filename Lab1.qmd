@@ -360,16 +360,16 @@ a[c(3,7,1)]
 -   To plot values of a vector $y$ against vector $x$, we can use `plot` function, e.g.
 ```{r dev.args = list(bg = 'transparent')}
 #| echo: true
-x <- 1:10
-y <- cumsum(x)
+x <- 1:16
+y <- rep(1:2,8)
 plot(x,y)
 ```
 
 -   To have a graph made by lines, use the following modification
 
 ```{r dev.args = list(bg = 'transparent')}
-#| echo: true
-plot(x,y, type='l')
+#| echo: true 
+plot(x, y, type='l')
 ```
 
 ## 
