@@ -388,7 +388,7 @@ f_X(x)=\frac{\lambda^\alpha}{\Gamma(\alpha)}x^{\alpha-1} e^{-\lambda x}, \quad x
 <p><span class="math display">\[
 F_X(x) = \P(X\leq x) = p,
 \]</span></p>
-<p>i.e.&nbsp;<span class="math inline">\(x=F_X^{-1}(p)\)</span>. The corresponding R-function has prefix <code>q</code>:</p>
+<p>i.e.&nbsp;<span class="math inline">\(x=F_X^{-1}(p)\)</span>. The corresponding R-function has prefix <code>q</code>. For example, for <span class="math inline">\(X\sim\Gamma(0.1,2)\)</span>, to find <span class="math inline">\(x\)</span> such that <span class="math inline">\(F_X(x)=0.2\)</span> we can use the following code:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">qgamma</span>(<span class="fl">0.2</span>, <span class="at">shape =</span> <span class="fl">0.1</span>, <span class="at">rate =</span> <span class="dv">2</span>)</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -484,9 +484,9 @@ h_X(x) := \frac{f_X(x)}{1-F_X(x)}.
 \]</span> Let <span class="math inline">\(X\sim \mathcal{N}(4, 0.4)\)</span>. Calculate <span class="math inline">\(h_X(2)\)</span>.</p>
 </div>
 <p>Check the answer:</p>
-<div class="cell" data-hash="Lab2_cache/html/unnamed-chunk-20_155c93a761875e6b9a7b99958736c9e8">
+<div class="cell" data-hash="Lab2_cache/html/unnamed-chunk-20_283d9d0cd5ccf48ea1d9e2df6952865b">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 12.66962</code></pre>
+<pre><code>[1] 0.004253513</code></pre>
 </div>
 </div>
 

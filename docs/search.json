@@ -190,7 +190,7 @@
     "href": "Lab2.html#section-5",
     "title": "Lab 2: Probability Distributions",
     "section": "4.2 ",
-    "text": "4.2 \n\nThe hazard function of a random variable \\(X\\) is defined as follows: \\[\nh_X(x) := \\frac{f_X(x)}{1-F_X(x)}.\n\\] Let \\(X\\sim \\mathcal{N}(4, 0.4)\\). Calculate \\(h_X(2)\\).\n\nCheck the answer:\n\n\n[1] 12.66962",
+    "text": "4.2 \n\nThe hazard function of a random variable \\(X\\) is defined as follows: \\[\nh_X(x) := \\frac{f_X(x)}{1-F_X(x)}.\n\\] Let \\(X\\sim \\mathcal{N}(4, 0.4)\\). Calculate \\(h_X(2)\\).\n\nCheck the answer:\n\n\n[1] 0.004253513",
     "crumbs": [
       "Labs - Problems",
       "Lab 2 - Problems"

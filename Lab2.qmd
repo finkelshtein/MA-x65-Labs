@@ -156,7 +156,7 @@ $$
 F_X(x) = \P(X\leq x) = p,
 $$
 
-i.e. $x=F_X^{-1}(p)$. The corresponding R-function has prefix `q`:
+i.e. $x=F_X^{-1}(p)$. The corresponding R-function has prefix `q`. For example, for $X\sim\Gamma(0.1,2)$, to find $x$ such that $F_X(x)=0.2$ we can use the following code:
 ```{r}
 #| echo: true
 #| code-fold: false
@@ -266,6 +266,6 @@ Let $X\sim \mathcal{N}(4, 0.4)$. Calculate $h_X(2)$.
 
 Check the answer:
 ```{r}
-sigma = 0.4**0.5 # square root of sigma^2 = 0.4
-dnorm(2, 4, sigma)/pexp(2, 4, sigma, lower.tail = F)
+sigma = sqrt(0.4) # square root of sigma^2 = 0.4
+dnorm(2, 4, sigma)/pnorm(2, 4, sigma, lower.tail = F)
 ```
