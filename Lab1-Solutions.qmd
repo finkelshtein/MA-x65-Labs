@@ -408,7 +408,7 @@ plot(x,y)
 plot(x, y, type='l')
 ```
 
-## 
+## {#sec-plotingtask}
 :::{.task}
 Plot graph of $y=x^2$ on $x\in[-10,10]$. (*Hint:* divide $[-10,10]$ on many small pieces and connect values of $y$ at ends of these pieces by straight lines).
 :::

@@ -1,0 +1,30 @@
+<!-- 
+
+<!-- 
+```{r dev.args = list(bg = 'transparent')}
+#| echo: false
+x <- seq(0, 3, 0.01)
+y <- dlnorm(x, meanlog = 0.01, sdlog = 0.2)
+z <- dnorm(x, mean = exp(0.01), sd =0.2)
+plot(x,y, type="l", xlab="x value", ylab="Density", main="Log-normal distribution density")
+lines(x,z, type="l", col="red")
+```    -->
+
+
+<!-- 
+
+##
+:::{.task}
+The **hazard function** of a random variable $X$ is defined as follows:
+$$
+h_X(x) := \frac{f_X(x)}{1-F_X(x)}.
+$$
+Let $X\sim Exp(0.3)$. Calculate $h_X(2)$.
+:::
+
+Check the answer:
+```{r}
+dexp(2, 0.3)/pexp(2, 0.3, lower.tail = F)
+```
+
+-   For $Y\sim\exp(0.4)$ find $y$ such that $\P(Y\leq y)=0.2$. Use the quantile function `qexp`. Store the value at `q`, check the answer. --> 
