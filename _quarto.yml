@@ -41,6 +41,8 @@ website:
         contents:
           - href: Lab1-Solutions.qmd
             text: Lab 1 - Solutions
+          - href: Lab2-Solutions.qmd
+            text: Lab 2 - Solutions
 
 
 format:
