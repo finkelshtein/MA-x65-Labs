@@ -267,7 +267,7 @@ lines(x, z, col = 'red')
 legend(x = "topright", 
        legend = c("gamma=3", "gamma=0.3"),
        lty = c(1, 1),       
-       col = c('red', 'blue'),
+       col = c('blue', 'red'),
        lwd = 2,            
        bg = 'light blue')  
 ```
