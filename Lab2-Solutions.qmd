@@ -229,7 +229,7 @@ rgamma(2, shape = 0.1, rate = 0.2)
 To fix the output, we should "set a seed": write the code `set.seed(m)` with any natural number instead of `m`. For each `m`, there will be a fixed output. If you change `m`, the output will also changes.
 
 ##
-:::{.task}
+:::{.task #sec-seed}
 Set the seed $123$, i.e. write `set.seed(123)` before your code. 
 Generate $10000$ values of $X\sim\Gamma(2,3)$. Find the mean (average) of these values and assign it to the variable `m`.  You may either use `sum` function discussed in Lab 1 (and average it) or `mean` function (use `?mean` if experience difficulties). 
 :::

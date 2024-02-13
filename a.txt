@@ -28,3 +28,20 @@ dexp(2, 0.3)/pexp(2, 0.3, lower.tail = F)
 ```
 
 -   For $Y\sim\exp(0.4)$ find $y$ such that $\P(Y\leq y)=0.2$. Use the quantile function `qexp`. Store the value at `q`, check the answer. --> 
+
+- The body of the function (the code inside the curled brackets) may contain several commands. For example, the following function calculates the area of a triangle with given lengths and returns $0$ if such triangle does not exist (the content of the function is not related to this module):
+```{r}
+#| echo: true
+#| code-fold: false
+heron <- function(a,b,c){
+    p <- (a+b+c)/2
+    if (p > max(a,b,c)){
+        s <- sqrt(p*(p-a)*(p-b)*(p-c))
+        return(s)
+    }
+    else {
+        return(0)
+    }
+}
+heron(3,4,5)
+```

@@ -256,7 +256,7 @@ plot(x,y, type="l", xlab="x value", ylab="Density", main="Log-normal distributio
 ```   
 
 ##
-:::{.task}
+:::{.task #sec-hazard}
 The **hazard function** of a random variable $X$ is defined as follows:
 $$
 h_X(x) := \frac{f_X(x)}{1-F_X(x)}.

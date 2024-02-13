@@ -36,6 +36,8 @@ website:
             text: Lab 1 - Problems
           - href: Lab2.qmd
             text: Lab 2 - Problems
+          - href: Lab3.qmd
+            text: Lab 3 - Problems
       - text: "---"
       - section: "Labs - Solutions"
         contents:

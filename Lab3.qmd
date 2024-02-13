@@ -1,0 +1,326 @@
+---
+title: "Lab 3:  Libraries, Functions, Loops"
+format: 
+    html:
+        echo: false
+---
+
+::: hidden
+$$
+  \renewcommand{\P}{\mathbb{P}}
+  \newcommand{\E}{\mathbb{E}}
+$$
+:::
+
+# Weibull distribution 
+
+-   Recall that continuous random variable $X$ has the Weibull distribution with scale $\alpha$ and shape $\beta$, in notations (see Lecture Notes) $X\sim W(\alpha,\beta)$ if its cumulative distribution function is 
+$$ 
+F(x) = \P(X\leq x) = 1- e^{-\alpha x^\beta}, \qquad x\geq0 
+$$ {#eq-1}
+and its density is, hence, 
+$$ 
+f(x) = \alpha\beta x^{\beta-1} e^{-\alpha x^\beta}. 
+$$
+
+- Also, see Lecture Notes,
+$$
+\E(X)= \Gamma\Bigl(1+\frac{1}{\beta}\Bigr)\alpha^{-\frac{1}{\beta}}.
+$$ {#eq-meanW}
+
+-   Note that the hazard function (see [Task 4.2 of Lab 2](Lab2.qmd#sec-hazard)) can be calculated here explicitly:
+$$ 
+h(x)=\frac{f_X(x)}{1-F_X(x)}= \alpha \beta x^{\beta-1}. 
+$$
+
+-   The corresponding functions built in R use another scale parameter:
+$$ 
+F(x) =  1- e^{-(x/\sigma)^\beta},
+$$  {#eq-2}
+i.e. the shape $\beta$ is the same in both cases, and the scale parameters are related as follows
+$$ 
+\alpha = \sigma^{-\beta}, \qquad \sigma=\alpha^{-\frac{1}{\beta}}.
+$$ {#eq-3}
+
+- The names of built-in functions with the parametrisation as in @eq-2 are `dweibull` for PDF, `pweibull` for CDF, `qweibull` for quantiles, `hweibull` for the hazard function, and `rweibull` for generating random values.
+
+- You are advised to specify the name of the argument explicitly, e.g. `rweibull(5,shape=0.25,scale=3)` would generate $5$ Weibull random variables with $\beta = 0.25$ and $\sigma=3$. 
+
+- However, if it is given that e.g. $X\sim W(0.76,0.25)$ then we will understand that $\alpha=0.76$, $\beta=0.25$ in the notations of @eq-1. Then we can calculate in R the value of $\sigma$ using a formula from @eq-3, and use the above mentioned functions.
+
+##
+:::{.task}
+Set seed `131` (see [Task 3.2 of Lab 2](Lab2-Solutions.qmd#sec-seed)). Generate $10^6$ random variables distributed with $W(0.76,0.25)$ (i.e. calculate $\sigma$ as it explained above and use the needed function described above); and assign this to a vector. Calculate the sample mean of these values (and assign it to a variable). Calculate the expected value of $X\sim W(0.76,0.25)$ using @eq-meanW and assign it to another variable: note that, for the Gamma-function $\Gamma(x)$, you can use use R-code `gamma(x)` (notice the small first letter; e.g. `gamma(5)` will return `24`). Finally, find the absolute value of the difference between the found sample mean and the expected value.
+:::
+
+Check your answer:
+```{r}
+alpha = 0.76
+beta = 0.25
+sigma = alpha**(-1/beta)
+set.seed(131)
+x <- rweibull(10**6, shape=beta, scale=sigma)
+m <- mean(x)
+e <- gamma(1+1/beta) * alpha**(-1/beta)
+abs(m-e)
+```
+
+- Another way, instead of recalculating the parameters, is to use another functions designed to deal with the parametrisation @eq-1. One can either define needed functions or use the functions defined in external libraries (packages).
+
+- We start with defining a new function. For example, consider the function which returns, for two variables, the difference of their squares. Let's call this function `sq_diff`.
+```{r}
+#| echo: true
+#| code-fold: false
+sq_diff <- function(x,y) {
+    x**2 - y**2    
+}
+```
+Then we can use anywhere below, e.g.
+```{r}
+#| echo: true
+#| code-fold: false
+sq_diff(4,5)
+```
+
+- Note that a more formal way to define this function would be
+```{r}
+#| echo: true
+#| code-fold: false
+sq_diff <- function(x,y) {
+    ans <- x**2 - y**2    
+    return(ans)
+}
+```
+The function may contain any number of the code lines.
+
+- In particular, the code inside a function may call another function. For example, the build-in R function `sin` takes arguments in radians:
+
+```{r}
+#| echo: true
+#| code-fold: false
+sin(pi/6)
+```
+
+Let's define another function which arguments in degrees, recall that $180^\circ$ is $\pi$ radians, i.e. $x^\circ$ is $\dfrac{x}{180}\pi$ radians. Then we can write
+```{r}
+#| echo: true
+#| code-fold: false
+sindeg <- function(x){
+    sin(pi*x/180)
+}
+```
+and then we can use it:
+```{r}
+#| echo: true
+#| code-fold: false
+sindeg(30)
+```
+
+
+##
+:::{.task}
+Define the function `rweibull65` which would have three arguments `n`, `shape`, `scale`, where shape corresponds to $\beta$ and `scale` to $\alpha$ in @eq-1, and which would return `n` Weibull random  values distributed with $W(\alpha,\beta)$ with `shape`$=\beta$ and `scale`$=\alpha$; so that this function `rweibull65` would call `rweibull` inside its body; see also the remark below. 
+:::
+
+```{r}
+rweibull65 <- function(n, shape, scale){
+    another_scale <- scale**(-1/shape)
+    rweibull(n, shape = shape, scale = another_scale)
+}
+```
+
+Run the following code to check your function:
+```{r}
+#| echo: true
+#| code-fold: false
+set.seed(12)
+rweibull65(2, 1.2, 2.3)
+```
+
+::::{.remark}
+R distinguishes the name of the argument and the argument itself. For example, in the defined above function `sindeg` the argument is called `x`. So we can specify the argument (though it's not needed here since it's the only argument):
+```{r}
+#| echo: true
+#| code-fold: false
+sindeg(x = 30)
+```
+Now, imagine we have a variable in our program which is also called `x`. Then we can write inside the function `x = x`:
+```{r}
+#| echo: true
+#| code-fold: false
+x <- 30
+sindeg(x = x)
+```
+R will understand that, in `x = x` the left `x` is the name of the argument of function `sindeg`, whereas the right `x` is the variable defined earlier.
+::::
+
+- It is not surprising that such functions were also created by other people. Such additional function are combined in **packages**. Each package should be first **installed** in R Studio and then **loaded** in R programme (in R-file).
+
+- Note that each package should be installed only once, but it should be loaded in any R-file where it is used.
+
+-   We can install package `flexsurv` which contains functions `dweibullPH`, `pweibullPH`, `qweibullPH`, `rweibullPH`, `hweibullPH` which use parametrisation @eq-2. (This package also contains many other useful functions, of course.) To install this package, use menu `Tools` in R Studio, and select the first item `Install Packages...` Then you type the package name `flexsurv` and press `Install`.
+
+- After this, we write in the code (**only once in the Lab file!**) `library(flexsurv)` and then we can use e.g. `dweibullPH`. For example,
+```{r}
+#| echo: true
+#| code-fold: false
+alpha = 0.76
+beta = 0.25
+sigma = alpha**(-1/beta)
+dweibull(1, shape=beta, scale=sigma)
+```
+coincides with
+```{r}
+#| echo: true
+#| code-fold: false
+#| warning: false
+library(flexsurv)
+dweibullPH(1, shape=beta, scale=alpha)
+```
+
+##
+:::{.task}
+Let $X\sim W(1.2, 3.1)$. Using functions `pweibullPH` and `qweibullPH`, find $b$ such that
+$\P(1\leq X\leq b)=0.25$.  
+:::
+Check your answer:
+```{r}
+# F(b)-F(1)=0.25
+# F(b)=F(1)+0.25
+fb <- pweibullPH(1, shape=3.1, scale = 1.2)+0.25
+b <- qweibullPH(fb, shape=3.1, scale = 1.2)
+b
+```
+
+# Pareto distribution
+
+- Recall that $X\sim Pa(\alpha,\lambda)$ if
+$$
+F_X(x)=1-\biggl(\frac{\lambda}{\lambda+x}\biggr)^\alpha, \qquad x\geq0.
+$$ 
+and then
+$$
+f_X(x)=\frac{\alpha\lambda^\alpha}{(\lambda+x)^{\alpha+1}}
+$$ 
+and, for $\alpha>1$,
+$$
+\mathbb{E}(X)=\frac{\lambda}{\alpha-1}
+$$ 
+
+- A modification of the Pareto distribution is the Burr distribution with additional parameter $\gamma>0$
+$$
+F_{Burr}(x)=F_{Pareto}(x^\gamma)=1-\biggl(\frac{\lambda}{\lambda+x^\gamma}\biggr)^\alpha.
+$$ 
+
+##
+:::{.task}
+Define function `pburr` which would have $4$ arguments: `x`, `alpha`, `lambda`, `gamma` which would return the value of  $F_{Burr}(x)$ for the given values of the parameters.
+:::
+```{r}
+pburr <- function(x, alpha, lambda, gamma){
+    1 - (lambda/(lambda+x**gamma))**alpha
+}
+```
+
+Check your code by calculating $F_{Burr}(0.5)$ for $\alpha=1$, $\lambda=2$, $\gamma=3$:
+```{r}
+pburr(0.5, alpha = 1, lambda = 2, gamma = 3)
+```
+
+- On previous Labs we  discuss how to plot the graph of a function. Often we need to plot several graphs on the same diagram, e.g. in different colours. The argument `col` of function `plot` is responsible for colours:
+```{r dev.args = list(bg = 'transparent')}
+#| echo: true
+#| code-fold: false
+x <- seq(-2*pi,2*pi, 0.05)
+y <- sin(x)
+plot(x, y, col = 'red', type='l')
+```
+however, to plot another graph we would need to replace the second `plot` by `lines` (without `type='l'`). The last lines add the legend to the graph:
+```{r dev.args = list(bg = 'transparent')}
+#| echo: true
+#| code-fold: false
+x <- seq(-2*pi,2*pi, 0.05)
+y <- sin(x)
+z <- cos(x)
+plot(x, y, col = 'red', type='l')
+lines(x, z, col = 'blue')
+
+legend(x = "topright",          # Position
+       legend = c("sin(x)", "cos(x)"),  # Legend texts
+       lty = c(1, 1),           # Line types: 1 stands for solid
+       col = c('red', 'blue'),  # Line colours
+       lwd = 2,                 # Line width
+       bg = 'light blue')      # Background color of the legend  
+```
+
+##
+:::{.task}
+Plot graphs of $F_{Burr}(x)$ for $\alpha=1$, $\lambda=2$ and $\gamma=3$ (blue graph) or $\gamma=0.3$ (red graph); let $x\in[1,5]$. Add legend to get the result:
+:::
+```{r dev.args = list(bg = 'transparent')}
+x <- seq(1,5, 0.05)
+y <- pburr(x, alpha = 1, lambda = 2, gamma = 3)
+z <- pburr(x, alpha = 1, lambda = 2, gamma = 0.3)
+plot(x, y, col = 'blue', type='l')
+lines(x, z, col = 'red')
+
+legend(x = "topright", 
+       legend = c("gamma=3", "gamma=0.3"),
+       lty = c(1, 1),       
+       col = c('red', 'blue'),
+       lwd = 2,            
+       bg = 'light blue')  
+```
+
+# Loops
+
+- Often we need to repeat the same code several times. For example, if we generate $10^4$ random variables distributed normally with $\mathcal{N}(0,1)$ and then calculate the sample mean, the result will differ from the expected value $0$. However, if we repeat this procedure many times (e.g. $10^3$ times) and record the obtained sample means, we will get values around $0$. The following code does the job. Note that to record the values, we create in advance a vector `means` consisting initially of all zeros (it may be any other numbers as well), i.e. we **preallocate** the values, and then we change them:
+```{r dev.args = list(bg = 'transparent')}
+#| echo: true
+#| code-fold: false
+n <- 10**4  # Number of random numbers in each sample
+m <- 10**3 # Number of samples
+means <- rep(0, m) # Preallocated vector of means
+for (i in 1:m){
+    x <- rnorm(n, mean = 0, sd = 1)
+    means[i] <- mean(x)
+}
+plot(1:m, means)
+```
+In the code above, `i` runs from `i=1` to `i=m`, `x` is a temporary variable which will be rewritten on every iteration of the loop `for`, and `mean(x)` will be assigned to the `i`-th component of vector `means`. The plot shows that the obtained means indeed fluctuates around the expected value $0$.
+
+##
+:::{.task}
+Set seed $23$. Generate $10^5$ exponential random variable with mean $3$ (think about the value of the `rate` argument). Record the maximum of them (use R-function `max`). Repeat this procedure $10^3$ times. Calculate the proportion of the found maximums which are larger then $50$.
+:::
+
+Check the answer:
+```{r}
+n <- 10**5
+m <- 10**3
+lambda <- 1/3
+maxs <- rep(0, m)
+set.seed(23)
+for (i in 1:m){
+    x <- rexp(n, rate = lambda)
+    maxs[i] <- max(x)
+}
+sum(maxs > 50) / m
+```
+
+Recall, see Lecture Notes, that, for $X_M=\max\{X_1,\ldots,X_{10^5}\}$, with $X\sim Exp(\frac13)$,
+$$
+\begin{aligned}
+\P(X_M> 50)&= 1- \P(X_M\leq 50)\\
+&= 1-\P(X_1\leq 50, \ldots, X_{10^5}\leq 50)\\
+&= 1- \bigl(\P(X\leq 50)\bigr)^{10^5}\\
+& = 1 - \bigl(1-e^{-\frac13\cdot 50}\bigr)^{10^5}
+\end{aligned}
+$$
+and
+```{r}
+#| echo: true
+#| code-fold: false
+1 - (1 - exp(-50/3))**(10**5)
+```
+that is quite close to the found value.
