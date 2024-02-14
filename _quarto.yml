@@ -25,7 +25,7 @@ website:
     
     style: "docked"
     search: true
-    collapse-level: 1
+    collapse-level: 0
     contents:
       - href: index.qmd
         text: Site overview
