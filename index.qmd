@@ -21,9 +21,7 @@ In this lab you may learn about the following topics:
 
 * First steps in plotting
 
-You may try first or proceed straight to  solutions
-
-<!-- [Lab 1 - Solutions](Lab1-solutions.qmd) -->
+You may try first or proceed straight to solutions [Lab 1 - Solutions](Lab1-Solutions.qmd)
 
 
 # [Lab 2](Lab2.qmd) {.unnumbered}
@@ -39,9 +37,7 @@ In this lab you may learn about the following topics:
 
 * Tou will also learn about `set.seed` function
 
-You may try first or proceed straight to solutions 
-
-<!-- [Lab 2 - Solutions](Lab2-solutions.qmd) -->
+You may try first or proceed straight to solutions [Lab 2 - Solutions](Lab2-Solutions.qmd) 
 
 
 # [Lab 3](Lab3.qmd) {.unnumbered}
