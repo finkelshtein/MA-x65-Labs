@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>MA-365/M65 Lab Assignments - Lab 3: Libraries, Functions, Loops</title>
+<title>MA-365/M65 Lab Assignments - Lab 3: Functions, Packages, Loops</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -132,7 +132,7 @@ window.Quarto = {
 </script>
 
 <link rel="stylesheet" href="styles.css">
-<meta property="og:title" content="MA-365/M65 Lab Assignments - Lab 3: Libraries, Functions, Loops">
+<meta property="og:title" content="MA-365/M65 Lab Assignments - Lab 3: Functions, Packages, Loops">
 <meta property="og:description" content="Lab Assignments for module MA-365/M65: Risk and Survival Models">
 <meta property="og:site_name" content="MA-365/M65 Lab Assignments">
 </head>
@@ -264,7 +264,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lab1.html">Labs - Problems</a></li><li class="breadcrumb-item"><a href="./Lab3.html">Lab 3 - Problems</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Lab 3: Libraries, Functions, Loops</h1>
+<h1 class="title">Lab 3: Functions, Packages, Loops</h1>
 </div>
 
 
@@ -322,8 +322,13 @@ F(x) =  1- e^{-(x/\sigma)^\beta},
 </div>
 </div>
 <ul>
-<li><p>Another way, instead of recalculating the parameters, is to use another functions designed to deal with the parametrisation <a href="#eq-1" class="quarto-xref">Equation&nbsp;1</a>. One can either define needed functions or use the functions defined in external libraries (packages).</p></li>
-<li><p>We start with defining a new function. For example, consider the function which returns, for two variables, the difference of their squares. Let’s call this function <code>sq_diff</code>.</p></li>
+<li>Another way, instead of recalculating the parameters, is to use another functions designed to deal with the parametrisation <a href="#eq-1" class="quarto-xref">Equation&nbsp;1</a>. One can either define needed functions or use the functions defined in external libraries (packages).</li>
+</ul>
+<div class="topic">
+<p>How to define a function</p>
+</div>
+<ul>
+<li>We start with defining a new function. For example, consider the function which returns, for two variables, the difference of their squares. Let’s call this function <code>sq_diff</code>.</li>
 </ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>sq_diff <span class="ot">&lt;-</span> <span class="cf">function</span>(x,y) {</span>
@@ -400,6 +405,9 @@ F(x) =  1- e^{-(x/\sigma)^\beta},
 </div>
 </div>
 <p>R will understand that, in <code>x = x</code> the left <code>x</code> is the name of the argument of function <code>sindeg</code>, whereas the right <code>x</code> is the variable defined earlier.</p>
+</div>
+<div class="topic">
+<p>How to use an external package</p>
 </div>
 <ul>
 <li><p>It is not surprising that such functions were also created by other people. Such additional function are combined in <strong>packages</strong>. Each package should be first <strong>installed</strong> in R Studio and then <strong>loaded</strong> in R programme (in R-file).</p></li>

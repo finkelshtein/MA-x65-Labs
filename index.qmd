@@ -21,4 +21,36 @@ In this lab you may learn about the following topics:
 
 * First steps in plotting
 
-<!-- You may try first or proceed straight to  [Lab 1 - Solutions](Lab1-solutions.qmd) -->
+You may try first or proceed straight to  [Lab 1 - Solutions](Lab1-solutions.qmd)
+
+
+# [Lab 2](Lab2.qmd) {.unnumbered}
+In this lab you may learn about the following topics:
+
+* Probability distributions in R: general structures
+
+* Exponential distribution
+
+* Gamma distribution
+
+* Normal and log-normal distributions
+
+* Tou will also learn about `set.seed` function
+
+You may try first or proceed straight to [Lab 2 - Solutions](Lab2-solutions.qmd)
+
+
+# [Lab 3](Lab3.qmd) {.unnumbered}
+In this lab you may learn about the following topics:
+
+* Weibull distribution
+
+* Pareto distribution
+
+* How to define a function in R
+
+* How to use an external package
+
+* Loops
+
+<!-- You may try first or proceed straight to  [Lab 3 - Solutions](Lab3-solutions.qmd) -->

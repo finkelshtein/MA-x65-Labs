@@ -1,5 +1,5 @@
 ---
-title: "Lab 3:  Libraries, Functions, Loops"
+title: "Lab 3:  Functions, Packages, Loops"
 format: 
     html:
         echo: false
@@ -66,6 +66,10 @@ abs(m-e)
 ```
 
 - Another way, instead of recalculating the parameters, is to use another functions designed to deal with the parametrisation @eq-1. One can either define needed functions or use the functions defined in external libraries (packages).
+
+:::{.topic}
+How to define a function
+:::
 
 - We start with defining a new function. For example, consider the function which returns, for two variables, the difference of their squares. Let's call this function `sq_diff`.
 ```{r}
@@ -153,6 +157,10 @@ sindeg(x = x)
 ```
 R will understand that, in `x = x` the left `x` is the name of the argument of function `sindeg`, whereas the right `x` is the variable defined earlier.
 ::::
+
+:::{.topic}
+How to use an external package
+:::
 
 - It is not surprising that such functions were also created by other people. Such additional function are combined in **packages**. Each package should be first **installed** in R Studio and then **loaded** in R programme (in R-file).
 

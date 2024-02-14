@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Lab Assignments",
     "section": "",
-    "text": "Site overview\nThis site contains Lab assignments and their solutions.\n\n\nLab 1\nIn this lab you may learn about the following topics:\n\nIntroduction to R\nArithmetic operations\nVectors\nFurther operations with vectors\nFirst steps in plotting\n\n\n\n\n\n\n Back to top",
+    "text": "Site overview\nThis site contains Lab assignments and their solutions.\n\n\nLab 1\nIn this lab you may learn about the following topics:\n\nIntroduction to R\nArithmetic operations\nVectors\nFurther operations with vectors\nFirst steps in plotting\n\nYou may try first or proceed straight to Lab 1 - Solutions\n\n\nLab 2\nIn this lab you may learn about the following topics:\n\nProbability distributions in R: general structures\nExponential distribution\nGamma distribution\nNormal and log-normal distributions\nTou will also learn about set.seed function\n\nYou may try first or proceed straight to Lab 2 - Solutions\n\n\nLab 3\nIn this lab you may learn about the following topics:\n\nWeibull distribution\nPareto distribution\nHow to define a function in R\nHow to use an external package\nLoops\n\n\n\n\n\n\n Back to top",
     "crumbs": [
       "Site overview"
     ]
@@ -276,7 +276,7 @@
   {
     "objectID": "Lab3.html",
     "href": "Lab3.html",
-    "title": "Lab 3: Libraries, Functions, Loops",
+    "title": "Lab 3: Functions, Packages, Loops",
     "section": "",
     "text": "\\[\n  \\renewcommand{\\P}{\\mathbb{P}}\n  \\newcommand{\\E}{\\mathbb{E}}\n\\]",
     "crumbs": [
@@ -287,9 +287,9 @@
   {
     "objectID": "Lab3.html#section",
     "href": "Lab3.html#section",
-    "title": "Lab 3: Libraries, Functions, Loops",
+    "title": "Lab 3: Functions, Packages, Loops",
     "section": "1.1 ",
-    "text": "1.1 \n\nSet seed 131 (see Task 3.2 of Lab 2). Generate \\(10^6\\) random variables distributed with \\(W(0.76,0.25)\\) (i.e. calculate \\(\\sigma\\) as it explained above and use the needed function described above); and assign this to a vector. Calculate the sample mean of these values (and assign it to a variable). Calculate the expected value of \\(X\\sim W(0.76,0.25)\\) using Equation 2 and assign it to another variable: note that, for the Gamma-function \\(\\Gamma(x)\\), you can use use R-code gamma(x) (notice the small first letter; e.g. gamma(5) will return 24). Finally, find the absolute value of the difference between the found sample mean and the expected value.\n\nCheck your answer:\n\n\n[1] 0.005210536\n\n\n\nAnother way, instead of recalculating the parameters, is to use another functions designed to deal with the parametrisation Equation 1. One can either define needed functions or use the functions defined in external libraries (packages).\nWe start with defining a new function. For example, consider the function which returns, for two variables, the difference of their squares. Let’s call this function sq_diff.\n\n\nsq_diff &lt;- function(x,y) {\n    x**2 - y**2    \n}\n\nThen we can use anywhere below, e.g.\n\nsq_diff(4,5)\n\n[1] -9\n\n\n\nNote that a more formal way to define this function would be\n\n\nsq_diff &lt;- function(x,y) {\n    ans &lt;- x**2 - y**2    \n    return(ans)\n}\n\nThe function may contain any number of the code lines.\n\nIn particular, the code inside a function may call another function. For example, the build-in R function sin takes arguments in radians:\n\n\nsin(pi/6)\n\n[1] 0.5\n\n\nLet’s define another function which arguments in degrees, recall that \\(180^\\circ\\) is \\(\\pi\\) radians, i.e. \\(x^\\circ\\) is \\(\\dfrac{x}{180}\\pi\\) radians. Then we can write\n\nsindeg &lt;- function(x){\n    sin(pi*x/180)\n}\n\nand then we can use it:\n\nsindeg(30)\n\n[1] 0.5",
+    "text": "1.1 \n\nSet seed 131 (see Task 3.2 of Lab 2). Generate \\(10^6\\) random variables distributed with \\(W(0.76,0.25)\\) (i.e. calculate \\(\\sigma\\) as it explained above and use the needed function described above); and assign this to a vector. Calculate the sample mean of these values (and assign it to a variable). Calculate the expected value of \\(X\\sim W(0.76,0.25)\\) using Equation 2 and assign it to another variable: note that, for the Gamma-function \\(\\Gamma(x)\\), you can use use R-code gamma(x) (notice the small first letter; e.g. gamma(5) will return 24). Finally, find the absolute value of the difference between the found sample mean and the expected value.\n\nCheck your answer:\n\n\n[1] 0.005210536\n\n\n\nAnother way, instead of recalculating the parameters, is to use another functions designed to deal with the parametrisation Equation 1. One can either define needed functions or use the functions defined in external libraries (packages).\n\n\nHow to define a function\n\n\nWe start with defining a new function. For example, consider the function which returns, for two variables, the difference of their squares. Let’s call this function sq_diff.\n\n\nsq_diff &lt;- function(x,y) {\n    x**2 - y**2    \n}\n\nThen we can use anywhere below, e.g.\n\nsq_diff(4,5)\n\n[1] -9\n\n\n\nNote that a more formal way to define this function would be\n\n\nsq_diff &lt;- function(x,y) {\n    ans &lt;- x**2 - y**2    \n    return(ans)\n}\n\nThe function may contain any number of the code lines.\n\nIn particular, the code inside a function may call another function. For example, the build-in R function sin takes arguments in radians:\n\n\nsin(pi/6)\n\n[1] 0.5\n\n\nLet’s define another function which arguments in degrees, recall that \\(180^\\circ\\) is \\(\\pi\\) radians, i.e. \\(x^\\circ\\) is \\(\\dfrac{x}{180}\\pi\\) radians. Then we can write\n\nsindeg &lt;- function(x){\n    sin(pi*x/180)\n}\n\nand then we can use it:\n\nsindeg(30)\n\n[1] 0.5",
     "crumbs": [
       "Labs - Problems",
       "Lab 3 - Problems"
@@ -298,9 +298,9 @@
   {
     "objectID": "Lab3.html#section-1",
     "href": "Lab3.html#section-1",
-    "title": "Lab 3: Libraries, Functions, Loops",
+    "title": "Lab 3: Functions, Packages, Loops",
     "section": "1.2 ",
-    "text": "1.2 \n\nDefine the function rweibull65 which would have three arguments n, shape, scale, where shape corresponds to \\(\\beta\\) and scale to \\(\\alpha\\) in Equation 1, and which would return n Weibull random values distributed with \\(W(\\alpha,\\beta)\\) with shape\\(=\\beta\\) and scale\\(=\\alpha\\); so that this function rweibull65 would call rweibull inside its body; see also the remark below.\n\nRun the following code to check your function:\n\nset.seed(12)\nrweibull65(2, 1.2, 2.3)\n\n[1] 1.1318101 0.1312781\n\n\n\nRemark. R distinguishes the name of the argument and the argument itself. For example, in the defined above function sindeg the argument is called x. So we can specify the argument (though it’s not needed here since it’s the only argument):\n\nsindeg(x = 30)\n\n[1] 0.5\n\n\nNow, imagine we have a variable in our program which is also called x. Then we can write inside the function x = x:\n\nx &lt;- 30\nsindeg(x = x)\n\n[1] 0.5\n\n\nR will understand that, in x = x the left x is the name of the argument of function sindeg, whereas the right x is the variable defined earlier.\n\n\nIt is not surprising that such functions were also created by other people. Such additional function are combined in packages. Each package should be first installed in R Studio and then loaded in R programme (in R-file).\nNote that each package should be installed only once, but it should be loaded in any R-file where it is used.\nWe can install package flexsurv which contains functions dweibullPH, pweibullPH, qweibullPH, rweibullPH, hweibullPH which use parametrisation Equation 3. (This package also contains many other useful functions, of course.) To install this package, use menu Tools in R Studio, and select the first item Install Packages... Then you type the package name flexsurv and press Install.\nAfter this, we write in the code (only once in the Lab file!) library(flexsurv) and then we can use e.g. dweibullPH. For example,\n\n\nalpha = 0.76\nbeta = 0.25\nsigma = alpha**(-1/beta)\ndweibull(1, shape=beta, scale=sigma)\n\n[1] 0.08885662\n\n\ncoincides with\n\nlibrary(flexsurv)\ndweibullPH(1, shape=beta, scale=alpha)\n\n[1] 0.08885662",
+    "text": "1.2 \n\nDefine the function rweibull65 which would have three arguments n, shape, scale, where shape corresponds to \\(\\beta\\) and scale to \\(\\alpha\\) in Equation 1, and which would return n Weibull random values distributed with \\(W(\\alpha,\\beta)\\) with shape\\(=\\beta\\) and scale\\(=\\alpha\\); so that this function rweibull65 would call rweibull inside its body; see also the remark below.\n\nRun the following code to check your function:\n\nset.seed(12)\nrweibull65(2, 1.2, 2.3)\n\n[1] 1.1318101 0.1312781\n\n\n\nRemark. R distinguishes the name of the argument and the argument itself. For example, in the defined above function sindeg the argument is called x. So we can specify the argument (though it’s not needed here since it’s the only argument):\n\nsindeg(x = 30)\n\n[1] 0.5\n\n\nNow, imagine we have a variable in our program which is also called x. Then we can write inside the function x = x:\n\nx &lt;- 30\nsindeg(x = x)\n\n[1] 0.5\n\n\nR will understand that, in x = x the left x is the name of the argument of function sindeg, whereas the right x is the variable defined earlier.\n\n\nHow to use an external package\n\n\nIt is not surprising that such functions were also created by other people. Such additional function are combined in packages. Each package should be first installed in R Studio and then loaded in R programme (in R-file).\nNote that each package should be installed only once, but it should be loaded in any R-file where it is used.\nWe can install package flexsurv which contains functions dweibullPH, pweibullPH, qweibullPH, rweibullPH, hweibullPH which use parametrisation Equation 3. (This package also contains many other useful functions, of course.) To install this package, use menu Tools in R Studio, and select the first item Install Packages... Then you type the package name flexsurv and press Install.\nAfter this, we write in the code (only once in the Lab file!) library(flexsurv) and then we can use e.g. dweibullPH. For example,\n\n\nalpha = 0.76\nbeta = 0.25\nsigma = alpha**(-1/beta)\ndweibull(1, shape=beta, scale=sigma)\n\n[1] 0.08885662\n\n\ncoincides with\n\nlibrary(flexsurv)\ndweibullPH(1, shape=beta, scale=alpha)\n\n[1] 0.08885662",
     "crumbs": [
       "Labs - Problems",
       "Lab 3 - Problems"
@@ -309,7 +309,7 @@
   {
     "objectID": "Lab3.html#section-2",
     "href": "Lab3.html#section-2",
-    "title": "Lab 3: Libraries, Functions, Loops",
+    "title": "Lab 3: Functions, Packages, Loops",
     "section": "1.3 ",
     "text": "1.3 \n\nLet \\(X\\sim W(1.2, 3.1)\\). Using functions pweibullPH and qweibullPH, find \\(b\\) such that \\(\\P(1\\leq X\\leq b)=0.25\\).\n\nCheck your answer:\n\n\n[1] 1.339862",
     "crumbs": [
@@ -320,7 +320,7 @@
   {
     "objectID": "Lab3.html#section-3",
     "href": "Lab3.html#section-3",
-    "title": "Lab 3: Libraries, Functions, Loops",
+    "title": "Lab 3: Functions, Packages, Loops",
     "section": "2.1 ",
     "text": "2.1 \n\nDefine function pburr which would have \\(4\\) arguments: x, alpha, lambda, gamma which would return the value of \\(F_{Burr}(x)\\) for the given values of the parameters.\n\nCheck your code by calculating \\(F_{Burr}(0.5)\\) for \\(\\alpha=1\\), \\(\\lambda=2\\), \\(\\gamma=3\\):\n\n\n[1] 0.05882353\n\n\n\nOn previous Labs we discuss how to plot the graph of a function. Often we need to plot several graphs on the same diagram, e.g. in different colours. The argument col of function plot is responsible for colours:\n\n\nx &lt;- seq(-2*pi,2*pi, 0.05)\ny &lt;- sin(x)\nplot(x, y, col = 'red', type='l')\n\n\n\n\n\n\n\n\nhowever, to plot another graph we would need to replace the second plot by lines (without type='l'). The last lines add the legend to the graph:\n\nx &lt;- seq(-2*pi,2*pi, 0.05)\ny &lt;- sin(x)\nz &lt;- cos(x)\nplot(x, y, col = 'red', type='l')\nlines(x, z, col = 'blue')\n\nlegend(x = \"topright\",          # Position\n       legend = c(\"sin(x)\", \"cos(x)\"),  # Legend texts\n       lty = c(1, 1),           # Line types: 1 stands for solid\n       col = c('red', 'blue'),  # Line colours\n       lwd = 2,                 # Line width\n       bg = 'light blue')      # Background color of the legend",
     "crumbs": [
@@ -331,7 +331,7 @@
   {
     "objectID": "Lab3.html#section-4",
     "href": "Lab3.html#section-4",
-    "title": "Lab 3: Libraries, Functions, Loops",
+    "title": "Lab 3: Functions, Packages, Loops",
     "section": "2.2 ",
     "text": "2.2 \n\nPlot graphs of \\(F_{Burr}(x)\\) for \\(\\alpha=1\\), \\(\\lambda=2\\) and \\(\\gamma=3\\) (blue graph) or \\(\\gamma=0.3\\) (red graph); let \\(x\\in[1,5]\\). Add legend to get the result:",
     "crumbs": [
@@ -342,7 +342,7 @@
   {
     "objectID": "Lab3.html#section-5",
     "href": "Lab3.html#section-5",
-    "title": "Lab 3: Libraries, Functions, Loops",
+    "title": "Lab 3: Functions, Packages, Loops",
     "section": "3.1 ",
     "text": "3.1 \n\nSet seed \\(23\\). Generate \\(10^5\\) exponential random variable with mean \\(3\\) (think about the value of the rate argument). Record the maximum of them (use R-function max). Repeat this procedure \\(10^3\\) times. Calculate the proportion of the found maximums which are larger then \\(50\\).\n\nCheck the answer:\n\n\n[1] 0.006\n\n\nRecall, see Lecture Notes, that, for \\(X_M=\\max\\{X_1,\\ldots,X_{10^5}\\}\\), with \\(X\\sim Exp(\\frac13)\\), \\[\n\\begin{aligned}\n\\P(X_M&gt; 50)&= 1- \\P(X_M\\leq 50)\\\\\n&= 1-\\P(X_1\\leq 50, \\ldots, X_{10^5}\\leq 50)\\\\\n&= 1- \\bigl(\\P(X\\leq 50)\\bigr)^{10^5}\\\\\n& = 1 - \\bigl(1-e^{-\\frac13\\cdot 50}\\bigr)^{10^5}\n\\end{aligned}\n\\] and\n\n1 - (1 - exp(-50/3))**(10**5)\n\n[1] 0.00576109\n\n\nthat is quite close to the found value.",
     "crumbs": [
