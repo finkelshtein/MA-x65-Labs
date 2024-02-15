@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.460">
+<meta name="generator" content="quarto-1.4.549">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -63,6 +63,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./Lab3-Solutions.html" rel="next">
 <link href="./Lab1-Solutions.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -94,6 +95,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -102,6 +104,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="styles.css">
 <meta property="og:title" content="MA-365/M65 Lab Assignments - Lab 2 - Solutions: Probability Distributions">
@@ -131,7 +160,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
-    <div class="pt-lg-2 mt-2 text-center sidebar-header">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
       <a href="./index.html" class="sidebar-logo-link">
       <img src="./images/graph.jpg" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
       </a>
@@ -199,6 +228,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="./Lab2-Solutions.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Lab 2 - Solutions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lab3-Solutions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 3 - Solutions</span></a>
   </div>
 </li>
       </ul>
@@ -338,7 +373,7 @@ f_X(x) = \lambda e^{-\lambda x}, \qquad x\geq0.
 <div class="task">
 <p>Let <span class="math inline">\(X\sim Exp(0.1)\)</span>. Find <span class="math inline">\(\P(1&lt;X\leq3)\)</span>.</p>
 </div>
-<div class="solution proof">
+<div class="proof solution">
 <p><span class="proof-title"><em>Solution</em>. </span>We know that (see <a href="#eq-main-prob" class="quarto-xref">Equation&nbsp;1</a> above)</p>
 <p><span class="math display">\[
 \P(1&lt;X\leq3) = F_X(3) - F_X(1)
@@ -378,7 +413,7 @@ f_X(x) = \lambda e^{-\lambda x}, \qquad x\geq0.
 <div class="task">
 <p>Let <span class="math inline">\(X\sim Exp(0.3)\)</span>. Plot the graph of <span class="math inline">\(S_X(x)\)</span> for <span class="math inline">\(x\in [0,10]\)</span> (see <a href="./Lab1-Solutions.html#sec-plotingtask">Task 5.1 of Lab 1</a>) using <code>pexp</code> function.</p>
 </div>
-<div class="solution proof">
+<div class="proof solution">
 <p><span class="proof-title"><em>Solution</em>. </span>Recall that R apply any function to a vector component-wise (entry-wise), i.e.&nbsp;if there is a vector <code>x</code> and a function <code>f</code>, then <code>f(x)</code> will be the vector whose first component is the value of <code>f</code> on the first compnent of <code>x</code> and so on.</p>
 <div class="cell">
 <details class="code-fold">
@@ -388,7 +423,11 @@ f_X(x) = \lambda e^{-\lambda x}, \qquad x\geq0.
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x,y, <span class="at">type=</span><span class="st">'l'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="Lab2-Solutions_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="Lab2-Solutions_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 </div>
@@ -438,7 +477,7 @@ F_X(x) = \P(X\leq x) = p,
 <div class="task">
 <p>Let <span class="math inline">\(X\sim \Gamma(3, 2)\)</span>. Find <span class="math inline">\(a\)</span> such that <span class="math inline">\(\P(a\leq X &lt; 5)=0.4\)</span>. (<em>Hint</em>: find first <span class="math inline">\(F_X(a)\)</span> and then find <span class="math inline">\(a\)</span>.) Assign the answer to R variable <code>a</code>.</p>
 </div>
-<div class="solution proof">
+<div class="proof solution">
 <p><span class="proof-title"><em>Solution</em>. </span>We have that</p>
 <p><span class="math display">\[
 F_X(5)-F_X(a) = 0.4,
@@ -518,7 +557,7 @@ F_X(a)=F_X(5)-0.4.
 <div class="task">
 <p>Let <span class="math inline">\(Y\sim\ln\mathcal{N}(0.01,0.2^2)\)</span>. Plot the graph of the density <span class="math inline">\(f_Y(x)\)</span> for <span class="math inline">\(x\in[0,3]\)</span>. Use <code>xlab</code> and <code>ylab</code> arguments of the <code>plot</code> function to set-up the names “x value” and “Density” for the horizontal and vertical axes. Use <code>main</code> argument of the <code>plot</code> function to set-up the title “Normal distribution density” for the whole plot.</p>
 </div>
-<div class="remark proof">
+<div class="proof remark">
 <p><span class="proof-title"><em>Remark</em>. </span>To make the graph smother, we will use a smaller step in <code>seq</code> function while defining the x values.</p>
 </div>
 <div class="cell">
@@ -529,7 +568,11 @@ F_X(a)=F_X(5)-0.4.
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x,y, <span class="at">type=</span><span class="st">"l"</span>, <span class="at">xlab=</span><span class="st">"x value"</span>, <span class="at">ylab=</span><span class="st">"Density"</span>, <span class="at">main=</span><span class="st">"Log-normal distribution density"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="Lab2-Solutions_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="Lab2-Solutions_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -685,38 +728,28 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
     stripColumnClz(note)
-    const typesetMath = (el) => {
-      if (window.MathJax) {
-        // MathJax Typeset
-        window.MathJax.typeset([el]);
-      } else if (window.katex) {
-        // KaTeX Render
-        var mathElements = el.getElementsByClassName("math");
-        var macros = [];
-        for (var i = 0; i < mathElements.length; i++) {
-          var texText = mathElements[i].firstChild;
-          if (mathElements[i].tagName == "SPAN") {
-            window.katex.render(texText.data, mathElements[i], {
-              displayMode: mathElements[i].classList.contains('display'),
-              throwOnError: false,
-              macros: macros,
-              fleqn: false
-            });
-          }
-        }
-      }
-    }
     if (id === null || id.startsWith('sec-')) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
       if (note.children && note.children.length > 2) {
-        for (let i = 0; i < 2; i++) {
-          container.appendChild(note.children[i].cloneNode(true));
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
         }
-        typesetMath(container);
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
         return container.innerHTML
       } else {
-        typesetMath(note);
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
         return note.innerHTML;
       }
     } else {
@@ -725,8 +758,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (anchorLink) {
         anchorLink.remove();
       }
-      typesetMath(note);
-      return note.innerHTML;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
     }
   }
   for (var i=0; i<xrefs.length; i++) {
@@ -954,6 +994,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./Lab3-Solutions.html" class="pagination-link" aria-label="Lab 3 - Solutions">
+        <span class="nav-page-text">Lab 3 - Solutions</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
