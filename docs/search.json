@@ -58,7 +58,7 @@
     "href": "Lab3.html#section-3",
     "title": "Lab 3: Functions, Packages, Loops",
     "section": "2.1 ",
-    "text": "2.1 \n\nDefine function pburr which would have \\(4\\) arguments: x, alpha, lambda, gamma which would return the value of \\(F_{Burr}(x)\\) for the given values of the parameters.\n\nCheck your code by calculating \\(F_{Burr}(0.5)\\) for \\(\\alpha=1\\), \\(\\lambda=2\\), \\(\\gamma=3\\):\n\n\n[1] 0.05882353\n\n\n\nOn previous Labs we discuss how to plot the graph of a function. Often we need to plot several graphs on the same diagram, e.g. in different colours. The argument col of function plot is responsible for colours:\n\n\nx &lt;- seq(-2*pi,2*pi, 0.05)\ny &lt;- sin(x)\nplot(x, y, col = 'red', type='l')\n\n\n\n\n\n\n\n\nhowever, to plot another graph we would need to replace the second plot by lines (without type='l'). The last lines add the legend to the graph:\n\nx &lt;- seq(-2*pi,2*pi, 0.05)\ny &lt;- sin(x)\nz &lt;- cos(x)\nplot(x, y, col = 'red', type='l')\nlines(x, z, col = 'blue')\n\nlegend(x = \"topright\",          # Position\n       legend = c(\"sin(x)\", \"cos(x)\"),  # Legend texts\n       lty = c(1, 1),           # Line types: 1 stands for solid\n       col = c('red', 'blue'),  # Line colours\n       lwd = 2,                 # Line width\n       bg = 'light blue')      # Background color of the legend",
+    "text": "2.1 \n\nDefine function pburr which would have \\(4\\) arguments: x, alpha, lambda, gamma which would return the value of \\(F_{Burr}(x)\\) for the given values of the parameters.\n\nCheck your code by calculating \\(F_{Burr}(0.5)\\) for \\(\\alpha=1\\), \\(\\lambda=2\\), \\(\\gamma=3\\):\n\n\n[1] 0.05882353\n\n\n\nOn previous Labs we discuss how to plot the graph of a function. Often we need to plot several graphs on the same diagram, e.g. in different colours. The argument col of function plot is responsible for colours:\n\n\nx &lt;- seq(-2*pi,2*pi, 0.05)\ny &lt;- sin(x)\nplot(x, y, col = 'red', type='l')\n\n\n\n\nhowever, to plot another graph we would need to replace the second plot by lines (without type='l'). The last lines add the legend to the graph:\n\nx &lt;- seq(-2*pi,2*pi, 0.05)\ny &lt;- sin(x)\nz &lt;- cos(x)\nplot(x, y, col = 'red', type='l')\nlines(x, z, col = 'blue')\n\nlegend(x = \"topright\",          # Position\n       legend = c(\"sin(x)\", \"cos(x)\"),  # Legend texts\n       lty = c(1, 1),           # Line types: 1 stands for solid\n       col = c('red', 'blue'),  # Line colours\n       lwd = 2,                 # Line width\n       bg = 'light blue')      # Background color of the legend",
     "crumbs": [
       "Labs - Problems",
       "Lab 3 - Problems"
@@ -399,7 +399,7 @@
     "href": "Lab3-Solutions.html#section-3",
     "title": "Lab 3 - Solutions: Functions, Packages, Loops",
     "section": "2.1 ",
-    "text": "2.1 \n\nDefine function pburr which would have \\(4\\) arguments: x, alpha, lambda, gamma which would return the value of \\(F_{Burr}(x)\\) for the given values of the parameters.\n\n\n\nCode\npburr &lt;- function(x, alpha, lambda, gamma){\n    1 - (lambda/(lambda+x**gamma))**alpha\n}\n\n\nCheck your code by calculating \\(F_{Burr}(0.5)\\) for \\(\\alpha=1\\), \\(\\lambda=2\\), \\(\\gamma=3\\):\n\n\nCode\npburr(0.5, alpha = 1, lambda = 2, gamma = 3)\n\n\n[1] 0.05882353\n\n\n\nOn previous Labs we discuss how to plot the graph of a function. Often we need to plot several graphs on the same diagram, e.g. in different colours. The argument col of function plot is responsible for colours:\n\n\nx &lt;- seq(-2*pi,2*pi, 0.05)\ny &lt;- sin(x)\nplot(x, y, col = 'red', type='l')\n\n\n\n\n\n\n\n\nhowever, to plot another graph we would need to replace the second plot by lines (without type='l'). The last lines add the legend to the graph:\n\nx &lt;- seq(-2*pi,2*pi, 0.05)\ny &lt;- sin(x)\nz &lt;- cos(x)\nplot(x, y, col = 'red', type='l')\nlines(x, z, col = 'blue')\n\nlegend(x = \"topright\",          # Position\n       legend = c(\"sin(x)\", \"cos(x)\"),  # Legend texts\n       lty = c(1, 1),           # Line types: 1 stands for solid\n       col = c('red', 'blue'),  # Line colours\n       lwd = 2,                 # Line width\n       bg = 'light blue')      # Background color of the legend",
+    "text": "2.1 \n\nDefine function pburr which would have \\(4\\) arguments: x, alpha, lambda, gamma which would return the value of \\(F_{Burr}(x)\\) for the given values of the parameters.\n\n\n\nCode\npburr &lt;- function(x, alpha, lambda, gamma){\n    1 - (lambda/(lambda+x**gamma))**alpha\n}\n\n\nCheck your code by calculating \\(F_{Burr}(0.5)\\) for \\(\\alpha=1\\), \\(\\lambda=2\\), \\(\\gamma=3\\):\n\n\nCode\npburr(0.5, alpha = 1, lambda = 2, gamma = 3)\n\n\n[1] 0.05882353\n\n\n\nOn previous Labs we discuss how to plot the graph of a function. Often we need to plot several graphs on the same diagram, e.g. in different colours. The argument col of function plot is responsible for colours:\n\n\nx &lt;- seq(-2*pi,2*pi, 0.05)\ny &lt;- sin(x)\nplot(x, y, col = 'red', type='l')\n\n\n\n\nhowever, to plot another graph we would need to replace the second plot by lines (without type='l'). The last lines add the legend to the graph:\n\nx &lt;- seq(-2*pi,2*pi, 0.05)\ny &lt;- sin(x)\nz &lt;- cos(x)\nplot(x, y, col = 'red', type='l')\nlines(x, z, col = 'blue')\n\nlegend(x = \"topright\",          # Position\n       legend = c(\"sin(x)\", \"cos(x)\"),  # Legend texts\n       lty = c(1, 1),           # Line types: 1 stands for solid\n       col = c('red', 'blue'),  # Line colours\n       lwd = 2,                 # Line width\n       bg = 'light blue')      # Background color of the legend",
     "crumbs": [
       "Labs - Solutions",
       "Lab 3 - Solutions"
@@ -488,6 +488,17 @@
     "title": "Lab 4: Data frames",
     "section": "4.1 ",
     "text": "4.1 \n\nPlot on the same diagram the scatter plot \\(y\\) against \\(x\\) as it is shown above, but in blue color, and plot the line \\(y=kx+b\\) with the found values of \\(k\\) and \\(b\\) (do not copy-paste, use coef function) in red colour. (See Lab 3 for plotting two graphs on one diagram).",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 4 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab4.html#section-5",
+    "href": "Lab4.html#section-5",
+    "title": "Lab 4: Data frames",
+    "section": "5.1 ",
+    "text": "5.1 \n\n\nInstall package MASS to R-Studio (see Lab 3).\nLoad package MASS in your code (see Lab 3).\nGiven that the column x of the last data frame df is exponentially distributed, find the MLE for its rate.\n\n\nCheck the output:\n\n\n     rate   \n  1.1527566 \n (0.1152757)\n\n\n(the value in brackets shows the possible “level of error” and it can be ignored for now).",
     "crumbs": [
       "Labs - Problems",
       "Lab 4 - Problems"

@@ -218,3 +218,24 @@ plot(x, y, col = 'blue')
 lines(x, ans[2]*x + ans[1], col = 'red')
 ```
 
+# Fitting of data
+
+We discussed the maximum likelihood estimator for unknown parameters of the data. One of the ways to use it in R, is to load package `MASS` (all capital letters). The command is then `fitdistr(DataVector, "name_of_distribution")`, where `DataVector` is the vector of values we want to fit, and `"name_of_distribution"` is a string like `"exponential"` or `"gamma"` etc.
+
+##
+:::{.task}
+1. Install package `MASS` to R-Studio (see [Lab 3](Lab3-Solutions.qmd)).
+
+2. Load package `MASS` in your code (see [Lab 3](Lab3-Solutions.qmd)).
+
+3. Given that the column `x` of the last data frame `df` is exponentially distributed, find the MLE for its rate.
+:::
+
+Check the output:
+
+```{r}
+#| warning: false
+library(MASS)
+fitdistr(df$x, "exponential")
+```
+(the value in brackets shows the possible "level of error" and it can be ignored for now).
