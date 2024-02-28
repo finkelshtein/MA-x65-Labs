@@ -69,4 +69,6 @@ In this lab you may learn about the following topics:
 
 * How to recognise linear dependence between data sets
 
+* How to fit data into a distribution using MLE
+
 <!-- You may try first or proceed straight to  [Lab 4 - Solutions](Lab4-Solutions.qmd) -->

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>MA-365/M65 Lab Assignments - Lab 2: Probability Distributions</title>
+<title>MA-365/M65 Lab Assignments - Lab 4: Data frames</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -63,8 +63,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./Lab3.html" rel="next">
-<link href="./Lab1.html" rel="prev">
+<link href="./Lab3-Solutions.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -105,7 +104,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="styles.css">
-<meta property="og:title" content="MA-365/M65 Lab Assignments - Lab 2: Probability Distributions">
+<meta property="og:title" content="MA-365/M65 Lab Assignments - Lab 4: Data frames">
 <meta property="og:description" content="Lab Assignments for module MA-365/M65: Risk and Survival Models">
 <meta property="og:site_name" content="MA-365/M65 Lab Assignments">
 </head>
@@ -119,7 +118,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lab1.html">Labs - Problems</a></li><li class="breadcrumb-item"><a href="./Lab2.html">Lab 2 - Problems</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lab1-Solutions.html">Labs - Solutions</a></li><li class="breadcrumb-item"><a href="./Lab4-Solutions.html">Lab 4 - Solutions</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -168,7 +167,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Lab2.html" class="sidebar-item-text sidebar-link active">
+  <a href="./Lab2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab 2 - Problems</span></a>
   </div>
 </li>
@@ -216,7 +215,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Lab4-Solutions.html" class="sidebar-item-text sidebar-link">
+  <a href="./Lab4-Solutions.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Lab 4 - Solutions</span></a>
   </div>
 </li>
@@ -232,21 +231,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#general-rules" id="toc-general-rules" class="nav-link active" data-scroll-target="#general-rules"><span class="header-section-number">1</span> General rules</a></li>
-  <li><a href="#exponential-distribution" id="toc-exponential-distribution" class="nav-link" data-scroll-target="#exponential-distribution"><span class="header-section-number">2</span> Exponential distribution</a>
+  <li><a href="#how-to-create-data-frames" id="toc-how-to-create-data-frames" class="nav-link active" data-scroll-target="#how-to-create-data-frames"><span class="header-section-number">1</span> How to create data frames</a>
   <ul class="collapse">
-  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"><span class="header-section-number">2.1</span> </a></li>
-  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1"><span class="header-section-number">2.2</span> </a></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"><span class="header-section-number">1.1</span> </a></li>
   </ul></li>
-  <li><a href="#gamma-distribution" id="toc-gamma-distribution" class="nav-link" data-scroll-target="#gamma-distribution"><span class="header-section-number">3</span> Gamma distribution</a>
+  <li><a href="#how-to-import-data-frames" id="toc-how-to-import-data-frames" class="nav-link" data-scroll-target="#how-to-import-data-frames"><span class="header-section-number">2</span> How to import data frames</a>
   <ul class="collapse">
-  <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2"><span class="header-section-number">3.1</span> </a></li>
-  <li><a href="#section-3" id="toc-section-3" class="nav-link" data-scroll-target="#section-3"><span class="header-section-number">3.2</span> </a></li>
+  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1"><span class="header-section-number">2.1</span> </a></li>
+  <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2"><span class="header-section-number">2.2</span> </a></li>
   </ul></li>
-  <li><a href="#normal-and-log-normal-distributions" id="toc-normal-and-log-normal-distributions" class="nav-link" data-scroll-target="#normal-and-log-normal-distributions"><span class="header-section-number">4</span> Normal and log-normal distributions</a>
+  <li><a href="#how-to-filter-data-frames" id="toc-how-to-filter-data-frames" class="nav-link" data-scroll-target="#how-to-filter-data-frames"><span class="header-section-number">3</span> How to filter data frames</a>
+  <ul class="collapse">
+  <li><a href="#section-3" id="toc-section-3" class="nav-link" data-scroll-target="#section-3"><span class="header-section-number">3.1</span> </a></li>
+  </ul></li>
+  <li><a href="#linear-models" id="toc-linear-models" class="nav-link" data-scroll-target="#linear-models"><span class="header-section-number">4</span> Linear models</a>
   <ul class="collapse">
   <li><a href="#section-4" id="toc-section-4" class="nav-link" data-scroll-target="#section-4"><span class="header-section-number">4.1</span> </a></li>
-  <li><a href="#section-5" id="toc-section-5" class="nav-link" data-scroll-target="#section-5"><span class="header-section-number">4.2</span> </a></li>
+  </ul></li>
+  <li><a href="#fitting-of-data" id="toc-fitting-of-data" class="nav-link" data-scroll-target="#fitting-of-data"><span class="header-section-number">5</span> Fitting of data</a>
+  <ul class="collapse">
+  <li><a href="#section-5" id="toc-section-5" class="nav-link" data-scroll-target="#section-5"><span class="header-section-number">5.1</span> </a></li>
   </ul></li>
   </ul>
 </nav>
@@ -254,9 +258,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lab1.html">Labs - Problems</a></li><li class="breadcrumb-item"><a href="./Lab2.html">Lab 2 - Problems</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lab1-Solutions.html">Labs - Solutions</a></li><li class="breadcrumb-item"><a href="./Lab4-Solutions.html">Lab 4 - Solutions</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Lab 2: Probability Distributions</h1>
+<h1 class="title">Lab 4: Data frames</h1>
 </div>
 
 
@@ -279,247 +283,313 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   \newcommand{\E}{\mathbb{E}}
 \]</span></p>
 </div>
-<section id="general-rules" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> General rules</h1>
+<section id="how-to-create-data-frames" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> How to create data frames</h1>
 <ul>
-<li><p>R language includes functions to deal with various probability distributions.</p></li>
-<li><p>Some specific distributions require external libraries to be used, we will discuss this in Lab 3.</p></li>
-<li><p>Usually, a distribution has short “nickname”:</p>
-<ul>
-<li><p>Exponential - <code>exp</code></p></li>
-<li><p>Gamma - <code>gamma</code></p></li>
-<li><p>Normal - <code>norm</code></p></li>
-<li><p>Log-normal - <code>lnorm</code></p></li>
-<li><p>… and we will discuss Weibull and Pareto in Lab 3.</p></li>
-</ul></li>
-<li><p>Each distribution has several functions in R with a similar structure of names, e.g.:</p>
-<ul>
-<li><p>Functions <code>dexp</code>, <code>dgamma</code>, <code>dnorm</code>, <code>dlnorm</code> stand for the PDF (density function) <span class="math inline">\(f_X(x)\)</span> of the random variables <span class="math inline">\(X\)</span> with the distributions <code>exp</code>, <code>gamma</code>, <code>norm</code>, <code>lnorm</code>, respectively.</p></li>
-<li><p>Functions <code>pexp</code>, <code>pgamma</code>, <code>pnorm</code>, <code>plnorm</code> stand for the corresponding CDF (distribution functions) <span class="math inline">\(F_X(x)=\P(X\leq x)\)</span>.</p></li>
-<li><p>Functions <code>qexp</code>, <code>qgamma</code>, <code>qnorm</code>, <code>qlnorm</code> stand for the quartiles, i.e.&nbsp;the inverse functions to <span class="math inline">\(F_X\)</span> (see examples below).</p></li>
-<li><p>Functions <code>rexp</code>, <code>rgamma</code>, <code>rnorm</code>, <code>rlnorm</code> are used to <em>generate</em> random variables distributed according to the corresponding distributions <code>exp</code>, <code>gamma</code>, <code>norm</code>, <code>lnorm</code>, respectively.</p></li>
-</ul></li>
-<li><p>If you type in console <code>?</code> followed by either of functions above, you will get a detailed help about all functions for the corresponding distribution, try e.g.&nbsp;<code>?dexp</code>.</p></li>
+<li><p>Data frame is a table with data.</p></li>
+<li><p>Each column of a data frame should contain the data of the same type (e.g.&nbsp;only numeric or only characters), however, different columns may have different types:</p></li>
 </ul>
-<p>Consider examples and tasks.</p>
+<div class="cell" data-hash="Lab4-Solutions_cache/html/unnamed-chunk-1_a2ffca5e7427a192fa2cd257b6bffbb6">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="dv">101</span><span class="sc">:</span><span class="dv">103</span>, <span class="at">y =</span> <span class="fu">c</span>(<span class="st">'a'</span>, <span class="st">'b'</span>, <span class="st">'c'</span>))</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    x y
+1 101 a
+2 102 b
+3 103 c</code></pre>
+</div>
+</div>
+<ul>
+<li><p>Here we create a data frame <code>df</code> with two columns: column <code>x</code> contains <span class="math inline">\(3\)</span> numbers: <span class="math inline">\(101\)</span>, <span class="math inline">\(102\)</span>, <span class="math inline">\(103\)</span> (see topic Patterns of <a href="./Lab1.html">Lab 1</a>) and column <code>y</code> contains three strings “a”, “b”, and “c”.</p></li>
+<li><p>On the left, you can also see numbers <span class="math inline">\(1,2,3\)</span>, these are the indexes which number the rows of the frame.</p></li>
+<li><p>We will mainly need access to the columns of a data frame. The command has the following simple structure <code>DataFrameName$ColumnName</code>, e.g.</p></li>
+</ul>
+<div class="cell" data-hash="Lab4-Solutions_cache/html/unnamed-chunk-2_062dda73c8930da4e7cb0276c8e8b2e4">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 101 102 103</code></pre>
+</div>
+</div>
+<p>Stress that the output is a vector. Similarly,</p>
+<div class="cell" data-hash="Lab4-Solutions_cache/html/unnamed-chunk-3_b3b591c0a5885f49272f40df74fb2e3e">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "a" "b" "c"</code></pre>
+</div>
+</div>
+<ul>
+<li>The data frame may be very large, and we may need to see its structure without showing the whole data frame. For this we can use function <code>head(...)</code>:</li>
+</ul>
+<div class="cell" data-hash="Lab4-Solutions_cache/html/unnamed-chunk-4_f107419b5b8f69b8f94fc8c52286383c">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">101</span><span class="sc">:</span><span class="dv">10</span><span class="sc">**</span><span class="dv">3</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">*</span>x <span class="sc">+</span> <span class="dv">7</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(x, y)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    x   y
+1 101 209
+2 102 211
+3 103 213
+4 104 215
+5 105 217
+6 106 219</code></pre>
+</div>
+</div>
+<ul>
+<li>By default, <code>head</code> shows <span class="math inline">\(6\)</span> rows. One can request more:</li>
+</ul>
+<div class="cell" data-hash="Lab4-Solutions_cache/html/unnamed-chunk-5_ba6b2ecbede86824a22b93c9aa7c22a5">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df,<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     x   y
+1  101 209
+2  102 211
+3  103 213
+4  104 215
+5  105 217
+6  106 219
+7  107 221
+8  108 223
+9  109 225
+10 110 227</code></pre>
+</div>
+</div>
+<ul>
+<li>Try commands <code>ncol(df)</code>, <code>nrow(df)</code>, <code>dim(df)</code> to see their outputs.</li>
+</ul>
+<section id="section" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="section"><span class="header-section-number">1.1</span> </h2>
+<div class="task">
+<p>Find the sum of all values in the column <code>y</code> of this data frame <code>df</code>.</p>
+</div>
+<p>Check the answer:</p>
+<div class="cell" data-hash="Lab4-Solutions_cache/html/unnamed-chunk-6_762067260633d1412a1c7559046c77e8">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(df<span class="sc">$</span>y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 997200</code></pre>
+</div>
+</div>
 </section>
-<section id="exponential-distribution" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Exponential distribution</h1>
+</section>
+<section id="how-to-import-data-frames" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> How to import data frames</h1>
 <ul>
-<li>Recall that continuous random variable <span class="math inline">\(X\)</span> has the exponential distribution with a rate (a parameter) <span class="math inline">\(\lambda&gt;0\)</span> (we denote this <span class="math inline">\(X\sim Exp(\lambda)\)</span>) if its cumulative distribution function is</li>
+<li>Often we need to work with external data stored in some files. A popular format for storing text data (that includes numbers) is CSV-format (stands for “fomma separated values”).</li>
 </ul>
-<p><span class="math display">\[
-F_X(x) = \P(X\leq x) = 1- e^{-\lambda x}, \qquad x\geq0,
-\]</span></p>
-<p>and hence, its density is</p>
-<p><span class="math display">\[
-f_X(x) = \lambda e^{-\lambda x}, \qquad x\geq0.
-\]</span></p>
+<section id="section-1" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="section-1"><span class="header-section-number">2.1</span> </h2>
+<div class="task">
+<p>Do the following steps:</p>
+<ol type="1">
+<li><p>Download file <a href="numbers.csv">numbers.csv</a> and save it in a directory (folder) on your computer (usually it’s “Documents” or “Downloads”).</p></li>
+<li><p>Save your R-file your are working with in R-Studio <strong>to the same</strong> directory (folder).</p></li>
+<li><p>Click with right mouse button on the file name at the top of R-Studio window and choose “Set working directory”.</p></li>
+</ol>
+<p>OR (instead of 3)</p>
 <ul>
-<li>Recall also that since this is a continuous random variable, <span class="math inline">\(\P(X=x)=0\)</span> for each <span class="math inline">\(x\)</span> and</li>
+<li>Go to menu “Session”, choose “Set working directory”, and then choose “To source file location”</li>
 </ul>
-<p><span class="math display">\[
-\boxed{\ \P(a\leq x\leq b)= F_X(b)- F_X(a)\ \vphantom{\biggl(}}
-\]</span></p>
-<ul>
-<li>For the PDF <span class="math inline">\(f_X(x)\)</span>, we use R-function <code>dexp(x, lambda)</code> where <code>lambda</code> is the value of <span class="math inline">\(\lambda\)</span>. The full code is <code>dexp(x, rate = lambda)</code> but as soon as <code>lambda</code> is on the second position, the word <code>rate</code> can be omitted. The default value of <code>rate</code> is <span class="math inline">\(1\)</span>. The following code gives the value of the PDF for <span class="math inline">\(\lambda=3\)</span> at <span class="math inline">\(x=5\)</span>, i.e.&nbsp;the value <span class="math inline">\(f_X(5) = 3\cdot e^{-3\cdot 5}=3e^{-15}\)</span>:</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dexp</span>(<span class="dv">5</span>, <span class="dv">3</span>) <span class="co"># or, the same, dexp(5, rate = 3)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>If you did 1-3 correctly, in “Files” tab on the (down) right part of R-Studio you will see your R-file and the downloaded CSV-file in the same directory.</p>
+<ol start="4" type="1">
+<li>Load the saved file by the command</li>
+</ol>
+<div class="cell" data-hash="Lab4-Solutions_cache/html/unnamed-chunk-7_4a8332b2aa42db4c40a8d507221d920b">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"numbers.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<p>Check yourself:</p>
+<div class="cell" data-hash="Lab4-Solutions_cache/html/unnamed-chunk-8_a612094e86e7ea34743b845a3ae6cf85">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 9.17707e-07</code></pre>
+<pre><code>           x        y
+1 1.98193075 8.554741
+2 0.08423538 4.008477
+3 0.33576991 4.920004
+4 0.44245007 4.861317
+5 0.09377962 4.023355
+6 0.42974243 5.109215</code></pre>
 </div>
 </div>
-<p>Note that R uses the so-called exponential form for decimals, it stands here for</p>
-<div class="cell" data-hash="Lab2_cache/html/unnamed-chunk-2_018ce81bf1e677874caa21bc6509315d">
+</section>
+<section id="section-2" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="section-2"><span class="header-section-number">2.2</span> </h2>
+<div class="task">
+<p>It is given that the data in column <code>x</code> of “numbers.csv” file are independent values of a random variable <span class="math inline">\(X\sim Exp(\lambda)\)</span>. Find the estimate <span class="math inline">\(\hat{\lambda}\)</span> for the parameter <span class="math inline">\(\lambda\)</span> using the method of moments (see Lecture Notes).</p>
+</div>
+<div class="solution proof">
+<p><span class="proof-title"><em>Solution</em>. </span>Recall that, for <span class="math inline">\(X\sim Exp(\lambda)\)</span>, <span class="math display">\[
+\E(X)=\frac{1}{\lambda}
+\]</span> The first sample moment (the average) is, for the sample <span class="math inline">\(\{x_1,\ldots,x_n\}\)</span>, <span class="math display">\[
+\bar{m}_1=\frac{x_1+\ldots+x_n}{n}
+\]</span> and can be found using R-function <code>mean</code>. Equating <span class="math inline">\(\bar{m}_1\)</span> and <span class="math inline">\(m_1=\E(X)\)</span>, we get <span class="math display">\[
+\bar{m}_1= \frac{1}{\lambda}, \qquad \lambda = \frac{1}{\bar{m}_1}.
+\]</span></p>
+</div>
+<div class="cell" data-hash="Lab4-Solutions_cache/html/unnamed-chunk-9_4d958aefa40b242ecf973e06ea7dba25">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">/</span><span class="fu">mean</span>(df<span class="sc">$</span>x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
-<pre><code>0.000000917707</code></pre>
+<pre><code>[1] 1.152757</code></pre>
 </div>
 </div>
-<p>One can check that the value is as expected:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dexp</span>(<span class="dv">5</span>, <span class="dv">3</span>) <span class="sc">==</span> <span class="dv">3</span> <span class="sc">*</span> <span class="fu">exp</span>(<span class="sc">-</span> <span class="dv">3</span><span class="sc">*</span><span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="how-to-filter-data-frames" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> How to filter data frames</h1>
+<ul>
+<li>Suppose we want to select only those rows of the last data frame where the value of <code>y</code> is bigger than 5. This condition then has the form: <code>df$y &gt; 5</code>. Since <code>df$y</code> is a vector, the result of <code>df$y &gt; 5</code> will be also a vector of <code>TRUE</code> and <code>FALSE</code>:</li>
+</ul>
+<div class="cell" data-hash="Lab4-Solutions_cache/html/unnamed-chunk-10_5c5fe1237fb5138aefeb6ac338057774">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>my_condition <span class="ot">&lt;-</span> df<span class="sc">$</span>y <span class="sc">&gt;</span> <span class="dv">5</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>my_condition[<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  TRUE FALSE FALSE FALSE FALSE  TRUE</code></pre>
+</div>
+</div>
+<p>i.e.&nbsp;the first, second, forth, and sixth values of <code>y</code> are bigger than <span class="math inline">\(5\)</span> (and of course many others, we are just looking here for the first <span class="math inline">\(6\)</span>). The length of <code>my_condition</code> is the same as the number of rows in <code>df</code>:</p>
+<div class="cell" data-hash="Lab4-Solutions_cache/html/unnamed-chunk-11_f8b3073f14b41ec1532985322074b201">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(my_condition) <span class="sc">==</span> <span class="fu">nrow</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
 </div>
 <ul>
-<li>Similarly, for the CDF <span class="math inline">\(F_X(x)=\P(X\leq x)\)</span>, we use the code <code>pexp(x, lambda)</code> (with the same comments about <code>rate = lambda</code>). For example, for <span class="math inline">\(X\sim Exp(3)\)</span>, the probability <span class="math inline">\(\P(X\leq 0.5)\)</span> can be found using the code</li>
+<li>The command <code>df[my_condition,]</code> (<strong>notice the comma!!!</strong>) will return the data frame which contain only those rows from <code>df</code> where <span class="math inline">\(y&gt;5\)</span>:</li>
 </ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pexp</span>(<span class="fl">0.5</span>, <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="Lab4-Solutions_cache/html/unnamed-chunk-12_82e4567c77d585a514d9adef833d8565">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>df_cond <span class="ot">&lt;-</span> df[my_condition,]</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_cond)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.7768698</code></pre>
-</div>
-</div>
-<section id="section" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="section"><span class="header-section-number">2.1</span> </h2>
-<div class="task">
-<p>Let <span class="math inline">\(X\sim Exp(0.1)\)</span>. Find <span class="math inline">\(\P(1&lt;X\leq3)\)</span>.</p>
-</div>
-<p>Check the answer.</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.1640192</code></pre>
+<pre><code>           x        y
+1  1.9819307 8.554741
+6  0.4297424 5.109215
+7  1.1831351 6.374403
+8  0.2664600 5.516452
+11 0.3309978 5.333065
+13 0.7291787 5.758398</code></pre>
 </div>
 </div>
 <ul>
-<li>The survival function <span class="math inline">\(S_X(x) = \P(X&gt;x)\)</span> can be calculated, of course, from the relation <span class="math inline">\(S_X(x) = 1- F_X(x)\)</span>. There is, however, more numerically exact way by using the argument <code>lower.tail = FALSE</code> (or <code>lower.tail = F</code>) for function <code>pexp</code>:</li>
+<li>Since <code>df_cond</code> is a data frame (and the same column names are inheritted from <code>df</code>), we can access its columns by <code>df_cond$x</code> and <code>df_cond$y</code>.</li>
 </ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pexp</span>(<span class="fl">0.5</span>, <span class="dv">3</span>,  <span class="at">lower.tail  =</span> F) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.2231302</code></pre>
-</div>
-</div>
-<p>that coincides with</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">-</span> <span class="fu">pexp</span>(<span class="fl">0.5</span>, <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.2231302</code></pre>
-</div>
-</div>
-<p>at least in the first 5 decimal figures.</p>
-<p>(Surely, for the exponential distribution one has an explicit simple formula: <span class="math inline">\(S_X(x)= e^{-\lambda x}\)</span>.)</p>
-</section>
-<section id="section-1" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="section-1"><span class="header-section-number">2.2</span> </h2>
+<section id="section-3" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="section-3"><span class="header-section-number">3.1</span> </h2>
 <div class="task">
-<p>Let <span class="math inline">\(X\sim Exp(0.3)\)</span>. Plot the graph of <span class="math inline">\(S_X(x)\)</span> for <span class="math inline">\(x\in [0,10]\)</span> (see <a href="./Lab1-Solutions.html#sec-plotingtask">Task 5.1 of Lab 1</a>) using <code>pexp</code> function.</p>
+<p>Find the average of all values of <code>y</code> from <code>df</code> such that the corresponding values of <code>x</code> are larger than <span class="math inline">\(1\)</span>.</p>
 </div>
-<p>Check the answer:</p>
-<div class="cell">
+<p>Check your answer:</p>
+<div class="cell" data-hash="Lab4-Solutions_cache/html/unnamed-chunk-13_966ae6cf2e05ff841880330e9dddceb2">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(df[df<span class="sc">$</span>x <span class="sc">&gt;</span> <span class="dv">1</span>,]<span class="sc">$</span>y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 7.687361</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="linear-models" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Linear models</h1>
+<ul>
+<li><p>Sometimes we may believe that two sets of data are related to each other. The simplest relation is linear, like <span class="math inline">\(y=kx+b\)</span>.</p></li>
+<li><p>If one has sets of data <span class="math inline">\(x=(x_1,\ldots,x_n)\)</span> and <span class="math inline">\(y=(y_1,\ldots,y_n)\)</span>, one can find <span class="math inline">\(k\)</span> and <span class="math inline">\(b\)</span> which would be the best possible to make $y_ik x_i +b $ for all <span class="math inline">\(i\)</span>.</p></li>
+<li><p>Usually, it is done using the linear regression method which chooses <span class="math inline">\(k\)</span> and <span class="math inline">\(b\)</span> so that</p></li>
+</ul>
+<p><span class="math display">\[
+\sum_{i=1}^n(y_i - (kx_i+b))^2
+\]</span></p>
+<p>would be smallest possible (for the given <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>).</p>
+<ul>
+<li>In the data frame above, we may suspect that <span class="math inline">\(y\)</span> and <span class="math inline">\(x\)</span> are linearly related:</li>
+</ul>
+<div class="cell" data-hash="Lab4-Solutions_cache/html/unnamed-chunk-14_5beb6d6f91180b84002933281408e390">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(df<span class="sc">$</span>x, df<span class="sc">$</span>y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
-<p><img src="Lab2_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-</section>
-</section>
-<section id="gamma-distribution" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Gamma distribution</h1>
-<ul>
-<li>Recall that, for <span class="math inline">\(X\sim \Gamma(\alpha,\lambda)\)</span>,</li>
-</ul>
-<p><span class="math display">\[
-f_X(x)=\frac{\lambda^\alpha}{\Gamma(\alpha)}x^{\alpha-1} e^{-\lambda x}, \quad x\geq0.
-\]</span></p>
-<ul>
-<li>The corresponding R functions, e.g.&nbsp;<code>dgamma</code>, <code>pgamma</code> etc., should hence have at least 3 arguments. <span class="math inline">\(\alpha\)</span> corresponds to <code>shape</code> (second parameter) and <span class="math inline">\(\lambda\)</span> corresponds to <code>rate</code> (third parameter), i.e.&nbsp;e.g., for <span class="math inline">\(X\sim\Gamma(0.1,2)\)</span>, <span class="math inline">\(f_X(3)\)</span> can be calculated as follows:</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dgamma</span>(<span class="dv">3</span>, <span class="fl">0.1</span>, <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.000103893</code></pre>
-</div>
-</div>
-<p>It may be more convenient (though not necessary) to write explicitly: <code>dgamma(3, shape = 0.1, rate = 2)</code>.</p>
-<ul>
-<li>By the definition, for any <span class="math inline">\(p\in(0,1)\)</span>, the <span class="math inline">\(p\)</span>-quantile is the value of <span class="math inline">\(x\)</span>, such that</li>
-</ul>
-<p><span class="math display">\[
-F_X(x) = \P(X\leq x) = p,
-\]</span></p>
-<p>i.e.&nbsp;<span class="math inline">\(x=F_X^{-1}(p)\)</span>. The corresponding R-function has prefix <code>q</code>. For example, for <span class="math inline">\(X\sim\Gamma(0.1,2)\)</span>, to find <span class="math inline">\(x\)</span> such that <span class="math inline">\(F_X(x)=0.2\)</span> we can use the following code:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">qgamma</span>(<span class="fl">0.2</span>, <span class="at">shape =</span> <span class="fl">0.1</span>, <span class="at">rate =</span> <span class="dv">2</span>)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 3.109401e-08</code></pre>
-</div>
-</div>
-<p>and we can check that, indeed, <span class="math inline">\(F_X(x)=0.2\)</span> for the found value of <span class="math inline">\(x\)</span>:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pgamma</span>(x, <span class="at">shape =</span> <span class="fl">0.1</span>, <span class="at">rate =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.2</code></pre>
-</div>
-</div>
-<section id="section-2" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="section-2"><span class="header-section-number">3.1</span> </h2>
-<div class="task">
-<p>Let <span class="math inline">\(X\sim \Gamma(3, 2)\)</span>. Find <span class="math inline">\(a\)</span> such that <span class="math inline">\(\P(a\leq X &lt; 5)=0.4\)</span>. (<em>Hint</em>: find first <span class="math inline">\(F_X(a)\)</span> and then find <span class="math inline">\(a\)</span>.) Assign the answer to R variable <code>a</code>.</p>
-</div>
-<p>Check the answer:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>a</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 1.546295</code></pre>
+<p><img src="Lab4-Solutions_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <ul>
-<li><p>To generate <code>n</code> (independent) random values distributed according to <span class="math inline">\(\Gamma(\alpha, \lambda)\)</span>, we use the command <code>rgamma(n, shape = alpha, rate = lambda)</code>. The output is a vector (of the length <code>n</code>).</p></li>
-<li><p>Since the values are random, if you run the same <code>rgamma</code> command again and again, the output will be different all the time:</p></li>
+<li>The corresponding R-code to find optimal <span class="math inline">\(k\)</span> and <span class="math inline">\(b\)</span> is the following:</li>
 </ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rgamma</span>(<span class="dv">2</span>, <span class="at">shape =</span> <span class="fl">0.1</span>, <span class="at">rate =</span> <span class="fl">0.2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="Lab4-Solutions_cache/html/unnamed-chunk-15_89b7460bc356ca084e860e66d77609e3">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.0004296262 0.0026047464</code></pre>
+<pre><code>
+Call:
+lm(formula = y ~ x, data = df)
+
+Coefficients:
+(Intercept)            x  
+      3.933        2.071  </code></pre>
 </div>
 </div>
-<p>and another output for the same input:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rgamma</span>(<span class="dv">2</span>, <span class="at">shape =</span> <span class="fl">0.1</span>, <span class="at">rate =</span> <span class="fl">0.2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2.384074e-02 5.141853e-05</code></pre>
-</div>
-</div>
-<p>To fix the output, we should “set a seed”: write the code <code>set.seed(m)</code> with any natural number instead of <code>m</code>. For each <code>m</code>, there will be a fixed output. If you change <code>m</code>, the output will also changes.</p>
-</section>
-<section id="section-3" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="section-3"><span class="header-section-number">3.2</span> </h2>
-<div class="task">
-<p>Set the seed <span class="math inline">\(123\)</span>, i.e.&nbsp;write <code>set.seed(123)</code> before your code. Generate <span class="math inline">\(10000\)</span> values of <span class="math inline">\(X\sim\Gamma(2,3)\)</span>. Find the mean (average) of these values and assign it to the variable <code>m</code>. You may either use <code>sum</code> function discussed in Lab 1 (and average it) or <code>mean</code> function (use <code>?mean</code> if experience difficulties).</p>
-</div>
-<p>Check the answer:</p>
-<div class="cell" data-hash="Lab2_cache/html/unnamed-chunk-17_e89c6bccb0920b77979b55caef59e49a">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>m</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.6592689</code></pre>
-</div>
-</div>
-<p>You may check that this answer will remain the same for each new run, as the randomness is “frozen” now.</p>
 <ul>
-<li>Note that, by LLN (the Low of Large Numbers), the obtained mean (i.e.&nbsp;a sample mean) should be close to <span class="math inline">\(\E(X)=\frac{\alpha}{\lambda}\)</span>. And indeed, the received value is close to <span class="math inline">\(\frac23\approx0.66\)</span>, we may calculate this in R, of course (using <code>abs</code> function for an absolute value of a number):</li>
+<li><p>Here <code>data</code> is the name of the parameter of function <code>lm</code> (stands for “linear model”), and <code>df</code> is the data frame which contains columns <code>x</code> and <code>y</code>. In other words, if columns of <code>df</code> would had names <code>colX</code> and <code>colY</code>, we would write <code>lm(colY ~ colX, data = df)</code>.</p></li>
+<li><p>The <code>(Intercept)</code> corresponds to <span class="math inline">\(b\)</span>, and value of <code>x</code> here is <span class="math inline">\(k\)</span>. One can access the obtained values:</p></li>
 </ul>
-<div class="cell" data-hash="Lab2_cache/html/unnamed-chunk-18_259206272cce70726671d118c48adef5">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">abs</span>(m <span class="sc">-</span> <span class="dv">2</span><span class="sc">/</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="Lab4-Solutions_cache/html/unnamed-chunk-16_283f27cfca4504f0fd4065373a273b41">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>ans <span class="ot">&lt;-</span> <span class="fu">coef</span>(<span class="fu">lm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> df))</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>ans</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.00739773</code></pre>
+<pre><code>(Intercept)           x 
+   3.932877    2.070541 </code></pre>
 </div>
 </div>
-</section>
-</section>
-<section id="normal-and-log-normal-distributions" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Normal and log-normal distributions</h1>
-<ul>
-<li><p>Recall that if <span class="math inline">\(Z\sim \ln \mathcal{N}(\mu,\sigma^2)\)</span>, then <span class="math inline">\(X:=\ln Z \sim \mathcal{N}(\mu,\sigma^2)\)</span>.</p></li>
-<li><p>In both cases, we have two parameters <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span>. The corresponding arguments for <code>dnorm,pnorm,qnorm,rnorm</code> are called <code>mean</code> and <code>sd</code>, whereas the arguments for <code>dlnorm,plnorm,qlnorm,rlnorm</code> are called <code>meanlog</code> and <code>sdlog</code>, respectively.</p></li>
-</ul>
+<p>and then <code>ans[1]</code> is <span class="math inline">\(b\)</span> and <code>ans[2]</code> is <span class="math inline">\(k\)</span>.</p>
 <section id="section-4" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="section-4"><span class="header-section-number">4.1</span> </h2>
 <div class="task">
-<p>Let <span class="math inline">\(Y\sim\ln\mathcal{N}(0.01,0.2^2)\)</span>. Plot the graph of the density <span class="math inline">\(f_Y(x)\)</span> for <span class="math inline">\(x\in[0,3]\)</span>. Use <code>xlab</code> and <code>ylab</code> arguments of the <code>plot</code> function to set-up the names “x value” and “Density” for the horizontal and vertical axes. Use <code>main</code> argument of the <code>plot</code> function to set-up the title “Normal distribution density” for the whole plot.</p>
+<p>Plot on the same diagram the scatter plot <span class="math inline">\(y\)</span> against <span class="math inline">\(x\)</span> as it is shown above, but in blue color, and plot the line <span class="math inline">\(y=kx+b\)</span> with the found values of <span class="math inline">\(k\)</span> and <span class="math inline">\(b\)</span> (do not copy-paste, use <code>coef</code> function) in red colour. (See Lab 3 for plotting two graphs on one diagram).</p>
 </div>
-<p>Check the output (to make the graph smother, use smaller step in <code>seq</code> function while defining the x values).</p>
-<div class="cell" data-hash="Lab2_cache/html/unnamed-chunk-19_fd5067f64db98f60701746ef217a3c03">
+<div class="cell" data-hash="Lab4-Solutions_cache/html/unnamed-chunk-17_1badb26f45c647a9382d37fbdf450f0b">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> df<span class="sc">$</span>x</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> df<span class="sc">$</span>y</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, y, <span class="at">col =</span> <span class="st">'blue'</span>)</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(x, ans[<span class="dv">2</span>]<span class="sc">*</span>x <span class="sc">+</span> ans[<span class="dv">1</span>], <span class="at">col =</span> <span class="st">'red'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
-<p><img src="Lab2_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
+<p><img src="Lab4-Solutions_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
-<section id="section-5" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="section-5"><span class="header-section-number">4.2</span> </h2>
-<div id="sec-hazard" class="task">
-<p>The <strong>hazard function</strong> of a random variable <span class="math inline">\(X\)</span> is defined as follows: <span class="math display">\[
-h_X(x) := \frac{f_X(x)}{1-F_X(x)}.
-\]</span> Let <span class="math inline">\(X\sim \mathcal{N}(4, 0.4)\)</span>. Calculate <span class="math inline">\(h_X(2)\)</span>.</p>
+</section>
+<section id="fitting-of-data" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Fitting of data</h1>
+<p>We discussed the maximum likelihood estimator for unknown parameters of the data. One of the ways to use it in R, is to load package <code>MASS</code> (all capital letters). The command is then <code>fitdistr(DataVector, "name_of_distribution")</code>, where <code>DataVector</code> is the vector of values we want to fit, and <code>"name_of_distribution"</code> is a string like <code>"exponential"</code> or <code>"gamma"</code> etc.</p>
+<section id="section-5" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="section-5"><span class="header-section-number">5.1</span> </h2>
+<div class="task">
+<ol type="1">
+<li><p>Install package <code>MASS</code> to R-Studio (see <a href="./Lab3-Solutions.html">Lab 3</a>).</p></li>
+<li><p>Load package <code>MASS</code> in your code (see <a href="./Lab3-Solutions.html">Lab 3</a>).</p></li>
+<li><p>Given that the column <code>x</code> of the last data frame <code>df</code> is exponentially distributed, find the MLE for its rate.</p></li>
+</ol>
 </div>
-<p>Check the answer:</p>
-<div class="cell" data-hash="Lab2_cache/html/unnamed-chunk-20_283d9d0cd5ccf48ea1d9e2df6952865b">
+<p>Check the output:</p>
+<div class="cell" data-hash="Lab4-Solutions_cache/html/unnamed-chunk-18_c6705293d9b8efb546bdf18ac2219328">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fitdistr</span>(df<span class="sc">$</span>x, <span class="st">"exponential"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.004253513</code></pre>
+<pre><code>     rate   
+  1.1527566 
+ (0.1152757)</code></pre>
 </div>
 </div>
+<p>(the value in brackets shows the possible “level of error” and it can be ignored for now).</p>
 
 
 </section>
@@ -918,14 +988,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a 1="" href="./Lab1.html" class="pagination-link  aria-label=" lab="" -="" problems"="">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Lab 1 - Problems</span>
+      <a 3="" href="./Lab3-Solutions.html" class="pagination-link  aria-label=" lab="" -="" solutions"="">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Lab 3 - Solutions</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./Lab3.html" class="pagination-link" aria-label="Lab 3 - Problems">
-        <span class="nav-page-text">Lab 3 - Problems</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->
