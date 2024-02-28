@@ -54,3 +54,19 @@ In this lab you may learn about the following topics:
 * Loops
 
 You may try first or proceed straight to  [Lab 3 - Solutions](Lab3-Solutions.qmd)
+
+
+# [Lab 4](Lab4.qmd) {.unnumbered}
+In this lab you may learn about the following topics:
+
+* How to create data frame
+
+* How to load an external data frame
+
+* How to access the data from a data frame
+
+* How to filter a data frame
+
+* How to recognise linear dependence between data sets
+
+<!-- You may try first or proceed straight to  [Lab 4 - Solutions](Lab4-Solutions.qmd) -->

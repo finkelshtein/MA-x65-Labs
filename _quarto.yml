@@ -38,6 +38,8 @@ website:
             text: Lab 2 - Problems
           - href: Lab3.qmd
             text: Lab 3 - Problems
+          - href: Lab4.qmd
+            text: Lab 4 - Problems
       - text: "---"
       - section: "Labs - Solutions"
         contents:
