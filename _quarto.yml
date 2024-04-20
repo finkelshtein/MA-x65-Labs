@@ -40,6 +40,8 @@ website:
             text: Lab 3 - Problems
           - href: Lab4.qmd
             text: Lab 4 - Problems
+          - href: Lab5.qmd
+            text: Lab 5 - Problems
       - text: "---"
       - section: "Labs - Solutions"
         contents:
@@ -51,6 +53,8 @@ website:
             text: Lab 3 - Solutions
           - href: Lab4-Solutions.qmd
             text: Lab 4 - Solutions
+          - href: Lab5-Solutions.qmd
+            text: Lab 5 - Solutions
 
 
 format:

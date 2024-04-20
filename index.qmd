@@ -71,4 +71,17 @@ In this lab you may learn about the following topics:
 
 * How to fit data into a distribution using MLE
 
-<!-- You may try first or proceed straight to  [Lab 4 - Solutions](Lab4-Solutions.qmd) -->
+You may try first or proceed straight to  [Lab 4 - Solutions](Lab4-Solutions.qmd) 
+
+# [Lab 5](Lab5.qmd) {.unnumbered}
+In this lab you may learn about the following topics:
+
+* How to calculate the Kaplan-Meier estimate for the survival function
+
+* How to plot the estimate for all data and for the values of a covariate
+
+* How to use the legend of a plot
+
+* How to calculate the estimators for the Cox regression model
+
+You may try first or proceed straight to  [Lab 5 - Solutions](Lab5-Solutions.qmd) 

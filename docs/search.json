@@ -4,15 +4,103 @@
     "href": "index.html",
     "title": "Lab Assignments",
     "section": "",
-    "text": "Site overview\nThis site contains Lab assignments and their solutions.\n\n\nLab 1\nIn this lab you may learn about the following topics:\n\nIntroduction to R\nArithmetic operations\nVectors\nFurther operations with vectors\nFirst steps in plotting\n\nYou may try first or proceed straight to solutions Lab 1 - Solutions\n\n\nLab 2\nIn this lab you may learn about the following topics:\n\nProbability distributions in R: general structures\nExponential distribution\nGamma distribution\nNormal and log-normal distributions\nTou will also learn about set.seed function\n\nYou may try first or proceed straight to solutions Lab 2 - Solutions\n\n\nLab 3\nIn this lab you may learn about the following topics:\n\nWeibull distribution\nPareto distribution\nHow to define a function in R\nHow to use an external package\nLoops\n\nYou may try first or proceed straight to Lab 3 - Solutions\n\n\nLab 4\nIn this lab you may learn about the following topics:\n\nHow to create data frame\nHow to load an external data frame\nHow to access the data from a data frame\nHow to filter a data frame\nHow to recognise linear dependence between data sets\nHow to fit data into a distribution using MLE\n\n\n\n\n\n\n Back to top",
+    "text": "Site overview\nThis site contains Lab assignments and their solutions.\n\n\nLab 1\nIn this lab you may learn about the following topics:\n\nIntroduction to R\nArithmetic operations\nVectors\nFurther operations with vectors\nFirst steps in plotting\n\nYou may try first or proceed straight to solutions Lab 1 - Solutions\n\n\nLab 2\nIn this lab you may learn about the following topics:\n\nProbability distributions in R: general structures\nExponential distribution\nGamma distribution\nNormal and log-normal distributions\nTou will also learn about set.seed function\n\nYou may try first or proceed straight to solutions Lab 2 - Solutions\n\n\nLab 3\nIn this lab you may learn about the following topics:\n\nWeibull distribution\nPareto distribution\nHow to define a function in R\nHow to use an external package\nLoops\n\nYou may try first or proceed straight to Lab 3 - Solutions\n\n\nLab 4\nIn this lab you may learn about the following topics:\n\nHow to create data frame\nHow to load an external data frame\nHow to access the data from a data frame\nHow to filter a data frame\nHow to recognise linear dependence between data sets\nHow to fit data into a distribution using MLE\n\nYou may try first or proceed straight to Lab 4 - Solutions\n\n\nLab 5\nIn this lab you may learn about the following topics:\n\nHow to calculate the Kaplan-Meier estimate for the survival function\nHow to plot the estimate for all data and for the values of a covariate\nHow to use the legend of a plot\nHow to calculate the estimators for the Cox regression model\n\nYou may try first or proceed straight to Lab 5 - Solutions\n\n\n\n\n Back to top",
     "crumbs": [
       "Site overview"
     ]
   },
   {
+    "objectID": "Lab5-Solutions.html",
+    "href": "Lab5-Solutions.html",
+    "title": "Lab 5 - Solutions: Kaplan–Meier estimate of the survival functions and Cox regression model",
+    "section": "",
+    "text": "\\[\n  \\renewcommand{\\P}{\\mathbb{P}}\n  \\newcommand{\\E}{\\mathbb{E}}\n\\]",
+    "crumbs": [
+      "Labs - Solutions",
+      "Lab 5 - Solutions"
+    ]
+  },
+  {
+    "objectID": "Lab5-Solutions.html#section",
+    "href": "Lab5-Solutions.html#section",
+    "title": "Lab 5 - Solutions: Kaplan–Meier estimate of the survival functions and Cox regression model",
+    "section": "1.1 ",
+    "text": "1.1 \n\nDownload hm.csv file, store it at the variable df, and show first rows of the data set. Check the output.\n\n\n\nCode\ndf &lt;- read.csv(\"hm.csv\")\nhead(df)\n\n\n  ID time age drug status    entdate    enddate\n1  1    5  46    0      1 15/05/2015 14/10/2015\n2  2    6  35    1      0 19/09/2014 20/03/2015\n3  3    8  30    1      1 21/04/2016 20/12/2016\n4  4    3  30    1      1 03/01/2016 04/04/2016\n5  5   22  36    0      1 18/09/2014 19/07/2016\n6  6    1  32    1      0 18/03/2016 17/04/2016\n\n\nAs you can see, this data frame contains some data about patients, who were in a trial. Column “time” tells us how many full months the trial took place place for each patient (we know that it’s “months” time units looking at the last two columns: “entdate” is the dat of the start of the trial for a patient, and the “enddate” is the date of the end of the trial). Column “age” contains obviously their ages. Column “drug” tells us whether they got some medicine effect of which we investigate (\\(0\\) means no, \\(1\\) means yes). Column “status” tells us their status at the end of the trial: \\(1\\) stands for “dead” (because of the drug received), \\(0\\) means “not dead because of the drug”, i.e. censored (excluded from the trial, e.g. recovered and dismissed, or dead by another reason non related to the drug, or something else).",
+    "crumbs": [
+      "Labs - Solutions",
+      "Lab 5 - Solutions"
+    ]
+  },
+  {
+    "objectID": "Lab5-Solutions.html#section-1",
+    "href": "Lab5-Solutions.html#section-1",
+    "title": "Lab 5 - Solutions: Kaplan–Meier estimate of the survival functions and Cox regression model",
+    "section": "1.2 ",
+    "text": "1.2 \n\nFind the mean age of the participants of the trial. Check the answer\n\n\n\nCode\nmean(df$age)\n\n\n[1] 36.07",
+    "crumbs": [
+      "Labs - Solutions",
+      "Lab 5 - Solutions"
+    ]
+  },
+  {
+    "objectID": "Lab5-Solutions.html#section-2",
+    "href": "Lab5-Solutions.html#section-2",
+    "title": "Lab 5 - Solutions: Kaplan–Meier estimate of the survival functions and Cox regression model",
+    "section": "1.3 ",
+    "text": "1.3 \n\nFind the number of entries (rows) in the data frame. Check the answer:\n\n\n\nCode\nlength(df$age)\n\n\n[1] 100",
+    "crumbs": [
+      "Labs - Solutions",
+      "Lab 5 - Solutions"
+    ]
+  },
+  {
+    "objectID": "Lab5-Solutions.html#section-3",
+    "href": "Lab5-Solutions.html#section-3",
+    "title": "Lab 5 - Solutions: Kaplan–Meier estimate of the survival functions and Cox regression model",
+    "section": "2.1 ",
+    "text": "2.1 \n\nFind out how likely, for the given data, is to survive at least \\(17\\) months than at least \\(51\\) months. Check your answer.\n\n\n\nCode\n0.2325/0.1090\n\n\n[1] 2.133028",
+    "crumbs": [
+      "Labs - Solutions",
+      "Lab 5 - Solutions"
+    ]
+  },
+  {
+    "objectID": "Lab5-Solutions.html#section-4",
+    "href": "Lab5-Solutions.html#section-4",
+    "title": "Lab 5 - Solutions: Kaplan–Meier estimate of the survival functions and Cox regression model",
+    "section": "3.1 ",
+    "text": "3.1 \n\nPlot the previous plot with legend so that drug=0 whould be in dashed seagreen colour (both on plot and in legend) and denoted by “No drug”, and drug=1 would be in solid orange and denoted “drug”.\n\n\n\nCode\nplot(kmdrug, col=c(\"seagreen\", \"orange\"), lty = c(2,1))\nlegend(\"topright\", legend=c(\"No drug\",\"Drug\"),  col=c(\"seagreen\", \"orange\"), lty = c(2,1))",
+    "crumbs": [
+      "Labs - Solutions",
+      "Lab 5 - Solutions"
+    ]
+  },
+  {
+    "objectID": "Lab5-Solutions.html#section-5",
+    "href": "Lab5-Solutions.html#section-5",
+    "title": "Lab 5 - Solutions: Kaplan–Meier estimate of the survival functions and Cox regression model",
+    "section": "4.1 ",
+    "text": "4.1 \n\nWrite the code for the following plot:\n\n\n\nCode\nplot(kmlung,col=c(\"blue\", \"red\"))\nlegend(\"topright\", legend=c(\"Male\",\"Female\"), col=c(\"blue\", \"red\"), lty=c(1,1))\n\n\n\n\n\n\n\n\n\nSurely, there numerous R packages which can make plots more nice. For example, may install and load survminer package:\n\nlibrary(survminer)\nggsurvplot(kmlung)\n\n\n\n\n\n\n\n\nHere “strata” is a synonym for “covariate”. Moreover, by specifying conf.int one can also include the confidence intervals for both values of the covariate:\n\nggsurvplot(kmlung, conf.int = 0.95)\n\n\n\n\n\n\n\n\nNote also that if we define kmlung without data = lung then ggsurvplot must include data = lung: i.e. the full command would be ggsurvplot(survfit(Surv(lung$time, lung$status) ~ lung$sex), conf.int = 0.95).",
+    "crumbs": [
+      "Labs - Solutions",
+      "Lab 5 - Solutions"
+    ]
+  },
+  {
+    "objectID": "Lab5-Solutions.html#section-6",
+    "href": "Lab5-Solutions.html#section-6",
+    "title": "Lab 5 - Solutions: Kaplan–Meier estimate of the survival functions and Cox regression model",
+    "section": "5.1 ",
+    "text": "5.1 \n\nFind the ratio of the hazard rate for a male aged 70 to a female aged 80 (for the given data set).\n\n\nSolution. Here we need \\[\n\\dfrac{\\lambda(t,z_1=1,z_2=70)}{\\lambda(t,z_1=2,z_2=80)} = e^{-\\beta_1}e^{-10\\beta_2}.\n\\]\n\nFrom the output of coxph above, we have that \\(e^{\\beta_1}=0.598566\\) and \\(e^{\\beta_2}=1.017191\\), hence, \\[\ne^{-\\beta_1}e^{-10\\beta_2}=0.598566^{-1}\\cdot 1.017191^{-10},\n\\] and we can calculate this:\n\n\nCode\n(0.598566)**(-1) * 1.017191**(-10)\n\n\n[1] 1.408844",
+    "crumbs": [
+      "Labs - Solutions",
+      "Lab 5 - Solutions"
+    ]
+  },
+  {
     "objectID": "Lab4-Solutions.html",
     "href": "Lab4-Solutions.html",
-    "title": "Lab 4: Data frames",
+    "title": "Lab 4 - Solutions: Data frames",
     "section": "",
     "text": "\\[\n  \\renewcommand{\\P}{\\mathbb{P}}\n  \\newcommand{\\E}{\\mathbb{E}}\n\\]",
     "crumbs": [
@@ -23,7 +111,7 @@
   {
     "objectID": "Lab4-Solutions.html#section",
     "href": "Lab4-Solutions.html#section",
-    "title": "Lab 4: Data frames",
+    "title": "Lab 4 - Solutions: Data frames",
     "section": "1.1 ",
     "text": "1.1 \n\nFind the sum of all values in the column y of this data frame df.\n\nCheck the answer:\n\n\nCode\nsum(df$y)\n\n\n[1] 997200",
     "crumbs": [
@@ -34,7 +122,7 @@
   {
     "objectID": "Lab4-Solutions.html#section-1",
     "href": "Lab4-Solutions.html#section-1",
-    "title": "Lab 4: Data frames",
+    "title": "Lab 4 - Solutions: Data frames",
     "section": "2.1 ",
     "text": "2.1 \n\nDo the following steps:\n\nDownload file numbers.csv and save it in a directory (folder) on your computer (usually it’s “Documents” or “Downloads”).\nSave your R-file your are working with in R-Studio to the same directory (folder).\nClick with right mouse button on the file name at the top of R-Studio window and choose “Set working directory”.\n\nOR (instead of 3)\n\nGo to menu “Session”, choose “Set working directory”, and then choose “To source file location”\n\nIf you did 1-3 correctly, in “Files” tab on the (down) right part of R-Studio you will see your R-file and the downloaded CSV-file in the same directory.\n\nLoad the saved file by the command\n\n\ndf &lt;- read.csv(\"numbers.csv\")\n\n\nCheck yourself:\n\nhead(df)\n\n           x        y\n1 1.98193075 8.554741\n2 0.08423538 4.008477\n3 0.33576991 4.920004\n4 0.44245007 4.861317\n5 0.09377962 4.023355\n6 0.42974243 5.109215",
     "crumbs": [
@@ -45,7 +133,7 @@
   {
     "objectID": "Lab4-Solutions.html#section-2",
     "href": "Lab4-Solutions.html#section-2",
-    "title": "Lab 4: Data frames",
+    "title": "Lab 4 - Solutions: Data frames",
     "section": "2.2 ",
     "text": "2.2 \n\nIt is given that the data in column x of “numbers.csv” file are independent values of a random variable \\(X\\sim Exp(\\lambda)\\). Find the estimate \\(\\hat{\\lambda}\\) for the parameter \\(\\lambda\\) using the method of moments (see Lecture Notes).\n\n\nSolution. Recall that, for \\(X\\sim Exp(\\lambda)\\), \\[\n\\E(X)=\\frac{1}{\\lambda}\n\\] The first sample moment (the average) is, for the sample \\(\\{x_1,\\ldots,x_n\\}\\), \\[\n\\bar{m}_1=\\frac{x_1+\\ldots+x_n}{n}\n\\] and can be found using R-function mean. Equating \\(\\bar{m}_1\\) and \\(m_1=\\E(X)\\), we get \\[\n\\bar{m}_1= \\frac{1}{\\lambda}, \\qquad \\lambda = \\frac{1}{\\bar{m}_1}.\n\\]\n\n\n\nCode\n1/mean(df$x)\n\n\n[1] 1.152757",
     "crumbs": [
@@ -56,7 +144,7 @@
   {
     "objectID": "Lab4-Solutions.html#section-3",
     "href": "Lab4-Solutions.html#section-3",
-    "title": "Lab 4: Data frames",
+    "title": "Lab 4 - Solutions: Data frames",
     "section": "3.1 ",
     "text": "3.1 \n\nFind the average of all values of y from df such that the corresponding values of x are larger than \\(1\\).\n\nCheck your answer:\n\n\nCode\nmean(df[df$x &gt; 1,]$y)\n\n\n[1] 7.687361",
     "crumbs": [
@@ -67,7 +155,7 @@
   {
     "objectID": "Lab4-Solutions.html#section-4",
     "href": "Lab4-Solutions.html#section-4",
-    "title": "Lab 4: Data frames",
+    "title": "Lab 4 - Solutions: Data frames",
     "section": "4.1 ",
     "text": "4.1 \n\nPlot on the same diagram the scatter plot \\(y\\) against \\(x\\) as it is shown above, but in blue color, and plot the line \\(y=kx+b\\) with the found values of \\(k\\) and \\(b\\) (do not copy-paste, use coef function) in red colour. (See Lab 3 for plotting two graphs on one diagram).\n\n\n\nCode\nx &lt;- df$x\ny &lt;- df$y\nplot(x, y, col = 'blue')\nlines(x, ans[2]*x + ans[1], col = 'red')",
     "crumbs": [
@@ -78,7 +166,7 @@
   {
     "objectID": "Lab4-Solutions.html#section-5",
     "href": "Lab4-Solutions.html#section-5",
-    "title": "Lab 4: Data frames",
+    "title": "Lab 4 - Solutions: Data frames",
     "section": "5.1 ",
     "text": "5.1 \n\n\nInstall package MASS to R-Studio (see Lab 3).\nLoad package MASS in your code (see Lab 3).\nGiven that the column x of the last data frame df is exponentially distributed, find the MLE for its rate.\n\n\nCheck the output:\n\n\nCode\nlibrary(MASS)\nfitdistr(df$x, \"exponential\")\n\n\n     rate   \n  1.1527566 \n (0.1152757)\n\n\n(the value in brackets shows the possible “level of error” and it can be ignored for now).",
     "crumbs": [
@@ -135,7 +223,7 @@
     "href": "Lab3-Solutions.html#section-3",
     "title": "Lab 3 - Solutions: Functions, Packages, Loops",
     "section": "2.1 ",
-    "text": "2.1 \n\nDefine function pburr which would have \\(4\\) arguments: x, alpha, lambda, gamma which would return the value of \\(F_{Burr}(x)\\) for the given values of the parameters.\n\n\n\nCode\npburr &lt;- function(x, alpha, lambda, gamma){\n    1 - (lambda/(lambda+x**gamma))**alpha\n}\n\n\nCheck your code by calculating \\(F_{Burr}(0.5)\\) for \\(\\alpha=1\\), \\(\\lambda=2\\), \\(\\gamma=3\\):\n\n\nCode\npburr(0.5, alpha = 1, lambda = 2, gamma = 3)\n\n\n[1] 0.05882353\n\n\n\nOn previous Labs we discuss how to plot the graph of a function. Often we need to plot several graphs on the same diagram, e.g. in different colours. The argument col of function plot is responsible for colours:\n\n\nx &lt;- seq(-2*pi,2*pi, 0.05)\ny &lt;- sin(x)\nplot(x, y, col = 'red', type='l')\n\n\n\n\nhowever, to plot another graph we would need to replace the second plot by lines (without type='l'). The last lines add the legend to the graph:\n\nx &lt;- seq(-2*pi,2*pi, 0.05)\ny &lt;- sin(x)\nz &lt;- cos(x)\nplot(x, y, col = 'red', type='l')\nlines(x, z, col = 'blue')\n\nlegend(x = \"topright\",          # Position\n       legend = c(\"sin(x)\", \"cos(x)\"),  # Legend texts\n       lty = c(1, 1),           # Line types: 1 stands for solid\n       col = c('red', 'blue'),  # Line colours\n       lwd = 2,                 # Line width\n       bg = 'light blue')      # Background color of the legend",
+    "text": "2.1 \n\nDefine function pburr which would have \\(4\\) arguments: x, alpha, lambda, gamma which would return the value of \\(F_{Burr}(x)\\) for the given values of the parameters.\n\n\n\nCode\npburr &lt;- function(x, alpha, lambda, gamma){\n    1 - (lambda/(lambda+x**gamma))**alpha\n}\n\n\nCheck your code by calculating \\(F_{Burr}(0.5)\\) for \\(\\alpha=1\\), \\(\\lambda=2\\), \\(\\gamma=3\\):\n\n\nCode\npburr(0.5, alpha = 1, lambda = 2, gamma = 3)\n\n\n[1] 0.05882353\n\n\n\nOn previous Labs we discuss how to plot the graph of a function. Often we need to plot several graphs on the same diagram, e.g. in different colours. The argument col of function plot is responsible for colours:\n\n\nx &lt;- seq(-2*pi,2*pi, 0.05)\ny &lt;- sin(x)\nplot(x, y, col = 'red', type='l')\n\n\n\n\n\n\n\n\nhowever, to plot another graph we would need to replace the second plot by lines (without type='l'). The last lines add the legend to the graph:\n\nx &lt;- seq(-2*pi,2*pi, 0.05)\ny &lt;- sin(x)\nz &lt;- cos(x)\nplot(x, y, col = 'red', type='l')\nlines(x, z, col = 'blue')\n\nlegend(x = \"topright\",          # Position\n       legend = c(\"sin(x)\", \"cos(x)\"),  # Legend texts\n       lty = c(1, 1),           # Line types: 1 stands for solid\n       col = c('red', 'blue'),  # Line colours\n       lwd = 2,                 # Line width\n       bg = 'light blue')      # Background color of the legend",
     "crumbs": [
       "Labs - Solutions",
       "Lab 3 - Solutions"
@@ -476,7 +564,7 @@
     "href": "Lab3.html#section-3",
     "title": "Lab 3: Functions, Packages, Loops",
     "section": "2.1 ",
-    "text": "2.1 \n\nDefine function pburr which would have \\(4\\) arguments: x, alpha, lambda, gamma which would return the value of \\(F_{Burr}(x)\\) for the given values of the parameters.\n\nCheck your code by calculating \\(F_{Burr}(0.5)\\) for \\(\\alpha=1\\), \\(\\lambda=2\\), \\(\\gamma=3\\):\n\n\n[1] 0.05882353\n\n\n\nOn previous Labs we discuss how to plot the graph of a function. Often we need to plot several graphs on the same diagram, e.g. in different colours. The argument col of function plot is responsible for colours:\n\n\nx &lt;- seq(-2*pi,2*pi, 0.05)\ny &lt;- sin(x)\nplot(x, y, col = 'red', type='l')\n\n\n\n\nhowever, to plot another graph we would need to replace the second plot by lines (without type='l'). The last lines add the legend to the graph:\n\nx &lt;- seq(-2*pi,2*pi, 0.05)\ny &lt;- sin(x)\nz &lt;- cos(x)\nplot(x, y, col = 'red', type='l')\nlines(x, z, col = 'blue')\n\nlegend(x = \"topright\",          # Position\n       legend = c(\"sin(x)\", \"cos(x)\"),  # Legend texts\n       lty = c(1, 1),           # Line types: 1 stands for solid\n       col = c('red', 'blue'),  # Line colours\n       lwd = 2,                 # Line width\n       bg = 'light blue')      # Background color of the legend",
+    "text": "2.1 \n\nDefine function pburr which would have \\(4\\) arguments: x, alpha, lambda, gamma which would return the value of \\(F_{Burr}(x)\\) for the given values of the parameters.\n\nCheck your code by calculating \\(F_{Burr}(0.5)\\) for \\(\\alpha=1\\), \\(\\lambda=2\\), \\(\\gamma=3\\):\n\n\n[1] 0.05882353\n\n\n\nOn previous Labs we discuss how to plot the graph of a function. Often we need to plot several graphs on the same diagram, e.g. in different colours. The argument col of function plot is responsible for colours:\n\n\nx &lt;- seq(-2*pi,2*pi, 0.05)\ny &lt;- sin(x)\nplot(x, y, col = 'red', type='l')\n\n\n\n\n\n\n\n\nhowever, to plot another graph we would need to replace the second plot by lines (without type='l'). The last lines add the legend to the graph:\n\nx &lt;- seq(-2*pi,2*pi, 0.05)\ny &lt;- sin(x)\nz &lt;- cos(x)\nplot(x, y, col = 'red', type='l')\nlines(x, z, col = 'blue')\n\nlegend(x = \"topright\",          # Position\n       legend = c(\"sin(x)\", \"cos(x)\"),  # Legend texts\n       lty = c(1, 1),           # Line types: 1 stands for solid\n       col = c('red', 'blue'),  # Line colours\n       lwd = 2,                 # Line width\n       bg = 'light blue')      # Background color of the legend",
     "crumbs": [
       "Labs - Problems",
       "Lab 3 - Problems"
@@ -579,6 +667,94 @@
     "crumbs": [
       "Labs - Problems",
       "Lab 4 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab5.html",
+    "href": "Lab5.html",
+    "title": "Lab 5: Kaplan–Meier estimate of the survival functions and Cox regression model",
+    "section": "",
+    "text": "\\[\n  \\renewcommand{\\P}{\\mathbb{P}}\n  \\newcommand{\\E}{\\mathbb{E}}\n\\]",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 5 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab5.html#section",
+    "href": "Lab5.html#section",
+    "title": "Lab 5: Kaplan–Meier estimate of the survival functions and Cox regression model",
+    "section": "1.1 ",
+    "text": "1.1 \n\nDownload hm.csv file, store it at the variable df, and show first rows of the data set. Check the output.\n\n\n\n  ID time age drug status    entdate    enddate\n1  1    5  46    0      1 15/05/2015 14/10/2015\n2  2    6  35    1      0 19/09/2014 20/03/2015\n3  3    8  30    1      1 21/04/2016 20/12/2016\n4  4    3  30    1      1 03/01/2016 04/04/2016\n5  5   22  36    0      1 18/09/2014 19/07/2016\n6  6    1  32    1      0 18/03/2016 17/04/2016\n\n\nAs you can see, this data frame contains some data about patients, who were in a trial. Column “time” tells us how many full months the trial took place place for each patient (we know that it’s “months” time units looking at the last two columns: “entdate” is the dat of the start of the trial for a patient, and the “enddate” is the date of the end of the trial). Column “age” contains obviously their ages. Column “drug” tells us whether they got some medicine effect of which we investigate (\\(0\\) means no, \\(1\\) means yes). Column “status” tells us their status at the end of the trial: \\(1\\) stands for “dead” (because of the drug received), \\(0\\) means “not dead because of the drug”, i.e. censored (excluded from the trial, e.g. recovered and dismissed, or dead by another reason non related to the drug, or something else).",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 5 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab5.html#section-1",
+    "href": "Lab5.html#section-1",
+    "title": "Lab 5: Kaplan–Meier estimate of the survival functions and Cox regression model",
+    "section": "1.2 ",
+    "text": "1.2 \n\nFind the mean age of the participants of the trial. Check the answer\n\n\n\n[1] 36.07",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 5 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab5.html#section-2",
+    "href": "Lab5.html#section-2",
+    "title": "Lab 5: Kaplan–Meier estimate of the survival functions and Cox regression model",
+    "section": "1.3 ",
+    "text": "1.3 \n\nFind the number of entries (rows) in the data frame. Check the answer:\n\n\n\n[1] 100",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 5 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab5.html#section-3",
+    "href": "Lab5.html#section-3",
+    "title": "Lab 5: Kaplan–Meier estimate of the survival functions and Cox regression model",
+    "section": "2.1 ",
+    "text": "2.1 \n\nFind out how likely, for the given data, is to survive at least \\(17\\) months than at least \\(51\\) months. Check your answer.\n\n\n\n[1] 2.133028",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 5 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab5.html#section-4",
+    "href": "Lab5.html#section-4",
+    "title": "Lab 5: Kaplan–Meier estimate of the survival functions and Cox regression model",
+    "section": "3.1 ",
+    "text": "3.1 \n\nPlot the previous plot with legend so that drug=0 whould be in dashed seagreen colour (both on plot and in legend) and denoted by “No drug”, and drug=1 would be in solid orange and denoted “drug”.",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 5 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab5.html#section-5",
+    "href": "Lab5.html#section-5",
+    "title": "Lab 5: Kaplan–Meier estimate of the survival functions and Cox regression model",
+    "section": "4.1 ",
+    "text": "4.1 \n\nWrite the code for the following plot:\n\n\n\n\n\n\n\n\n\n\nSurely, there numerous R packages which can make plots more nice. For example, may install and load survminer package:\n\nlibrary(survminer)\nggsurvplot(kmlung)\n\n\n\n\n\n\n\n\nHere “strata” is a synonym for “covariate”. Moreover, by specifying conf.int one can also include the confidence intervals for both values of the covariate:\n\nggsurvplot(kmlung, conf.int = 0.95)\n\n\n\n\n\n\n\n\nNote also that if we define kmlung without data = lung then ggsurvplot must include data = lung: i.e. the full command would be ggsurvplot(survfit(Surv(lung$time, lung$status) ~ lung$sex), conf.int = 0.95).",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 5 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab5.html#section-6",
+    "href": "Lab5.html#section-6",
+    "title": "Lab 5: Kaplan–Meier estimate of the survival functions and Cox regression model",
+    "section": "5.1 ",
+    "text": "5.1 \n\nFind the ratio of the hazard rate for a male aged 70 to a female aged 80 (for the given data set). Check the asnwer:\n\n\n\n[1] 1.408844",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 5 - Problems"
     ]
   }
 ]
