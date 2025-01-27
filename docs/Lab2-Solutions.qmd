@@ -1,0 +1,288 @@
+---
+title: "Lab 2 - Solutions:  Probability Distributions"
+format: 
+    html:
+        echo: true
+        code-fold: true
+---
+
+::: hidden
+$$
+  \renewcommand{\P}{\mathbb{P}}
+  \newcommand{\E}{\mathbb{E}}
+$$
+:::
+
+# General rules
+
+-   R language includes functions to deal with various probability distributions.
+
+-   Some specific distributions require external libraries to be used, we will discuss this in Lab 3.
+
+-   Usually, a distribution has short "nickname":
+
+    * Exponential - `exp`
+
+    * Gamma - `gamma`
+
+    * Normal - `norm`
+
+    * Log-normal - `lnorm`
+
+    * ... and we will discuss Weibull and Pareto in Lab 3.
+
+
+- Each distribution has several functions in R with a similar structure of names, e.g.: 
+
+    * Functions  `dexp`, `dgamma`, `dnorm`, `dlnorm` stand for the PDF (density function) $f_X(x)$ of the random variables $X$ with the distributions `exp`, `gamma`, `norm`, `lnorm`, respectively.
+
+    *  Functions  `pexp`, `pgamma`, `pnorm`, `plnorm`  stand for the corresponding CDF (distribution functions) $F_X(x)=\P(X\leq x)$. 
+    
+    * Functions `qexp`, `qgamma`, `qnorm`, `qlnorm` stand for the quartiles, i.e. the inverse functions to $F_X$ (see examples below).
+
+    * Functions `rexp`, `rgamma`, `rnorm`, `rlnorm` are used to *generate* random variables distributed according to the corresponding distributions `exp`, `gamma`, `norm`, `lnorm`, respectively.
+
+- If you type in console `?` followed by either of functions above, you will get a detailed help about all functions for the corresponding distribution, try e.g. `?dexp`.
+
+Consider examples and tasks. 
+
+# Exponential distribution
+
+-   Recall that continuous random variable $X$ has the exponential distribution with a rate (a parameter) $\lambda>0$ (we denote this $X\sim Exp(\lambda)$) if its cumulative distribution function is 
+
+$$ 
+F_X(x) = \P(X\leq x) = 1- e^{-\lambda x}, \qquad x\geq0, 
+$$ 
+
+and hence, its density is  
+
+$$ 
+f_X(x) = \lambda e^{-\lambda x}, \qquad x\geq0. 
+$$
+
+-   Recall also that since this is a continuous random variable, $\P(X=x)=0$ for each $x$ and 
+
+$$ 
+\boxed{\ \P(a\leq x\leq b)= F_X(b)- F_X(a)\ \vphantom{\biggl(}} 
+$$ {#eq-main-prob}
+
+- For the PDF $f_X(x)$, we use R-function `dexp(x, lambda)` where `lambda` is the value of $\lambda$. The full code is `dexp(x, rate = lambda)` but as soon as `lambda` is on the second position, the word `rate` can be omitted. The default value of `rate` is $1$. 
+The following code gives the value of the PDF for $\lambda=3$ at $x=5$, i.e. the value $f_X(5) = 3\cdot e^{-3\cdot 5}=3e^{-15}$:
+```{r}
+#| echo: true
+#| code-fold: false
+dexp(5, 3) # or, the same, dexp(5, rate = 3)
+```
+Note that R uses the so-called exponential form for decimals, it stands here for
+```{r}
+#| echo: false
+#| code-fold: false
+cat(sprintf(dexp(5, 3), fmt = '%#.12f'))
+```
+One can check that the value is as expected:
+```{r}
+#| echo: true
+#| code-fold: false
+dexp(5, 3) == 3 * exp(- 3*5)
+```
+
+- Similarly, for the CDF $F_X(x)=\P(X\leq x)$, we use the code `pexp(x, lambda)` (with the same comments about `rate = lambda`). For example, for $X\sim Exp(3)$, the probability $\P(X\leq 0.5)$ can be found using the code
+```{r}
+#| echo: true
+#| code-fold: false
+pexp(0.5, 3)
+```
+
+
+## 
+
+:::{.task}
+Let $X\sim Exp(0.1)$. Find $\P(1<X\leq3)$.
+:::
+
+:::: {.solution}
+We know that (see @eq-main-prob above)
+
+$$
+\P(1<X\leq3) = F_X(3) - F_X(1)
+$$
+
+Therefore, we can use the code
+```{r}
+pexp(3, 0.1) - pexp(1, 0.1)
+```
+::::
+
+
+
+
+- The survival function $S_X(x) = \P(X>x)$ can be calculated, of course, from the relation $S_X(x) = 1- F_X(x)$. There is, however, more numerically exact way by using the argument `lower.tail = FALSE` (or `lower.tail = F`) for function `pexp`:
+```{r}
+#| echo: true
+#| code-fold: false
+pexp(0.5, 3,  lower.tail  = F) 
+```
+that coincides with
+```{r}
+#| echo: true
+#| code-fold: false
+1 - pexp(0.5, 3)
+```
+at least in the first 5 decimal figures.
+
+(Surely, for the exponential distribution one has an explicit simple formula: $S_X(x)= e^{-\lambda x}$.)
+
+##
+:::{.task}
+Let $X\sim Exp(0.3)$. Plot the graph of $S_X(x)$ for $x\in [0,10]$ (see [Task 5.1 of Lab 1](Lab1-Solutions.qmd#sec-plotingtask)) using `pexp` function.
+:::
+
+:::: {.solution}
+Recall that R apply any function to a vector component-wise (entry-wise), i.e. if there is a vector `x` and a function `f`, then `f(x)` will be the vector whose first component is the value of `f` on the first compnent of `x` and so on.
+
+```{r dev.args = list(bg = 'transparent')}
+x <- seq(0, 10, 0.1)
+y <- pexp(x, 0.3, lower.tail = F)
+plot(x,y, type='l')
+```
+
+::::
+
+# Gamma distribution
+
+- Recall that, for $X\sim \Gamma(\alpha,\lambda)$,
+
+$$
+f_X(x)=\frac{\lambda^\alpha}{\Gamma(\alpha)}x^{\alpha-1} e^{-\lambda x}, \quad x\geq0.
+$$
+
+- The corresponding R functions, e.g. `dgamma`, `pgamma` etc., should hence have at least 3 arguments. $\alpha$ corresponds to `shape` (second parameter) and $\lambda$ corresponds to `rate` (third parameter), i.e. e.g., for $X\sim\Gamma(0.1,2)$, $f_X(3)$ can be calculated as follows:
+```{r}
+#| echo: true
+#| code-fold: false
+dgamma(3, 0.1, 2)
+```
+It may be more convenient (though not necessary) to write explicitly: `dgamma(3, shape = 0.1, rate = 2)`.
+
+- By the definition, for any $p\in(0,1)$, the $p$-quantile is the value of $x$, such that 
+
+$$
+F_X(x) = \P(X\leq x) = p,
+$$
+
+i.e. $x=F_X^{-1}(p)$. The corresponding R-function has prefix `q`. For example, for $X\sim\Gamma(0.1,2)$, to find $x$ such that $F_X(x)=0.2$ we can use the following code:
+```{r}
+#| echo: true
+#| code-fold: false
+x <- qgamma(0.2, shape = 0.1, rate = 2)
+x
+```
+and we can check that, indeed, $F_X(x)=0.2$ for the found value of $x$:
+```{r}
+#| echo: true
+#| code-fold: false
+pgamma(x, shape = 0.1, rate = 2)
+```
+
+##
+:::{.task}
+Let $X\sim \Gamma(3, 2)$. Find $a$ such that $\P(a\leq X < 5)=0.4$. (*Hint*: find first $F_X(a)$ and then find $a$.) Assign the answer to R variable `a`.
+:::
+
+:::: {.solution}
+We have that 
+
+$$
+F_X(5)-F_X(a) = 0.4, 
+$$
+
+hence,
+
+$$
+F_X(a)=F_X(5)-0.4.
+$$
+
+```{r}
+fa <- pgamma(5, shape = 3, rate = 2) - 0.4
+a <- qgamma(fa, shape = 3, rate = 2)
+a
+```
+::::
+
+
+
+- To generate `n` (independent) random values distributed according to $\Gamma(\alpha, \lambda)$, we use the command `rgamma(n, shape = alpha, rate = lambda)`. The output is a vector (of the length `n`).
+
+- Since the values are random, if you run the same `rgamma` command again and again, the output will be different all the time: 
+```{r}
+#| echo: true
+#| code-fold: false
+rgamma(2, shape = 0.1, rate = 0.2)
+```
+and another output for the same input:
+```{r}
+#| echo: true
+#| code-fold: false
+rgamma(2, shape = 0.1, rate = 0.2)
+```
+
+To fix the output, we should "set a seed": write the code `set.seed(m)` with any natural number instead of `m`. For each `m`, there will be a fixed output. If you change `m`, the output will also changes.
+
+##
+:::{.task #sec-seed}
+Set the seed $123$, i.e. write `set.seed(123)` before your code. 
+Generate $10000$ values of $X\sim\Gamma(2,3)$. Find the mean (average) of these values and assign it to the variable `m`.  You may either use `sum` function discussed in Lab 1 (and average it) or `mean` function (use `?mean` if experience difficulties). 
+:::
+
+```{r}
+set.seed(123)
+x <- rgamma(10000, shape = 2, rate = 3)
+m <- mean(x)
+m
+```
+
+
+You may check that this answer will remain the same for each new run, as the randomness is "frozen" now.
+
+- Note that, by LLN (the Low of Large Numbers), the obtained mean (i.e. a sample mean) should be close to $\E(X)=\frac{\alpha}{\lambda}$. And indeed, the received value is close to $\frac23\approx0.66$, we may calculate this in R, of course (using `abs` function for an absolute value of a number):
+```{r}
+#| echo: true
+#| code-fold: false
+abs(m - 2/3)
+```
+
+# Normal and log-normal distributions
+
+- Recall that if $Z\sim \ln \mathcal{N}(\mu,\sigma^2)$, then $X:=\ln Z \sim \mathcal{N}(\mu,\sigma^2)$.
+
+- In both cases, we have two parameters $\mu$ and $\sigma$. The corresponding arguments for `dnorm,pnorm,qnorm,rnorm` are called `mean` and `sd`, whereas the arguments for `dlnorm,plnorm,qlnorm,rlnorm` are called `meanlog` and `sdlog`, respectively.
+
+##
+:::{.task}
+Let $Y\sim\ln\mathcal{N}(0.01,0.2^2)$. Plot the graph of the density $f_Y(x)$ for $x\in[0,3]$. Use `xlab` and `ylab` arguments of the `plot` function to set-up the names "x value" and "Density" for the horizontal and vertical axes. Use `main` argument of the `plot` function to set-up the title "Normal distribution density" for the whole plot. 
+:::
+
+:::{.remark}
+To make the graph smother, we will use a smaller step in `seq` function while defining the x values.
+:::
+
+```{r dev.args = list(bg = 'transparent')}
+x <- seq(0, 3, 0.01)
+y <- dlnorm(x, meanlog = 0.01, sdlog = 0.2)
+plot(x,y, type="l", xlab="x value", ylab="Density", main="Log-normal distribution density")
+```   
+
+##
+:::{.task}
+The **hazard function** of a random variable $X$ is defined as follows:
+$$
+h_X(x) := \frac{f_X(x)}{1-F_X(x)}.
+$$
+Let $X\sim \mathcal{N}(4, 0.4)$. Calculate $h_X(2)$.
+:::
+
+Check the answer:
+```{r}
+sigma = sqrt(0.4) # square root of sigma^2 = 0.4
+dnorm(2, 4, sigma)/pnorm(2, 4, sigma, lower.tail = F)
+```
