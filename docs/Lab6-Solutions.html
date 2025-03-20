@@ -63,7 +63,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./Lab5.html" rel="prev">
+<link href="./Lab5-Solutions.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -134,7 +134,7 @@ window.Quarto = {
 <link rel="stylesheet" href="styles.css">
 <meta property="og:title" content="Lab 6: Time series – MA-365/M65 Lab Assignments">
 <meta property="og:description" content="Lab Assignments for module MA-365/M65: Risk and Survival Models">
-<meta property="og:image" content="https://finkelshtein.github.io/MA-x65/website/Lab6_files/figure-html/unnamed-chunk-1-1.png">
+<meta property="og:image" content="https://finkelshtein.github.io/MA-x65/website/Lab6-Solutions_files/figure-html/unnamed-chunk-1-1.png">
 <meta property="og:site_name" content="MA-365/M65 Lab Assignments">
 <meta property="og:image:height" content="960">
 <meta property="og:image:width" content="8640">
@@ -149,7 +149,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lab1.html">Labs - Problems</a></li><li class="breadcrumb-item"><a href="./Lab6.html">Lab 6 - Problems</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lab1-Solutions.html">Labs - Solutions</a></li><li class="breadcrumb-item"><a href="./Lab6-Solutions.html">Lab 6 - Solutions</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -222,7 +222,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Lab6.html" class="sidebar-item-text sidebar-link active">
+  <a href="./Lab6.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab 6 - Problems</span></a>
   </div>
 </li>
@@ -270,7 +270,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Lab6-Solutions.html" class="sidebar-item-text sidebar-link">
+  <a href="./Lab6-Solutions.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Lab 6 - Solutions</span></a>
   </div>
 </li>
@@ -309,7 +309,7 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lab1.html">Labs - Problems</a></li><li class="breadcrumb-item"><a href="./Lab6.html">Lab 6 - Problems</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lab1-Solutions.html">Labs - Solutions</a></li><li class="breadcrumb-item"><a href="./Lab6-Solutions.html">Lab 6 - Solutions</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Lab 6: Time series</h1>
 </div>
@@ -368,7 +368,7 @@ X_t = \alpha X_{t-1} + e_t,
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Lab6_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="4320"></p>
+<p><img src="Lab6-Solutions_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="4320"></p>
 </figure>
 </div>
 </div>
@@ -380,7 +380,7 @@ X_t = \alpha X_{t-1} + e_t,
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Lab6_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="4320"></p>
+<p><img src="Lab6-Solutions_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="4320"></p>
 </figure>
 </div>
 </div>
@@ -391,10 +391,21 @@ X_t = \alpha X_{t-1} + e_t,
 <div class="task">
 <p>The previous time series is weakly stationary. Modify the code to generate a non-stationary <span class="math inline">\(AR(1)\)</span> time-series, similar to the following one:</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>xt <span class="ot">&lt;-</span> <span class="fu">numeric</span>(n) <span class="co"># We pre-allocate zero-values to vector xt of the length n</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>xt[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>et <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n,<span class="at">sd=</span><span class="dv">2</span>) <span class="co"># Note that rnorm has mean=0 by default, see ?rnorm</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span>n){</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  xt[i] <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">*</span>xt[i<span class="dv">-1</span>] <span class="sc">+</span> et[i]</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(xt,<span class="at">type=</span><span class="st">"l"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Lab6_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="4320"></p>
+<p><img src="Lab6-Solutions_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="4320"></p>
 </figure>
 </div>
 </div>
@@ -410,10 +421,23 @@ X_t = 0.3X_{t-1} +0.1 X_{t-2}+e_{t}+0.25e_{t-1}-0.5e_{t-2},
 <p><em>Hint:</em> note that you need now <span class="math inline">\(2\)</span> initial values to generate the rest <span class="math inline">\(n-2\)</span> values.</p>
 </div>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>xt <span class="ot">&lt;-</span> <span class="fu">numeric</span>(n) </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>xt[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>xt[<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>et <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n,<span class="at">sd=</span><span class="fl">0.7</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">3</span><span class="sc">:</span>n){</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  xt[i] <span class="ot">&lt;-</span> <span class="fl">0.3</span><span class="sc">*</span>xt[i<span class="dv">-1</span>] <span class="sc">+</span> <span class="fl">0.1</span><span class="sc">*</span>xt[i<span class="dv">-2</span>] <span class="sc">+</span> et[i] <span class="sc">+</span> <span class="fl">0.25</span><span class="sc">*</span>et[i<span class="dv">-1</span>] <span class="sc">-</span> <span class="fl">0.5</span><span class="sc">*</span>et[i<span class="dv">-2</span>]</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>xt <span class="ot">&lt;-</span> <span class="fu">ts</span>(xt)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(xt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Lab6_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="4320"></p>
+<p><img src="Lab6-Solutions_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="4320"></p>
 </figure>
 </div>
 </div>
@@ -429,10 +453,27 @@ X_t = 0.3X_{t-1} +0.1 X_{t-2}+e_{t}+0.25e_{t-1}-0.5e_{t-2},
 </div>
 <p>The process is not stationary with the output like this:</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">101</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">100000</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>xt <span class="ot">&lt;-</span> <span class="fu">numeric</span>(n) </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>xt[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>xt[<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>et <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n,<span class="at">sd=</span><span class="fl">0.7</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># The roots 1 and 2 yields the characteristic equation </span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 0=(z-1)(z+2)=z^2+z-2, i.e.</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 1=0.5x+0.5z^2</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">3</span><span class="sc">:</span>n){</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  xt[i] <span class="ot">&lt;-</span> <span class="fl">0.5</span><span class="sc">*</span>xt[i<span class="dv">-1</span>] <span class="sc">+</span> <span class="fl">0.5</span><span class="sc">*</span>xt[i<span class="dv">-2</span>] <span class="sc">+</span> et[i] <span class="sc">+</span> <span class="fl">0.25</span><span class="sc">*</span>et[i<span class="dv">-1</span>] <span class="sc">-</span> <span class="fl">0.5</span><span class="sc">*</span>et[i<span class="dv">-2</span>]</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>xt <span class="ot">&lt;-</span> <span class="fu">ts</span>(xt)</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(xt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Lab6_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="4320"></p>
+<p><img src="Lab6-Solutions_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="4320"></p>
 </figure>
 </div>
 </div>
@@ -449,10 +490,16 @@ Y_t=\nabla X_t=(1-B)X_t=X_t-X_{t-1}
 <p>Plot the graph of <span class="math inline">\(Y_t\)</span>. Notice that the output reflects the stationarity of the time series.</p>
 </div>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>yt <span class="ot">&lt;-</span> <span class="fu">diff</span>(xt)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>yt <span class="ot">&lt;-</span> <span class="fu">ts</span>(yt)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(yt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Lab6_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="4320"></p>
+<p><img src="Lab6-Solutions_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="4320"></p>
 </figure>
 </div>
 </div>
@@ -477,21 +524,27 @@ sq = \sigma), n = T)}
 <p>Redo Task <a href="#sec-task2" class="quarto-xref">2.2</a> using <code>arima.sim</code> function. Set seed <span class="math inline">\(100\)</span>. Assign the result to <code>xt</code>. Plot the output.</p>
 </div>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">100</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>xt <span class="ot">&lt;-</span> <span class="fu">arima.sim</span>(<span class="at">model =</span> <span class="fu">list</span>(<span class="at">ar =</span> <span class="fu">c</span>(<span class="fl">0.3</span>, <span class="fl">0.1</span>), <span class="at">ma =</span> <span class="fu">c</span>(<span class="fl">0.25</span>, <span class="sc">-</span><span class="fl">0.5</span>), <span class="at">sd =</span> <span class="fl">0.7</span>), <span class="at">n =</span> <span class="dv">10000</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(xt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Lab6_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Lab6-Solutions_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>We can also “zoom” the plot, e.g.&nbsp;between <span class="math inline">\(t=5000\)</span> and <span class="math inline">\(t=6000\)</span>. Note that a slicing <code>xt[n:m]</code> is a vector, and it may be converted to time series:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">ts</span>(xt[<span class="dv">5000</span><span class="sc">:</span><span class="dv">6000</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">ts</span>(xt[<span class="dv">5000</span><span class="sc">:</span><span class="dv">6000</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Lab6_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Lab6-Solutions_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -499,11 +552,11 @@ sq = \sigma), n = T)}
 <p>As you can see, the times are not the “real” ones, here <span class="math inline">\(0\)</span> stands for the starting time <span class="math inline">\(5000\)</span>.</p>
 <p>One of the way to keep the real times is to do not convert by <code>ts</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="dv">5000</span><span class="sc">:</span><span class="dv">6000</span>, xt[<span class="dv">5000</span><span class="sc">:</span><span class="dv">6000</span>], <span class="at">type=</span><span class="st">"l"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="dv">5000</span><span class="sc">:</span><span class="dv">6000</span>, xt[<span class="dv">5000</span><span class="sc">:</span><span class="dv">6000</span>], <span class="at">type=</span><span class="st">"l"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Lab6_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Lab6-Solutions_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -516,6 +569,10 @@ sq = \sigma), n = T)}
 </div>
 <p>Note that the latter value is close to <span class="math inline">\(0\)</span>, as expected:</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(xt[<span class="dv">1000</span>], <span class="fu">mean</span>(xt))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.062928746 0.005488778</code></pre>
 </div>
@@ -526,8 +583,8 @@ sq = \sigma), n = T)}
 <h1 data-number="4"><span class="header-section-number">4</span> Fitting the model and forecasting</h1>
 <p>Having the data, i.e.&nbsp;the values of <span class="math inline">\(X_t\)</span> for <span class="math inline">\(t=1,2,3,\ldots, T\)</span>, we can find an <span class="math inline">\(ARMA(p,q)\)</span> model that is the best to fit the data. The values for <span class="math inline">\(X_t\)</span> may be loaded from a file or e.g.&nbsp;we can use the previously generated vector of <code>xt</code>. Note that <code>xt</code> was just a sample path of certain <span class="math inline">\(ARMA(2,2)\)</span> process (i.e.&nbsp;the values were random), and it’s <strong>hopeless to recover</strong> the values of <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>, we may only find the “simplest” process which would behave similarly. The command is (notice the package we need to load):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forecast)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">auto.arima</span>(xt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forecast)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">auto.arima</span>(xt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Series: xt 
 ARIMA(1,0,3) with zero mean 
@@ -545,7 +602,7 @@ AIC=28278.19   AICc=28278.19   BIC=28314.24</code></pre>
 <p>Note that if you change the seed <span class="math inline">\(100\)</span> above, the data <code>xt</code> would change, and the fitted model may be very different.</p>
 <p>On the other hand, if we have some insight about the type of the model, e.g.&nbsp;if we know that it was an <span class="math inline">\(ARMA(2,2)\)</span> process, we can specify this, to fit the parameters:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">arima</span>(xt, <span class="at">order=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">arima</span>(xt, <span class="at">order=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -563,9 +620,9 @@ sigma^2 estimated as 0.9889:  log likelihood = -14134.08,  aic = 28280.17</code>
 <p>Normally, this is not used to recover the model, but to predict (forecast) possible future for the current data.</p>
 <p>Let assign the result of fitting to a variable <code>fit</code>: <code>fit &lt;- arima(xt, order=c(2,0,2))</code> and use <code>predict</code> function to get next <span class="math inline">\(5\)</span> values (it’s hopeless to predict too much):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">arima</span>(xt, <span class="at">order=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">2</span>))</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>future <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit, <span class="at">n.ahead=</span><span class="dv">5</span>)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>future</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">arima</span>(xt, <span class="at">order=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">2</span>))</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>future <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit, <span class="at">n.ahead=</span><span class="dv">5</span>)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>future</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$pred
 Time Series:
@@ -585,12 +642,12 @@ Frequency = 1
 <p>As you can see the output is a data frame with two columns: predicted data and standard error.</p>
 <p>We can now plot the prediction “attached” to the end of the time series (recall that the time series <code>xt</code> ends at time <span class="math inline">\(10000\)</span>):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(xt, <span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">9950</span>,<span class="dv">10010</span>), <span class="at">col=</span><span class="st">"blue"</span>)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(future<span class="sc">$</span>pred, <span class="at">col=</span><span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(xt, <span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">9950</span>,<span class="dv">10010</span>), <span class="at">col=</span><span class="st">"blue"</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(future<span class="sc">$</span>pred, <span class="at">col=</span><span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Lab6_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Lab6-Solutions_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -601,10 +658,16 @@ Frequency = 1
 <p>Check what happen if we try to predict next <span class="math inline">\(50\)</span> values.</p>
 </div>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>future2 <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit, <span class="at">n.ahead=</span><span class="dv">50</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(xt, <span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">9950</span>,<span class="dv">10060</span>), <span class="at">col=</span><span class="st">"blue"</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(future2<span class="sc">$</span>pred, <span class="at">col=</span><span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Lab6_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Lab6-Solutions_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1034,8 +1097,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./Lab5.html" class="pagination-link" aria-label="Lab 5 - Problems">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Lab 5 - Problems</span>
+      <a href="./Lab5-Solutions.html" class="pagination-link" aria-label="Lab 5 - Solutions">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Lab 5 - Solutions</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
