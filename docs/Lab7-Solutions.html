@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Lab 7: Kaplan–Meier estimate of the survival functions and Cox regression model – MA-365/M65 Lab Assignments</title>
+<title>Lab 7 - Solutions: Kaplan–Meier estimate of the survival functions and Cox regression model – MA-365/M65 Lab Assignments</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -63,7 +63,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./Lab6.html" rel="prev">
+<link href="./Lab6-Solutions.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -132,9 +132,9 @@ window.Quarto = {
 </script>
 
 <link rel="stylesheet" href="styles.css">
-<meta property="og:title" content="Lab 7: Kaplan–Meier estimate of the survival functions and Cox regression model – MA-365/M65 Lab Assignments">
+<meta property="og:title" content="Lab 7 - Solutions: Kaplan–Meier estimate of the survival functions and Cox regression model – MA-365/M65 Lab Assignments">
 <meta property="og:description" content="Lab Assignments for module MA-365/M65: Risk and Survival Models">
-<meta property="og:image" content="https://finkelshtein.github.io/MA-x65/website/Lab7_files/figure-html/unnamed-chunk-7-1.png">
+<meta property="og:image" content="https://finkelshtein.github.io/MA-x65/website/Lab7-Solutions_files/figure-html/unnamed-chunk-7-1.png">
 <meta property="og:site_name" content="MA-365/M65 Lab Assignments">
 <meta property="og:image:height" content="960">
 <meta property="og:image:width" content="1344">
@@ -149,7 +149,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lab1.html">Labs - Problems</a></li><li class="breadcrumb-item"><a href="./Lab7.html">Lab 7 - Problems</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lab1-Solutions.html">Labs - Solutions</a></li><li class="breadcrumb-item"><a href="./Lab7-Solutions.html">Lab 7 - Solutions</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -228,7 +228,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Lab7.html" class="sidebar-item-text sidebar-link active">
+  <a href="./Lab7.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab 7 - Problems</span></a>
   </div>
 </li>
@@ -282,7 +282,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Lab7-Solutions.html" class="sidebar-item-text sidebar-link">
+  <a href="./Lab7-Solutions.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Lab 7 - Solutions</span></a>
   </div>
 </li>
@@ -326,9 +326,9 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lab1.html">Labs - Problems</a></li><li class="breadcrumb-item"><a href="./Lab7.html">Lab 7 - Problems</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lab1-Solutions.html">Labs - Solutions</a></li><li class="breadcrumb-item"><a href="./Lab7-Solutions.html">Lab 7 - Solutions</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Lab 7: Kaplan–Meier estimate of the survival functions and Cox regression model</h1>
+<h1 class="title">Lab 7 - Solutions: Kaplan–Meier estimate of the survival functions and Cox regression model</h1>
 </div>
 
 
@@ -359,6 +359,11 @@ window.Quarto = {
 <p>Download <a href="hm.csv">hm.csv</a> file, store it at the variable <code>df</code>, and show first rows of the data set. Check the output.</p>
 </div>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"hm.csv"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>  ID time age drug status    entdate    enddate
 1  1    5  46    0      1 15/05/2015 14/10/2015
@@ -369,7 +374,7 @@ window.Quarto = {
 6  6    1  32    1      0 18/03/2016 17/04/2016</code></pre>
 </div>
 </div>
-<p>As you can see, this data frame contains some data about patients, who were in a trial. Column “time” tells us how many full months the trial took place place for each patient (we know that it’s “months” time units looking at the last two columns: “entdate” is the date of the start of the trial for a patient, and the “enddate” is the date of the end of the trial). Column “age” contains obviously their ages. Column “drug” tells us whether they got some medicine effect of which we investigate (<span class="math inline">\(0\)</span> means no, <span class="math inline">\(1\)</span> means yes). Column “status” tells us their status at the end of the trial: <span class="math inline">\(1\)</span> stands for “dead” (because of the drug received), <span class="math inline">\(0\)</span> means “not dead because of the drug”, i.e.&nbsp;censored (excluded from the trial, e.g.&nbsp;recovered and dismissed, or dead by another reason non related to the drug, or something else).</p>
+<p>As you can see, this data frame contains some data about patients, who were in a trial. Column “time” tells us how many full months the trial took place place for each patient (we know that it’s “months” time units looking at the last two columns: “entdate” is the dat of the start of the trial for a patient, and the “enddate” is the date of the end of the trial). Column “age” contains obviously their ages. Column “drug” tells us whether they got some medicine effect of which we investigate (<span class="math inline">\(0\)</span> means no, <span class="math inline">\(1\)</span> means yes). Column “status” tells us their status at the end of the trial: <span class="math inline">\(1\)</span> stands for “dead” (because of the drug received), <span class="math inline">\(0\)</span> means “not dead because of the drug”, i.e.&nbsp;censored (excluded from the trial, e.g.&nbsp;recovered and dismissed, or dead by another reason non related to the drug, or something else).</p>
 </section>
 <section id="section-1" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="section-1"><span class="header-section-number">1.2</span> </h2>
@@ -377,6 +382,10 @@ window.Quarto = {
 <p>Find the mean age of the participants of the trial. Check the answer</p>
 </div>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(df<span class="sc">$</span>age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 36.07</code></pre>
 </div>
@@ -388,6 +397,10 @@ window.Quarto = {
 <p>Find the number of entries (rows) in the data frame. Check the answer:</p>
 </div>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(df<span class="sc">$</span>age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 100</code></pre>
 </div>
@@ -398,11 +411,11 @@ window.Quarto = {
 <h1 data-number="2"><span class="header-section-number">2</span> Kaplan–Meier estimate</h1>
 <p>To build the Kaplan-Meier estimate of the survival function based on the data, we will use package <code>survival</code>. Install it, using menu <code>Tools</code> in R Studio and then choosing <code>Install Packages</code> item. Load the installed package in your code:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survival)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survival)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>First, we need to “label” the data, explaining which entries are censored. For this we use the function <code>Surv</code> (notice the first capital letter!) which has (at least) two arguments, e.g.&nbsp;<code>Surv(time, status)</code>. Here <code>time</code> is a vector containing the data (normally, moments of time), in the example above this data is in the column <code>df$time</code>. Next, <code>status</code> in the <code>Surv</code> function is e.g.&nbsp;a vector of 0/1 or 1/2 where the larger number (1 for 0/1 or 2 for 1/2) means the death because of the considered reason (drug in this example). In our example, we have for this the column <code>df$status</code>. The output is as follows:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Surv</span>(df<span class="sc">$</span>time, df<span class="sc">$</span>status)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Surv</span>(df<span class="sc">$</span>time, df<span class="sc">$</span>status)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  [1]  5   6+  8   3  22   1+  7   9   3  12   2+ 12   1  15  34   1   4  19+
  [19]  3+  2   2+  6  60+ 11   2+  5   4+  1  13   3   2   1  30   7   4   8 
@@ -415,9 +428,9 @@ window.Quarto = {
 <p>As you can see all censored moments of time got “+” label. Note that the output of <code>Surv</code> function is the so-called “survival object” which has some special internal structure used by R, what we see above is just a visual representation.</p>
 <p>Next, to build the Kaplan-Meier estimate of the survival function based on the given data, we use function <code>survfit</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>sf <span class="ot">&lt;-</span> <span class="fu">Surv</span>(df<span class="sc">$</span>time, df<span class="sc">$</span>status)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>km <span class="ot">&lt;-</span> <span class="fu">survfit</span>(sf <span class="sc">~</span> <span class="dv">1</span>)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>km</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>sf <span class="ot">&lt;-</span> <span class="fu">Surv</span>(df<span class="sc">$</span>time, df<span class="sc">$</span>status)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>km <span class="ot">&lt;-</span> <span class="fu">survfit</span>(sf <span class="sc">~</span> <span class="dv">1</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>km</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Call: survfit(formula = sf ~ 1)
 
@@ -428,11 +441,11 @@ window.Quarto = {
 <p>The symbols <code>~ 1</code> means that we want to build the Kaplan-Meier estimate for the whole (non-censored) data from the data frame regardless of other covariates (characteristics) like age or whether the patient got the drug. The output of <code>survfit</code> (which we stored in <code>km</code> variable) tells us that for <span class="math inline">\(n=100\)</span> patients only <span class="math inline">\(80\)</span> events happened (meaning, in this example, non-censored deaths, i.e.&nbsp;deaths because fo the drug). Again, the output of <code>survfit</code> (stored in <code>km</code>) contains more information, we se only part of it. The usage of this outpus is as follows:</p>
 <p>First, we can plot the Kaplan-Meier estimate:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(km)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(km)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Lab7_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Lab7-Solutions_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -440,11 +453,11 @@ window.Quarto = {
 <p>The solid (middle) line here is actually the graph of the the Kaplan-Meier estimate for the survival function for the given data. The dashed lines show the boundaries of the <span class="math inline">\(0.95\)</span>-confidence interval for such survival functions. It means that the given data is, obviously, just a sample from some large population of patients which got this drug in similar circumnstances (e.g.&nbsp;after the same decease or the same surtgery etc.). If we (hypothetically) would take a large number of samples from this populations (all samples should be of the same length <span class="math inline">\(100\)</span> like in the our example), and if we would plot the Kaplan-Meier estimates for the survival functions in each such sample, then <span class="math inline">\(95\)</span>% of these curves would be in the area bounded by the dashed curves on the plot above.</p>
 <p>Note that the value <span class="math inline">\(0.95\)</span> for the confidence interval is the default value, and it can be changed, e.g.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">survfit</span>(sf <span class="sc">~</span> <span class="dv">1</span>), <span class="at">conf.int =</span> <span class="fl">0.99</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">survfit</span>(sf <span class="sc">~</span> <span class="dv">1</span>), <span class="at">conf.int =</span> <span class="fl">0.99</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Lab7_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Lab7-Solutions_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -452,7 +465,7 @@ window.Quarto = {
 <p>As you can see, the area is now “wider” as it should cover a larger number of samples (<span class="math inline">\(99\)</span>%).</p>
 <p>Next, we can use the output of <code>survfit</code> to investigate numerical values of the Kaplan-Meier estimate:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(km)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(km)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Call: survfit(formula = sf ~ 1)
 
@@ -497,9 +510,13 @@ window.Quarto = {
 <section id="section-3" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="section-3"><span class="header-section-number">2.1</span> </h2>
 <div class="task">
-<p>Find out the ratio, for the given data, of the chances to survive at least <span class="math inline">\(17\)</span> months to those of at least <span class="math inline">\(51\)</span> months. Check your answer.</p>
+<p>Find out how likely, for the given data, is to survive at least <span class="math inline">\(17\)</span> months than at least <span class="math inline">\(51\)</span> months. Check your answer.</p>
 </div>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fl">0.2325</span><span class="sc">/</span><span class="fl">0.1090</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2.133028</code></pre>
 </div>
@@ -510,9 +527,9 @@ window.Quarto = {
 <h1 data-number="3"><span class="header-section-number">3</span> Kaplan–Meier estimate for covariates</h1>
 <p>Suppose now we want to get Kaplan–Meier estimates for survival functions separately for those who got drugs and those who didn’t. Instead of writing <code>~ 1</code> in <code>survfit</code> function discussed above, we will write <code>~ df$drug</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>sf <span class="ot">&lt;-</span> <span class="fu">Surv</span>(df<span class="sc">$</span>time, df<span class="sc">$</span>status)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>kmdrug <span class="ot">&lt;-</span> <span class="fu">survfit</span>(sf <span class="sc">~</span> df<span class="sc">$</span>drug)</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>kmdrug</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>sf <span class="ot">&lt;-</span> <span class="fu">Surv</span>(df<span class="sc">$</span>time, df<span class="sc">$</span>status)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>kmdrug <span class="ot">&lt;-</span> <span class="fu">survfit</span>(sf <span class="sc">~</span> df<span class="sc">$</span>drug)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>kmdrug</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Call: survfit(formula = sf ~ df$drug)
 
@@ -524,23 +541,23 @@ df$drug=1 49     38      5       3       7</code></pre>
 <p>Hence, there are <span class="math inline">\(51\)</span> patients who didn’t get drug and <span class="math inline">\(42\)</span> of them aparently died being non-sensored; whereas, there are <span class="math inline">\(49\)</span> patients who got drug and <span class="math inline">\(38\)</span> of them aparently died being non-sensored.</p>
 <p>We can plot both survival functions at once:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(kmdrug)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(kmdrug)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Lab7_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Lab7-Solutions_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>The problem is only that we do not see which curves is for whom. We can use e.g.&nbsp;different colours and, most importantly, a legend for the plot:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(kmdrug, <span class="at">col=</span><span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"red"</span>))</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">legend=</span><span class="fu">c</span>(<span class="st">"drug=0"</span>,<span class="st">"drug=1"</span>), <span class="at">col=</span><span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"red"</span>), <span class="at">lty=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(kmdrug, <span class="at">col=</span><span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"red"</span>))</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">legend=</span><span class="fu">c</span>(<span class="st">"drug=0"</span>,<span class="st">"drug=1"</span>), <span class="at">col=</span><span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"red"</span>), <span class="at">lty=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Lab7_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Lab7-Solutions_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -552,10 +569,15 @@ df$drug=1 49     38      5       3       7</code></pre>
 <p>Plot the previous plot with legend so that <code>drug=0</code> whould be in dashed <code>seagreen</code> colour (both on plot and in legend) and denoted by “No drug”, and <code>drug=1</code> would be in solid orange and denoted “drug”.</p>
 </div>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(kmdrug, <span class="at">col=</span><span class="fu">c</span>(<span class="st">"seagreen"</span>, <span class="st">"orange"</span>), <span class="at">lty =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">1</span>))</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">legend=</span><span class="fu">c</span>(<span class="st">"No drug"</span>,<span class="st">"Drug"</span>),  <span class="at">col=</span><span class="fu">c</span>(<span class="st">"seagreen"</span>, <span class="st">"orange"</span>), <span class="at">lty =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Lab7_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Lab7-Solutions_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -567,8 +589,8 @@ df$drug=1 49     38      5       3       7</code></pre>
 <p>The data frame <code>lung</code> is embedded into <code>survival</code> package. You can get information about this data frame by typing in the console <code>?lung</code>.</p>
 <p>Note that instead of writing e.g.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>kmlung <span class="ot">&lt;-</span> <span class="fu">survfit</span>(<span class="fu">Surv</span>(lung<span class="sc">$</span>time, lung<span class="sc">$</span>status) <span class="sc">~</span> lung<span class="sc">$</span>sex)</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>kmlung</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>kmlung <span class="ot">&lt;-</span> <span class="fu">survfit</span>(<span class="fu">Surv</span>(lung<span class="sc">$</span>time, lung<span class="sc">$</span>status) <span class="sc">~</span> lung<span class="sc">$</span>sex)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>kmlung</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Call: survfit(formula = Surv(lung$time, lung$status) ~ lung$sex)
 
@@ -579,8 +601,8 @@ lung$sex=2  90     53    426     348     550</code></pre>
 </div>
 <p>one can write</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>kmlung <span class="ot">&lt;-</span> <span class="fu">survfit</span>(<span class="fu">Surv</span>(time, status) <span class="sc">~</span> sex, <span class="at">data =</span> lung)</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>kmlung</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>kmlung <span class="ot">&lt;-</span> <span class="fu">survfit</span>(<span class="fu">Surv</span>(time, status) <span class="sc">~</span> sex, <span class="at">data =</span> lung)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>kmlung</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Call: survfit(formula = Surv(time, status) ~ sex, data = lung)
 
@@ -596,33 +618,38 @@ sex=2  90     53    426     348     550</code></pre>
 <p>Write the code for the following plot:</p>
 </div>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(kmlung,<span class="at">col=</span><span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"red"</span>))</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">legend=</span><span class="fu">c</span>(<span class="st">"Male"</span>,<span class="st">"Female"</span>), <span class="at">col=</span><span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"red"</span>), <span class="at">lty=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Lab7_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Lab7-Solutions_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Surely, there numerous R packages which can make plots more nice. For example, may install and load <code>survminer</code> package:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survminer)</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsurvplot</span>(kmlung)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survminer)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsurvplot</span>(kmlung)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Lab7_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Lab7-Solutions_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Here “strata” is a synonym for “covariate”. Moreover, by specifying <code>conf.int</code> one can also include the confidence intervals <strong>for both</strong> values of the covariate:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsurvplot</span>(kmlung, <span class="at">conf.int =</span> <span class="fl">0.95</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsurvplot</span>(kmlung, <span class="at">conf.int =</span> <span class="fl">0.95</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Lab7_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Lab7-Solutions_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -636,8 +663,8 @@ sex=2  90     53    426     348     550</code></pre>
 <p>Recall that the Cox model for one covariate takes the form <span class="math display">\[ \lambda(t,z)=\lambda_0(t)e^{\beta z}, \]</span> where <span class="math inline">\(\beta\in\mathbb{R}\)</span>. In our case, looking at <code>?lung</code>, <span class="math inline">\(z\in\{1,2\}\)</span>, where <span class="math inline">\(z=1\)</span> stands for male and <span class="math inline">\(z=2\)</span> stands for female.</p>
 <p>Function <code>coxph</code> calculates the estimate for the parameters <span class="math inline">\(\beta\)</span> and has the same arguments as <code>survfit</code> considered above:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(time, status)<span class="sc">~</span>sex, <span class="at">data=</span>lung)</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>fit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(time, status)<span class="sc">~</span>sex, <span class="at">data=</span>lung)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>fit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Call:
 coxph(formula = Surv(time, status) ~ sex, data = lung)
@@ -660,8 +687,8 @@ In other words, based on the data set <code>lung</code> females with advanced lu
 \]</span> (Surely, it can be obtained manually as the reciprocal: <code>1/0.5880=1.70068</code>).</p>
 <p>In the above, we dealt with one covariate, <code>sex</code>. To deal with several, the corresponding names should be added, e.g.&nbsp;<code>~sex+age</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>fit2 <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(time, status)<span class="sc">~</span>sex<span class="sc">+</span>age, <span class="at">data=</span>lung)</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>fit2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>fit2 <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(time, status)<span class="sc">~</span>sex<span class="sc">+</span>age, <span class="at">data=</span>lung)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>fit2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Call:
 coxph(formula = Surv(time, status) ~ sex + age, data = lung)
@@ -682,9 +709,21 @@ n= 228, number of events= 165 </code></pre>
 <section id="section-6" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="section-6"><span class="header-section-number">5.1</span> </h2>
 <div class="task">
-<p>Find the ratio of the hazard rate for a male aged 70 to a female aged 80 (for the given data set). Check the asnwer:</p>
+<p>Find the ratio of the hazard rate for a male aged 70 to a female aged 80 (for the given data set).</p>
 </div>
+<div class="proof solution">
+<p><span class="proof-title"><em>Solution</em>. </span>Here we need <span class="math display">\[
+\dfrac{\lambda(t,z_1=1,z_2=70)}{\lambda(t,z_1=2,z_2=80)} = e^{-\beta_1}e^{-10\beta_2}.
+\]</span></p>
+</div>
+<p>From the output of <code>coxph</code> above, we have that <span class="math inline">\(e^{\beta_1}=0.598566\)</span> and <span class="math inline">\(e^{\beta_2}=1.017191\)</span>, hence, <span class="math display">\[
+e^{-\beta_1}e^{-10\beta_2}=0.598566^{-1}\cdot 1.017191^{-10},
+\]</span> and we can calculate this:</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>(<span class="fl">0.598566</span>)<span class="sc">**</span>(<span class="sc">-</span><span class="dv">1</span>) <span class="sc">*</span> <span class="fl">1.017191</span><span class="sc">**</span>(<span class="sc">-</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.408844</code></pre>
 </div>
@@ -1114,8 +1153,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./Lab6.html" class="pagination-link" aria-label="Lab 6 - Problems">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Lab 6 - Problems</span>
+      <a href="./Lab6-Solutions.html" class="pagination-link" aria-label="Lab 6 - Solutions">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Lab 6 - Solutions</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
