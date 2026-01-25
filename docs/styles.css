@@ -1,0 +1,136 @@
+h1.title {
+    font-size: calc(2.325rem + 0.9vw);
+}
+
+
+h2.anchored::before {
+    content: "Task ";
+  }
+
+h2.anchored {
+  border-bottom: 0px;
+  background-color: rgb(176, 205, 236);
+  padding-bottom: 2px;
+  margin-bottom: 0px;
+  padding-left: 10px;
+}
+
+
+.header-section-number {
+  color: black;  
+}
+
+
+
+ul > li > ul > li > a.nav-link::before {
+    content: "Task ";
+  }
+
+
+.cell-output-display::after {
+    box-sizing: content-box;
+}
+
+.theorem-title::after 
+  {
+    content: '. ';
+    font-weight: bold;
+    margin-left: -3pt;
+    margin-right: 6pt;
+  }
+
+h1 .header-section-number::after  {
+    content: '. ';
+  }
+
+.solution.proof {
+  background-color: rgb(232, 245, 247);
+}
+
+.unnumbered.anchored {
+  color:rgb(8, 71, 12);  
+}
+
+.task {
+  border-style: solid;
+  border-color: rgb(176, 205, 236);
+  border-width: 2px;
+  border-top: 0px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 0px;
+  margin-bottom: 10px;
+}
+
+.subtask {
+  border-style: solid;
+  border-color: rgb(176, 205, 236);
+  border-width: 2px;
+  margin-top: 12px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: -5px;
+  padding-top: 10px;
+  margin-bottom: 10px;
+}
+
+ul {
+  padding-left: 1rem;
+}
+
+.sourceCode.cell-code {  
+  border-left: 4px solid rgb(8, 71, 12);
+  margin-top: 0px;
+  margin-left: 1rem;
+  background-color: #d9e3e4;
+}
+
+.cell-output-display, .cell-output.cell-output-stdout{
+  border-left: 4px double rgb(71, 8, 24);
+  padding-left: 5px;
+  margin-top: 0px;
+  margin-left: 1rem;
+  background-color: rgb(255, 245, 231);
+}
+
+
+/* 
+.img .cell-output.cell-output-display{
+  border-left: 0px;
+} */
+
+/* .img .cell-output-display {
+  background-color: white;
+} */
+
+.remark.proof {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 10px;
+  border: thick dashed rgb(232, 245, 247);
+}
+
+.topic {
+  color: rgb(8, 71, 12);
+  opacity: .9;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+  font-weight: 600;
+  font-size: calc(1.27rem + 0.24vw);
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+}
+
+body {
+  background-color: rgba(236, 233, 240, 0.95);
+}
+
+nav.sidebar.sidebar-navigation:not(.rollup) {
+  background-color: rgba(236, 233, 240, 0.95);
+}
