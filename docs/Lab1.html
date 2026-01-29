@@ -216,15 +216,11 @@ window.Quarto = {
   <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1"><span class="header-section-number">2.2</span> </a></li>
   <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2"><span class="header-section-number">2.3</span> </a></li>
   </ul></li>
-  <li><a href="#work-with-probability-distributions" id="toc-work-with-probability-distributions" class="nav-link" data-scroll-target="#work-with-probability-distributions"><span class="header-section-number">3</span> Work with probability distributions</a></li>
-  <li><a href="#exponential-distribution" id="toc-exponential-distribution" class="nav-link" data-scroll-target="#exponential-distribution"><span class="header-section-number">4</span> Exponential distribution</a>
+  <li><a href="#work-with-probability-distributions" id="toc-work-with-probability-distributions" class="nav-link" data-scroll-target="#work-with-probability-distributions"><span class="header-section-number">3</span> Work with probability distributions</a>
   <ul class="collapse">
-  <li><a href="#section-3" id="toc-section-3" class="nav-link" data-scroll-target="#section-3"><span class="header-section-number">4.1</span> </a></li>
-  </ul></li>
-  <li><a href="#gamma-distribution" id="toc-gamma-distribution" class="nav-link" data-scroll-target="#gamma-distribution"><span class="header-section-number">5</span> Gamma distribution</a>
-  <ul class="collapse">
-  <li><a href="#section-4" id="toc-section-4" class="nav-link" data-scroll-target="#section-4"><span class="header-section-number">5.1</span> </a></li>
-  <li><a href="#section-5" id="toc-section-5" class="nav-link" data-scroll-target="#section-5"><span class="header-section-number">5.2</span> </a></li>
+  <li><a href="#section-3" id="toc-section-3" class="nav-link" data-scroll-target="#section-3"><span class="header-section-number">3.1</span> </a></li>
+  <li><a href="#section-4" id="toc-section-4" class="nav-link" data-scroll-target="#section-4"><span class="header-section-number">3.2</span> </a></li>
+  <li><a href="#section-5" id="toc-section-5" class="nav-link" data-scroll-target="#section-5"><span class="header-section-number">3.3</span> </a></li>
   </ul></li>
   </ul>
 </nav>
@@ -665,9 +661,9 @@ Y_k = X_1+\ldots+X_k, \qquad 1\leq k\leq 2024.
 <li><p>If you type in console <code>?</code> followed by either of functions above, you will get a detailed help about all functions for the corresponding distribution, try e.g.&nbsp;<code>?dexp</code>.</p></li>
 </ul>
 <p>Consider examples and tasks.</p>
-</section>
-<section id="exponential-distribution" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> Exponential distribution</h1>
+<div class="topic">
+<p>Exponential distribution</p>
+</div>
 <ul>
 <li>Recall that continuous random variable <span class="math inline">\(X\)</span> has the exponential distribution with a rate (a parameter) <span class="math inline">\(\lambda&gt;0\)</span> (we denote this <span class="math inline">\(X\sim Exp(\lambda)\)</span>) if its cumulative distribution function is</li>
 </ul>
@@ -715,8 +711,8 @@ f_X(x) = \lambda e^{-\lambda x}, \qquad x\geq0.
 <pre><code>[1] 0.7768698</code></pre>
 </div>
 </div>
-<section id="section-3" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="section-3"><span class="header-section-number">4.1</span> </h2>
+<section id="section-3" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="section-3"><span class="header-section-number">3.1</span> </h2>
 <div class="task">
 <p>Let <span class="math inline">\(X\sim Exp(0.1)\)</span>. Find <span class="math inline">\(\P(1&lt;X\leq3)\)</span>.</p>
 <p>Check the answer.</p>
@@ -744,10 +740,9 @@ f_X(x) = \lambda e^{-\lambda x}, \qquad x\geq0.
 </div>
 <p>at least in the first 5 decimal figures.</p>
 <p>(Surely, for the exponential distribution one has an explicit simple formula: <span class="math inline">\(S_X(x)= e^{-\lambda x}\)</span>.)</p>
-</section>
-</section>
-<section id="gamma-distribution" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> Gamma distribution</h1>
+<div class="topic">
+<p>Gamma distribution</p>
+</div>
 <ul>
 <li>Recall that, for <span class="math inline">\(X\sim \Gamma(\alpha,\lambda)\)</span>,</li>
 </ul>
@@ -785,8 +780,9 @@ F_X(x) = \P(X\leq x) = p,
 <pre><code>[1] 0.2</code></pre>
 </div>
 </div>
-<section id="section-4" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="section-4"><span class="header-section-number">5.1</span> </h2>
+</section>
+<section id="section-4" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="section-4"><span class="header-section-number">3.2</span> </h2>
 <div class="task">
 <p>Let <span class="math inline">\(X\sim \Gamma(3, 2)\)</span>. Find <span class="math inline">\(a\)</span> such that <span class="math inline">\(\P(a\leq X &lt; 5)=0.4\)</span>. (<em>Hint</em>: find first <span class="math inline">\(F_X(a)\)</span> and then find <span class="math inline">\(a\)</span>.) Assign the answer to R variable <code>a</code>.</p>
 <p>Check the answer:</p>
@@ -816,8 +812,8 @@ F_X(x) = \P(X\leq x) = p,
 </div>
 <p>To fix the output, we should “set a seed”: write the code <code>set.seed(m)</code> with any natural number instead of <code>m</code>. For each <code>m</code>, there will be a fixed output. If you change <code>m</code>, the output will also changes.</p>
 </section>
-<section id="section-5" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="section-5"><span class="header-section-number">5.2</span> </h2>
+<section id="section-5" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="section-5"><span class="header-section-number">3.3</span> </h2>
 <div class="task">
 <p>Set the seed <span class="math inline">\(123\)</span>, i.e.&nbsp;write <code>set.seed(123)</code> before your code. Generate <span class="math inline">\(10000\)</span> values of <span class="math inline">\(X\sim\Gamma(2,3)\)</span>. Find the mean (average) of these values and assign it to the variable <code>m</code>. You may either use <code>sum</code> function discussed above (and average it) or <code>mean</code> function (use <code>?mean</code> if experience difficulties).</p>
 <p>Check the answer:</p>
