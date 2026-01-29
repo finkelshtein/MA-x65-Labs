@@ -1,3 +1,7 @@
+:root {
+  --background-color: rgba(236, 233, 240, 0.95);
+}
+
 h1.title {
     font-size: calc(2.325rem + 0.9vw);
 }
@@ -21,11 +25,22 @@ h2.anchored {
 }
 
 
+.sidebar nav[role=doc-toc] ul>li>ul>li>a {
+	padding-left: 1.2em;
+}
 
-ul > li > ul > li > a.nav-link::before {
+[id^=toc-section]::before {
     content: "Task ";
-  }
+ }
 
+.sidebar nav[role=doc-toc] ul>li>ul>li>ul>li>a {
+	padding-left: 1.2em;	
+}
+
+
+.cell-output-stdout {
+    background-color: rgb(255, 245, 231);
+}
 
 .cell-output-display::after {
     box-sizing: content-box;
@@ -56,60 +71,31 @@ h1 .header-section-number::after  {
   border-color: rgb(176, 205, 236);
   border-width: 2px;
   border-top: 0px;
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-bottom: 0px;
-  margin-bottom: 10px;
+  padding: 10px;
 }
 
-.subtask {
-  border-style: solid;
-  border-color: rgb(176, 205, 236);
-  border-width: 2px;
-  margin-top: 12px;
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-bottom: -5px;
-  padding-top: 10px;
-  margin-bottom: 10px;
-}
 
-ul {
-  padding-left: 1rem;
-}
 
-.sourceCode.cell-code {  
+.sourceCode.cell-code {
   border-left: 4px solid rgb(8, 71, 12);
-  margin-top: 0px;
-  margin-left: 1rem;
-  background-color: #d9e3e4;
+  margin-top: -10px;
 }
 
-.cell-output-display, .cell-output.cell-output-stdout{
+.cell-output.cell-output-stdout{
   border-left: 4px double rgb(71, 8, 24);
   padding-left: 5px;
-  margin-top: 0px;
-  margin-left: 1rem;
-  background-color: rgb(255, 245, 231);
 }
 
-
-/* 
 .img .cell-output.cell-output-display{
   border-left: 0px;
-} */
+}
 
-/* .img .cell-output-display {
+.img .cell-output-display {
   background-color: white;
-} */
+}
 
 .remark.proof {
-  margin-top: 10px;
-  margin-bottom: 10px;
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-top: 10px;
-  border: thick dashed rgb(232, 245, 247);
+  background: lightcyan;
 }
 
 .topic {
@@ -128,9 +114,10 @@ ul {
 }
 
 body {
-  background-color: rgba(236, 233, 240, 0.95);
+  background-color: var(--background-color);
 }
 
-nav.sidebar.sidebar-navigation:not(.rollup) {
-  background-color: rgba(236, 233, 240, 0.95);
+div.sidebar.sidebar-navigation.rollup.quarto-sidebar-toggle-contents, nav.sidebar.sidebar-navigation:not(.rollup) {
+  background-color: var(--background-color);
 }
+

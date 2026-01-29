@@ -1,1 +1,1 @@
-Sitemap: https://finkelshtein.github.io/MA-x65/website/sitemap.xml
+Sitemap: https://finkelshtein.github.io/MA-x65-Labs/sitemap.xml
