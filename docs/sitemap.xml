@@ -2,22 +2,26 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://finkelshtein.github.io/MA-x65-Labs/index.html</loc>
-    <lastmod>2026-01-29T12:28:25.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://finkelshtein.github.io/MA-x65-Labs/Lab2-Solutions.html</loc>
-    <lastmod>2026-02-05T22:09:06.749Z</lastmod>
-  </url>
-  <url>
-    <loc>https://finkelshtein.github.io/MA-x65-Labs/Lab1-Solutions.html</loc>
-    <lastmod>2026-02-05T11:32:12.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://finkelshtein.github.io/MA-x65-Labs/Lab1.html</loc>
-    <lastmod>2026-02-05T09:11:33.119Z</lastmod>
+    <lastmod>2026-01-29T12:28:25.251Z</lastmod>
   </url>
   <url>
     <loc>https://finkelshtein.github.io/MA-x65-Labs/Lab2.html</loc>
-    <lastmod>2026-02-05T11:37:21.000Z</lastmod>
+    <lastmod>2026-02-05T11:37:21.371Z</lastmod>
+  </url>
+  <url>
+    <loc>https://finkelshtein.github.io/MA-x65-Labs/Lab1.html</loc>
+    <lastmod>2026-02-11T22:13:44.000Z</lastmod>
+  </url>
+  <url>
+    <loc>https://finkelshtein.github.io/MA-x65-Labs/Lab1-Solutions.html</loc>
+    <lastmod>2026-02-12T10:28:57.646Z</lastmod>
+  </url>
+  <url>
+    <loc>https://finkelshtein.github.io/MA-x65-Labs/Lab2-Solutions.html</loc>
+    <lastmod>2026-02-12T10:33:46.199Z</lastmod>
+  </url>
+  <url>
+    <loc>https://finkelshtein.github.io/MA-x65-Labs/Lab3.html</loc>
+    <lastmod>2026-02-12T10:39:39.586Z</lastmod>
   </url>
 </urlset>

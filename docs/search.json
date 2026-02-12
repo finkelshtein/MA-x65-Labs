@@ -10,6 +10,270 @@
     ]
   },
   {
+    "objectID": "Lab2.html",
+    "href": "Lab2.html",
+    "title": "Lab 2: Probability Distributions, Plotting, Creating Functions",
+    "section": "",
+    "text": "\\[\n  \\renewcommand{\\P}{\\mathbb{P}}\n  \\newcommand{\\E}{\\mathbb{E}}\n\\]",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 2 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab2.html#section",
+    "href": "Lab2.html#section",
+    "title": "Lab 2: Probability Distributions, Plotting, Creating Functions",
+    "section": "1.1 ",
+    "text": "1.1 \n\nPlot graph of \\(y=x^2\\) on \\(x\\in[-10,10]\\). (Hint: divide \\([-10,10]\\) on many small pieces using seq function discussed in Lab 1, and assign the output of this function to vector x, create vector y of squares of x and, hence, connect values of \\(y\\) at ends of these pieces by straight lines; if the pieces are small, it would like a smooth curve).\nTry by yourself, if it does not work, unfold the code below.\n\n\nCode\n# Recall that R applies any function to a vector component-wise (entry-wise), \n# i.e. if there is a vector `x` and a function `f`, \n# then `f(x)` will be the vector whose first component \n# is the value of `f` on the first compnent of `x` and so on.\nx &lt;- seq(-10, 10, 0.1)\ny &lt;- x**2\nplot(x,y, type='l')",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 2 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab2.html#section-1",
+    "href": "Lab2.html#section-1",
+    "title": "Lab 2: Probability Distributions, Plotting, Creating Functions",
+    "section": "1.2 ",
+    "text": "1.2 \n\nLet \\(X\\sim Exp(0.3)\\). Plot the graph of the survival function \\(S_X(x)\\) for \\(x\\in [0,10]\\) using pexp function (also discussed in Lab 1).\nThe expected output:",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 2 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab2.html#section-2",
+    "href": "Lab2.html#section-2",
+    "title": "Lab 2: Probability Distributions, Plotting, Creating Functions",
+    "section": "2.1 ",
+    "text": "2.1 \n\nLet \\(Y\\sim\\ln\\mathrm{N}(0.01,0.2^2)\\). Plot the graph of the density \\(f_Y(x)\\) for \\(x\\in[0,3]\\). Use xlab and ylab arguments of the plot function to set-up the names “x value” and “Density” for the horizontal and vertical axes. (We didn’t use them before, so their defaults values, which are empty lines, like xlab='', were used by R in the past). Use main argument of the plot function to set-up the title “Normal distribution density” for the whole plot.\nCheck the output (to make the graph smother, use smaller step in seq function while defining the x values).",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 2 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab2.html#section-3",
+    "href": "Lab2.html#section-3",
+    "title": "Lab 2: Probability Distributions, Plotting, Creating Functions",
+    "section": "2.2 ",
+    "text": "2.2 \n\nThe hazard function of a random variable \\(X\\) is defined as follows: \\[\nh_X(x) := \\frac{f_X(x)}{1-F_X(x)}.\n\\] Let \\(X\\sim \\mathrm{N}(4, 0.4)\\). Calculate \\(h_X(2)\\).\nCheck the output:\n\n\n[1] 0.004253513",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 2 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab2.html#section-4",
+    "href": "Lab2.html#section-4",
+    "title": "Lab 2: Probability Distributions, Plotting, Creating Functions",
+    "section": "3.1 ",
+    "text": "3.1 \n\nSet seed 131 (see Task 3.3 of Lab 1). Generate \\(10^6\\) random variables distributed with \\(W(0.76,0.25)\\) (i.e. calculate \\(\\sigma\\) from Equation 4 and use the needed function described above); and assign this to a vector. Calculate the sample mean of these values (and assign it to a variable). Calculate the expected value \\(\\mathbb{E}(X)\\) of \\(X\\sim W(0.76,0.25)\\) using Equation 2 and assign it to another variable: note that, for the Gamma-function \\(\\Gamma(x)\\) in Equation 2, you can use R-code gamma(x) (notice the small first letter; e.g. gamma(5) will return 24). Finally, find the absolute value of the difference between the found sample mean and the expected value.\nCheck your answer:\n\n\n[1] 0.005210536\n\n\n\n\nInstead of recalculating the parameters every time we need to use parametrisation Equation 1 instead of the built-in parametrisation Equation 3, we may want to use another functions designed to deal with the parametrisation Equation 1. One can either define needed functions by ourselves or use the functions defined in external libraries (packages).",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 2 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab2.html#section-5",
+    "href": "Lab2.html#section-5",
+    "title": "Lab 2: Probability Distributions, Plotting, Creating Functions",
+    "section": "4.1 ",
+    "text": "4.1 \n\nDefine the function rweibull65 which would have three arguments n, shape, scale, where shape corresponds to \\(\\beta\\) and scale to \\(\\alpha\\) in Equation 1, and which would return n Weibull random values distributed with \\(W(\\alpha,\\beta)\\) with shape\\(=\\beta\\) and scale\\(=\\alpha\\); so that this function rweibull65 would call rweibull inside its body; see also the remark below.\n\nRun the following code to check your function:\n\nset.seed(12)\nrweibull65(2, 1.2, 2.3)\n\n[1] 1.1318101 0.1312781\n\n\n\nRemark. R distinguishes the name of the argument and the argument itself. For example, in the defined above function sindeg the argument is called x. So we can specify the argument (though it’s not needed here since it’s the only argument):\n\nsindeg(x = 30)\n\n[1] 0.5\n\n\nNow, imagine we have a variable in our program which is also called x. Then we can write inside the function x = x:\n\nx &lt;- 30\nsindeg(x = x)\n\n[1] 0.5\n\n\nR will understand that, in x = x the left x is the name of the argument of function sindeg, whereas the right x is the variable defined earlier.",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 2 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab2.html#section-6",
+    "href": "Lab2.html#section-6",
+    "title": "Lab 2: Probability Distributions, Plotting, Creating Functions",
+    "section": "5.1 ",
+    "text": "5.1 \n\nLet \\(X\\sim W(1.2, 3.1)\\). Using functions pweibullPH and qweibullPH, find \\(b\\) such that \\(\\P(1\\leq X\\leq b)=0.25\\).\n\nCheck your answer:\n\n\n[1] 1.339862",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 2 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab2.html#section-7",
+    "href": "Lab2.html#section-7",
+    "title": "Lab 2: Probability Distributions, Plotting, Creating Functions",
+    "section": "6.1 ",
+    "text": "6.1 \n\nDefine function pburr which would have \\(4\\) arguments: x, alpha, lambda, gamma which would return the value of \\(F_{Burr}(x)\\) for the given values of the parameters.\nCheck your code by calculating \\(F_{Burr}(0.5)\\) for \\(\\alpha=1\\), \\(\\lambda=2\\), \\(\\gamma=3\\):\n\n\n[1] 0.05882353\n\n\n\n\nWe discussed previously how to plot the graph of a function. Often we need to plot several graphs on the same diagram, e.g. in different colours. The argument col of function plot is responsible for colours:\n\n\nx &lt;- seq(-2*pi,2*pi, 0.05)\ny &lt;- sin(x)\nplot(x, y, col = 'red', type='l')\n\n\n\n\n\n\n\n\nhowever, to plot another graph we would need to replace the second plot by lines (without type='l'). The last lines add the legend to the graph:\n\nx &lt;- seq(-2*pi,2*pi, 0.05)\ny &lt;- sin(x)\nz &lt;- cos(x)\nplot(x, y, col = 'red', type='l')\nlines(x, z, col = 'blue')\n\nlegend(x = \"topright\",          # Position\n       legend = c(\"sin(x)\", \"cos(x)\"),  # Legend texts\n       lty = c(1, 1),           # Line types: 1 stands for solid\n       col = c('red', 'blue'),  # Line colours\n       lwd = 2,                 # Line width\n       bg = 'light blue')      # Background color of the legend",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 2 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab2.html#section-8",
+    "href": "Lab2.html#section-8",
+    "title": "Lab 2: Probability Distributions, Plotting, Creating Functions",
+    "section": "6.2 ",
+    "text": "6.2 \n\nPlot graphs of \\(F_{Burr}(x)\\) for \\(\\alpha=1\\), \\(\\lambda=2\\) and \\(\\gamma=3\\) (blue graph) or \\(\\gamma=0.3\\) (red graph); let \\(x\\in[1,5]\\). Add legend to get the result:",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 2 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab1.html",
+    "href": "Lab1.html",
+    "title": "Lab 1: From basics to probability distributions",
+    "section": "",
+    "text": "\\[\n  \\renewcommand{\\P}{\\mathbb{P}}\n  \\newcommand{\\E}{\\mathbb{E}}\n\\]",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 1 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab1.html#section",
+    "href": "Lab1.html#section",
+    "title": "Lab 1: From basics to probability distributions",
+    "section": "2.1 ",
+    "text": "2.1 \n\nLet \\(X\\) be the random variable that is the result of throwing a (fair) dice, i.e. \\(X\\) may take either of values \\(1,2,3,4,5,6\\) with equal probabilities \\(\\frac16\\).\n\nDefine vector \\[\nx=(x_1,x_2,\\ldots,x_6)=(1,2,\\ldots,6)\n\\] of values of \\(X\\) and assign it to R-variable x.\nDefine vector \\[\np=(p_1,p_2,\\ldots,p_6)=\\Bigl(\\frac16,\\frac16,\\ldots,\\frac16\\Bigr)\n\\] of the probabilities, and assign it to R-variable p.\nRecall that the expectation of \\(X\\) is \\[\n\\E(X)=\\sum_{i=1}^6 x_ip_i=x_1p_1+\\ldots x_6p_6=x\\cdot p.\n\\] Calculate \\(\\E(X)\\) (using the previously considered functions).\n\nCheck the answer.\n\n\n[1] 3.5",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 1 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab1.html#section-1",
+    "href": "Lab1.html#section-1",
+    "title": "Lab 1: From basics to probability distributions",
+    "section": "2.2 ",
+    "text": "2.2 \n\nRecall that the variance of a random variable can be found by the following formulas: \\[\n\\begin{aligned}\\mathrm{Var}(X) &= \\mathbb{E}\\Bigl(\\bigl(X-\\mathbb{E}(X)\\bigr)^2\\Bigr)\\\\\n    &= \\sum_{i=1}^6 \\bigl(x_i-\\mathbb{E}(X)\\bigr)^2p_i\\end{aligned}.\n\\] Find \\(\\mathrm{Var}(X)\\) (using the previously considered functions).\nCheck the answer:\n\n\n[1] 2.916667",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 1 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab1.html#section-2",
+    "href": "Lab1.html#section-2",
+    "title": "Lab 1: From basics to probability distributions",
+    "section": "2.3 ",
+    "text": "2.3 \n\nLet \\(X=(1,2,\\ldots,2024)\\) and \\(Y=(Y_1,\\ldots,Y_{2024})\\) with\n\\[\nY_k = X_1+\\ldots+X_k, \\qquad 1\\leq k\\leq 2024.\n\\]\nFind how many components of \\(Y\\) are bigger than \\(10^6\\). (Hint: remember that True stands for 1).\nCheck the answer:\n\n\n[1] 611\n\n\n\n\nSlicing\n\n\nIf x is a vector, to access its component with index i one needs to use x[i]:\n\n\n\n[1] 6\n\n\n\nRemark. Note that the indexation in R starts with 1 (in contrast to e.g. Python).\n\n\nWe can also get a slice of a vector by specifying the range of indexes, e.g.\n\n\n\n[1]  6  8 10\n\n\n\nThe indexes do not need to follow some order:\n\n\n\n[1]  6 14  2",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 1 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab1.html#section-3",
+    "href": "Lab1.html#section-3",
+    "title": "Lab 1: From basics to probability distributions",
+    "section": "3.1 ",
+    "text": "3.1 \n\nLet \\(X\\sim Exp(0.1)\\). Find \\(\\P(1&lt;X\\leq3)\\).\nCheck the answer.\n\n\n[1] 0.1640192\n\n\n\n\nThe survival function \\(S_X(x) = \\P(X&gt;x)\\) can be calculated, of course, from the relation \\(S_X(x) = 1- F_X(x)\\). There is, however, more numerically exact way by using the argument lower.tail = FALSE (or lower.tail = F) for function pexp:\n\n\n\n[1] 0.2231302\n\n\nthat coincides with\n\n\n[1] 0.2231302\n\n\nat least in the first 5 decimal figures.\n(Surely, for the exponential distribution one has an explicit simple formula: \\(S_X(x)= e^{-\\lambda x}\\).)\n\nGamma distribution\n\n\nRecall that, for \\(X\\sim \\Gamma(\\alpha,\\lambda)\\),\n\\[\nf_X(x)=\\frac{\\lambda^\\alpha}{\\Gamma(\\alpha)}x^{\\alpha-1} e^{-\\lambda x}, \\quad x\\geq0.\n\\]\nThe corresponding R functions, e.g. dgamma, pgamma etc., should hence have at least 3 arguments. \\(\\alpha\\) corresponds to shape (second parameter) and \\(\\lambda\\) corresponds to rate (third parameter), i.e. e.g., for \\(X\\sim\\Gamma(0.1,2)\\), \\(f_X(3)\\) can be calculated as follows:\n\n\n\n[1] 0.000103893\n\n\nIt may be more convenient (though not necessary) to write explicitly: dgamma(3, shape = 0.1, rate = 2).\n\nBy the definition, for any \\(p\\in(0,1)\\), the \\(p\\)-quantile is the value of \\(x\\), such that\n\\[\nF_X(x) = \\P(X\\leq x) = p,\n\\]\ni.e. \\(x=F_X^{-1}(p)\\). The corresponding R-function has prefix q. For example, for \\(X\\sim\\Gamma(0.1,2)\\), to find \\(x\\) such that \\(F_X(x)=0.2\\) we can use the following code:\n\n\n\n[1] 3.109401e-08\n\n\nand we can check that, indeed, \\(F_X(x)=0.2\\) for the found value of \\(x\\):\n\n\n[1] 0.2",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 1 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab1.html#section-4",
+    "href": "Lab1.html#section-4",
+    "title": "Lab 1: From basics to probability distributions",
+    "section": "3.2 ",
+    "text": "3.2 \n\nLet \\(X\\sim \\Gamma(3, 2)\\). Find \\(a\\) such that \\(\\P(a\\leq X &lt; 5)=0.4\\). (Hint: find first \\(F_X(a)\\) and then find \\(a\\).) Assign the answer to R variable a.\nCheck the answer:\n\na\n\n[1] 1.546295\n\n\n\n\nTo generate n (independent) random values distributed according to \\(\\Gamma(\\alpha, \\lambda)\\), we use the command rgamma(n, shape = alpha, rate = lambda). The output is a vector (of the length n).\nSince the values are random, if you run the same rgamma command again and again, the output will be different all the time:\n\n\n\n[1] 0.0006223894 0.0005440849\n\n\nand another output for the same input:\n\n\n[1] 5.790475e-10 5.604763e-04\n\n\nTo fix the output, we should “set a seed”: write the code set.seed(m) with any natural number instead of m. For each m, there will be a fixed output. If you change m, the output will also changes.",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 1 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab1.html#section-5",
+    "href": "Lab1.html#section-5",
+    "title": "Lab 1: From basics to probability distributions",
+    "section": "3.3 ",
+    "text": "3.3 \n\nSet the seed \\(123\\), i.e. write set.seed(123) before your code. Generate \\(10000\\) values of \\(X\\sim\\Gamma(2,3)\\). Find the mean (average) of these values and assign it to the variable m. You may either use sum function discussed above (and average it) or mean function (use ?mean if experience difficulties).\nCheck the answer:\n\nm\n\n[1] 0.6592689\n\n\n\nYou may check that this answer will remain the same for each new run, as the randomness is “frozen” now.\n\nNote that, by LLN (the Low of Large Numbers), the obtained mean (i.e. a sample mean) should be close to \\(\\E(X)=\\frac{\\alpha}{\\lambda}\\). And indeed, the received value is close to \\(\\frac23\\approx0.66\\), we may calculate this in R, of course (using abs function for an absolute value of a number):\n\n\n\n[1] 0.00739773",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 1 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab1-Solutions.html",
+    "href": "Lab1-Solutions.html",
+    "title": "Lab 1: Solutions",
+    "section": "",
+    "text": "\\[\n  \\renewcommand{\\P}{\\mathbb{P}}\n  \\newcommand{\\E}{\\mathbb{E}}\n\\]",
+    "crumbs": [
+      "Labs - Solutions",
+      "Lab 1 - Solutions"
+    ]
+  },
+  {
+    "objectID": "Lab1-Solutions.html#section",
+    "href": "Lab1-Solutions.html#section",
+    "title": "Lab 1: Solutions",
+    "section": "2.1 ",
+    "text": "2.1 \n\nLet \\(X\\) be the random variable that is the result of throwing a (fair) dice, i.e. \\(X\\) may take either of values \\(1,2,3,4,5,6\\) with equal probabilities \\(\\frac16\\).\n\nDefine vector \\[\nx=(x_1,x_2,\\ldots,x_6)=(1,2,\\ldots,6)\n\\] of values of \\(X\\) and assign it to R-variable x.\nDefine vector \\[\np=(p_1,p_2,\\ldots,p_6)=\\Bigl(\\frac16,\\frac16,\\ldots,\\frac16\\Bigr)\n\\] of the probabilities, and assign it to R-variable p.\nRecall that the expectation of \\(X\\) is \\[\n\\E(X)=\\sum_{i=1}^6 x_ip_i=x_1p_1+\\ldots x_6p_6=x\\cdot p.\n\\] Calculate \\(\\E(X)\\) (using the previously considered functions).\n\nCheck the answer. (Unfold the code.)\n\n\nCode\nx &lt;- seq(1,6)\np &lt;- rep(1/6, 6)\nsum(x*p)\n\n\n[1] 3.5",
+    "crumbs": [
+      "Labs - Solutions",
+      "Lab 1 - Solutions"
+    ]
+  },
+  {
+    "objectID": "Lab1-Solutions.html#section-1",
+    "href": "Lab1-Solutions.html#section-1",
+    "title": "Lab 1: Solutions",
+    "section": "2.2 ",
+    "text": "2.2 \n\nRecall that the variance of a random variable can be found by the following formulas: \\[\n\\begin{aligned}\\mathrm{Var}(X) &= \\mathbb{E}\\Bigl(\\bigl(X-\\mathbb{E}(X)\\bigr)^2\\Bigr)\\\\\n    &= \\sum_{i=1}^6 \\bigl(x_i-\\mathbb{E}(X)\\bigr)^2p_i\\end{aligned}.\n\\] Find \\(\\mathrm{Var}(X)\\) (using the previously considered functions).\nCheck the answer:\n\n\nCode\nsum(p*(x-sum(x*p))**2)\n\n\n[1] 2.916667",
+    "crumbs": [
+      "Labs - Solutions",
+      "Lab 1 - Solutions"
+    ]
+  },
+  {
+    "objectID": "Lab1-Solutions.html#section-2",
+    "href": "Lab1-Solutions.html#section-2",
+    "title": "Lab 1: Solutions",
+    "section": "2.3 ",
+    "text": "2.3 \n\nLet \\(X=(1,2,\\ldots,2024)\\) and \\(Y=(Y_1,\\ldots,Y_{2024})\\) with\n\\[\nY_k = X_1+\\ldots+X_k, \\qquad 1\\leq k\\leq 2024.\n\\]\nFind how many components of \\(Y\\) are bigger than \\(10^6\\). (Hint: remember that True stands for 1).\nCheck the answer:\n\n\nCode\nx &lt;- 1:2024\ny &lt;- cumsum(x)\nsum(y&gt;10**6)\n\n\n[1] 611\n\n\n\n\nSlicing\n\n\nIf x is a vector, to access its component with index i one needs to use x[i]:\n\n\na &lt;- seq(2,20,2)\na[3]\n\n[1] 6\n\n\n\nRemark. Note that the indexation in R starts with 1 (in contrast to e.g. Python).\n\n\nWe can also get a slice of a vector by specifying the range of indexes, e.g.\n\n\na[3:5]\n\n[1]  6  8 10\n\n\n\nThe indexes do not need to follow some order:\n\n\na[c(3,7,1)]\n\n[1]  6 14  2",
+    "crumbs": [
+      "Labs - Solutions",
+      "Lab 1 - Solutions"
+    ]
+  },
+  {
+    "objectID": "Lab1-Solutions.html#section-3",
+    "href": "Lab1-Solutions.html#section-3",
+    "title": "Lab 1: Solutions",
+    "section": "3.1 ",
+    "text": "3.1 \n\nLet \\(X\\sim Exp(0.1)\\). Find \\(\\P(1&lt;X\\leq3)\\).\n\n\nSolution. We know that (see Equation 1 above)\n\\[\n\\P(1&lt;X\\leq3) = F_X(3) - F_X(1)\n\\]\nTherefore, we can use the code\n\n\nCode\npexp(3, 0.1) - pexp(1, 0.1)\n\n\n[1] 0.1640192\n\n\n\n\nThe survival function \\(S_X(x) = \\P(X&gt;x)\\) can be calculated, of course, from the relation \\(S_X(x) = 1- F_X(x)\\). There is, however, more numerically exact way by using the argument lower.tail = FALSE (or lower.tail = F) for function pexp:\n\n\npexp(0.5, 3,  lower.tail  = F) \n\n[1] 0.2231302\n\n\nthat coincides with\n\n1 - pexp(0.5, 3)\n\n[1] 0.2231302\n\n\nat least in the first 5 decimal figures.\n(Surely, for the exponential distribution one has an explicit simple formula: \\(S_X(x)= e^{-\\lambda x}\\).)\n\nGamma distribution\n\n\nRecall that, for \\(X\\sim \\Gamma(\\alpha,\\lambda)\\),\n\n\\[\nf_X(x)=\\frac{\\lambda^\\alpha}{\\Gamma(\\alpha)}x^{\\alpha-1} e^{-\\lambda x}, \\quad x\\geq0.\n\\]\n\nThe corresponding R functions, e.g. dgamma, pgamma etc., should hence have at least 3 arguments. \\(\\alpha\\) corresponds to shape (second parameter) and \\(\\lambda\\) corresponds to rate (third parameter), i.e. e.g., for \\(X\\sim\\Gamma(0.1,2)\\), \\(f_X(3)\\) can be calculated as follows:\n\n\ndgamma(3, 0.1, 2)\n\n[1] 0.000103893\n\n\nIt may be more convenient (though not necessary) to write explicitly: dgamma(3, shape = 0.1, rate = 2).\n\nBy the definition, for any \\(p\\in(0,1)\\), the \\(p\\)-quantile is the value of \\(x\\), such that\n\n\\[\nF_X(x) = \\P(X\\leq x) = p,\n\\]\ni.e. \\(x=F_X^{-1}(p)\\). The corresponding R-function has prefix q. For example, for \\(X\\sim\\Gamma(0.1,2)\\), to find \\(x\\) such that \\(F_X(x)=0.2\\) we can use the following code:\n\nx &lt;- qgamma(0.2, shape = 0.1, rate = 2)\nx\n\n[1] 3.109401e-08\n\n\nand we can check that, indeed, \\(F_X(x)=0.2\\) for the found value of \\(x\\):\n\npgamma(x, shape = 0.1, rate = 2)\n\n[1] 0.2",
+    "crumbs": [
+      "Labs - Solutions",
+      "Lab 1 - Solutions"
+    ]
+  },
+  {
+    "objectID": "Lab1-Solutions.html#section-4",
+    "href": "Lab1-Solutions.html#section-4",
+    "title": "Lab 1: Solutions",
+    "section": "3.2 ",
+    "text": "3.2 \n\nLet \\(X\\sim \\Gamma(3, 2)\\). Find \\(a\\) such that \\(\\P(a\\leq X &lt; 5)=0.4\\). (Hint: find first \\(F_X(a)\\) and then find \\(a\\).) Assign the answer to R variable a.\n\n\nSolution. We have that\n\\[\nF_X(5)-F_X(a) = 0.4,\n\\]\nhence,\n\\[\nF_X(a)=F_X(5)-0.4.\n\\]\n\n\nCode\n# F(5) - F(a) = 0.4\n# F(a) = F(5) - 0.4\nfa &lt;- pgamma(5, shape = 3, rate = 2) - 0.4\na &lt;- qgamma(fa, shape = 3, rate = 2)\n\n\n\n\nTo generate n (independent) random values distributed according to \\(\\Gamma(\\alpha, \\lambda)\\), we use the command rgamma(n, shape = alpha, rate = lambda). The output is a vector (of the length n).\nSince the values are random, if you run the same rgamma command again and again, the output will be different all the time:\n\n\nrgamma(2, shape = 0.1, rate = 0.2)\n\n[1] 1.206199e-05 7.748004e-02\n\n\nand another output for the same input:\n\nrgamma(2, shape = 0.1, rate = 0.2)\n\n[1] 5.107859e-07 7.906683e-03\n\n\nTo fix the output, we should “set a seed”: write the code set.seed(m) with any natural number instead of m. For each m, there will be a fixed output. If you change m, the output will also changes.",
+    "crumbs": [
+      "Labs - Solutions",
+      "Lab 1 - Solutions"
+    ]
+  },
+  {
+    "objectID": "Lab1-Solutions.html#section-5",
+    "href": "Lab1-Solutions.html#section-5",
+    "title": "Lab 1: Solutions",
+    "section": "3.3 ",
+    "text": "3.3 \n\nSet the seed \\(123\\), i.e. write set.seed(123) before your code. Generate \\(10000\\) values of \\(X\\sim\\Gamma(2,3)\\). Find the mean (average) of these values and assign it to the variable m. You may either use sum function discussed above (and average it) or mean function (use ?mean if experience difficulties).\n\n\nCode\nset.seed(123)\nx &lt;- rgamma(10000, shape = 2, rate = 3)\nm &lt;- mean(x)\n\n\nCheck the answer:\n\nm\n\n[1] 0.6592689\n\n\n\nYou may check that this answer will remain the same for each new run, as the randomness is “frozen” now.\n\nNote that, by LLN (the Low of Large Numbers), the obtained mean (i.e. a sample mean) should be close to \\(\\E(X)=\\frac{\\alpha}{\\lambda}\\). And indeed, the received value is close to \\(\\frac23\\approx0.66\\), we may calculate this in R, of course (using abs function for an absolute value of a number):\n\n\nabs(m - 2/3)\n\n[1] 0.00739773",
+    "crumbs": [
+      "Labs - Solutions",
+      "Lab 1 - Solutions"
+    ]
+  },
+  {
     "objectID": "Lab2-Solutions.html",
     "href": "Lab2-Solutions.html",
     "title": "Lab 2: Probability Distributions, Plotting, Creating Functions",
@@ -120,267 +384,91 @@
     ]
   },
   {
-    "objectID": "Lab1-Solutions.html",
-    "href": "Lab1-Solutions.html",
-    "title": "Lab 1: Solutions",
-    "section": "",
-    "text": "\\[\n  \\renewcommand{\\P}{\\mathbb{P}}\n  \\newcommand{\\E}{\\mathbb{E}}\n\\]",
-    "crumbs": [
-      "Labs - Solutions",
-      "Lab 1 - Solutions"
-    ]
-  },
-  {
-    "objectID": "Lab1-Solutions.html#section",
-    "href": "Lab1-Solutions.html#section",
-    "title": "Lab 1: Solutions",
-    "section": "2.1 ",
-    "text": "2.1 \n\nLet \\(X\\) be the random variable that is the result of throwing a (fair) dice, i.e. \\(X\\) may take either of values \\(1,2,3,4,5,6\\) with equal probabilities \\(\\frac16\\).\n\nDefine vector \\[\nx=(x_1,x_2,\\ldots,x_6)=(1,2,\\ldots,6)\n\\] of values of \\(X\\) and assign it to R-variable x.\nDefine vector \\[\np=(p_1,p_2,\\ldots,p_6)=\\Bigl(\\frac16,\\frac16,\\ldots,\\frac16\\Bigr)\n\\] of the probabilities, and assign it to R-variable p.\nRecall that the expectation of \\(X\\) is \\[\n\\E(X)=\\sum_{i=1}^6 x_ip_i=x_1p_1+\\ldots x_6p_6=x\\cdot p.\n\\] Calculate \\(\\E(X)\\) (using the previously considered functions).\n\nCheck the answer. (Unfold the code.)\n\n\nCode\nx &lt;- seq(1,6)\np &lt;- rep(1/6, 6)\nsum(x*p)\n\n\n[1] 3.5",
-    "crumbs": [
-      "Labs - Solutions",
-      "Lab 1 - Solutions"
-    ]
-  },
-  {
-    "objectID": "Lab1-Solutions.html#section-1",
-    "href": "Lab1-Solutions.html#section-1",
-    "title": "Lab 1: Solutions",
-    "section": "2.2 ",
-    "text": "2.2 \n\nRecall that the variance of a random variable can be found by the following formulas: \\[\n\\begin{aligned}\\mathrm{Var}(X) &= \\mathbb{E}\\Bigl(\\bigl(X-\\mathbb{E}(X)\\bigr)^2\\Bigr)\\\\\n    &= \\sum_{i=1}^6 \\bigl(x_i-\\mathbb{E}(X)\\bigr)^2p_i\\end{aligned}.\n\\] Find \\(\\mathrm{Var}(X)\\) (using the previously considered functions).\nCheck the answer:\n\n\nCode\nsum(p*(x-sum(x*p))**2)\n\n\n[1] 2.916667",
-    "crumbs": [
-      "Labs - Solutions",
-      "Lab 1 - Solutions"
-    ]
-  },
-  {
-    "objectID": "Lab1-Solutions.html#section-2",
-    "href": "Lab1-Solutions.html#section-2",
-    "title": "Lab 1: Solutions",
-    "section": "2.3 ",
-    "text": "2.3 \n\nLet \\(X=(1,2,\\ldots,2024)\\) and \\(Y=(Y_1,\\ldots,Y_{2024})\\) with\n\\[\nY_k = X_1+\\ldots+X_k, \\qquad 1\\leq k\\leq 2024.\n\\]\nFind how many components of \\(Y\\) are bigger than \\(10^6\\). (Hint: remember that True stands for 1).\nCheck the answer:\n\n\nCode\nx &lt;- 1:2024\ny &lt;- cumsum(x)\nsum(y&gt;10**6)\n\n\n[1] 611\n\n\n\n\nSlicing\n\n\nIf x is a vector, to access its component with index i one needs to use x[i]:\n\n\na &lt;- seq(2,20,2)\na[3]\n\n[1] 6\n\n\n\nRemark. Note that the indexation in R starts with 1 (in contrast to e.g. Python).\n\n\nWe can also get a slice of a vector by specifying the range of indexes, e.g.\n\n\na[3:5]\n\n[1]  6  8 10\n\n\n\nThe indexes do not need to follow some order:\n\n\na[c(3,7,1)]\n\n[1]  6 14  2",
-    "crumbs": [
-      "Labs - Solutions",
-      "Lab 1 - Solutions"
-    ]
-  },
-  {
-    "objectID": "Lab1-Solutions.html#section-3",
-    "href": "Lab1-Solutions.html#section-3",
-    "title": "Lab 1: Solutions",
-    "section": "3.1 ",
-    "text": "3.1 \n\nLet \\(X\\sim Exp(0.1)\\). Find \\(\\P(1&lt;X\\leq3)\\).\n\n\nSolution. We know that (see Equation 1 above)\n\\[\n\\P(1&lt;X\\leq3) = F_X(3) - F_X(1)\n\\]\nTherefore, we can use the code\n\n\nCode\npexp(3, 0.1) - pexp(1, 0.1)\n\n\n[1] 0.1640192\n\n\n\n\nThe survival function \\(S_X(x) = \\P(X&gt;x)\\) can be calculated, of course, from the relation \\(S_X(x) = 1- F_X(x)\\). There is, however, more numerically exact way by using the argument lower.tail = FALSE (or lower.tail = F) for function pexp:\n\n\npexp(0.5, 3,  lower.tail  = F) \n\n[1] 0.2231302\n\n\nthat coincides with\n\n1 - pexp(0.5, 3)\n\n[1] 0.2231302\n\n\nat least in the first 5 decimal figures.\n(Surely, for the exponential distribution one has an explicit simple formula: \\(S_X(x)= e^{-\\lambda x}\\).)\n\nGamma distribution\n\n\nRecall that, for \\(X\\sim \\Gamma(\\alpha,\\lambda)\\),\n\n\\[\nf_X(x)=\\frac{\\lambda^\\alpha}{\\Gamma(\\alpha)}x^{\\alpha-1} e^{-\\lambda x}, \\quad x\\geq0.\n\\]\n\nThe corresponding R functions, e.g. dgamma, pgamma etc., should hence have at least 3 arguments. \\(\\alpha\\) corresponds to shape (second parameter) and \\(\\lambda\\) corresponds to rate (third parameter), i.e. e.g., for \\(X\\sim\\Gamma(0.1,2)\\), \\(f_X(3)\\) can be calculated as follows:\n\n\ndgamma(3, 0.1, 2)\n\n[1] 0.000103893\n\n\nIt may be more convenient (though not necessary) to write explicitly: dgamma(3, shape = 0.1, rate = 2).\n\nBy the definition, for any \\(p\\in(0,1)\\), the \\(p\\)-quantile is the value of \\(x\\), such that\n\n\\[\nF_X(x) = \\P(X\\leq x) = p,\n\\]\ni.e. \\(x=F_X^{-1}(p)\\). The corresponding R-function has prefix q. For example, for \\(X\\sim\\Gamma(0.1,2)\\), to find \\(x\\) such that \\(F_X(x)=0.2\\) we can use the following code:\n\nx &lt;- qgamma(0.2, shape = 0.1, rate = 2)\nx\n\n[1] 3.109401e-08\n\n\nand we can check that, indeed, \\(F_X(x)=0.2\\) for the found value of \\(x\\):\n\npgamma(x, shape = 0.1, rate = 2)\n\n[1] 0.2",
-    "crumbs": [
-      "Labs - Solutions",
-      "Lab 1 - Solutions"
-    ]
-  },
-  {
-    "objectID": "Lab1-Solutions.html#section-4",
-    "href": "Lab1-Solutions.html#section-4",
-    "title": "Lab 1: Solutions",
-    "section": "3.2 ",
-    "text": "3.2 \n\nLet \\(X\\sim \\Gamma(3, 2)\\). Find \\(a\\) such that \\(\\P(a\\leq X &lt; 5)=0.4\\). (Hint: find first \\(F_X(a)\\) and then find \\(a\\).) Assign the answer to R variable a.\n\n\nSolution. We have that\n\\[\nF_X(5)-F_X(a) = 0.4,\n\\]\nhence,\n\\[\nF_X(a)=F_X(5)-0.4.\n\\]\n\n\nCode\n# F(5) - F(a) = 0.4\n# F(a) = F(5) - 0.4\nfa &lt;- pgamma(5, shape = 3, rate = 2) - 0.4\na &lt;- qgamma(fa, shape = 3, rate = 2)\n\n\n\n\nTo generate n (independent) random values distributed according to \\(\\Gamma(\\alpha, \\lambda)\\), we use the command rgamma(n, shape = alpha, rate = lambda). The output is a vector (of the length n).\nSince the values are random, if you run the same rgamma command again and again, the output will be different all the time:\n\n\nrgamma(2, shape = 0.1, rate = 0.2)\n\n[1] 1.206199e-05 7.748004e-02\n\n\nand another output for the same input:\n\nrgamma(2, shape = 0.1, rate = 0.2)\n\n[1] 5.107859e-07 7.906683e-03\n\n\nTo fix the output, we should “set a seed”: write the code set.seed(m) with any natural number instead of m. For each m, there will be a fixed output. If you change m, the output will also changes.",
-    "crumbs": [
-      "Labs - Solutions",
-      "Lab 1 - Solutions"
-    ]
-  },
-  {
-    "objectID": "Lab1-Solutions.html#section-5",
-    "href": "Lab1-Solutions.html#section-5",
-    "title": "Lab 1: Solutions",
-    "section": "3.3 ",
-    "text": "3.3 \n\nSet the seed \\(123\\), i.e. write set.seed(123) before your code. Generate \\(10000\\) values of \\(X\\sim\\Gamma(2,3)\\). Find the mean (average) of these values and assign it to the variable m. You may either use sum function discussed above (and average it) or mean function (use ?mean if experience difficulties).\n\n\nCode\nset.seed(123)\nx &lt;- rgamma(10000, shape = 2, rate = 3)\nm &lt;- mean(x)\n\n\nCheck the answer:\n\nm\n\n[1] 0.6592689\n\n\n\nYou may check that this answer will remain the same for each new run, as the randomness is “frozen” now.\n\nNote that, by LLN (the Low of Large Numbers), the obtained mean (i.e. a sample mean) should be close to \\(\\E(X)=\\frac{\\alpha}{\\lambda}\\). And indeed, the received value is close to \\(\\frac23\\approx0.66\\), we may calculate this in R, of course (using abs function for an absolute value of a number):\n\n\nabs(m - 2/3)\n\n[1] 0.00739773",
-    "crumbs": [
-      "Labs - Solutions",
-      "Lab 1 - Solutions"
-    ]
-  },
-  {
-    "objectID": "Lab1.html",
-    "href": "Lab1.html",
-    "title": "Lab 1: From basics to probability distributions",
+    "objectID": "Lab3.html",
+    "href": "Lab3.html",
+    "title": "Lab 3: Parameter Estimation, Loops, Compound Distributions",
     "section": "",
     "text": "\\[\n  \\renewcommand{\\P}{\\mathbb{P}}\n  \\newcommand{\\E}{\\mathbb{E}}\n\\]",
     "crumbs": [
       "Labs - Problems",
-      "Lab 1 - Problems"
+      "Lab 3 - Problems"
     ]
   },
   {
-    "objectID": "Lab1.html#section",
-    "href": "Lab1.html#section",
-    "title": "Lab 1: From basics to probability distributions",
-    "section": "2.1 ",
-    "text": "2.1 \n\nLet \\(X\\) be the random variable that is the result of throwing a (fair) dice, i.e. \\(X\\) may take either of values \\(1,2,3,4,5,6\\) with equal probabilities \\(\\frac16\\).\n\nDefine vector \\[\nx=(x_1,x_2,\\ldots,x_6)=(1,2,\\ldots,6)\n\\] of values of \\(X\\) and assign it to R-variable x.\nDefine vector \\[\np=(p_1,p_2,\\ldots,p_6)=\\Bigl(\\frac16,\\frac16,\\ldots,\\frac16\\Bigr)\n\\] of the probabilities, and assign it to R-variable p.\nRecall that the expectation of \\(X\\) is \\[\n\\E(X)=\\sum_{i=1}^6 x_ip_i=x_1p_1+\\ldots x_6p_6=x\\cdot p.\n\\] Calculate \\(\\E(X)\\) (using the previously considered functions).\n\nCheck the answer.\n\n\n[1] 3.5",
-    "crumbs": [
-      "Labs - Problems",
-      "Lab 1 - Problems"
-    ]
-  },
-  {
-    "objectID": "Lab1.html#section-1",
-    "href": "Lab1.html#section-1",
-    "title": "Lab 1: From basics to probability distributions",
-    "section": "2.2 ",
-    "text": "2.2 \n\nRecall that the variance of a random variable can be found by the following formulas: \\[\n\\begin{aligned}\\mathrm{Var}(X) &= \\mathbb{E}\\Bigl(\\bigl(X-\\mathbb{E}(X)\\bigr)^2\\Bigr)\\\\\n    &= \\sum_{i=1}^6 \\bigl(x_i-\\mathbb{E}(X)\\bigr)^2p_i\\end{aligned}.\n\\] Find \\(\\mathrm{Var}(X)\\) (using the previously considered functions).\nCheck the answer:\n\n\n[1] 2.916667",
-    "crumbs": [
-      "Labs - Problems",
-      "Lab 1 - Problems"
-    ]
-  },
-  {
-    "objectID": "Lab1.html#section-2",
-    "href": "Lab1.html#section-2",
-    "title": "Lab 1: From basics to probability distributions",
-    "section": "2.3 ",
-    "text": "2.3 \n\nLet \\(X=(1,2,\\ldots,2024)\\) and \\(Y=(Y_1,\\ldots,Y_{2024})\\) with\n\\[\nY_k = X_1+\\ldots+X_k, \\qquad 1\\leq k\\leq 2024.\n\\]\nFind how many components of \\(Y\\) are bigger than \\(10^6\\). (Hint: remember that True stands for 1).\nCheck the answer:\n\n\n[1] 611\n\n\n\n\nSlicing\n\n\nIf x is a vector, to access its component with index i one needs to use x[i]:\n\n\n\n[1] 6\n\n\n\nRemark. Note that the indexation in R starts with 1 (in contrast to e.g. Python).\n\n\nWe can also get a slice of a vector by specifying the range of indexes, e.g.\n\n\n\n[1]  6  8 10\n\n\n\nThe indexes do not need to follow some order:\n\n\n\n[1]  6 14  2",
-    "crumbs": [
-      "Labs - Problems",
-      "Lab 1 - Problems"
-    ]
-  },
-  {
-    "objectID": "Lab1.html#section-3",
-    "href": "Lab1.html#section-3",
-    "title": "Lab 1: From basics to probability distributions",
-    "section": "3.1 ",
-    "text": "3.1 \n\nLet \\(X\\sim Exp(0.1)\\). Find \\(\\P(1&lt;X\\leq3)\\).\nCheck the answer.\n\n\n[1] 0.1640192\n\n\n\n\nThe survival function \\(S_X(x) = \\P(X&gt;x)\\) can be calculated, of course, from the relation \\(S_X(x) = 1- F_X(x)\\). There is, however, more numerically exact way by using the argument lower.tail = FALSE (or lower.tail = F) for function pexp:\n\n\n\n[1] 0.2231302\n\n\nthat coincides with\n\n\n[1] 0.2231302\n\n\nat least in the first 5 decimal figures.\n(Surely, for the exponential distribution one has an explicit simple formula: \\(S_X(x)= e^{-\\lambda x}\\).)\n\nGamma distribution\n\n\nRecall that, for \\(X\\sim \\Gamma(\\alpha,\\lambda)\\),\n\\[\nf_X(x)=\\frac{\\lambda^\\alpha}{\\Gamma(\\alpha)}x^{\\alpha-1} e^{-\\lambda x}, \\quad x\\geq0.\n\\]\nThe corresponding R functions, e.g. dgamma, pgamma etc., should hence have at least 3 arguments. \\(\\alpha\\) corresponds to shape (second parameter) and \\(\\lambda\\) corresponds to rate (third parameter), i.e. e.g., for \\(X\\sim\\Gamma(0.1,2)\\), \\(f_X(3)\\) can be calculated as follows:\n\n\n\n[1] 0.000103893\n\n\nIt may be more convenient (though not necessary) to write explicitly: dgamma(3, shape = 0.1, rate = 2).\n\nBy the definition, for any \\(p\\in(0,1)\\), the \\(p\\)-quantile is the value of \\(x\\), such that\n\\[\nF_X(x) = \\P(X\\leq x) = p,\n\\]\ni.e. \\(x=F_X^{-1}(p)\\). The corresponding R-function has prefix q. For example, for \\(X\\sim\\Gamma(0.1,2)\\), to find \\(x\\) such that \\(F_X(x)=0.2\\) we can use the following code:\n\n\n\n[1] 3.109401e-08\n\n\nand we can check that, indeed, \\(F_X(x)=0.2\\) for the found value of \\(x\\):\n\n\n[1] 0.2",
-    "crumbs": [
-      "Labs - Problems",
-      "Lab 1 - Problems"
-    ]
-  },
-  {
-    "objectID": "Lab1.html#section-4",
-    "href": "Lab1.html#section-4",
-    "title": "Lab 1: From basics to probability distributions",
-    "section": "3.2 ",
-    "text": "3.2 \n\nLet \\(X\\sim \\Gamma(3, 2)\\). Find \\(a\\) such that \\(\\P(a\\leq X &lt; 5)=0.4\\). (Hint: find first \\(F_X(a)\\) and then find \\(a\\).) Assign the answer to R variable a.\nCheck the answer:\n\na\n\n[1] 1.546295\n\n\n\n\nTo generate n (independent) random values distributed according to \\(\\Gamma(\\alpha, \\lambda)\\), we use the command rgamma(n, shape = alpha, rate = lambda). The output is a vector (of the length n).\nSince the values are random, if you run the same rgamma command again and again, the output will be different all the time:\n\n\n\n[1] 0.0006223894 0.0005440849\n\n\nand another output for the same input:\n\n\n[1] 5.790475e-10 5.604763e-04\n\n\nTo fix the output, we should “set a seed”: write the code set.seed(m) with any natural number instead of m. For each m, there will be a fixed output. If you change m, the output will also changes.",
-    "crumbs": [
-      "Labs - Problems",
-      "Lab 1 - Problems"
-    ]
-  },
-  {
-    "objectID": "Lab1.html#section-5",
-    "href": "Lab1.html#section-5",
-    "title": "Lab 1: From basics to probability distributions",
-    "section": "3.3 ",
-    "text": "3.3 \n\nSet the seed \\(123\\), i.e. write set.seed(123) before your code. Generate \\(10000\\) values of \\(X\\sim\\Gamma(2,3)\\). Find the mean (average) of these values and assign it to the variable m. You may either use sum function discussed above (and average it) or mean function (use ?mean if experience difficulties).\nCheck the answer:\n\nm\n\n[1] 0.6592689\n\n\n\nYou may check that this answer will remain the same for each new run, as the randomness is “frozen” now.\n\nNote that, by LLN (the Low of Large Numbers), the obtained mean (i.e. a sample mean) should be close to \\(\\E(X)=\\frac{\\alpha}{\\lambda}\\). And indeed, the received value is close to \\(\\frac23\\approx0.66\\), we may calculate this in R, of course (using abs function for an absolute value of a number):\n\n\n\n[1] 0.00739773",
-    "crumbs": [
-      "Labs - Problems",
-      "Lab 1 - Problems"
-    ]
-  },
-  {
-    "objectID": "Lab2.html",
-    "href": "Lab2.html",
-    "title": "Lab 2: Probability Distributions, Plotting, Creating Functions",
-    "section": "",
-    "text": "\\[\n  \\renewcommand{\\P}{\\mathbb{P}}\n  \\newcommand{\\E}{\\mathbb{E}}\n\\]",
-    "crumbs": [
-      "Labs - Problems",
-      "Lab 2 - Problems"
-    ]
-  },
-  {
-    "objectID": "Lab2.html#section",
-    "href": "Lab2.html#section",
-    "title": "Lab 2: Probability Distributions, Plotting, Creating Functions",
+    "objectID": "Lab3.html#section",
+    "href": "Lab3.html#section",
+    "title": "Lab 3: Parameter Estimation, Loops, Compound Distributions",
     "section": "1.1 ",
-    "text": "1.1 \n\nPlot graph of \\(y=x^2\\) on \\(x\\in[-10,10]\\). (Hint: divide \\([-10,10]\\) on many small pieces using seq function discussed in Lab 1, and assign the output of this function to vector x, create vector y of squares of x and, hence, connect values of \\(y\\) at ends of these pieces by straight lines; if the pieces are small, it would like a smooth curve).\nTry by yourself, if it does not work, unfold the code below.\n\n\nCode\n# Recall that R applies any function to a vector component-wise (entry-wise), \n# i.e. if there is a vector `x` and a function `f`, \n# then `f(x)` will be the vector whose first component \n# is the value of `f` on the first compnent of `x` and so on.\nx &lt;- seq(-10, 10, 0.1)\ny &lt;- x**2\nplot(x,y, type='l')",
+    "text": "1.1 \n\nSet seed 123. Generate \\(100\\) random values of \\(Y\\sim N(5,9)\\), and assign them to vector y. Assign the MLE for \\(\\mu=\\mathbb{E}(Y)\\) to variable mu and assign the MLE for \\(\\sigma=\\sigma(Y)\\) to variable sigma. Output the vector \\((\\mu,\\sigma,\\mu+\\sigma)\\). Check the answer.\n\n\n[1] 5.271218 2.724721 7.995939",
     "crumbs": [
       "Labs - Problems",
-      "Lab 2 - Problems"
+      "Lab 3 - Problems"
     ]
   },
   {
-    "objectID": "Lab2.html#section-1",
-    "href": "Lab2.html#section-1",
-    "title": "Lab 2: Probability Distributions, Plotting, Creating Functions",
+    "objectID": "Lab3.html#section-1",
+    "href": "Lab3.html#section-1",
+    "title": "Lab 3: Parameter Estimation, Loops, Compound Distributions",
     "section": "1.2 ",
-    "text": "1.2 \n\nLet \\(X\\sim Exp(0.3)\\). Plot the graph of the survival function \\(S_X(x)\\) for \\(x\\in [0,10]\\) using pexp function (also discussed in Lab 1).\nThe expected output:",
+    "text": "1.2 \n\nImagine that you don’t know that the first data x has exponential distribution and decided to try a normal distribution \\(N(\\mu,\\sigma^2)\\). It is still possible to calculate MLE for its parameters, though it’s likely that the estimated standard errors will be high. Given that the standard errors are in the sd component of fitdistr function, calculate the vector of standard errors for \\(\\mu\\) and \\(\\sigma\\).\n\n\n[1] 1.3598213 0.9615389\n\n\n\n\nEven when standard errors are relatively small, it is still reasonable to ask ourselves how can we be certain that the data follows the particular disribution. Various statistical tests may be applied. For ungrouped data, as we have e.g. in vector x, the Kolmogorov–Smirnov test is widely used.\n\nks.test(x, \"pexp\", rate = lambda_mle)\n\n\n  Exact one-sample Kolmogorov-Smirnov test\n\ndata:  x\nD = 0.10167, p-value = 0.6423\nalternative hypothesis: two-sided\n\n\nIt tests whether we should reject the null-hypothesis \\(H_0\\) that the data follows the exponential distribution, against the alternative hypothesis \\(H_1\\) that it does not.\nAs you can see ks.test function has several arguments:\n\nvector of the data (x);\nname of the R function for the CDF we test against (pexp);\nvalue(s) for the parameter(s) of that R function, using their name(s) (rate here; remember that you can always type in concole ?functionname to learn about the parameters of functionname); the values were previously obtained from MLE.\n\nThe output (recall that you may get different numbers as your data x was likely different) shows the number D (sum of absolute values of differences (residual distances) between the theoretical CDF and the CDF which can be calculated from the data, see the graph below), the smaller it is, the better prediction is. And also it shoes the \\(p\\)-value; in contrary, if \\(p\\)-value is small (close to \\(0\\)) it would mean that we have to reject \\(H_0\\) as then \\(p\\)-value would be the probability to observe the given data if \\(H_0\\) were true. Here \\(p\\)-value is pretty large, so there is no evidences to reject \\(H_0\\).",
     "crumbs": [
       "Labs - Problems",
-      "Lab 2 - Problems"
+      "Lab 3 - Problems"
     ]
   },
   {
-    "objectID": "Lab2.html#section-2",
-    "href": "Lab2.html#section-2",
-    "title": "Lab 2: Probability Distributions, Plotting, Creating Functions",
+    "objectID": "Lab3.html#section-2",
+    "href": "Lab3.html#section-2",
+    "title": "Lab 3: Parameter Estimation, Loops, Compound Distributions",
+    "section": "1.3 ",
+    "text": "1.3 \n\nFor the data y and MLE estimates mu and sigma from Task 1.1, apply the Kolmogorov–Smirnov test to test the null hypothesis that y follows the normal distribution with these two parameters. Check the output.\n\n\n\n    Asymptotic one-sample Kolmogorov-Smirnov test\n\ndata:  y\nD = 0.058719, p-value = 0.8808\nalternative hypothesis: two-sided",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 3 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab3.html#section-3",
+    "href": "Lab3.html#section-3",
+    "title": "Lab 3: Parameter Estimation, Loops, Compound Distributions",
     "section": "2.1 ",
-    "text": "2.1 \n\nLet \\(Y\\sim\\ln\\mathrm{N}(0.01,0.2^2)\\). Plot the graph of the density \\(f_Y(x)\\) for \\(x\\in[0,3]\\). Use xlab and ylab arguments of the plot function to set-up the names “x value” and “Density” for the horizontal and vertical axes. (We didn’t use them before, so their defaults values, which are empty lines, like xlab='', were used by R in the past). Use main argument of the plot function to set-up the title “Normal distribution density” for the whole plot.\nCheck the output (to make the graph smother, use smaller step in seq function while defining the x values).",
+    "text": "2.1 \n\nSet seed \\(23\\). Generate \\(10^5\\) an exponential random variable with mean \\(3\\) (think about the value of the rate argument). Record the maximum of them (use R-function max). Repeat this procedure \\(10^3\\) times. Calculate the proportion of the found maximums which are larger then \\(50\\).\nCheck the answer:\n\n\n[1] 0.006",
     "crumbs": [
       "Labs - Problems",
-      "Lab 2 - Problems"
+      "Lab 3 - Problems"
     ]
   },
   {
-    "objectID": "Lab2.html#section-3",
-    "href": "Lab2.html#section-3",
-    "title": "Lab 2: Probability Distributions, Plotting, Creating Functions",
-    "section": "2.2 ",
-    "text": "2.2 \n\nThe hazard function of a random variable \\(X\\) is defined as follows: \\[\nh_X(x) := \\frac{f_X(x)}{1-F_X(x)}.\n\\] Let \\(X\\sim \\mathrm{N}(4, 0.4)\\). Calculate \\(h_X(2)\\).\nCheck the output:\n\n\n[1] 0.004253513",
-    "crumbs": [
-      "Labs - Problems",
-      "Lab 2 - Problems"
-    ]
-  },
-  {
-    "objectID": "Lab2.html#section-4",
-    "href": "Lab2.html#section-4",
-    "title": "Lab 2: Probability Distributions, Plotting, Creating Functions",
+    "objectID": "Lab3.html#section-4",
+    "href": "Lab3.html#section-4",
+    "title": "Lab 3: Parameter Estimation, Loops, Compound Distributions",
     "section": "3.1 ",
-    "text": "3.1 \n\nSet seed 131 (see Task 3.3 of Lab 1). Generate \\(10^6\\) random variables distributed with \\(W(0.76,0.25)\\) (i.e. calculate \\(\\sigma\\) from Equation 4 and use the needed function described above); and assign this to a vector. Calculate the sample mean of these values (and assign it to a variable). Calculate the expected value \\(\\mathbb{E}(X)\\) of \\(X\\sim W(0.76,0.25)\\) using Equation 2 and assign it to another variable: note that, for the Gamma-function \\(\\Gamma(x)\\) in Equation 2, you can use R-code gamma(x) (notice the small first letter; e.g. gamma(5) will return 24). Finally, find the absolute value of the difference between the found sample mean and the expected value.\nCheck your answer:\n\n\n[1] 0.005210536\n\n\n\n\nInstead of recalculating the parameters every time we need to use parametrisation Equation 1 instead of the built-in parametrisation Equation 3, we may want to use another functions designed to deal with the parametrisation Equation 1. One can either define needed functions by ourselves or use the functions defined in external libraries (packages).",
+    "text": "3.1 \n\nSet seed \\(123\\). Generate \\(10000\\) values from a compound Poisson distribution with Poisson parameter \\(\\lambda=1000\\) and individual claims which have gamma distribution \\(\\Gamma(750,0.25)\\) (recall that here \\(0.25\\) is called rate in the corresponding R functions).\nIn other words, you will have some numbers \\(N_1,\\ldots, N_{10000}\\) which came from the Poisson distribution, and for each \\(N_k\\), you have to generate \\(N_k\\) numbers from the gamma distribution: \\(X_1^{(k)},\\ldots,X_{N_k}^{(k)}\\), and then you got the corresponding value of a compound Poisson random variables \\[\nS^{(k)} = X_1^{(k)}+\\ldots+X_{N_k}^{(k)}.\n\\]\nFind the mean and the standard deviation (sd function) of the obtained sample of the compound Poisson random variables.\nHint: generate a vector N of \\(n=10000\\) Poisson r.v., and create a zero-vector S of length \\(10000\\) using numeric function. Then you will use a loop in \\(k\\) (\\(1\\leq k\\leq 10000\\)) inside which you generate the corresponding values of \\(X_i^{(k)}\\) and get their sums \\(S^{(k)}\\); and the latter would be assigned to S[k].\nCheck the answer:\n\n\n[1] 2997650.56   93719.71\n\n\nNote that (see Lecture Notes) \\[\n\\E(S)=\\E(N)\\E(X)=1000\\cdot\\frac{750}{0.25}=3000000,\n\\] so the mean for the sample we obtained is close to the theoretical expectation.",
     "crumbs": [
       "Labs - Problems",
-      "Lab 2 - Problems"
+      "Lab 3 - Problems"
     ]
   },
   {
-    "objectID": "Lab2.html#section-5",
-    "href": "Lab2.html#section-5",
-    "title": "Lab 2: Probability Distributions, Plotting, Creating Functions",
-    "section": "4.1 ",
-    "text": "4.1 \n\nDefine the function rweibull65 which would have three arguments n, shape, scale, where shape corresponds to \\(\\beta\\) and scale to \\(\\alpha\\) in Equation 1, and which would return n Weibull random values distributed with \\(W(\\alpha,\\beta)\\) with shape\\(=\\beta\\) and scale\\(=\\alpha\\); so that this function rweibull65 would call rweibull inside its body; see also the remark below.\n\nRun the following code to check your function:\n\nset.seed(12)\nrweibull65(2, 1.2, 2.3)\n\n[1] 1.1318101 0.1312781\n\n\n\nRemark. R distinguishes the name of the argument and the argument itself. For example, in the defined above function sindeg the argument is called x. So we can specify the argument (though it’s not needed here since it’s the only argument):\n\nsindeg(x = 30)\n\n[1] 0.5\n\n\nNow, imagine we have a variable in our program which is also called x. Then we can write inside the function x = x:\n\nx &lt;- 30\nsindeg(x = x)\n\n[1] 0.5\n\n\nR will understand that, in x = x the left x is the name of the argument of function sindeg, whereas the right x is the variable defined earlier.",
+    "objectID": "Lab3.html#section-5",
+    "href": "Lab3.html#section-5",
+    "title": "Lab 3: Parameter Estimation, Loops, Compound Distributions",
+    "section": "3.2 ",
+    "text": "3.2 \n\nIn contrast to \\(\\E(S)\\) and \\(\\mathrm{Var}(S)\\), the probability distribution of \\(S\\) is hard for precise theoretical analysis. For example, there is not a “compact” formula for \\[\n\\P(S&gt;\\E(S))=\\P(S&gt;3000000).\n\\] Your task is to estimate this probability by looking at the ratio of \\(S^{(k)}&gt;3000000\\) in the sample you previously obtained to all \\(S^{(k)}\\).\nCheck the answer.\n\n\n[1] 0.4881\n\n\n\n\nRecall that a number \\(q\\) is called \\(\\alpha\\)-percentile for a random variable \\(X\\), if \\(\\mathbb{P}(X\\leq q)=\\alpha\\). As we discussed in Lab 1, in R, it’s called “quantiles”, and the corresponding functions starts with “q”: qexp, qnorm etc.\nWe also discussed on a lecturethe notion of percentiles/quantiles for the data samples: we should order the sample, and find the number which divides it in the proportion \\(\\alpha/(1-\\alpha)\\). The corresponding R function is called quantile:\n\nu &lt;- rpois(n = 10, lambda = 100) \nsort(u) # This command is NOT needed for the quantile R function,\n\n [1]  83  92  94  94  95  97 100 103 106 109\n\n        # it just for better visualisation of the quantile function\nquantile(u,0.3)\n\n30% \n 94",
     "crumbs": [
       "Labs - Problems",
-      "Lab 2 - Problems"
+      "Lab 3 - Problems"
     ]
   },
   {
-    "objectID": "Lab2.html#section-6",
-    "href": "Lab2.html#section-6",
-    "title": "Lab 2: Probability Distributions, Plotting, Creating Functions",
-    "section": "5.1 ",
-    "text": "5.1 \n\nLet \\(X\\sim W(1.2, 3.1)\\). Using functions pweibullPH and qweibullPH, find \\(b\\) such that \\(\\P(1\\leq X\\leq b)=0.25\\).\n\nCheck your answer:\n\n\n[1] 1.339862",
+    "objectID": "Lab3.html#section-6",
+    "href": "Lab3.html#section-6",
+    "title": "Lab 3: Parameter Estimation, Loops, Compound Distributions",
+    "section": "3.3 ",
+    "text": "3.3 \n\nFind, based on the previously obtained sample of \\(S^{(k)}\\), the number \\(q\\) such that \\[\n\\P(S\\leq q) = 0.9\n\\] Assign the result to q.\nCheck the answer.\n\nq\n\n    90% \n3115719 \n\n\nNow, modify the code from the previous Task to check that \\(\\P(S\\leq 3115719) = 0.9\\).\n\n\n\n[1] 0.9",
     "crumbs": [
       "Labs - Problems",
-      "Lab 2 - Problems"
-    ]
-  },
-  {
-    "objectID": "Lab2.html#section-7",
-    "href": "Lab2.html#section-7",
-    "title": "Lab 2: Probability Distributions, Plotting, Creating Functions",
-    "section": "6.1 ",
-    "text": "6.1 \n\nDefine function pburr which would have \\(4\\) arguments: x, alpha, lambda, gamma which would return the value of \\(F_{Burr}(x)\\) for the given values of the parameters.\nCheck your code by calculating \\(F_{Burr}(0.5)\\) for \\(\\alpha=1\\), \\(\\lambda=2\\), \\(\\gamma=3\\):\n\n\n[1] 0.05882353\n\n\n\n\nWe discussed previously how to plot the graph of a function. Often we need to plot several graphs on the same diagram, e.g. in different colours. The argument col of function plot is responsible for colours:\n\n\nx &lt;- seq(-2*pi,2*pi, 0.05)\ny &lt;- sin(x)\nplot(x, y, col = 'red', type='l')\n\n\n\n\n\n\n\n\nhowever, to plot another graph we would need to replace the second plot by lines (without type='l'). The last lines add the legend to the graph:\n\nx &lt;- seq(-2*pi,2*pi, 0.05)\ny &lt;- sin(x)\nz &lt;- cos(x)\nplot(x, y, col = 'red', type='l')\nlines(x, z, col = 'blue')\n\nlegend(x = \"topright\",          # Position\n       legend = c(\"sin(x)\", \"cos(x)\"),  # Legend texts\n       lty = c(1, 1),           # Line types: 1 stands for solid\n       col = c('red', 'blue'),  # Line colours\n       lwd = 2,                 # Line width\n       bg = 'light blue')      # Background color of the legend",
-    "crumbs": [
-      "Labs - Problems",
-      "Lab 2 - Problems"
-    ]
-  },
-  {
-    "objectID": "Lab2.html#section-8",
-    "href": "Lab2.html#section-8",
-    "title": "Lab 2: Probability Distributions, Plotting, Creating Functions",
-    "section": "6.2 ",
-    "text": "6.2 \n\nPlot graphs of \\(F_{Burr}(x)\\) for \\(\\alpha=1\\), \\(\\lambda=2\\) and \\(\\gamma=3\\) (blue graph) or \\(\\gamma=0.3\\) (red graph); let \\(x\\in[1,5]\\). Add legend to get the result:",
-    "crumbs": [
-      "Labs - Problems",
-      "Lab 2 - Problems"
+      "Lab 3 - Problems"
     ]
   }
 ]
