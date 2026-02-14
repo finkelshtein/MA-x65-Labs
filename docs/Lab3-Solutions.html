@@ -67,7 +67,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./Lab2.html" rel="prev">
+<link href="./Lab2-Solutions.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -139,7 +139,7 @@ window.Quarto = {
 
 <link rel="stylesheet" href="styles.css">
 <meta property="og:title" content="Lab 3: Parameter Estimation, Loops, Compound Distributions – MA-365/M65 Lab Assignments">
-<meta property="og:image" content="https://finkelshtein.github.io/MA-x65-Labs/Lab3_files/figure-html/unnamed-chunk-9-1.png">
+<meta property="og:image" content="https://finkelshtein.github.io/MA-x65-Labs/Lab3-Solutions_files/figure-html/unnamed-chunk-9-1.png">
 <meta property="og:site_name" content="MA-365/M65 Lab Assignments">
 <meta property="og:image:height" content="960">
 <meta property="og:image:width" content="1344">
@@ -154,7 +154,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lab1.html">Labs - Problems</a></li><li class="breadcrumb-item"><a href="./Lab3.html">Lab 3 - Problems</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lab1-Solutions.html">Labs - Solutions</a></li><li class="breadcrumb-item"><a href="./Lab3-Solutions.html">Lab 3 - Solutions</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -210,7 +210,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Lab3.html" class="sidebar-item-text sidebar-link active">
+  <a href="./Lab3.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab 3 - Problems</span></a>
   </div>
 </li>
@@ -240,7 +240,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Lab3-Solutions.html" class="sidebar-item-text sidebar-link">
+  <a href="./Lab3-Solutions.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Lab 3 - Solutions</span></a>
   </div>
 </li>
@@ -278,7 +278,7 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lab1.html">Labs - Problems</a></li><li class="breadcrumb-item"><a href="./Lab3.html">Lab 3 - Problems</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lab1-Solutions.html">Labs - Solutions</a></li><li class="breadcrumb-item"><a href="./Lab3-Solutions.html">Lab 3 - Solutions</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Lab 3: Parameter Estimation, Loops, Compound Distributions</h1>
 </div>
@@ -349,6 +349,15 @@ window.Quarto = {
 <div class="task">
 <p>Set seed <code>123</code>. Generate <span class="math inline">\(100\)</span> random values of <span class="math inline">\(Y\sim N(5,9)\)</span>, and assign them to vector <code>y</code>. Assign the MLE for <span class="math inline">\(\mu=\mathbb{E}(Y)\)</span> to variable <code>mu</code> and assign the MLE for <span class="math inline">\(\sigma=\sigma(Y)\)</span> to variable <code>sigma</code>. Output the vector <span class="math inline">\((\mu,\sigma,\mu+\sigma)\)</span>. Check the answer.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">5</span>, <span class="at">sd =</span> <span class="dv">3</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="fu">fitdistr</span>(y, <span class="st">"normal"</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">unname</span>(f<span class="sc">$</span>estimate[<span class="dv">1</span>])</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="fu">unname</span>(f<span class="sc">$</span>estimate[<span class="dv">2</span>])</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(mu, sigma, mu<span class="sc">+</span>sigma)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 5.271218 2.724721 7.995939</code></pre>
 </div>
@@ -360,6 +369,13 @@ window.Quarto = {
 <div class="task">
 <p>Imagine that you don’t know that the first data <code>x</code> has exponential distribution and decided to try a normal distribution <span class="math inline">\(N(\mu,\sigma^2)\)</span>. It is still possible to calculate MLE for its parameters, though it’s likely that the estimated standard errors will be high. Given that the standard errors are in the <code>sd</code> component of <code>fitdistr</code> function, calculate the vector of standard errors for <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span>.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">fitdistr</span>(x, <span class="st">"normal"</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>mu_stand_error <span class="ot">&lt;-</span> <span class="fu">unname</span>(g<span class="sc">$</span>sd[<span class="dv">1</span>])</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>sd_stand_error <span class="ot">&lt;-</span> <span class="fu">unname</span>(g<span class="sc">$</span>sd[<span class="dv">2</span>])</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(mu_stand_error, sd_stand_error)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.3598213 0.9615389</code></pre>
 </div>
@@ -368,7 +384,7 @@ window.Quarto = {
 <ul>
 <li><p>Even when standard errors are relatively small, it is still reasonable to ask ourselves how can we be certain that the data follows the particular disribution. Various statistical tests may be applied. For ungrouped data, as we have e.g.&nbsp;in vector <code>x</code>, the Kolmogorov–Smirnov test is widely used.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ks.test</span>(x, <span class="st">"pexp"</span>, <span class="at">rate =</span> lambda_mle)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ks.test</span>(x, <span class="st">"pexp"</span>, <span class="at">rate =</span> lambda_mle)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
   Exact one-sample Kolmogorov-Smirnov test
@@ -391,7 +407,7 @@ alternative hypothesis: two-sided</code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Lab3_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Lab3-Solutions_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -402,6 +418,10 @@ alternative hypothesis: two-sided</code></pre>
 <div class="task">
 <p>For the data <code>y</code> and MLE estimates <code>mu</code> and <code>sigma</code> from Task 1.1, apply the Kolmogorov–Smirnov test to test the null hypothesis that <code>y</code> follows the normal distribution with these two parameters. Check the output.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ks.test</span>(y, <span class="st">"pnorm"</span>, <span class="at">mean =</span> mu, <span class="at">sd =</span> sigma)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Asymptotic one-sample Kolmogorov-Smirnov test
@@ -424,18 +444,18 @@ alternative hypothesis: two-sided</code></pre>
 <li><p>The code below solves the followin problem. If we generate <span class="math inline">\(10^4\)</span> random variables distributed normally with <span class="math inline">\(\mathcal{N}(0,1)\)</span> and then calculate the sample mean, the result will differ from the expected value <span class="math inline">\(0\)</span>. However, if we repeat this procedure many times (e.g.&nbsp;<span class="math inline">\(10^3\)</span> times) and record the obtained sample means, we will get values around <span class="math inline">\(0\)</span>.</p></li>
 <li><p>In the code below, <code>i</code> runs from <code>i=1</code> to <code>i=10^3</code>, <code>x</code> is a temporary variable which will be rewritten on every iteration of the loop <code>for</code>, and <code>mean(x)</code> will be assigned to the <code>i</code>-th component of vector <code>means</code>. Vector <code>means</code> was created in advance by preallocating zeros to its components.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10</span><span class="sc">**</span><span class="dv">4</span>  <span class="co"># Number of random numbers in each sample</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="dv">10</span><span class="sc">**</span><span class="dv">3</span> <span class="co"># Number of samples</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>means <span class="ot">&lt;-</span> <span class="fu">numeric</span>(m) <span class="co"># Preallocated vector of means</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>m){</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    means[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(x)</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="dv">1</span><span class="sc">:</span>m, means,  <span class="at">xlab=</span><span class="st">"Trials"</span>, <span class="at">ylab=</span><span class="st">"Means"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10</span><span class="sc">**</span><span class="dv">4</span>  <span class="co"># Number of random numbers in each sample</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="dv">10</span><span class="sc">**</span><span class="dv">3</span> <span class="co"># Number of samples</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>means <span class="ot">&lt;-</span> <span class="fu">numeric</span>(m) <span class="co"># Preallocated vector of means</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>m){</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    means[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(x)</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="dv">1</span><span class="sc">:</span>m, means,  <span class="at">xlab=</span><span class="st">"Trials"</span>, <span class="at">ylab=</span><span class="st">"Means"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Lab3_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Lab3-Solutions_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -448,6 +468,19 @@ alternative hypothesis: two-sided</code></pre>
 <p>Set seed <span class="math inline">\(23\)</span>. Generate <span class="math inline">\(10^5\)</span> an exponential random variable with mean <span class="math inline">\(3\)</span> (think about the value of the <code>rate</code> argument). Record the maximum of them (use R-function <code>max</code>). Repeat this procedure <span class="math inline">\(10^3\)</span> times. Calculate the proportion of the found maximums which are larger then <span class="math inline">\(50\)</span>.</p>
 <p>Check the answer:</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10</span><span class="sc">**</span><span class="dv">5</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="dv">10</span><span class="sc">**</span><span class="dv">3</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>lambda <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">3</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>maxs <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>, m)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">23</span>)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>m){</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> <span class="fu">rexp</span>(n, <span class="at">rate =</span> lambda)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    maxs[i] <span class="ot">&lt;-</span> <span class="fu">max</span>(x)</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(maxs <span class="sc">&gt;</span> <span class="dv">50</span>) <span class="sc">/</span> m</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.006</code></pre>
 </div>
@@ -482,6 +515,19 @@ S^{(k)} = X_1^{(k)}+\ldots+X_{N_k}^{(k)}.
 <p><em>Hint</em>: generate a vector <code>N</code> of <span class="math inline">\(n=10000\)</span> Poisson r.v., and create a zero-vector <code>S</code> of length <span class="math inline">\(10000\)</span> using <code>numeric</code> function. Then you will use a loop in <span class="math inline">\(k\)</span> (<span class="math inline">\(1\leq k\leq 10000\)</span>) inside which you generate the corresponding values of <span class="math inline">\(X_i^{(k)}\)</span> and get their sums <span class="math inline">\(S^{(k)}\)</span>; and the latter would be assigned to <code>S[k]</code>.</p>
 <p>Check the answer:</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10</span><span class="sc">^</span><span class="dv">4</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="fu">rpois</span>(n, <span class="at">lambda =</span> <span class="dv">1000</span>) <span class="co"># You may omit text "lambda = " here</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>S <span class="ot">&lt;-</span> <span class="fu">numeric</span>(n)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n)</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">rgamma</span>(N[k], <span class="at">shape =</span> <span class="dv">750</span>, <span class="at">rate =</span> <span class="fl">0.25</span>)</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  S[k] <span class="ot">&lt;-</span> <span class="fu">sum</span>(x)</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>( <span class="fu">mean</span>(S), <span class="fu">sd</span>(S) )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2997650.56   93719.71</code></pre>
 </div>
@@ -499,6 +545,10 @@ S^{(k)} = X_1^{(k)}+\ldots+X_{N_k}^{(k)}.
 \]</span> Your task is to estimate this probability by looking at the ratio of <span class="math inline">\(S^{(k)}&gt;3000000\)</span> in the sample you previously obtained to all <span class="math inline">\(S^{(k)}\)</span>.</p>
 <p>Check the answer.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(S<span class="sc">&gt;</span><span class="dv">3000000</span>)<span class="sc">/</span>n</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.4881</code></pre>
 </div>
@@ -508,12 +558,12 @@ S^{(k)} = X_1^{(k)}+\ldots+X_{N_k}^{(k)}.
 <li><p>Recall that a number <span class="math inline">\(q\)</span> is called <span class="math inline">\(\alpha\)</span>-percentile for a random variable <span class="math inline">\(X\)</span>, if <span class="math inline">\(\mathbb{P}(X\leq q)=\alpha\)</span>. As we discussed in <a href="./Lab1-Solutions.html">Lab 1</a>, in R, it’s called “quantiles”, and the corresponding functions starts with “q”: <code>qexp</code>, <code>qnorm</code> etc.</p></li>
 <li><p>We also discussed on a lecturethe notion of percentiles/quantiles for the data samples: we should order the sample, and find the number which divides it in the proportion <span class="math inline">\(\alpha/(1-\alpha)\)</span>. The corresponding R function is called <code>quantile</code>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">rpois</span>(<span class="at">n =</span> <span class="dv">10</span>, <span class="at">lambda =</span> <span class="dv">100</span>) </span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(u) <span class="co"># This command is NOT needed for the quantile R function, it is just for better visualisation of the quantile function</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">rpois</span>(<span class="at">n =</span> <span class="dv">10</span>, <span class="at">lambda =</span> <span class="dv">100</span>) </span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(u) <span class="co"># This command is NOT needed for the quantile R function, it is just for better visualisation of the quantile function</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1]  83  92  94  94  95  97 100 103 106 109</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(u,<span class="fl">0.3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(u,<span class="fl">0.3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>30% 
  94 </code></pre>
@@ -529,7 +579,11 @@ S^{(k)} = X_1^{(k)}+\ldots+X_{N_k}^{(k)}.
 \]</span> Assign the result to <code>q</code>.</p>
 <p>Check the answer.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>q</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>q <span class="ot">&lt;-</span> <span class="fu">quantile</span>(S,<span class="fl">0.9</span>)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>q</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>    90% 
 3115719 </code></pre>
@@ -537,6 +591,10 @@ S^{(k)} = X_1^{(k)}+\ldots+X_{N_k}^{(k)}.
 </div>
 <p>Now, modify the code from the previous Task to check that <span class="math inline">\(\P(S\leq 3115719) = 0.9\)</span>.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(S<span class="sc">&lt;=</span>q)<span class="sc">/</span>n</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.9</code></pre>
 </div>
@@ -950,8 +1008,8 @@ S^{(k)} = X_1^{(k)}+\ldots+X_{N_k}^{(k)}.
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./Lab2.html" class="pagination-link" aria-label="Lab 2 - Problems">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Lab 2 - Problems</span>
+      <a href="./Lab2-Solutions.html" class="pagination-link" aria-label="Lab 2 - Solutions">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Lab 2 - Solutions</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
