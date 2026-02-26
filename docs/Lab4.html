@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Lab 3: Parameter Estimation, Loops, Compound Distributions – MA-365/M65 Lab Assignments</title>
+<title>Lab 4: Reinsurance. Data frames – MA-365/M65 Lab Assignments</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -63,8 +63,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./Lab4.html" rel="next">
-<link href="./Lab2.html" rel="prev">
+<link href="./Lab3.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -133,8 +132,9 @@ window.Quarto = {
 </script>
 
 <link rel="stylesheet" href="styles.css">
-<meta property="og:title" content="Lab 3: Parameter Estimation, Loops, Compound Distributions – MA-365/M65 Lab Assignments">
-<meta property="og:image" content="https://finkelshtein.github.io/MA-x65-Labs/Lab3_files/figure-html/unnamed-chunk-9-1.png">
+<meta property="og:title" content="Lab 4: Reinsurance. Data frames – MA-365/M65 Lab Assignments">
+<meta property="og:description" content="Lab Assignments for module MA-365/M65: Risk and Survival Models">
+<meta property="og:image" content="https://finkelshtein.github.io/MA-x65-Labs/Lab4_files/figure-html/unnamed-chunk-16-1.png">
 <meta property="og:site_name" content="MA-365/M65 Lab Assignments">
 <meta property="og:image:height" content="960">
 <meta property="og:image:width" content="1344">
@@ -149,7 +149,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lab1.html">Labs - Problems</a></li><li class="breadcrumb-item"><a href="./Lab3.html">Lab 3 - Problems</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lab1.html">Labs - Problems</a></li><li class="breadcrumb-item"><a href="./Lab4.html">Lab 4 - Problems</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -204,13 +204,13 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Lab3.html" class="sidebar-item-text sidebar-link active">
+  <a href="./Lab3.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab 3 - Problems</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Lab4.html" class="sidebar-item-text sidebar-link">
+  <a href="./Lab4.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Lab 4 - Problems</span></a>
   </div>
 </li>
@@ -256,21 +256,27 @@ window.Quarto = {
     <h2 id="toc-title">In this Lab</h2>
    
   <ul class="collapse">
-  <li><a href="#fitting-of-data" id="toc-fitting-of-data" class="nav-link active" data-scroll-target="#fitting-of-data"><span class="header-section-number">1</span> Fitting of data</a>
+  <li><a href="#reinsurance" id="toc-reinsurance" class="nav-link active" data-scroll-target="#reinsurance"><span class="header-section-number">1</span> Reinsurance</a>
   <ul class="collapse">
   <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"><span class="header-section-number">1.1</span> </a></li>
   <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1"><span class="header-section-number">1.2</span> </a></li>
-  <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2"><span class="header-section-number">1.3</span> </a></li>
   </ul></li>
-  <li><a href="#loops" id="toc-loops" class="nav-link" data-scroll-target="#loops"><span class="header-section-number">2</span> Loops</a>
+  <li><a href="#how-to-create-data-frames" id="toc-how-to-create-data-frames" class="nav-link" data-scroll-target="#how-to-create-data-frames"><span class="header-section-number">2</span> How to create data frames</a>
   <ul class="collapse">
-  <li><a href="#section-3" id="toc-section-3" class="nav-link" data-scroll-target="#section-3"><span class="header-section-number">2.1</span> </a></li>
+  <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2"><span class="header-section-number">2.1</span> </a></li>
   </ul></li>
-  <li><a href="#the-compound-poisson-distribution" id="toc-the-compound-poisson-distribution" class="nav-link" data-scroll-target="#the-compound-poisson-distribution"><span class="header-section-number">3</span> The compound Poisson distribution</a>
+  <li><a href="#how-to-import-data-frames" id="toc-how-to-import-data-frames" class="nav-link" data-scroll-target="#how-to-import-data-frames"><span class="header-section-number">3</span> How to import data frames</a>
   <ul class="collapse">
-  <li><a href="#section-4" id="toc-section-4" class="nav-link" data-scroll-target="#section-4"><span class="header-section-number">3.1</span> </a></li>
-  <li><a href="#section-5" id="toc-section-5" class="nav-link" data-scroll-target="#section-5"><span class="header-section-number">3.2</span> </a></li>
-  <li><a href="#section-6" id="toc-section-6" class="nav-link" data-scroll-target="#section-6"><span class="header-section-number">3.3</span> </a></li>
+  <li><a href="#section-3" id="toc-section-3" class="nav-link" data-scroll-target="#section-3"><span class="header-section-number">3.1</span> </a></li>
+  <li><a href="#section-4" id="toc-section-4" class="nav-link" data-scroll-target="#section-4"><span class="header-section-number">3.2</span> </a></li>
+  </ul></li>
+  <li><a href="#how-to-filter-data-frames" id="toc-how-to-filter-data-frames" class="nav-link" data-scroll-target="#how-to-filter-data-frames"><span class="header-section-number">4</span> How to filter data frames</a>
+  <ul class="collapse">
+  <li><a href="#section-5" id="toc-section-5" class="nav-link" data-scroll-target="#section-5"><span class="header-section-number">4.1</span> </a></li>
+  </ul></li>
+  <li><a href="#linear-models" id="toc-linear-models" class="nav-link" data-scroll-target="#linear-models"><span class="header-section-number">5</span> Linear models</a>
+  <ul class="collapse">
+  <li><a href="#section-6" id="toc-section-6" class="nav-link" data-scroll-target="#section-6"><span class="header-section-number">5.1</span> </a></li>
   </ul></li>
   </ul>
 </nav>
@@ -278,9 +284,9 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lab1.html">Labs - Problems</a></li><li class="breadcrumb-item"><a href="./Lab3.html">Lab 3 - Problems</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lab1.html">Labs - Problems</a></li><li class="breadcrumb-item"><a href="./Lab4.html">Lab 4 - Problems</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Lab 3: Parameter Estimation, Loops, Compound Distributions</h1>
+<h1 class="title">Lab 4: Reinsurance. Data frames</h1>
 </div>
 
 
@@ -303,54 +309,23 @@ window.Quarto = {
   \newcommand{\E}{\mathbb{E}}
 \]</span></p>
 </div>
-<section id="fitting-of-data" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Fitting of data</h1>
-<ul>
-<li><p>We discussed on lectures the maximum likelihood estimate (MLE) for unknown parameters of the data. One of the ways to use it in R, is to load package <code>MASS</code> (all capital letters). The command is then <code>fitdistr(DataVector, "name_of_distribution")</code>, where <code>DataVector</code> is the vector of values we want to fit, and <code>"name_of_distribution"</code> is a string like <code>"exponential"</code>, <code>"gamma"</code>, <code>"lognormal"</code>, <code>"normal"</code>, <code>"Poisson"</code>, <code>"weibull"</code>, and some others.</p></li>
-<li><p>To start, hence, you <strong>need to install</strong> package <code>MASS</code> to R-Studio (see <a href="./Lab2-Solutions.html#sec-package">Lab 2</a> on how to install a package).</p></li>
-<li><p>Let’s first generate <span class="math inline">\(50\)</span> values of a random variable <span class="math inline">\(X\sim Exp(\lambda)\)</span> with <span class="math inline">\(\lambda=0.1\)</span>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rexp</span>(<span class="at">n=</span><span class="dv">50</span>, <span class="at">rate=</span><span class="fl">0.1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div></li>
-<li><p>Now, suppose that we have only this data available and we want to estimate the value of <span class="math inline">\(\lambda\)</span> given that we believe the data is exponentially distributed.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First we load the previously installed package</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">fitdistr</span>(x, <span class="st">"exponential"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>      rate   
-  0.09849806 
- (0.01392973)</code></pre>
-</div>
-</div></li>
-<li><p><strong>Note that</strong> since <code>x</code> was random, your numbers may be (very) different.</p></li>
-<li><p>The first line of the output is the MLE <span class="math inline">\(\lambda_*\)</span>, which is apparently pretty close to <span class="math inline">\(0.1\)</span>. The second line of the output is the estimated standard errors (informally speaking, smaller—better!)</p></li>
-<li><p>We can access the MLE value itself (e.g.&nbsp;to use it later) by assigning <code>fitdistr</code> output to a variable, call it <code>f</code>, and access the component <code>estimate</code> of the object <code>f</code>, using standard for R <code>class$component</code> syntax:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="fu">fitdistr</span>(x, <span class="st">"exponential"</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>f<span class="sc">$</span>estimate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>      rate 
-0.09849806 </code></pre>
-</div>
-</div></li>
-<li><p>It’s still not a number itself but a pair of name of the parameter (“rate”) and its MLE. To get the value, we <strong>unname</strong> it:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>lambda_mle <span class="ot">&lt;-</span> <span class="fu">unname</span>(f<span class="sc">$</span>estimate)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>lambda_mle</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.09849806</code></pre>
-</div>
-</div></li>
-<li><p>Note that, in this example, <code>f$estimate</code> had only one component (for one parameter <code>rate</code>). We could also write <code>unname(f$estimate[1])</code>. If there are several parameteres to estimate, we would use <code>f$estimate[2]</code>, <code>f$estimate[3]</code> etc.</p></li>
-</ul>
+<section id="reinsurance" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Reinsurance</h1>
+<p>For the next task, you will need to use function <code>pmax</code>. If <code>a</code> is a vector <span class="math inline">\((a_1,\ldots,a_m)\)</span> and <code>x</code> is a number, then usual <code>max(a,x)</code> returns <span class="math display">\[
+\max\{a_1,\ldots,a_m,x\}
+\]</span> that is a number, whereas <code>pmax(a,x)</code> returns <span class="math display">\[
+\bigl(\max\{a_1,x\},\ldots,\max\{a_m,x\})
+\]</span> that is a vector.</p>
 <section id="section" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="section"><span class="header-section-number">1.1</span> </h2>
 <div class="task">
-<p>Set seed <code>123</code>. Generate <span class="math inline">\(100\)</span> random values of <span class="math inline">\(Y\sim N(5,9)\)</span>, and assign them to vector <code>y</code>. Assign the MLE for <span class="math inline">\(\mu=\mathbb{E}(Y)\)</span> to variable <code>mu</code> and assign the MLE for <span class="math inline">\(\sigma=\sigma(Y)\)</span> to variable <code>sigma</code>. Output the vector <span class="math inline">\((\mu,\sigma,\mu+\sigma)\)</span>. Check the answer.</p>
+<p>Set seed <span class="math inline">\(234\)</span>. Simulate <span class="math inline">\(15000\)</span> values for a reinsurer where (aggregated) claims have a compound Poisson distribution with parameter <span class="math inline">\(900\)</span> and the individual claims have log-normal distribution <span class="math inline">\(logN(7,0.3^2)\)</span> under individual excess of loss with retention <span class="math inline">\(1700\)</span>. Find the mean and the standard deviation of the obtained data, i.e.&nbsp;using the notations from the lecture notes, estimate <span class="math inline">\(\E(S_R)\)</span> for <span class="math display">\[
+S_R=Z_1+\ldots+Z_N
+\]</span> from the sample, and also estimate <span class="math inline">\(\sigma(S_R)\)</span> from the sample.</p>
+<p>Check the answer.</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 5.271218 2.724721 7.995939</code></pre>
+<pre><code>[1] 16640.800  2872.169</code></pre>
 </div>
 </div>
 </div>
@@ -358,187 +333,281 @@ window.Quarto = {
 <section id="section-1" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="section-1"><span class="header-section-number">1.2</span> </h2>
 <div class="task">
-<p>Imagine that you don’t know that the first data <code>x</code> has exponential distribution and decided to try a normal distribution <span class="math inline">\(N(\mu,\sigma^2)\)</span>. It is still possible to calculate MLE for its parameters, though it’s likely that the estimated standard errors will be high. Given that the standard errors are in the <code>sd</code> component of <code>fitdistr</code> function, calculate the vector of standard errors for <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span>.</p>
+<p>We can see, using formulas from the lecture notes, that in the assumption of the previous task <span class="math display">\[
+\E(S) = \E(N)\E(X)=900\cdot e^{7+0.5\cdot 0.3^2}=1032398
+\]</span> (you can also check that the mean of the sample: for <span class="math inline">\(S\)</span> (not <span class="math inline">\(S_R\)</span>), with the seed <span class="math inline">\(234\)</span> it would be <span class="math inline">\(1032358\)</span>, pretty close). Suppose now that the reinsurer applies the <strong>aggregated</strong> excess <span class="math inline">\(M\)</span>, i.e.&nbsp;the insurer pays <span class="math display">\[
+  S_I=\begin{cases}
+  S, &amp; \text{if } S \leq M,\\
+  M, &amp; \text{if } S &gt; M
+  \end{cases}
+\]</span> and the reinsurer pays <span class="math display">\[
+  S_R=S-S_I=\begin{cases}
+  0, &amp; \text{if } S \leq M,\\
+  S-M, &amp; \text{if } S &gt; M.
+  \end{cases}
+\]</span> Let <span class="math inline">\(M=\E(S)=1032398\)</span>. Modify the previous code and find <span class="math inline">\(\E(S_R)\)</span>, the average paid by the reinsurer under this agreement.</p>
+<p>Check the answer.</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1.3598213 0.9615389</code></pre>
+<pre><code>[1] 14297.37</code></pre>
 </div>
 </div>
 </div>
+</section>
+</section>
+<section id="how-to-create-data-frames" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> How to create data frames</h1>
 <ul>
-<li><p>Even when standard errors are relatively small, it is still reasonable to ask ourselves how can we be certain that the data follows the particular disribution. Various statistical tests may be applied. For ungrouped data, as we have e.g.&nbsp;in vector <code>x</code>, the Kolmogorov–Smirnov test is widely used.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ks.test</span>(x, <span class="st">"pexp"</span>, <span class="at">rate =</span> lambda_mle)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-  Exact one-sample Kolmogorov-Smirnov test
-
-data:  x
-D = 0.10167, p-value = 0.6423
-alternative hypothesis: two-sided</code></pre>
-</div>
-</div></li>
-<li><p>It tests whether we should reject the null-hypothesis <span class="math inline">\(H_0\)</span> that the data follows the exponential distribution, against the alternative hypothesis <span class="math inline">\(H_1\)</span> that it does not.</p></li>
-<li><p>As you can see <code>ks.test</code> function has several arguments:</p>
-<ul>
-<li><p>vector of the data (<code>x</code>);</p></li>
-<li><p>name of the R function for the CDF we test against (<code>pexp</code>);</p></li>
-<li><p>value(s) for the parameter(s) of that R function, using their name(s) (<code>rate</code> here; remember that you can always type in concole <code>?functionname</code> to learn about the parameters of <code>functionname</code>); <strong>the values were previously obtained from MLE</strong>.</p></li>
-</ul></li>
-<li><p>The output (recall that you may get different numbers as your data <code>x</code> was likely different) shows the number <code>D</code> (sum of absolute values of differences (residual distances) between the theoretical CDF and the CDF which can be calculated from the data, see the graph below), the smaller it is, the better prediction is. And also it shoes the <span class="math inline">\(p\)</span>-value; in contrary, if <span class="math inline">\(p\)</span>-value is small (close to <span class="math inline">\(0\)</span>) it would mean that we have to reject <span class="math inline">\(H_0\)</span> as then <span class="math inline">\(p\)</span>-value would be the probability to observe the given data if <span class="math inline">\(H_0\)</span> were true. Here <span class="math inline">\(p\)</span>-value is pretty large, so there is no evidences to reject <span class="math inline">\(H_0\)</span>.</p></li>
+<li><p>Data frame is a table with data.</p></li>
+<li><p>Each column of a data frame should contain the data of the same type (e.g.&nbsp;only numeric or only characters), however, different columns may have different types:</p></li>
 </ul>
 <div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="Lab3_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="section-2" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="section-2"><span class="header-section-number">1.3</span> </h2>
-<div class="task">
-<p>For the data <code>y</code> and MLE estimates <code>mu</code> and <code>sigma</code> from Task 1.1, apply the Kolmogorov–Smirnov test to test the null hypothesis that <code>y</code> follows the normal distribution with these two parameters. Check the output.</p>
-<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="dv">101</span><span class="sc">:</span><span class="dv">103</span>, <span class="at">y =</span> <span class="fu">c</span>(<span class="st">'a'</span>, <span class="st">'b'</span>, <span class="st">'c'</span>))</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>
-    Asymptotic one-sample Kolmogorov-Smirnov test
-
-data:  y
-D = 0.058719, p-value = 0.8808
-alternative hypothesis: two-sided</code></pre>
+<pre><code>    x y
+1 101 a
+2 102 b
+3 103 c</code></pre>
 </div>
 </div>
-</div>
-</section>
-</section>
-<section id="loops" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Loops</h1>
 <ul>
-<li><p>Often we need to repeat the same code several times and record the outputs. We can then <strong>loop</strong> over an index variable and record the outputs into a vector indexed by this variable.</p></li>
-<li><p>“For”-loops in R use the syntax <code>for (i in range) {code}</code>, where <code>i</code> is the index variable which changes within <code>range</code>.</p></li>
-<li><p>Note that it is always better, firstly, <strong>preallocate</strong> the computer memory for the whole output vector, and then just change values of its coordinates inside the loop. This is much more effective than enlarging the vector with each step of the loop (especially for the vectors of large length).</p></li>
-<li><p>For example, you can preallocate the memory by creating a zero-vector of the needed length <code>m</code>, using R command <code>numeric(m)</code>.</p></li>
-<li><p>The code below solves the followin problem. If we generate <span class="math inline">\(10^4\)</span> random variables distributed normally with <span class="math inline">\(\mathcal{N}(0,1)\)</span> and then calculate the sample mean, the result will differ from the expected value <span class="math inline">\(0\)</span>. However, if we repeat this procedure many times (e.g.&nbsp;<span class="math inline">\(10^3\)</span> times) and record the obtained sample means, we will get values around <span class="math inline">\(0\)</span>.</p></li>
-<li><p>In the code below, <code>i</code> runs from <code>i=1</code> to <code>i=10^3</code>, <code>x</code> is a temporary variable which will be rewritten on every iteration of the loop <code>for</code>, and <code>mean(x)</code> will be assigned to the <code>i</code>-th component of vector <code>means</code>. Vector <code>means</code> was created in advance by preallocating zeros to its components.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10</span><span class="sc">**</span><span class="dv">4</span>  <span class="co"># Number of random numbers in each sample</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="dv">10</span><span class="sc">**</span><span class="dv">3</span> <span class="co"># Number of samples</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>means <span class="ot">&lt;-</span> <span class="fu">numeric</span>(m) <span class="co"># Preallocated vector of means</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>m){</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    means[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(x)</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="dv">1</span><span class="sc">:</span>m, means,  <span class="at">xlab=</span><span class="st">"Trials"</span>, <span class="at">ylab=</span><span class="st">"Means"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="Lab3_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div></li>
-<li><p>The plot shows that the obtained means indeed fluctuates around the expected value <span class="math inline">\(0\)</span>.</p></li>
+<li><p>Here we create a data frame <code>df</code> with two columns: column <code>x</code> contains <span class="math inline">\(3\)</span> numbers: <span class="math inline">\(101\)</span>, <span class="math inline">\(102\)</span>, <span class="math inline">\(103\)</span> (see topic Patterns of <a href="./Lab1.html">Lab 1</a>) and column <code>y</code> contains three strings “a”, “b”, and “c”.</p></li>
+<li><p>On the left, you can also see numbers <span class="math inline">\(1,2,3\)</span>, these are the indexes which number the rows of the frame.</p></li>
+<li><p>We will mainly need access to the columns of a data frame. The command has the following simple structure <code>DataFrameName$ColumnName</code>, e.g.</p></li>
 </ul>
-<section id="section-3" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="section-3"><span class="header-section-number">2.1</span> </h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 101 102 103</code></pre>
+</div>
+</div>
+<p>Stress that the output is a vector. Similarly,</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "a" "b" "c"</code></pre>
+</div>
+</div>
+<ul>
+<li>The data frame may be very large, and we may need to see its structure without showing the whole data frame. For this we can use function <code>head(...)</code>:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">101</span><span class="sc">:</span><span class="dv">10</span><span class="sc">**</span><span class="dv">3</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">*</span>x <span class="sc">+</span> <span class="dv">7</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(x, y)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    x   y
+1 101 209
+2 102 211
+3 103 213
+4 104 215
+5 105 217
+6 106 219</code></pre>
+</div>
+</div>
+<ul>
+<li>By default, <code>head</code> shows <span class="math inline">\(6\)</span> rows. One can request more:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df,<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     x   y
+1  101 209
+2  102 211
+3  103 213
+4  104 215
+5  105 217
+6  106 219
+7  107 221
+8  108 223
+9  109 225
+10 110 227</code></pre>
+</div>
+</div>
+<ul>
+<li>Try commands <code>ncol(df)</code>, <code>nrow(df)</code>, <code>dim(df)</code> to see their outputs.</li>
+</ul>
+<section id="section-2" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="section-2"><span class="header-section-number">2.1</span> </h2>
 <div class="task">
-<p>Set seed <span class="math inline">\(23\)</span>. Generate <span class="math inline">\(10^5\)</span> an exponential random variable with mean <span class="math inline">\(3\)</span> (think about the value of the <code>rate</code> argument). Record the maximum of them (use R-function <code>max</code>). Repeat this procedure <span class="math inline">\(10^3\)</span> times. Calculate the proportion of the found maximums which are larger then <span class="math inline">\(50\)</span>.</p>
+<p>Find the sum of all values in the column <code>y</code> of this data frame <code>df</code>.</p>
 <p>Check the answer:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.006</code></pre>
+<pre><code>[1] 997200</code></pre>
 </div>
 </div>
 </div>
 </section>
 </section>
-<section id="the-compound-poisson-distribution" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> The compound Poisson distribution</h1>
+<section id="how-to-import-data-frames" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> How to import data frames</h1>
 <ul>
-<li><p>Recall that the Poisson distribution is a <em>discrete</em> distribution: <span class="math inline">\(N\sim Po(\lambda)\)</span> with a <span class="math inline">\(\lambda&gt;0\)</span> means that <span class="math display">\[
-\P(N=n)=\frac{\lambda^n}{n!}e^{-\lambda}, \qquad n\in\mathbb{Z}_+.
-\]</span></p></li>
-<li><p>Recall, that for any discrete distribution, the density coincides with the probability at a point: <span class="math display">\[
-f_N(n)=\P(N=n), \qquad n\in\mathbb{Z}_+,
-\]</span> and <span class="math inline">\(f_N(x)=0\)</span> for <span class="math inline">\(x\notin\mathbb{Z}_+\)</span>; whereas, <span class="math display">\[
-F_N(x)=\sum_{n\leq x} \P(N=n)=\sum_{n=0}^{[x]}\frac{\lambda^n}{n!}e^{-\lambda},
-\]</span> where <span class="math inline">\([x]\)</span> denotes the entire part of <span class="math inline">\(x\)</span>.</p></li>
-<li><p>Similarly to the continuous distributions discussed in previous labs, R functions to deal with the Poisson distribution are <code>dpois,ppois,qpois,rpois</code> and the main their parameter is naturally called <code>lambda</code> (type e.g.&nbsp;<code>?dpois</code> in console to read about them).</p></li>
-<li><p>Recall that a random variable <span class="math inline">\(S\)</span> has the compound Poisson distribution if <span class="math display">\[
-S= \sum_{k=1}^N X_k,
-\]</span> where <span class="math inline">\(N\sim Po(\lambda)\)</span> and <span class="math inline">\(\{X_k\}\)</span> are i.d.d.r.v. Here <span class="math inline">\(X_k\)</span> may be interpreted as individual claims and <span class="math inline">\(S\)</span> is the aggregated claim (within certain time-interval).</p></li>
+<li>Often we need to work with external data stored in some files. A popular format for storing text data (that includes numbers) is CSV-format (stands for “fomma separated values”).</li>
 </ul>
-<section id="section-4" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="section-4"><span class="header-section-number">3.1</span> </h2>
+<section id="section-3" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="section-3"><span class="header-section-number">3.1</span> </h2>
 <div class="task">
-<p>Set seed <span class="math inline">\(123\)</span>. Generate <span class="math inline">\(10000\)</span> values from a compound Poisson distribution with Poisson parameter <span class="math inline">\(\lambda=1000\)</span> and individual claims which have gamma distribution <span class="math inline">\(\Gamma(750,0.25)\)</span> (recall that here <span class="math inline">\(0.25\)</span> is called <code>rate</code> in the corresponding R functions).</p>
-<p>In other words, you will have some numbers <span class="math inline">\(N_1,\ldots, N_{10000}\)</span> which came from the Poisson distribution, and for each <span class="math inline">\(N_k\)</span>, you have to generate <span class="math inline">\(N_k\)</span> numbers from the gamma distribution: <span class="math inline">\(X_1^{(k)},\ldots,X_{N_k}^{(k)}\)</span>, and then you got the corresponding value of a compound Poisson random variables <span class="math display">\[
-S^{(k)} = X_1^{(k)}+\ldots+X_{N_k}^{(k)}.
+<p>Do the following steps:</p>
+<ol type="1">
+<li><p>Download file <a href="numbers.csv">numbers.csv</a> and save it in a directory (folder) on your computer (usually it’s “Documents” or “Downloads”).</p></li>
+<li><p>Save your R-file your are working with in R-Studio <strong>to the same</strong> directory (folder).</p></li>
+<li><p>Click with right mouse button on the file name at the top of R-Studio window and choose “Set working directory”.</p></li>
+</ol>
+<p>OR (instead of 3)</p>
+<ul>
+<li>Go to menu “Session”, choose “Set working directory”, and then choose “To source file location”</li>
+</ul>
+<p>If you did 1-3 correctly, in “Files” tab on the (down) right part of R-Studio you will see your R-file and the downloaded CSV-file in the same directory.</p>
+<ol start="4" type="1">
+<li>Load the saved file by the command</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"numbers.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Check yourself:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           x        y
+1 1.98193075 8.554741
+2 0.08423538 4.008477
+3 0.33576991 4.920004
+4 0.44245007 4.861317
+5 0.09377962 4.023355
+6 0.42974243 5.109215</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="section-4" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="section-4"><span class="header-section-number">3.2</span> </h2>
+<div class="task">
+<p>It is given that the data in column <code>x</code> of “numbers.csv” file are independent values of a random variable <span class="math inline">\(X\sim Exp(\lambda)\)</span>. Find the estimate <span class="math inline">\(\hat{\lambda}\)</span> for the parameter <span class="math inline">\(\lambda\)</span> using the method of moments (see Lecture Notes).</p>
+<p>Check your answer:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.152757</code></pre>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="how-to-filter-data-frames" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> How to filter data frames</h1>
+<ul>
+<li>Suppose we want to select only those rows of the last data frame where the value of <code>y</code> is bigger than 5. This condition then has the form: <code>df$y &gt; 5</code>. Since <code>df$y</code> is a vector, the result of <code>df$y &gt; 5</code> will be also a vector of <code>TRUE</code> and <code>FALSE</code>:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>my_condition <span class="ot">&lt;-</span> df<span class="sc">$</span>y <span class="sc">&gt;</span> <span class="dv">5</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>my_condition[<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  TRUE FALSE FALSE FALSE FALSE  TRUE</code></pre>
+</div>
+</div>
+<p>i.e.&nbsp;the first, second, forth, and sixth values of <code>y</code> are bigger than <span class="math inline">\(5\)</span> (and of course many others, we are just looking here for the first <span class="math inline">\(6\)</span>). The length of <code>my_condition</code> is the same as the number of rows in <code>df</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(my_condition) <span class="sc">==</span> <span class="fu">nrow</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<ul>
+<li>The command <code>df[my_condition,]</code> (<strong>notice the comma!!!</strong>) will return the data frame which contain only those rows from <code>df</code> where <span class="math inline">\(y&gt;5\)</span>:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>df_cond <span class="ot">&lt;-</span> df[my_condition,]</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_cond)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           x        y
+1  1.9819307 8.554741
+6  0.4297424 5.109215
+7  1.1831351 6.374403
+8  0.2664600 5.516452
+11 0.3309978 5.333065
+13 0.7291787 5.758398</code></pre>
+</div>
+</div>
+<ul>
+<li>Since <code>df_cond</code> is a data frame (and the same column names are inheritted from <code>df</code>), we can access its columns by <code>df_cond$x</code> and <code>df_cond$y</code>.</li>
+</ul>
+<section id="section-5" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="section-5"><span class="header-section-number">4.1</span> </h2>
+<div class="task">
+<p>Find the average of all values of <code>y</code> from <code>df</code> such that the corresponding values of <code>x</code> are larger than <span class="math inline">\(1\)</span>.</p>
+<p>Check your answer:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 7.687361</code></pre>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="linear-models" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Linear models</h1>
+<ul>
+<li><p>Sometimes we may believe that two sets of data are related to each other. The simplest relation is linear, like <span class="math inline">\(y=kx+b\)</span>.</p></li>
+<li><p>If one has sets of data <span class="math inline">\(x=(x_1,\ldots,x_n)\)</span> and <span class="math inline">\(y=(y_1,\ldots,y_n)\)</span>, one can find <span class="math inline">\(k\)</span> and <span class="math inline">\(b\)</span> which would be the best possible to make $y_ik x_i +b $ for all <span class="math inline">\(i\)</span>.</p></li>
+<li><p>Usually, it is done using the linear regression method which chooses <span class="math inline">\(k\)</span> and <span class="math inline">\(b\)</span> so that</p></li>
+</ul>
+<p><span class="math display">\[
+\sum_{i=1}^n(y_i - (kx_i+b))^2
 \]</span></p>
-<p>Find the mean and the standard deviation (<code>sd</code> function) of the obtained sample of the compound Poisson random variables.</p>
-<p><em>Hint</em>: generate a vector <code>N</code> of <span class="math inline">\(n=10000\)</span> Poisson r.v., and create a zero-vector <code>S</code> of length <span class="math inline">\(10000\)</span> using <code>numeric</code> function. Then you will use a loop in <span class="math inline">\(k\)</span> (<span class="math inline">\(1\leq k\leq 10000\)</span>) inside which you generate the corresponding values of <span class="math inline">\(X_i^{(k)}\)</span> and get their sums <span class="math inline">\(S^{(k)}\)</span>; and the latter would be assigned to <code>S[k]</code>.</p>
-<p>Check the answer:</p>
+<p>would be smallest possible (for the given <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>).</p>
+<ul>
+<li>In the data frame above, we may suspect that <span class="math inline">\(y\)</span> and <span class="math inline">\(x\)</span> are linearly related:</li>
+</ul>
 <div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2997650.56   93719.71</code></pre>
-</div>
-</div>
-<p>Note that (see Lecture Notes) <span class="math display">\[
-\E(S)=\E(N)\E(X)=1000\cdot\frac{750}{0.25}=3000000,
-\]</span> so the mean for the sample we obtained is close to the theoretical expectation.</p>
-</div>
-</section>
-<section id="section-5" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="section-5"><span class="header-section-number">3.2</span> </h2>
-<div class="task">
-<p>In contrast to <span class="math inline">\(\E(S)\)</span> and <span class="math inline">\(\mathrm{Var}(S)\)</span>, the probability distribution of <span class="math inline">\(S\)</span> is hard for precise theoretical analysis. For example, there is not a “compact” formula for <span class="math display">\[
-\P(S&gt;\E(S))=\P(S&gt;3000000).
-\]</span> Your task is to estimate this probability by looking at the ratio of <span class="math inline">\(S^{(k)}&gt;3000000\)</span> in the sample you previously obtained to all <span class="math inline">\(S^{(k)}\)</span>.</p>
-<p>Check the answer.</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.4881</code></pre>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Lab4_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
 </div>
 </div>
 </div>
 <ul>
-<li><p>Recall that a number <span class="math inline">\(q\)</span> is called <span class="math inline">\(\alpha\)</span>-percentile for a random variable <span class="math inline">\(X\)</span>, if <span class="math inline">\(\mathbb{P}(X\leq q)=\alpha\)</span>. As we discussed in <a href="./Lab1-Solutions.html">Lab 1</a>, in R, it’s called “quantiles”, and the corresponding functions starts with “q”: <code>qexp</code>, <code>qnorm</code> etc.</p></li>
-<li><p>We also discussed on a lecturethe notion of percentiles/quantiles for the data samples: we should order the sample, and find the number which divides it in the proportion <span class="math inline">\(\alpha/(1-\alpha)\)</span>. The corresponding R function is called <code>quantile</code>:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">rpois</span>(<span class="at">n =</span> <span class="dv">10</span>, <span class="at">lambda =</span> <span class="dv">100</span>) </span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(u) <span class="co"># This command is NOT needed for the quantile R function, it is just for better visualisation of the quantile function</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> [1]  83  92  94  94  95  97 100 103 106 109</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(u,<span class="fl">0.3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>30% 
- 94 </code></pre>
-</div>
-</div></li>
+<li>The corresponding R-code to find optimal <span class="math inline">\(k\)</span> and <span class="math inline">\(b\)</span> is the following:</li>
 </ul>
-</section>
-<section id="section-6" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="section-6"><span class="header-section-number">3.3</span> </h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = y ~ x, data = df)
+
+Coefficients:
+(Intercept)            x  
+      3.933        2.071  </code></pre>
+</div>
+</div>
+<ul>
+<li><p>Here <code>data</code> is the name of the parameter of function <code>lm</code> (stands for “linear model”), and <code>df</code> is the data frame which contains columns <code>x</code> and <code>y</code>. In other words, if columns of <code>df</code> would had names <code>colX</code> and <code>colY</code>, we would write <code>lm(colY ~ colX, data = df)</code>.</p></li>
+<li><p>The <code>(Intercept)</code> corresponds to <span class="math inline">\(b\)</span>, and value of <code>x</code> here is <span class="math inline">\(k\)</span>. One can access the obtained values:</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>ans <span class="ot">&lt;-</span> <span class="fu">coef</span>(<span class="fu">lm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> df))</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>ans</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Intercept)           x 
+   3.932877    2.070541 </code></pre>
+</div>
+</div>
+<p>and then <code>ans[1]</code> is <span class="math inline">\(b\)</span> and <code>ans[2]</code> is <span class="math inline">\(k\)</span>.</p>
+<section id="section-6" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="section-6"><span class="header-section-number">5.1</span> </h2>
 <div class="task">
-<p>Find, based on the previously obtained sample of <span class="math inline">\(S^{(k)}\)</span>, the number <span class="math inline">\(q\)</span> such that <span class="math display">\[
-\P(S\leq q) = 0.9
-\]</span> Assign the result to <code>q</code>.</p>
-<p>Check the answer.</p>
+<p>Plot on the same diagram the scatter plot <span class="math inline">\(y\)</span> against <span class="math inline">\(x\)</span> as it is shown above, but in blue color, and plot the line <span class="math inline">\(y=kx+b\)</span> with the found values of <span class="math inline">\(k\)</span> and <span class="math inline">\(b\)</span> (do not copy-paste, use <code>coef</code> function) in red colour. (See Lab 3 for plotting two graphs on one diagram).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>q</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>    90% 
-3115719 </code></pre>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Lab4_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
 </div>
-</div>
-<p>Now, modify the code from the previous Task to check that <span class="math inline">\(\P(S\leq 3115719) = 0.9\)</span>.</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.9</code></pre>
 </div>
 </div>
 </div>
@@ -967,14 +1036,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./Lab2.html" class="pagination-link" aria-label="Lab 2 - Problems">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Lab 2 - Problems</span>
+      <a href="./Lab3.html" class="pagination-link" aria-label="Lab 3 - Problems">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Lab 3 - Problems</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./Lab4.html" class="pagination-link" aria-label="Lab 4 - Problems">
-        <span class="nav-page-text">Lab 4 - Problems</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->
