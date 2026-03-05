@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.40">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Lab 5: Time series – MA-365/M65 Lab Assignments</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./Lab4.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-70e52673ab01eacf4446dd4d819793d2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles.css">
+<meta property="og:title" content="Lab 5: Time series – MA-365/M65 Lab Assignments">
+<meta property="og:description" content="Lab Assignments for module MA-365/M65: Risk and Survival Models">
+<meta property="og:image" content="https://finkelshtein.github.io/MA-x65-Labs/Lab5_files/figure-html/unnamed-chunk-1-1.png">
+<meta property="og:site_name" content="MA-365/M65 Lab Assignments">
+<meta property="og:image:height" content="960">
+<meta property="og:image:width" content="4800">
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lab1.html">Labs - Problems</a></li><li class="breadcrumb-item"><a href="./Lab5.html">Lab 5 - Problems</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-center sidebar-header">
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="./images/graph.jpg" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Site overview</span></a>
+  </div>
+</li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Labs - Problems</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lab1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 1 - Problems</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lab2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 2 - Problems</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lab3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 3 - Problems</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lab4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 4 - Problems</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lab5.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Lab 5 - Problems</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Labs - Solutions</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lab1-Solutions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 1 - Solutions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lab2-Solutions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 2 - Solutions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lab3-Solutions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 3 - Solutions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lab4-Solutions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 4 - Solutions</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+    <h2 id="toc-title">In this Lab</h2>
+   
+  <ul class="collapse">
+  <li><a href="#reminder" id="toc-reminder" class="nav-link active" data-scroll-target="#reminder"><span class="header-section-number">1</span> Reminder</a></li>
+  <li><a href="#generating-time-series-manually" id="toc-generating-time-series-manually" class="nav-link" data-scroll-target="#generating-time-series-manually"><span class="header-section-number">2</span> Generating time series manually</a>
+  <ul class="collapse">
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"><span class="header-section-number">2.1</span> </a></li>
+  <li><a href="#sec-task2" id="toc-sec-task2" class="nav-link" data-scroll-target="#sec-task2"><span class="header-section-number">2.2</span> </a></li>
+  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1"><span class="header-section-number">2.3</span> </a></li>
+  <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2"><span class="header-section-number">2.4</span> </a></li>
+  </ul></li>
+  <li><a href="#generating-time-series-using-arima-object" id="toc-generating-time-series-using-arima-object" class="nav-link" data-scroll-target="#generating-time-series-using-arima-object"><span class="header-section-number">3</span> Generating time series using <code>arima</code> object</a>
+  <ul class="collapse">
+  <li><a href="#section-3" id="toc-section-3" class="nav-link" data-scroll-target="#section-3"><span class="header-section-number">3.1</span> </a></li>
+  <li><a href="#section-4" id="toc-section-4" class="nav-link" data-scroll-target="#section-4"><span class="header-section-number">3.2</span> </a></li>
+  </ul></li>
+  <li><a href="#fitting-the-model-and-forecasting" id="toc-fitting-the-model-and-forecasting" class="nav-link" data-scroll-target="#fitting-the-model-and-forecasting"><span class="header-section-number">4</span> Fitting the model and forecasting</a>
+  <ul class="collapse">
+  <li><a href="#section-5" id="toc-section-5" class="nav-link" data-scroll-target="#section-5"><span class="header-section-number">4.1</span> </a></li>
+  </ul></li>
+  <li><a href="#autocorrelation-and-partial-autocorrelation" id="toc-autocorrelation-and-partial-autocorrelation" class="nav-link" data-scroll-target="#autocorrelation-and-partial-autocorrelation"><span class="header-section-number">5</span> Autocorrelation and Partial Autocorrelation</a>
+  <ul class="collapse">
+  <li><a href="#section-6" id="toc-section-6" class="nav-link" data-scroll-target="#section-6"><span class="header-section-number">5.1</span> </a></li>
+  <li><a href="#section-7" id="toc-section-7" class="nav-link" data-scroll-target="#section-7"><span class="header-section-number">5.2</span> </a></li>
+  <li><a href="#section-8" id="toc-section-8" class="nav-link" data-scroll-target="#section-8"><span class="header-section-number">5.3</span> </a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lab1.html">Labs - Problems</a></li><li class="breadcrumb-item"><a href="./Lab5.html">Lab 5 - Problems</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Lab 5: Time series</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="hidden">
+<p><span class="math display">\[
+  \renewcommand{\P}{\mathbb{P}}
+  \newcommand{\E}{\mathbb{E}}
+\]</span></p>
+</div>
+<section id="reminder" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Reminder</h1>
+<p>We considered <span class="math inline">\(AR(p)\)</span> models of time series, which satisfy: <span class="math display">\[
+X_t = \alpha_1 X_{t-1} + \ldots + \alpha_p X_{t-p} +e_t,
+\]</span> and <span class="math inline">\(MA(q)\)</span> models of time series, which satisfy: <span class="math display">\[
+X_t=e_t+\beta_1 e_{t-1}+\ldots+\beta_q e_{t-q}.
+\]</span> We will deal today with time series with <span class="math inline">\(0\)</span> mean, for simplicity. Recall that <span class="math inline">\(e_t\)</span> is a white noise.</p>
+<p>Their combination is <span class="math inline">\(ARMA(p,q)\)</span> model: <span class="math display">\[
+X_t=\alpha_1 X_{t-1} + \ldots + \alpha_p X_{t-p} +e_t+\beta_1 e_{t-1}+\ldots+\beta_q e_{t-q}.
+\]</span></p>
+<p>We will also consider <span class="math inline">\(ARIMA\)</span>-model, e.g.&nbsp; <span class="math display">\[
+Y_t=\nabla X_t = X_t-X_{t-1},
+\]</span> where <span class="math inline">\(X_t\)</span> is an <span class="math inline">\(ARMA(p,q)\)</span> time series.</p>
+<p>In <span class="math inline">\(R\)</span>, there are a number of methods to work with time series, in particular, with <span class="math inline">\(ARMA\)</span> and <span class="math inline">\(ARIMA\)</span> models. They are implemented using <code>arima</code> and <code>arima.sim</code> functions discussed below. However, firstly, we consider how to generate a time series manually.</p>
+</section>
+<section id="generating-time-series-manually" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Generating time series manually</h1>
+<p>Consider an <span class="math inline">\(AR(1)\)</span> process <span class="math display">\[
+X_t = \alpha X_{t-1} + e_t,
+\]</span> where <span class="math inline">\(e_t\sim N(0,\sigma^2)\)</span> is an example of the white noise. Suppose we want to generate first <span class="math inline">\(10000\)</span> values of <span class="math inline">\(X_t\)</span> with <span class="math inline">\(X_1=1\)</span>, <span class="math inline">\(\alpha=0.9\)</span> and <span class="math inline">\(\sigma=2\)</span>. A possible code is as follows:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>xt <span class="ot">&lt;-</span> <span class="fu">numeric</span>(n) <span class="co"># We pre-allocate zero-values to vector xt of the length n</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>xt[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>et <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n,<span class="at">sd=</span><span class="dv">2</span>) <span class="co"># We generate n normally distributed random value </span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># with the standard deviation of sd</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Note that rnorm has mean=0 by default, see ?rnorm</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span>n){</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  xt[i] <span class="ot">&lt;-</span> <span class="fl">0.9</span><span class="sc">*</span>xt[i<span class="dv">-1</span>] <span class="sc">+</span> et[i]</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(xt,<span class="at">type=</span><span class="st">"l"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Lab5_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="2400"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>As a result, <code>xt</code> is a usual R-vector. For more sophisticated actions with time series it would be better to convert it to the time series object <code>ts</code>. For this, we use <code>ts</code> function: e.g.&nbsp;<code>xt &lt;- ts(xt)</code>, then instead of the last plot-line we can write</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>xt <span class="ot">&lt;-</span> <span class="fu">ts</span>(xt)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(xt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Lab5_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="2400"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>(the output is the same, of course).</p>
+<section id="section" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="section"><span class="header-section-number">2.1</span> </h2>
+<div class="task">
+<p>The previous time series is weakly stationary. Modify the code to generate a non-stationary <span class="math inline">\(AR(1)\)</span> time-series, similar to the following one:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Lab5_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="2400"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-task2" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="sec-task2"><span class="header-section-number">2.2</span> </h2>
+<div class="task">
+<p>Modify the code to generate the following <span class="math inline">\(ARMA(2,2)\)</span> time series <span class="math display">\[
+X_t = 0.3X_{t-1} +0.1 X_{t-2}+e_{t}+0.25e_{t-1}-0.5e_{t-2},
+\]</span> where <span class="math inline">\(e_t\sim N(0,0.7^2)\)</span>, <span class="math inline">\(X_1=X_2=1\)</span>, <span class="math inline">\(t=1,\ldots, 10000\)</span>.</p>
+<p><em>Hint:</em> note that you need now <span class="math inline">\(2\)</span> initial values to generate the rest <span class="math inline">\(n-2\)</span> values.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Lab5_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="2400"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p><strong>Remark</strong>: Note that the characteristic equation for <span class="math inline">\(AR\)</span>-part is <span class="math display">\[
+1-0.3z-0.1z^2=0, \qquad z^2+3z-10=0, \qquad z_1=-5, z_2=2,
+\]</span> i.e.&nbsp;both roots are such that <span class="math inline">\(|z|&gt;1\)</span>, hence, the process is weakly stationary.</p>
+</section>
+<section id="section-1" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="section-1"><span class="header-section-number">2.3</span> </h2>
+<div class="task">
+<p>Modify the previous code so that the characteristic equation would have the roots <span class="math inline">\(z_1=1\)</span> and <span class="math inline">\(z_2=-2\)</span> (keeping the same <span class="math inline">\(MA\)</span>-part). Choose maximal time <span class="math inline">\(100000\)</span>. Set seed <span class="math inline">\(101\)</span> at the beginning of your code.</p>
+<p>The process is not stationary with the output like this:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Lab5_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="2400"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p><strong>Remark</strong>: Note that if any root satisfies <span class="math inline">\(|z|&lt;1\)</span>, then the values of <span class="math inline">\(X_t\)</span> would become very large (exponentially large) for small <span class="math inline">\(t\sim 30\)</span>.</p>
+<p>Recall that the root <span class="math inline">\(z=1\)</span> means that if we consider the differencing: <span class="math display">\[
+Y_t=\nabla X_t=(1-B)X_t=X_t-X_{t-1}
+\]</span> then <span class="math inline">\(Y_t\)</span> is an ARMA time series with the characteristic equation having all other roots (if <span class="math inline">\(z=1\)</span> is the multiple root of multiplicity <span class="math inline">\(j\)</span>, then it’s true for <span class="math inline">\(Y_t=\nabla^j X_t\)</span>). Here <span class="math inline">\(z=1\)</span> is a root of multiplicity <span class="math inline">\(j=1\)</span>, so <span class="math inline">\(Y_t=\nabla X_t\)</span> has the characteristic equation with the only root <span class="math inline">\(z=-2\)</span>, i.e.&nbsp;<span class="math inline">\(Y_t\)</span> is ARMA<span class="math inline">\((1,2)\)</span> time series, which is stationary (as <span class="math inline">\(|z|=|-2|&gt;1\)</span>). In our notations, it means that <span class="math inline">\(X_t\)</span> is an ARIMA<span class="math inline">\((1,1,2)\)</span> (recall that in some sources, and also in the notations of <code>arima</code> object discussed below it’s called ARIMA<span class="math inline">\(({\color{red}2},1,2)\)</span> time series, as it has AR<span class="math inline">\((2)\)</span> part itself, whereas our notations were about AR-part for <span class="math inline">\(Y_t\)</span> rather than <span class="math inline">\(X_t\)</span>).</p>
+<p>In R, there is a fast way to calculate the differencing <span class="math inline">\(Y_t=X_t-X_{t-1}\)</span> having vector <code>x</code> we just consider <code>y &lt;- diff(x)</code>. Note that if <span class="math inline">\(x=(x_1,\ldots,x_n)\)</span>, then <span class="math inline">\(y=(x_2-x_1,x_3-x_2,\ldots,x_n-x_{n-1})\)</span> i.e.&nbsp;<span class="math inline">\(y\)</span> has <span class="math inline">\(n-1\)</span> entries only.</p>
+</section>
+<section id="section-2" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="section-2"><span class="header-section-number">2.4</span> </h2>
+<div id="task">
+<p>Plot the graph of <span class="math inline">\(Y_t\)</span>. Notice that the output reflects the stationarity of the time series.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Lab5_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="2400"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="generating-time-series-using-arima-object" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Generating time series using <code>arima</code> object</h1>
+<p>Instead of modelling <span class="math inline">\(ARMA(p,q)\)</span> time series manually, we can use <code>arima.sim</code> function. Namely, to model</p>
+<p><span class="math display">\[
+X_t=\alpha_1 X_{t-1} + \ldots + \alpha_p X_{t-p} +e_t+\beta_1 e_{t-1}+\ldots+\beta_q e_{t-q}.
+\]</span></p>
+<p>with <span class="math inline">\(e_t\sim N(0,\sigma^2)\)</span> and <span class="math inline">\(t=1,2,\ldots,T\)</span>, we use the command</p>
+<p><span class="math display">\[
+\mathtt{arima.sim(model = list( ar = c(\alpha_1,\ldots,\alpha_p), ma = c(\beta_1,\ldots,\beta_q),
+sd = \sigma), n = T)}
+\]</span></p>
+<p>(surely, you need to substitute <span class="math inline">\(\alpha\)</span>’s, <span class="math inline">\(\beta\)</span>’s, <span class="math inline">\(\sigma\)</span> and <span class="math inline">\(T\)</span> by their values and do not type dots). The output is a <code>ts</code> object, not just a vector.</p>
+<section id="section-3" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="section-3"><span class="header-section-number">3.1</span> </h2>
+<div class="task">
+<p>Redo Task <a href="#sec-task2" class="quarto-xref">2.2</a> using <code>arima.sim</code> function. Set seed <span class="math inline">\(100\)</span>. Assign the result to <code>xt</code>. Plot the output.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Lab5_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p>We can also “zoom” the plot, e.g.&nbsp;between <span class="math inline">\(t=5000\)</span> and <span class="math inline">\(t=6000\)</span>. Note that a slicing <code>xt[n:m]</code> is a vector, and it may be converted to time series:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">ts</span>(xt[<span class="dv">5000</span><span class="sc">:</span><span class="dv">6000</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Lab5_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>As you can see, the times are not the original ones, here <span class="math inline">\(0\)</span> stands for the starting time <span class="math inline">\(5000\)</span>.</p>
+<p>One of the way to keep the original times is to use the parameter <code>start</code> of the funciton <code>ts</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">ts</span>(xt[<span class="dv">5000</span><span class="sc">:</span><span class="dv">6000</span>], <span class="at">start=</span><span class="dv">5000</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Lab5_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="section-4" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="section-4"><span class="header-section-number">3.2</span> </h2>
+<div class="task">
+<p>Given that a <code>ts</code> object has all properties of a vector, find <span class="math inline">\(X_{1000}\)</span> and the mean of all <span class="math inline">\(10000\)</span> found values <span class="math inline">\(X_t\)</span>.</p>
+<p>Note that the latter value is close to <span class="math inline">\(0\)</span>, as expected:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.062928746 0.005488778</code></pre>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="fitting-the-model-and-forecasting" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Fitting the model and forecasting</h1>
+<p>Having the data, i.e.&nbsp;the values of <span class="math inline">\(X_t\)</span> for <span class="math inline">\(t=1,2,3,\ldots, T\)</span>, we can find an <span class="math inline">\(ARMA(p,q)\)</span> model that is the best to fit the data. The values for <span class="math inline">\(X_t\)</span> may be loaded from a file or e.g.&nbsp;we can use the previously generated vector of <code>xt</code>. Note that <code>xt</code> was just a sample path of certain <span class="math inline">\(ARMA(2,2)\)</span> process (i.e.&nbsp;the values were random), and we shouldn’t expect exact recovery of the values of <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>. The command is (notice the package we need to load):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forecast)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'forecast' was built under R version 4.4.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Registered S3 method overwritten by 'quantmod':
+  method            from
+  as.zoo.data.frame zoo </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">auto.arima</span>(xt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Series: xt 
+ARIMA(1,0,3) with zero mean 
+
+Coefficients:
+         ar1      ma1      ma2     ma3
+      0.5773  -0.0440  -0.5755  0.1219
+s.e.  0.2172   0.2186   0.1119  0.0618
+
+sigma^2 = 0.9893:  log likelihood = -14134.09
+AIC=28278.19   AICc=28278.19   BIC=28314.24</code></pre>
+</div>
+</div>
+<p>Thus, despite the real background for the data, the best approximation for it would be <span class="math inline">\(ARMA(1,3) = ARIMA(1,0,3)\)</span> model (the middle 0 in <span class="math inline">\(ARIMA\)</span> means that it is <span class="math inline">\(ARMA\)</span>).</p>
+<p>Note that if you change the seed <span class="math inline">\(100\)</span> above, the data <code>xt</code> would change, and the fitted model may be very different.</p>
+<p>On the other hand, if we have some insight about the type of the model, e.g.&nbsp;if we know that it was an <span class="math inline">\(ARMA(2,2)\)</span> process, we can specify this, to fit the parameters:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">arima</span>(xt, <span class="at">order=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+arima(x = xt, order = c(2, 0, 2))
+
+Coefficients:
+         ar1     ar2     ma1      ma2  intercept
+      0.2300  0.0494  0.3033  -0.4388     0.0055
+s.e.  0.0746  0.0304  0.0735   0.0649     0.0119
+
+sigma^2 estimated as 0.9889:  log likelihood = -14134.08,  aic = 28280.17</code></pre>
+</div>
+</div>
+<p>As you can see, the result is close to the original <span class="math inline">\(\alpha_1=0.3\)</span>, <span class="math inline">\(\alpha_2=0.1\)</span>, <span class="math inline">\(\beta_1=0.25\)</span>, <span class="math inline">\(\beta=-0.5\)</span>, though <span class="math inline">\(\sigma^2\not\approx 0.7^2=0.49\)</span>.</p>
+<p>Normally, this is not used to recover the model, but to predict (forecast) possible future for the current data.</p>
+<p>Let assign the result of fitting to a variable <code>fit</code>: <code>fit &lt;- arima(xt, order=c(2,0,2))</code> and use <code>predict</code> function to get next <span class="math inline">\(5\)</span> values (it’s hopeless to predict too much):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">arima</span>(xt, <span class="at">order=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">2</span>))</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>future <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit, <span class="at">n.ahead=</span><span class="dv">5</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>future</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$pred
+Time Series:
+Start = 10001 
+End = 10005 
+Frequency = 1 
+[1]  0.332912745 -0.363255454 -0.063112391 -0.028462429 -0.005669689
+
+$se
+Time Series:
+Start = 10001 
+End = 10005 
+Frequency = 1 
+[1] 0.9944434 1.1270039 1.1578150 1.1583389 1.1585314</code></pre>
+</div>
+</div>
+<p>As you can see the output is a data frame with two columns: predicted data and standard error.</p>
+<p>We can now plot the prediction “attached” to the end of the time series (recall that the time series <code>xt</code> ends at time <span class="math inline">\(10000\)</span>):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(xt, <span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">9950</span>,<span class="dv">10010</span>), <span class="at">col=</span><span class="st">"blue"</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(future<span class="sc">$</span>pred, <span class="at">col=</span><span class="st">"red"</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"bottomright"</span>,</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend=</span><span class="fu">c</span>(<span class="st">"Observed"</span>, <span class="st">"Forecast"</span>),</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"red"</span>),</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">lty =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Lab5_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="section-5" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="section-5"><span class="header-section-number">4.1</span> </h2>
+<div class="task">
+<p>Check what happen if we try to predict next <span class="math inline">\(50\)</span> values.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Lab5_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="autocorrelation-and-partial-autocorrelation" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Autocorrelation and Partial Autocorrelation</h1>
+<p>Recall that, for a (weakly) stationary time series <span class="math inline">\(\{X_t\}\)</span>, the <strong>autocorrelation function (ACF)</strong> is defined as follows: <span class="math display">\[
+\rho(k)=\frac{\gamma(k)}{\gamma(0)}=\frac{\mathrm{Cov}(X_t,X_{t+k})}{\mathrm{Var}(X_t)
+\]</span> (and both numerator and demominator do not depend on <span class="math inline">\(k\)</span>).</p>
+<p>Thus <span class="math inline">\(\rho(k)\)</span> measures the linear dependence between values of the time series separated by <span class="math inline">\(k\)</span> time steps.</p>
+<p>The empirical ACF (i.e.&nbsp;calculated from a sampple) can be plotted using the function <code>acf</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>ar <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.6</span>, <span class="sc">-</span><span class="fl">0.4</span>, <span class="fl">0.3</span>, <span class="sc">-</span><span class="fl">0.2</span>, <span class="fl">0.15</span>, <span class="sc">-</span><span class="fl">0.1</span>, <span class="fl">0.08</span>, <span class="sc">-</span><span class="fl">0.06</span>, <span class="fl">0.04</span>, <span class="sc">-</span><span class="fl">0.02</span>)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>ma <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="sc">-</span><span class="fl">0.3</span>, <span class="fl">0.25</span>, <span class="sc">-</span><span class="fl">0.2</span>, <span class="fl">0.15</span>, <span class="sc">-</span><span class="fl">0.1</span>, <span class="fl">0.08</span>, <span class="sc">-</span><span class="fl">0.06</span>, <span class="fl">0.04</span>, <span class="sc">-</span><span class="fl">0.02</span>)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>xt <span class="ot">&lt;-</span> <span class="fu">arima.sim</span>(<span class="at">model =</span> <span class="fu">list</span>(<span class="at">ar =</span> ar, <span class="at">ma =</span> ma), <span class="at">n =</span> <span class="dv">10000</span>)</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(xt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Lab5_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>As you can see, the values here are shown as vertical bars (with <span class="math inline">\(\rho(0)=1\)</span>).</p>
+<p>Consider a moving average process</p>
+<p><span class="math display">\[
+X_t=e_t+\beta_1e_{t-1}+\ldots+\beta_qe_{t-q},
+\]</span></p>
+<p>where <span class="math inline">\((e_t)\)</span> is white noise.</p>
+<p>Each value <span class="math inline">\(X_t\)</span> depends only on the noise variables</p>
+<p><span class="math display">\[
+e_t,e_{t-1},\ldots,e_{t-q}.
+\]</span></p>
+<p>If <span class="math inline">\(k&gt;q\)</span>, the sets of noise variables involved in <span class="math inline">\(X_t\)</span> and <span class="math inline">\(X_{t-k}\)</span> do not overlap. Since the noise variables are uncorrelated,</p>
+<p><span class="math display">\[
+\mathrm{Cov}(X_t,X_{t-k})=0.
+\]</span></p>
+<p>Therefore,</p>
+<p><span class="math display">\[
+\rho(k)=0 \qquad (k&gt;q).
+\]</span></p>
+<p>Thus the <strong>ACF truncates after lag <span class="math inline">\(q\)</span></strong> for an <span class="math inline">\(MA(q)\)</span> process.</p>
+<section id="section-6" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="section-6"><span class="header-section-number">5.1</span> </h2>
+<div class="task">
+<p>Generate an <span class="math inline">\(MA(3)\)</span> time series and plot its ACF.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Lab5_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="1152"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>As you can see only the first <span class="math inline">\(3\)</span> lags are not close to zero.</p>
+</div>
+<p>The <strong>partial autocorrelation function (PACF)</strong> measures the dependence between <span class="math inline">\(X_t\)</span> and <span class="math inline">\(X_{t-k}\)</span> after removing the influence of the intermediate observations</p>
+<p><span class="math display">\[
+X_{t-1},X_{t-2},\ldots,X_{t-k+1}.
+\]</span></p>
+<p>More precisely,</p>
+<p><span class="math display">\[
+\mathrm{PACF}(k) = \mathrm{Corr}(X_t,X_{t-k}\mid X_{t-1},\ldots,X_{t-k+1}).
+\]</span></p>
+<p>Thus PACF measures the <strong>direct linear dependence</strong> between observations <span class="math inline">\(k\)</span> steps apart.</p>
+<p>Equivalently, PACF can be interpreted using the <strong>best linear predictor</strong>. Consider the approximation</p>
+<p><span class="math display">\[
+X_t \approx \phi_{k1}X_{t-1}+\phi_{k2}X_{t-2}+\ldots+\phi_{kk}X_{t-k},
+\]</span></p>
+<p>which minimises the mean squared prediction error between <span class="math inline">\(X_t\)</span> and the right hand side.</p>
+<p>Then</p>
+<p><span class="math display">\[
+\mathrm{PACF}(k)=\phi_{kk}.
+\]</span></p>
+<p>In other words, PACF<span class="math inline">\((k)\)</span> is the coefficient of <span class="math inline">\(X_{t-k}\)</span> in the best linear prediction of <span class="math inline">\(X_t\)</span> using the previous <span class="math inline">\(k\)</span> observations.</p>
+<p>The PACF can be plotted using</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># For a previously defined xt</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pacf</span>(xt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Lab5_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Consider an autoregressive process</p>
+<p><span class="math display">\[
+X_t=\alpha_1X_{t-1}+\ldots+\alpha_pX_{t-p}+e_t.
+\]</span></p>
+<p>Once the first <span class="math inline">\(p\)</span> lags are known, older observations do not provide additional linear information about <span class="math inline">\(X_t\)</span>. Therefore</p>
+<p><span class="math display">\[
+\mathrm{PACF}(k)=0 \qquad (k&gt;p).
+\]</span></p>
+<p>Thus the <strong>PACF truncates after lag <span class="math inline">\(p\)</span></strong>.</p>
+</section>
+<section id="section-7" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="section-7"><span class="header-section-number">5.2</span> </h2>
+<div class="task">
+<p>Generate an <span class="math inline">\(AR(3)\)</span> process and examine its PACF.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Lab5_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="1152"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>As you can see, PACF effectively vanishes after lag <span class="math inline">\(3\)</span>.</p>
+</div>
+<p><strong>However</strong>, for an <span class="math inline">\(ARMA(p,q)\)</span> process</p>
+<p><span class="math display">\[
+X_t=\alpha_1X_{t-1}+\ldots+\alpha_pX_{t-p}+e_t+\beta_1e_{t-1}+\ldots+\beta_qe_{t-q},
+\]</span></p>
+<p>neither the ACF nor the PACF truncates. Both functions typically <strong>decay gradually</strong>.</p>
+</section>
+<section id="section-8" class="level2 task" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="section-8"><span class="header-section-number">5.3</span> </h2>
+<p>Generate an <span class="math inline">\(ARMA(2,1)\)</span> process, and plot its ACF and PACF:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Lab5_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="1152"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Lab5_files/figure-html/unnamed-chunk-20-2.png" class="img-fluid figure-img" width="1152"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Compare the behaviour of the ACF and PACF. ACF gives a “hint” that <span class="math inline">\(q\)</span> may be <span class="math inline">\(1\)</span> and PACF gives a hint that <span class="math inline">\(p\)</span> may be <span class="math inline">\(2\)</span>.</p>
+</section>
+
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/finkelshtein\.github\.io\/MA-x65-Labs\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./Lab4.html" class="pagination-link" aria-label="Lab 4 - Problems">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Lab 4 - Problems</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>© Copyright 2026, Dmitri Finkelshtein</p>
+</div>   
+    <div class="nav-footer-center">
+<p>MA-365/M65: Lab Assignments</p>
+</div>
+    <div class="nav-footer-right">
+<p>This page is built with <a href="https://quarto.org/">Quarto</a>.</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
