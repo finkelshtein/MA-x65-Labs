@@ -2,11 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<<<<<<< HEAD
 <meta name="generator" content="quarto-1.9.17">
-=======
-<meta name="generator" content="quarto-1.8.25">
->>>>>>> 150e983d3a33791f5faff8631f895e460ac8c56e
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -79,17 +75,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<<<<<<< HEAD
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-ce4278342a015d016477ed09bce942c5.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-52eb717195531e273a6ba5e9ae3541a5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-=======
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-8fef5d38915f831591fa3b4cafce98b5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
->>>>>>> 150e983d3a33791f5faff8631f895e460ac8c56e
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -233,6 +222,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="./Lab5.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab 5 - Problems</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lab6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 6 - Problems</span></a>
   </div>
 </li>
       </ul>
@@ -913,15 +908,13 @@ F_X(a)=F_X(5)-0.4.
 </div>
 <ul>
 <li><p>To generate <code>n</code> (independent) random values distributed according to <span class="math inline">\(\Gamma(\alpha, \lambda)\)</span>, we use the command <code>rgamma(n, shape = alpha, rate = lambda)</code>. The output is a vector (of the length <code>n</code>).</p></li>
-<li><p>Since the values are random, if you run the same <code>rgamma</code> command again and again, the output will be different all the time:</p></li>
+<li><p>Since the values are random, if you run the same <code>rgamma</code> command again and again, the output will be different all the time: ::: {.cell}</p></li>
 </ul>
-<div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rgamma</span>(<span class="dv">2</span>, <span class="at">shape =</span> <span class="fl">0.1</span>, <span class="at">rate =</span> <span class="fl">0.2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.206199e-05 7.748004e-02</code></pre>
 </div>
-</div>
-<p>and another output for the same input:</p>
+<p>::: and another output for the same input:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rgamma</span>(<span class="dv">2</span>, <span class="at">shape =</span> <span class="fl">0.1</span>, <span class="at">rate =</span> <span class="fl">0.2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -942,24 +935,22 @@ F_X(a)=F_X(5)-0.4.
 <span id="cb95-3"><a href="#cb95-3" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">mean</span>(x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<p>Check the answer:</p>
-<div class="cell">
+<p>Check the answer: ::: {.cell}</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a>m</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.6592689</code></pre>
 </div>
 </div>
-</div>
+<p>:::</p>
 <p>You may check that this answer will remain the same for each new run, as the randomness is “frozen” now.</p>
 <ul>
-<li>Note that, by LLN (the Low of Large Numbers), the obtained mean (i.e.&nbsp;a sample mean) should be close to <span class="math inline">\(\E(X)=\frac{\alpha}{\lambda}\)</span>. And indeed, the received value is close to <span class="math inline">\(\frac23\approx0.66\)</span>, we may calculate this in R, of course (using <code>abs</code> function for an absolute value of a number):</li>
+<li>Note that, by LLN (the Low of Large Numbers), the obtained mean (i.e.&nbsp;a sample mean) should be close to <span class="math inline">\(\E(X)=\frac{\alpha}{\lambda}\)</span>. And indeed, the received value is close to <span class="math inline">\(\frac23\approx0.66\)</span>, we may calculate this in R, of course (using <code>abs</code> function for an absolute value of a number): ::: {.cell}</li>
 </ul>
-<div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">abs</span>(m <span class="sc">-</span> <span class="dv">2</span><span class="sc">/</span><span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.00739773</code></pre>
 </div>
-</div>
+<p>:::</p>
 
 
 </section>

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Lab 4: Reinsurance. Data frames – MA-365/M65 Lab Assignments</title>
+<title>Lab 6: Survival Models, Life Tables, and Exposure to Risk – MA-365/M65 Lab Assignments</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -67,8 +67,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./Lab5.html" rel="next">
-<link href="./Lab3.html" rel="prev">
+<link href="./Lab5.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -139,9 +138,9 @@ window.Quarto = {
 </script>
 
 <link rel="stylesheet" href="styles.css">
-<meta property="og:title" content="Lab 4: Reinsurance. Data frames – MA-365/M65 Lab Assignments">
+<meta property="og:title" content="Lab 6: Survival Models, Life Tables, and Exposure to Risk – MA-365/M65 Lab Assignments">
 <meta property="og:description" content="Lab Assignments for module MA-365/M65: Risk and Survival Models">
-<meta property="og:image" content="https://finkelshtein.github.io/MA-x65-Labs/Lab4_files/figure-html/unnamed-chunk-16-1.png">
+<meta property="og:image" content="https://finkelshtein.github.io/MA-x65-Labs/Lab6_files/figure-html/unnamed-chunk-1-1.png">
 <meta property="og:site_name" content="MA-365/M65 Lab Assignments">
 <meta property="og:image:height" content="960">
 <meta property="og:image:width" content="1344">
@@ -156,7 +155,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lab1.html">Labs - Problems</a></li><li class="breadcrumb-item"><a href="./Lab4.html">Lab 4 - Problems</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lab1.html">Labs - Problems</a></li><li class="breadcrumb-item"><a href="./Lab6.html">Lab 6 - Problems</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -218,7 +217,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Lab4.html" class="sidebar-item-text sidebar-link active">
+  <a href="./Lab4.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab 4 - Problems</span></a>
   </div>
 </li>
@@ -230,7 +229,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Lab6.html" class="sidebar-item-text sidebar-link">
+  <a href="./Lab6.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Lab 6 - Problems</span></a>
   </div>
 </li>
@@ -288,27 +287,22 @@ window.Quarto = {
     <h2 id="toc-title">In this Lab</h2>
    
   <ul class="collapse">
-  <li><a href="#reinsurance" id="toc-reinsurance" class="nav-link active" data-scroll-target="#reinsurance"><span class="header-section-number">1</span> Reinsurance</a>
+  <li><a href="#parametric-models" id="toc-parametric-models" class="nav-link active" data-scroll-target="#parametric-models"><span class="header-section-number">1</span> Parametric models</a>
   <ul class="collapse">
   <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"><span class="header-section-number">1.1</span> </a></li>
-  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1"><span class="header-section-number">1.2</span> </a></li>
   </ul></li>
-  <li><a href="#how-to-create-data-frames" id="toc-how-to-create-data-frames" class="nav-link" data-scroll-target="#how-to-create-data-frames"><span class="header-section-number">2</span> How to create data frames</a>
+  <li><a href="#life-tables" id="toc-life-tables" class="nav-link" data-scroll-target="#life-tables"><span class="header-section-number">2</span> Life tables</a>
   <ul class="collapse">
-  <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2"><span class="header-section-number">2.1</span> </a></li>
+  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1"><span class="header-section-number">2.1</span> </a></li>
+  <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2"><span class="header-section-number">2.2</span> </a></li>
+  <li><a href="#section-3" id="toc-section-3" class="nav-link" data-scroll-target="#section-3"><span class="header-section-number">2.3</span> </a></li>
+  <li><a href="#section-4" id="toc-section-4" class="nav-link" data-scroll-target="#section-4"><span class="header-section-number">2.4</span> </a></li>
   </ul></li>
-  <li><a href="#how-to-import-data-frames" id="toc-how-to-import-data-frames" class="nav-link" data-scroll-target="#how-to-import-data-frames"><span class="header-section-number">3</span> How to import data frames</a>
+  <li><a href="#fitting-the-data" id="toc-fitting-the-data" class="nav-link" data-scroll-target="#fitting-the-data"><span class="header-section-number">3</span> Fitting the data</a>
   <ul class="collapse">
-  <li><a href="#section-3" id="toc-section-3" class="nav-link" data-scroll-target="#section-3"><span class="header-section-number">3.1</span> </a></li>
-  <li><a href="#section-4" id="toc-section-4" class="nav-link" data-scroll-target="#section-4"><span class="header-section-number">3.2</span> </a></li>
-  </ul></li>
-  <li><a href="#how-to-filter-data-frames" id="toc-how-to-filter-data-frames" class="nav-link" data-scroll-target="#how-to-filter-data-frames"><span class="header-section-number">4</span> How to filter data frames</a>
-  <ul class="collapse">
-  <li><a href="#section-5" id="toc-section-5" class="nav-link" data-scroll-target="#section-5"><span class="header-section-number">4.1</span> </a></li>
-  </ul></li>
-  <li><a href="#linear-models" id="toc-linear-models" class="nav-link" data-scroll-target="#linear-models"><span class="header-section-number">5</span> Linear models</a>
-  <ul class="collapse">
-  <li><a href="#section-6" id="toc-section-6" class="nav-link" data-scroll-target="#section-6"><span class="header-section-number">5.1</span> </a></li>
+  <li><a href="#section-5" id="toc-section-5" class="nav-link" data-scroll-target="#section-5"><span class="header-section-number">3.1</span> </a></li>
+  <li><a href="#section-6" id="toc-section-6" class="nav-link" data-scroll-target="#section-6"><span class="header-section-number">3.2</span> </a></li>
+  <li><a href="#section-7" id="toc-section-7" class="nav-link" data-scroll-target="#section-7"><span class="header-section-number">3.3</span> </a></li>
   </ul></li>
   </ul>
 </nav>
@@ -316,9 +310,9 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lab1.html">Labs - Problems</a></li><li class="breadcrumb-item"><a href="./Lab4.html">Lab 4 - Problems</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lab1.html">Labs - Problems</a></li><li class="breadcrumb-item"><a href="./Lab6.html">Lab 6 - Problems</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Lab 4: Reinsurance. Data frames</h1>
+<h1 class="title">Lab 6: Survival Models, Life Tables, and Exposure to Risk</h1>
 </div>
 
 
@@ -335,306 +329,266 @@ window.Quarto = {
 </header>
 
 
-<section id="reinsurance" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Reinsurance</h1>
-<p>For the next task, you will need to use function <code>pmax</code>. If <code>a</code> is a vector <span class="math inline">\((a_1,\ldots,a_m)\)</span> and <code>x</code> is a number, then usual <code>max(a,x)</code> returns <span class="math display">\[
-\max\{a_1,\ldots,a_m,x\}
-\]</span> that is a number, whereas <code>pmax(a,x)</code> returns <span class="math display">\[
-\bigl(\max\{a_1,x\},\ldots,\max\{a_m,x\})
-\]</span> that is a vector.</p>
-<section id="section" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="section"><span class="header-section-number">1.1</span> </h2>
-<div class="task">
-<p>Set seed <span class="math inline">\(234\)</span>. Simulate <span class="math inline">\(15000\)</span> values for a reinsurer where (aggregated) claims have a compound Poisson distribution with parameter <span class="math inline">\(900\)</span> and the individual claims have log-normal distribution <span class="math inline">\(logN(7,0.3^2)\)</span> under individual excess of loss with retention <span class="math inline">\(1700\)</span>. Find the mean and the standard deviation of the obtained data, i.e.&nbsp;using the notations from the lecture notes, estimate <span class="math inline">\(\E(S_R)\)</span> for</p>
+<div class="hidden">
 <p><span class="math display">\[
-S_R=Z_1+\ldots+Z_N
+  \renewcommand{\P}{\mathbb{P}}
+  \newcommand{\E}{\mathbb{E}}
 \]</span></p>
-<p>from the sample, and also estimate <span class="math inline">\(\sigma(S_R)\)</span> from the sample.</p>
-<p>Check the answer.</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 16640.800  2872.169</code></pre>
 </div>
-</div>
-</div>
-</section>
-<section id="section-1" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="section-1"><span class="header-section-number">1.2</span> </h2>
-<div class="task">
-<p>We can see, using formulas from the lecture notes, that in the assumption of the previous task <span class="math display">\[
-\E(S) = \E(N)\E(X)=900\cdot e^{7+0.5\cdot 0.3^2}=1032398
-\]</span> (you can also check that the mean of the sample: for <span class="math inline">\(S\)</span> (not <span class="math inline">\(S_R\)</span>), with the seed <span class="math inline">\(234\)</span> it would be <span class="math inline">\(1032358\)</span>, pretty close). Suppose now that the reinsurer applies the <strong>aggregated</strong> excess <span class="math inline">\(M\)</span>, i.e.&nbsp;the insurer pays <span class="math display">\[
-  S_I=\begin{cases}
-  S, &amp; \text{if } S \leq M,\\
-  M, &amp; \text{if } S &gt; M
-  \end{cases}
-\]</span> and the reinsurer pays <span class="math display">\[
-  S_R=S-S_I=\begin{cases}
-  0, &amp; \text{if } S \leq M,\\
-  S-M, &amp; \text{if } S &gt; M.
-  \end{cases}
-\]</span></p>
-<p>Let <span class="math inline">\(M=\E(S)=1032398\)</span>. Modify the previous code and find <span class="math inline">\(\E(S_R)\)</span>, the average paid by the reinsurer under this agreement.</p>
-<p>Check the answer.</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 14297.37</code></pre>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="how-to-create-data-frames" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> How to create data frames</h1>
-<ul>
-<li><p>Data frame is a table with data.</p></li>
-<li><p>Each column of a data frame should contain the data of the same type (e.g.&nbsp;only numeric or only characters), however, different columns may have different types:</p></li>
-</ul>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="dv">101</span><span class="sc">:</span><span class="dv">103</span>, <span class="at">y =</span> <span class="fu">c</span>(<span class="st">'a'</span>, <span class="st">'b'</span>, <span class="st">'c'</span>))</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>    x y
-1 101 a
-2 102 b
-3 103 c</code></pre>
-</div>
-</div>
-<ul>
-<li><p>Here we create a data frame <code>df</code> with two columns: column <code>x</code> contains <span class="math inline">\(3\)</span> numbers: <span class="math inline">\(101\)</span>, <span class="math inline">\(102\)</span>, <span class="math inline">\(103\)</span> (see topic Patterns of <a href="./Lab1.html">Lab 1</a>) and column <code>y</code> contains three strings “a”, “b”, and “c”.</p></li>
-<li><p>On the left, you can also see numbers <span class="math inline">\(1,2,3\)</span>, these are the indexes which number the rows of the frame.</p></li>
-<li><p>We will mainly need access to the columns of a data frame. The command has the following simple structure <code>DataFrameName$ColumnName</code>, e.g.</p></li>
-</ul>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>x</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 101 102 103</code></pre>
-</div>
-</div>
-<p>Stress that the output is a vector. Similarly,</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>y</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "a" "b" "c"</code></pre>
-</div>
-</div>
-<ul>
-<li>The data frame may be very large, and we may need to see its structure without showing the whole data frame. For this we can use function <code>head(...)</code>:</li>
-</ul>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">101</span><span class="sc">:</span><span class="dv">10</span><span class="sc">**</span><span class="dv">3</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">*</span>x <span class="sc">+</span> <span class="dv">7</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(x, y)</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>    x   y
-1 101 209
-2 102 211
-3 103 213
-4 104 215
-5 105 217
-6 106 219</code></pre>
-</div>
-</div>
-<ul>
-<li>By default, <code>head</code> shows <span class="math inline">\(6\)</span> rows. One can request more:</li>
-</ul>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df,<span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>     x   y
-1  101 209
-2  102 211
-3  103 213
-4  104 215
-5  105 217
-6  106 219
-7  107 221
-8  108 223
-9  109 225
-10 110 227</code></pre>
-</div>
-</div>
-<ul>
-<li>Try commands <code>ncol(df)</code>, <code>nrow(df)</code>, <code>dim(df)</code> to see their outputs.</li>
-</ul>
-<section id="section-2" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="section-2"><span class="header-section-number">2.1</span> </h2>
-<div class="task">
-<p>Find the sum of all values in the column <code>y</code> of this data frame <code>df</code>.</p>
-<p>Check the answer:</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 997200</code></pre>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="how-to-import-data-frames" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> How to import data frames</h1>
-<ul>
-<li>Often we need to work with external data stored in some files. A popular format for storing text data (that includes numbers) is CSV-format (stands for “fomma separated values”).</li>
-</ul>
-<section id="section-3" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="section-3"><span class="header-section-number">3.1</span> </h2>
-<div class="task">
-<p>Do the following steps:</p>
-<ol type="1">
-<li><p>Download file <a href="numbers.csv">numbers.csv</a> and save it in a directory (folder) on your computer (usually it’s “Documents” or “Downloads”).</p></li>
-<li><p>Save your R-file your are working with in R-Studio <strong>to the same</strong> directory (folder).</p></li>
-<li><p>Click with right mouse button on the file name at the top of R-Studio window and choose “Set working directory”.</p></li>
-</ol>
-<p>OR (instead of 3)</p>
-<ul>
-<li>Go to menu “Session”, choose “Set working directory”, and then choose “To source file location”</li>
-</ul>
-<p>If you did 1-3 correctly, in “Files” tab on the (down) right part of R-Studio you will see your R-file and the downloaded CSV-file in the same directory.</p>
-<ol start="4" type="1">
-<li>Load the saved file by the command</li>
-</ol>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"numbers.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>Check yourself:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>           x        y
-1 1.98193075 8.554741
-2 0.08423538 4.008477
-3 0.33576991 4.920004
-4 0.44245007 4.861317
-5 0.09377962 4.023355
-6 0.42974243 5.109215</code></pre>
-</div>
-</div>
-</div>
-</section>
-<section id="section-4" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="section-4"><span class="header-section-number">3.2</span> </h2>
-<div class="task">
-<p>It is given that the data in column <code>x</code> of “numbers.csv” file are independent values of a random variable <span class="math inline">\(X\sim Exp(\lambda)\)</span>. Find the estimate <span class="math inline">\(\hat{\lambda}\)</span> for the parameter <span class="math inline">\(\lambda\)</span> using the method of moments (see Lecture Notes).</p>
-<p>Check your answer:</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 1.152757</code></pre>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="how-to-filter-data-frames" class="level1" data-number="4">
-<h1 data-number="4"><span class="header-section-number">4</span> How to filter data frames</h1>
-<ul>
-<li>Suppose we want to select only those rows of the last data frame where the value of <code>y</code> is bigger than 5. This condition then has the form: <code>df$y &gt; 5</code>. Since <code>df$y</code> is a vector, the result of <code>df$y &gt; 5</code> will be also a vector of <code>TRUE</code> and <code>FALSE</code>:</li>
-</ul>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>my_condition <span class="ot">&lt;-</span> df<span class="sc">$</span>y <span class="sc">&gt;</span> <span class="dv">5</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>my_condition[<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1]  TRUE FALSE FALSE FALSE FALSE  TRUE</code></pre>
-</div>
-</div>
-<p>i.e.&nbsp;the first, second, forth, and sixth values of <code>y</code> are bigger than <span class="math inline">\(5\)</span> (and of course many others, we are just looking here for the first <span class="math inline">\(6\)</span>). The length of <code>my_condition</code> is the same as the number of rows in <code>df</code>:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(my_condition) <span class="sc">==</span> <span class="fu">nrow</span>(df)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] TRUE</code></pre>
-</div>
-</div>
-<ul>
-<li>The command <code>df[my_condition,]</code> (<strong>notice the comma!!!</strong>) will return the data frame which contain only those rows from <code>df</code> where <span class="math inline">\(y&gt;5\)</span>:</li>
-</ul>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>df_cond <span class="ot">&lt;-</span> df[my_condition,]</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df_cond)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>           x        y
-1  1.9819307 8.554741
-6  0.4297424 5.109215
-7  1.1831351 6.374403
-8  0.2664600 5.516452
-11 0.3309978 5.333065
-13 0.7291787 5.758398</code></pre>
-</div>
-</div>
-<ul>
-<li>Since <code>df_cond</code> is a data frame (and the same column names are inheritted from <code>df</code>), we can access its columns by <code>df_cond$x</code> and <code>df_cond$y</code>.</li>
-</ul>
-<section id="section-5" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="section-5"><span class="header-section-number">4.1</span> </h2>
-<div class="task">
-<p>Find the average of all values of <code>y</code> from <code>df</code> such that the corresponding values of <code>x</code> are larger than <span class="math inline">\(1\)</span>.</p>
-<p>Check your answer:</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 7.687361</code></pre>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="linear-models" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> Linear models</h1>
-<ul>
-<li><p>Sometimes we may believe that two sets of data are related to each other. The simplest relation is linear, like <span class="math inline">\(y=kx+b\)</span>.</p></li>
-<li><p>If one has sets of data <span class="math inline">\(x=(x_1,\ldots,x_n)\)</span> and <span class="math inline">\(y=(y_1,\ldots,y_n)\)</span>, one can find <span class="math inline">\(k\)</span> and <span class="math inline">\(b\)</span> which would be the best possible to make $y_ik x_i +b $ for all <span class="math inline">\(i\)</span>.</p></li>
-<li><p>Usually, it is done using the linear regression method which chooses <span class="math inline">\(k\)</span> and <span class="math inline">\(b\)</span> so that</p></li>
-</ul>
+<section id="parametric-models" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Parametric models</h1>
+<p><strong>Weibull model</strong></p>
+<p>Recall that in the Weibull model the force of mortality <span class="math inline">\(\mu_x\)</span> and the survival function <span class="math inline">\(S_x(t)=\mathbb{P}(T_x&gt;t)\)</span> are as follows:</p>
 <p><span class="math display">\[
-\sum_{i=1}^n(y_i - (kx_i+b))^2
+\mu_x = \alpha \beta x^{\beta-1}, \qquad S_x(t)=\exp\Bigl(-\alpha \bigl((x+t)^\beta-x^\beta\bigr)\Bigr),
 \]</span></p>
-<p>would be smallest possible (for the given <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>).</p>
-<ul>
-<li>In the data frame above, we may suspect that <span class="math inline">\(y\)</span> and <span class="math inline">\(x\)</span> are linearly related:</li>
-</ul>
+<p>where <span class="math inline">\(\alpha,\beta&gt;0\)</span>. Although we could use the Weibull distribution function, it may be easier to define the required functions directly (see <a href="./Lab3.html">Lab 3</a> for how to define a function in R).</p>
+<p><strong>Gompertz and Gompertz–Makeham models</strong></p>
+<p>Recall that the Gompertz–Makeham model is given by</p>
+<p><span class="math display">\[
+\mu_x= a+b c^x, \qquad S_x(t)=\exp\biggl(-at-\frac{b}{\ln c} c^x(c^t-1)\biggr),
+\]</span></p>
+<p>where <span class="math inline">\(a,b,c&gt;0\)</span>, and the Gompertz model corresponds to <span class="math inline">\(a=0\)</span>.</p>
+<p><strong>Subplots in R</strong></p>
+<p>Often we need to present several plots together, making a grid of plots. This can be done using the <code>par</code> function in R, for example,</p>
 <div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>x<span class="ot">=</span><span class="fu">seq</span>(<span class="sc">-</span><span class="dv">2</span>,<span class="dv">2</span>,<span class="fl">0.1</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, x<span class="sc">**</span><span class="dv">2</span>, <span class="at">type=</span><span class="st">"l"</span>, <span class="at">main =</span> <span class="fu">expression</span>(<span class="st">"Graph of "</span> <span class="sc">*</span> y<span class="sc">==</span>x<span class="sc">**</span><span class="dv">2</span>), <span class="at">xlab=</span><span class="st">"x"</span>, <span class="at">ylab=</span><span class="fu">expression</span>(x<span class="sc">**</span><span class="dv">2</span>))</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, <span class="dv">2</span><span class="sc">*</span>x<span class="sc">**</span><span class="dv">2</span>, <span class="at">type=</span><span class="st">"l"</span>, <span class="at">main =</span> <span class="fu">expression</span>(<span class="st">"Graph of "</span> <span class="sc">*</span> y<span class="sc">==</span><span class="dv">2</span><span class="sc">*</span>x<span class="sc">**</span><span class="dv">2</span>), <span class="at">xlab=</span><span class="st">"x"</span>, <span class="at">ylab=</span><span class="fu">expression</span>(<span class="dv">2</span><span class="sc">*</span>x<span class="sc">**</span><span class="dv">2</span>))</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, <span class="dv">3</span><span class="sc">*</span>x<span class="sc">**</span><span class="dv">2</span>, <span class="at">type=</span><span class="st">"l"</span>, <span class="at">main =</span> <span class="fu">expression</span>(<span class="st">"Graph of "</span> <span class="sc">*</span> y<span class="sc">==</span><span class="dv">3</span><span class="sc">*</span>x<span class="sc">**</span><span class="dv">2</span>), <span class="at">xlab=</span><span class="st">"x"</span>, <span class="at">ylab=</span><span class="fu">expression</span>(<span class="dv">3</span><span class="sc">*</span>x<span class="sc">**</span><span class="dv">2</span>))</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, <span class="dv">4</span><span class="sc">*</span>x<span class="sc">**</span><span class="dv">2</span>, <span class="at">type=</span><span class="st">"l"</span>, <span class="at">main =</span> <span class="fu">expression</span>(<span class="st">"Graph of "</span> <span class="sc">*</span> y<span class="sc">==</span><span class="dv">4</span><span class="sc">*</span>x<span class="sc">**</span><span class="dv">2</span>), <span class="at">xlab=</span><span class="st">"x"</span>, <span class="at">ylab=</span><span class="fu">expression</span>(<span class="dv">4</span><span class="sc">*</span>x<span class="sc">**</span><span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Lab4_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Lab6_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<ul>
-<li>The corresponding R-code to find optimal <span class="math inline">\(k\)</span> and <span class="math inline">\(b\)</span> is the following:</li>
-</ul>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> df)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-lm(formula = y ~ x, data = df)
-
-Coefficients:
-(Intercept)            x  
-      3.933        2.071  </code></pre>
-</div>
-</div>
-<ul>
-<li><p>Here <code>data</code> is the name of the parameter of function <code>lm</code> (stands for “linear model”), and <code>df</code> is the data frame which contains columns <code>x</code> and <code>y</code>. In other words, if columns of <code>df</code> would had names <code>colX</code> and <code>colY</code>, we would write <code>lm(colY ~ colX, data = df)</code>.</p></li>
-<li><p>The <code>(Intercept)</code> corresponds to <span class="math inline">\(b\)</span>, and value of <code>x</code> here is <span class="math inline">\(k\)</span>. One can access the obtained values:</p></li>
-</ul>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>ans <span class="ot">&lt;-</span> <span class="fu">coef</span>(<span class="fu">lm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> df))</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>ans</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>(Intercept)           x 
-   3.932877    2.070541 </code></pre>
-</div>
-</div>
-<p>and then <code>ans[1]</code> is <span class="math inline">\(b\)</span> and <code>ans[2]</code> is <span class="math inline">\(k\)</span>.</p>
-<section id="section-6" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="section-6"><span class="header-section-number">5.1</span> </h2>
+<p>The parameter <code>mfrow</code> means that the plots are presented row by row. They can be presented column by column with the <code>mfcol</code> parameter.</p>
+<p><strong>It is crucial</strong> to restore the single-plot setting by the command <code>par(mfrow = c(1, 1))</code>.</p>
+<section id="section" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="section"><span class="header-section-number">1.1</span> </h2>
 <div class="task">
-<p>Plot on the same diagram the scatter plot <span class="math inline">\(y\)</span> against <span class="math inline">\(x\)</span> as it is shown above, but in blue color, and plot the line <span class="math inline">\(y=kx+b\)</span> with the found values of <span class="math inline">\(k\)</span> and <span class="math inline">\(b\)</span> (do not copy-paste, use <code>coef</code> function) in red colour. (See Lab 3 for plotting two graphs on one diagram).</p>
+<p>Let <span class="math inline">\(\alpha=5\cdot10^{-6}\)</span>, <span class="math inline">\(\beta=4\)</span>, <span class="math inline">\(a=0.0005\)</span>, <span class="math inline">\(b=0.00003\)</span>, <span class="math inline">\(c=1.09\)</span>.</p>
+<p>Produce three plots in one column. Include the legends to <strong>each</strong> plot.</p>
+<p>The first plot should include the graphs for the forces of mortality <span class="math inline">\(\mu_x\)</span> for <span class="math inline">\(x\in[0,100]\)</span> for <strong>two</strong> models: Weibull and Gompertz–Makeham.</p>
+<p>The second plot should include the graphs for <span class="math inline">\(\ln \mu_x\)</span> for <span class="math inline">\(x\in[0,100]\)</span> for these two models.</p>
+<p>The third plot should include the graphs for <span class="math inline">\(S(t)=S_0(t)\)</span> for <span class="math inline">\(t\in[0,100]\)</span> for these two models.</p>
+<p>Note that, in <code>legend</code> function, the parameter <code>bty = "n"</code> removes the frame around the legend as on the plots below.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Lab4_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Lab6_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="life-tables" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Life tables</h1>
+<p>Download the file <a href="elt17.csv">elt17.csv</a> which contains the values of <span class="math inline">\(l_x\)</span> for males and females at different ages from the <a href="https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/lifeexpectancies/bulletins/englishlifetablesno17/2015-09-01">English Life Tables No.17 (2010 to 2012)</a> dataset (you do not need to download the full dataset, just <a href="elt17.csv">elt17.csv</a> file). Upload it to your project.</p>
+<section id="section-1" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="section-1"><span class="header-section-number">2.1</span> </h2>
+<div class="task">
+<p>Check the first and last rows of the dataset. For the last rows, use the <code>tail</code> function.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>  Age  Males Females
+1   0 100000  100000
+2   1  99525   99619
+3   2  99495   99595
+4   3  99474   99578
+5   4  99460   99564
+6   5  99448   99554</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Age Males Females
+111 110     4      14
+112 111     2       7
+113 112     1       3
+114 113    NA       2
+115 114    NA       1
+116  NA    NA      NA</code></pre>
+</div>
+</div>
+<p>Plot the values of <span class="math inline">\(l_x\)</span> for males and females on the same graph, for integer ages <span class="math inline">\(x\in[0,112]\)</span>, using different colours.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Lab6_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p>The <code>c(...)</code> function in R is very flexible. For example, if <code>v</code> is a vector and <code>n</code> is a number, then <code>c(v,n)</code> returns a longer vector:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(v,<span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 2 3</code></pre>
+</div>
+</div>
+<p>The same would work if instead of <code>n</code> we would have another vector or even more general structure, or lack of data at all:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(v,<span class="cn">NA</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  1  2 NA</code></pre>
+</div>
+</div>
+<p>Note that <code>NA</code> is a special R-object which represents the lack of provided data. As you can see in the dataset <code>elt17.csv</code>, some data is absent.</p>
+<p>Note also that the command <code>datasetName$columnName</code> can be used even if the column with <code>columnName</code> does not yet exist. In this case, such a column would be created.</p>
+</section>
+<section id="section-2" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="section-2"><span class="header-section-number">2.2</span> </h2>
+<div class="task">
+<p>Calculate <span class="math inline">\(d_x=l_x-l_{x+1}\)</span> for all possible <span class="math inline">\(x\)</span> for both males and females. (<em>Hint</em>: use <code>diff</code> function from <a href="Lab7.qmd">Lab 7</a>.) Fill the absent values of the vectors <span class="math inline">\(d=(d_x)\)</span> with <code>NA</code>. Assign the results to the dataset columns <code>MaleDx</code> and <code>FemaleDx</code>, respectively (this would create these columns).</p>
+<p>Check head and tail of the modified dataset.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>  Age  Males Females MaleDx FemaleDx
+1   0 100000  100000    475      381
+2   1  99525   99619     30       24
+3   2  99495   99595     21       17
+4   3  99474   99578     14       14
+5   4  99460   99564     12       10
+6   5  99448   99554     10        9</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Age Males Females MaleDx FemaleDx
+111 110     4      14      2        7
+112 111     2       7      1        4
+113 112     1       3     NA        1
+114 113    NA       2     NA        1
+115 114    NA       1     NA       NA
+116  NA    NA      NA     NA       NA</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="section-3" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="section-3"><span class="header-section-number">2.3</span> </h2>
+<div class="task">
+<p>Recall that <span class="math inline">\(d_x=l_xq_x\)</span>, where <span class="math inline">\(q_x\)</span> is the probability of death within the next year. Plot the ratio <span class="math inline">\(q_x^{male}/q_x^{female}\)</span> for integer ages <span class="math inline">\(x\in[0,111]\)</span>.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Lab6_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p>For the next task, you may need to use <code>cumsum</code> function discussed in <a href="./Lab1.html">Lab 1</a>. Recall that, for vector <span class="math inline">\((x_1,\ldots,x_n)\)</span> its cumulative sum would be the vector</p>
+<p><span class="math display">\[
+(x_1, x_1+x_2, x_1+x_2+x_3,\ldots, x_1+\ldots+x_n),
+\]</span> i.e.&nbsp;on each position one has the sum of the “head” of the vector up to that position. What if we want to have the sum of the “tail” of the vector, i.e. <span class="math display">\[
+(x_1+\ldots+x_n, x_2+\ldots+x_n, x_3+\ldots+x_n,\ldots,x_n)
+\]</span> The trick is to reverse the vector (using the <code>rev</code> function), apply cumsum, and then reverse it back:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">20</span>,<span class="dv">30</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rev</span>(<span class="fu">cumsum</span>(<span class="fu">rev</span>(a)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 60 50 30</code></pre>
+</div>
+</div>
+</section>
+<section id="section-4" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="section-4"><span class="header-section-number">2.4</span> </h2>
+<div class="task">
+<p>Recall that the curtate expectation of life <span class="math inline">\(e_x=\mathbb{E}([T_x])\)</span> (where <span class="math inline">\([\cdot]\)</span> denotes the integer part of a real number) can be found from the formulas:</p>
+<p><span class="math display">\[
+e_x=\sum_{j\geq1}{}_j p_{x}, \qquad {}_j p_{x}=\frac{l_{x+j}}{l_x}
+\]</span></p>
+<p>Construct the vectors of <span class="math inline">\(e_x\)</span> for males and females. <strong>Note that</strong> the sum above starts with <span class="math inline">\(j=1\)</span>, not <span class="math inline">\(j=0\)</span>, i.e.&nbsp;the corresponding current value <span class="math inline">\(l_x\)</span> must be subtracted from the corresponding cumulative sum for each index <span class="math inline">\(x\)</span>. Plot, on the same graph, the graphs of <span class="math inline">\(x+e_x\)</span> for males and for females, for integer ages <span class="math inline">\(x\in[0,111]\)</span>. (We proved that <span class="math inline">\(x+\mathring{e}_x\)</span> is increasing in <span class="math inline">\(x\)</span>, where <span class="math inline">\(\mathring{e}_x\)</span> was the complete expectation of life, so let’s check this on the data.)</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Lab6_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="fitting-the-data" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Fitting the data</h1>
+<p>As you could see from the task on parametric models, the difference between the Weibull model and the Gompertz/Gompertz–Makeham models can be easily seen through the graph of <span class="math inline">\(\ln\mu_x\)</span>: for the Weibull model</p>
+<p><span class="math display">\[
+\ln \mu_x  =  m \ln x + k, \qquad m=\beta-1, k=\ln(\alpha\beta),
+\]</span></p>
+<p>that has logarithmic growth in <span class="math inline">\(x\)</span>, whereas for the Gompertz–Makeham model, when <span class="math inline">\(a&gt;0\)</span> is small,</p>
+<p><span class="math display">\[
+\ln \mu_x =\ln(a+bc^x)\approx \ln(bc^x)= m x +k, \qquad m=\ln c, k= \ln b,
+\]</span></p>
+<p>that has the linear growth in <span class="math inline">\(x\)</span> (and for <span class="math inline">\(a=0\)</span>, in the Gompertz model, the equality is exact).</p>
+<p>Therefore, to check if the data follows Gompertz-type model, we can check if <span class="math inline">\(\ln \mu_x\)</span> appears approximately linear in <span class="math inline">\(x\)</span> (at least for some interval of <span class="math inline">\(x\)</span>, typically, for larger <span class="math inline">\(x\)</span>). If it is the case, one can determine the parameters <span class="math inline">\(b\)</span> and <span class="math inline">\(c\)</span> using the linear regression.</p>
+<p>To estimate <span class="math inline">\(\mu_x\)</span> from the table, we assume that deaths are distributed uniformly between integer years (UDD assumption). We know that then (see Lecture Notes)</p>
+<p><span class="math display">\[
+E_x^c= l_x-\frac{d_x}{2}.
+\]</span></p>
+<p>Therefore, the central rate of mortality</p>
+<p><span class="math display">\[
+\begin{aligned}
+m_x &amp;= \frac{d_x}{E_x^c}\\&amp;=\frac{d_x}{l_x-\frac{d_x}{2}}\\
+&amp;= \frac{2d_x}{2l_x-d_x}\\
+&amp;= \frac{2l_xq_x}{2l_x-l_xq_x}\\
+&amp;= \frac{2q_x}{2-q_x}.
+\end{aligned}
+\]</span></p>
+<p>Moreover, for small <span class="math inline">\(\mu_x\)</span>, we have that <span class="math inline">\(\mu_x\approx m_x\)</span>, i.e.&nbsp;we have an estimation for <span class="math inline">\(\mu_x\)</span>:</p>
+<p><span class="math display">\[
+\hat{\mu}_x = \frac{2q_x}{2-q_x}.
+\]</span></p>
+<section id="section-5" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="section-5"><span class="header-section-number">3.1</span> </h2>
+<div class="task">
+<p>Assuming UDD and small forces of mortality, estimate the forces of mortality for males and for females. Plot two graphs of <span class="math inline">\(\ln\hat{\mu}_x\)</span> on the same diagram (for integer ages <span class="math inline">\(x\in[0,111]\)</span>).</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Lab6_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p>As we can see, between ages, approximately, <span class="math inline">\(25\)</span> and <span class="math inline">\(95\)</span> one has pretty good linear behaviour.</p>
+</section>
+<section id="section-6" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="section-6"><span class="header-section-number">3.2</span> </h2>
+<div class="task">
+<p>Build the linear model for <span class="math inline">\(\ln\hat{\mu}_x = mx +k\)</span> based on values of integer ages <span class="math inline">\(x\in[25,95]\)</span> (think about the corresponding indexes); see <a href="./Lab4.html">Lab 4</a> for linear models: you can create a temporary data frame for the linear model, if needed. Find, from the linear model, the estimates <span class="math inline">\(\hat{m}\)</span>, <span class="math inline">\(\hat{k}\)</span> for <span class="math inline">\(m=\ln c\)</span> and <span class="math inline">\(k=\ln b\)</span>, and hence find estimates <span class="math inline">\(\hat{b}\)</span> and <span class="math inline">\(\hat{c}\)</span> for <span class="math inline">\(b\)</span> and <span class="math inline">\(c\)</span> (separately for males and females).</p>
+<p>Check the answer.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unname</span>(<span class="fu">c</span>(b_male, c_male, b_female, c_female))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.693641e-05 1.096556e+00 1.667903e-05 1.103153e+00</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="section-7" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="section-7"><span class="header-section-number">3.3</span> </h2>
+<div class="task">
+<p>Plot two graphs in one column, one for males, another for females. On each graph, plot <span class="math inline">\(\mu_x\)</span> for <span class="math inline">\(x\in[0,111]\)</span>, and also plot <span class="math inline">\(\hat{b}\cdot \hat{c}^x\)</span> for <span class="math inline">\(x\in[25,95]\)</span> in another colour.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Lab6_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1048,14 +1002,11 @@ Coefficients:
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./Lab3.html" class="pagination-link" aria-label="Lab 3 - Problems">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Lab 3 - Problems</span>
+      <a href="./Lab5.html" class="pagination-link" aria-label="Lab 5 - Problems">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Lab 5 - Problems</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./Lab5.html" class="pagination-link" aria-label="Lab 5 - Problems">
-        <span class="nav-page-text">Lab 5 - Problems</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->

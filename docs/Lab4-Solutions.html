@@ -2,11 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<<<<<<< HEAD
 <meta name="generator" content="quarto-1.9.17">
-=======
-<meta name="generator" content="quarto-1.8.25">
->>>>>>> 150e983d3a33791f5faff8631f895e460ac8c56e
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -80,17 +76,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<<<<<<< HEAD
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-ce4278342a015d016477ed09bce942c5.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-52eb717195531e273a6ba5e9ae3541a5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-=======
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-8fef5d38915f831591fa3b4cafce98b5.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
->>>>>>> 150e983d3a33791f5faff8631f895e460ac8c56e
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -239,6 +228,12 @@ window.Quarto = {
  <span class="menu-text">Lab 5 - Problems</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lab6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 6 - Problems</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="px-0"><hr class="sidebar-divider hi "></li>
@@ -340,12 +335,6 @@ window.Quarto = {
 </header>
 
 
-<div class="hidden">
-<p><span class="math display">\[
-  \renewcommand{\P}{\mathbb{P}}
-  \newcommand{\E}{\mathbb{E}}
-\]</span></p>
-</div>
 <section id="reinsurance" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Reinsurance</h1>
 <p>For the next task, you will need to use function <code>pmax</code>. If <code>a</code> is a vector <span class="math inline">\((a_1,\ldots,a_m)\)</span> and <code>x</code> is a number, then usual <code>max(a,x)</code> returns <span class="math display">\[
@@ -356,11 +345,15 @@ window.Quarto = {
 <section id="section" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="section"><span class="header-section-number">1.1</span> </h2>
 <div class="task">
-<p>Set seed <span class="math inline">\(234\)</span>. Simulate <span class="math inline">\(15000\)</span> values for a reinsurer where (aggregated) claims have a compound Poisson distribution with parameter <span class="math inline">\(900\)</span> and the individual claims have log-normal distribution <span class="math inline">\(logN(7,0.3^2)\)</span> under individual excess of loss with retention <span class="math inline">\(1700\)</span>. Find the mean and the standard deviation of the obtained data, i.e.&nbsp;using the notations from the lecture notes, estimate <span class="math inline">\(\E(S_R)\)</span> for <span class="math display">\[
+<p>Set seed <span class="math inline">\(234\)</span>. Simulate <span class="math inline">\(15000\)</span> values for a reinsurer where (aggregated) claims have a compound Poisson distribution with parameter <span class="math inline">\(900\)</span> and the individual claims have log-normal distribution <span class="math inline">\(logN(7,0.3^2)\)</span> under individual excess of loss with retention <span class="math inline">\(1700\)</span>. Find the mean and the standard deviation of the obtained data, i.e.&nbsp;using the notations from the lecture notes, estimate <span class="math inline">\(\E(S_R)\)</span> for</p>
+<p><span class="math display">\[
 S_R=Z_1+\ldots+Z_N
-\]</span> from the sample, and also estimate <span class="math inline">\(\sigma(S_R)\)</span> from the sample.</p>
+\]</span></p>
+<p>from the sample, and also estimate <span class="math inline">\(\sigma(S_R)\)</span> from the sample.</p>
 <p>Check the answer.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">234</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">rpois</span>(<span class="dv">15000</span>, <span class="at">lambda =</span> <span class="dv">900</span>) </span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>sR <span class="ot">&lt;-</span> <span class="fu">numeric</span>(<span class="dv">15000</span>)</span>
@@ -371,6 +364,7 @@ S_R=Z_1+\ldots+Z_N
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  sR[k] <span class="ot">&lt;-</span> <span class="fu">sum</span>(z)</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>( <span class="fu">mean</span>(sR), <span class="fu">sd</span>(sR) )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 16640.800  2872.169</code></pre>
 </div>
@@ -392,9 +386,12 @@ S_R=Z_1+\ldots+Z_N
   0, &amp; \text{if } S \leq M,\\
   S-M, &amp; \text{if } S &gt; M.
   \end{cases}
-\]</span> Let <span class="math inline">\(M=\E(S)=1032398\)</span>. Modify the previous code and find <span class="math inline">\(\E(S_R)\)</span>, the average paid by the reinsurer under this agreement.</p>
+\]</span></p>
+<p>Let <span class="math inline">\(M=\E(S)=1032398\)</span>. Modify the previous code and find <span class="math inline">\(\E(S_R)\)</span>, the average paid by the reinsurer under this agreement.</p>
 <p>Check the answer.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">234</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">rpois</span>(<span class="dv">15000</span>, <span class="at">lambda =</span> <span class="dv">900</span>) </span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fu">numeric</span>(<span class="dv">15000</span>)</span>
@@ -405,6 +402,7 @@ S_R=Z_1+\ldots+Z_N
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>sR <span class="ot">&lt;-</span> <span class="fu">pmax</span>(<span class="dv">0</span>,s<span class="dv">-1032398</span>)</span>
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(sR)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 14297.37</code></pre>
 </div>
@@ -465,9 +463,8 @@ S_R=Z_1+\ldots+Z_N
 </div>
 </div>
 <ul>
-<li>By default, <code>head</code> shows <span class="math inline">\(6\)</span> rows. One can request more:</li>
+<li>By default, <code>head</code> shows <span class="math inline">\(6\)</span> rows. One can request more: ::: {.cell}</li>
 </ul>
-<div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df,<span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     x   y
@@ -482,7 +479,7 @@ S_R=Z_1+\ldots+Z_N
 9  109 225
 10 110 227</code></pre>
 </div>
-</div>
+<p>:::</p>
 <ul>
 <li>Try commands <code>ncol(df)</code>, <code>nrow(df)</code>, <code>dim(df)</code> to see their outputs.</li>
 </ul>
@@ -490,14 +487,16 @@ S_R=Z_1+\ldots+Z_N
 <h2 data-number="2.1" class="anchored" data-anchor-id="section-2"><span class="header-section-number">2.1</span> </h2>
 <div class="task">
 <p>Find the sum of all values in the column <code>y</code> of this data frame <code>df</code>.</p>
-<p>Check the answer:</p>
-<div class="cell">
+<p>Check the answer: ::: {.cell}</p>
+<details class="code-fold">
+<summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(df<span class="sc">$</span>y)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 997200</code></pre>
 </div>
 </div>
-</div>
+<p>:::</p>
 </section>
 </section>
 <section id="how-to-import-data-frames" class="level1" data-number="3">
@@ -546,7 +545,10 @@ S_R=Z_1+\ldots+Z_N
 <p>It is given that the data in column <code>x</code> of “numbers.csv” file are independent values of a random variable <span class="math inline">\(X\sim Exp(\lambda)\)</span>. Find the estimate <span class="math inline">\(\hat{\lambda}\)</span> for the parameter <span class="math inline">\(\lambda\)</span> using the method of moments (see Lecture Notes).</p>
 <p>Check your answer:</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">/</span><span class="fu">mean</span>(df<span class="sc">$</span>x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.152757</code></pre>
 </div>
@@ -598,7 +600,10 @@ S_R=Z_1+\ldots+Z_N
 <p>Find the average of all values of <code>y</code> from <code>df</code> such that the corresponding values of <code>x</code> are larger than <span class="math inline">\(1\)</span>.</p>
 <p>Check your answer:</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(df[df<span class="sc">$</span>x <span class="sc">&gt;</span> <span class="dv">1</span>,]<span class="sc">$</span>y)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 7.687361</code></pre>
 </div>
@@ -621,7 +626,10 @@ S_R=Z_1+\ldots+Z_N
 <li>In the data frame above, we may suspect that <span class="math inline">\(y\)</span> and <span class="math inline">\(x\)</span> are linearly related:</li>
 </ul>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(df<span class="sc">$</span>x, df<span class="sc">$</span>y, <span class="at">xlab =</span> <span class="st">"x"</span>, <span class="at">ylab =</span> <span class="st">"y"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -663,10 +671,13 @@ Coefficients:
 <div class="task">
 <p>Plot on the same diagram the scatter plot <span class="math inline">\(y\)</span> against <span class="math inline">\(x\)</span> as it is shown above, but in blue color, and plot the line <span class="math inline">\(y=kx+b\)</span> with the found values of <span class="math inline">\(k\)</span> and <span class="math inline">\(b\)</span> (do not copy-paste, use <code>coef</code> function) in red colour. (See Lab 3 for plotting two graphs on one diagram).</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> df<span class="sc">$</span>x</span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> df<span class="sc">$</span>y</span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, y, <span class="at">col =</span> <span class="st">'blue'</span>)</span>
 <span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(x, ans[<span class="dv">2</span>]<span class="sc">*</span>x <span class="sc">+</span> ans[<span class="dv">1</span>], <span class="at">col =</span> <span class="st">'red'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">

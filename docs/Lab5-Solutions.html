@@ -227,6 +227,12 @@ window.Quarto = {
  <span class="menu-text">Lab 5 - Problems</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lab6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 6 - Problems</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="px-0"><hr class="sidebar-divider hi "></li>
@@ -392,6 +398,8 @@ X_t = \alpha X_{t-1} + e_t,
 <div class="task">
 <p>The previous time series is weakly stationary. Modify the code to generate a non-stationary <span class="math inline">\(AR(1)\)</span> time-series, similar to the following one:</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>xt <span class="ot">&lt;-</span> <span class="fu">numeric</span>(n) <span class="co"># We pre-allocate zero-values to vector xt of the length n</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>xt[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
@@ -400,6 +408,7 @@ X_t = \alpha X_{t-1} + e_t,
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  xt[i] <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">*</span>xt[i<span class="dv">-1</span>] <span class="sc">+</span> et[i]</span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(xt,<span class="at">type=</span><span class="st">"l"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -418,6 +427,8 @@ X_t = 0.3X_{t-1} +0.1 X_{t-2}+e_{t}+0.25e_{t-1}-0.5e_{t-2},
 \]</span> where <span class="math inline">\(e_t\sim N(0,0.7^2)\)</span>, <span class="math inline">\(X_1=X_2=1\)</span>, <span class="math inline">\(t=1,\ldots, 10000\)</span>.</p>
 <p><em>Hint:</em> note that you need now <span class="math inline">\(2\)</span> initial values to generate the rest <span class="math inline">\(n-2\)</span> values.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>xt <span class="ot">&lt;-</span> <span class="fu">numeric</span>(n) </span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>xt[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
@@ -428,6 +439,7 @@ X_t = 0.3X_{t-1} +0.1 X_{t-2}+e_{t}+0.25e_{t-1}-0.5e_{t-2},
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>xt <span class="ot">&lt;-</span> <span class="fu">ts</span>(xt)</span>
 <span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(xt)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -447,6 +459,8 @@ X_t = 0.3X_{t-1} +0.1 X_{t-2}+e_{t}+0.25e_{t-1}-0.5e_{t-2},
 <p>Modify the previous code so that the characteristic equation would have the roots <span class="math inline">\(z_1=1\)</span> and <span class="math inline">\(z_2=-2\)</span> (keeping the same <span class="math inline">\(MA\)</span>-part). Choose maximal time <span class="math inline">\(100000\)</span>. Set seed <span class="math inline">\(101\)</span> at the beginning of your code.</p>
 <p>The process is not stationary with the output like this:</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">101</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">100000</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>xt <span class="ot">&lt;-</span> <span class="fu">numeric</span>(n) </span>
@@ -461,6 +475,7 @@ X_t = 0.3X_{t-1} +0.1 X_{t-2}+e_{t}+0.25e_{t-1}-0.5e_{t-2},
 <span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>xt <span class="ot">&lt;-</span> <span class="fu">ts</span>(xt)</span>
 <span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(xt)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -481,9 +496,12 @@ Y_t=\nabla X_t=(1-B)X_t=X_t-X_{t-1}
 <div id="task">
 <p>Plot the graph of <span class="math inline">\(Y_t\)</span>. Notice that the output reflects the stationarity of the time series.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>yt <span class="ot">&lt;-</span> <span class="fu">diff</span>(xt)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>yt <span class="ot">&lt;-</span> <span class="fu">ts</span>(yt)</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(yt)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -512,9 +530,12 @@ sd = \sigma), n = T)}
 <div class="task">
 <p>Redo Task <a href="#sec-task2" class="quarto-xref">2.2</a> using <code>arima.sim</code> function. Set seed <span class="math inline">\(100\)</span>. Assign the result to <code>xt</code>. Plot the output.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">100</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>xt <span class="ot">&lt;-</span> <span class="fu">arima.sim</span>(<span class="at">model =</span> <span class="fu">list</span>(<span class="at">ar =</span> <span class="fu">c</span>(<span class="fl">0.3</span>, <span class="fl">0.1</span>), <span class="at">ma =</span> <span class="fu">c</span>(<span class="fl">0.25</span>, <span class="sc">-</span><span class="fl">0.5</span>), <span class="at">sd =</span> <span class="fl">0.7</span>), <span class="at">n =</span> <span class="dv">10000</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(xt)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -554,7 +575,10 @@ sd = \sigma), n = T)}
 <p>Given that a <code>ts</code> object has all properties of a vector, find <span class="math inline">\(X_{1000}\)</span> and the mean of all <span class="math inline">\(10000\)</span> found values <span class="math inline">\(X_t\)</span>.</p>
 <p>Note that the latter value is close to <span class="math inline">\(0\)</span>, as expected:</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(xt[<span class="dv">1000</span>], <span class="fu">mean</span>(xt))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.062928746 0.005488778</code></pre>
 </div>
@@ -652,6 +676,8 @@ Frequency = 1
 <div class="task">
 <p>Check what happen if we try to predict next <span class="math inline">\(50\)</span> values.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>future2 <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit, <span class="at">n.ahead=</span><span class="dv">50</span>)</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(xt, <span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">9950</span>,<span class="dv">10060</span>), <span class="at">col=</span><span class="st">"blue"</span>)</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(future2<span class="sc">$</span>pred, <span class="at">col=</span><span class="st">"red"</span>)</span>
@@ -659,6 +685,7 @@ Frequency = 1
 <span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend=</span><span class="fu">c</span>(<span class="st">"Observed"</span>, <span class="st">"Forecast"</span>),</span>
 <span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"red"</span>),</span>
 <span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">lty =</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -718,11 +745,14 @@ e_t,e_{t-1},\ldots,e_{t-q}.
 <div class="task">
 <p>Generate an <span class="math inline">\(MA(3)\)</span> time series and plot its ACF.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">100</span>)</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>xt <span class="ot">&lt;-</span> <span class="fu">arima.sim</span>(<span class="at">model=</span><span class="fu">list</span>(<span class="at">ma=</span><span class="fu">c</span>(<span class="fl">0.6</span>,<span class="sc">-</span><span class="fl">0.4</span>,<span class="fl">0.3</span>)), <span class="at">n=</span><span class="dv">10000</span>)</span>
 <span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(xt)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -779,11 +809,14 @@ X_t=\alpha_1X_{t-1}+\ldots+\alpha_pX_{t-p}+e_t.
 <div class="task">
 <p>Generate an <span class="math inline">\(AR(3)\)</span> process and examine its PACF.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>xt <span class="ot">&lt;-</span> <span class="fu">arima.sim</span>(<span class="at">model=</span><span class="fu">list</span>(<span class="at">ar=</span><span class="fu">c</span>(<span class="fl">0.7</span>,<span class="sc">-</span><span class="fl">0.4</span>,<span class="fl">0.2</span>)), <span class="at">n=</span><span class="dv">10000</span>)</span>
 <span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="fu">pacf</span>(xt)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -804,11 +837,14 @@ X_t=\alpha_1X_{t-1}+\ldots+\alpha_pX_{t-p}+e_t+\beta_1e_{t-1}+\ldots+\beta_qe_{t
 <h2 data-number="5.3" class="anchored" data-anchor-id="section-8"><span class="header-section-number">5.3</span> </h2>
 <p>Generate an <span class="math inline">\(ARMA(2,1)\)</span> process, and plot its ACF and PACF:</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">111</span>)</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>xt <span class="ot">&lt;-</span> <span class="fu">arima.sim</span>(<span class="at">model=</span><span class="fu">list</span>(<span class="at">ar=</span><span class="fu">c</span>(<span class="fl">0.6</span>,<span class="sc">-</span><span class="fl">0.3</span>), <span class="at">ma=</span><span class="fu">c</span>(<span class="fl">0.5</span>)), <span class="at">n=</span><span class="dv">10000</span>)</span>
 <span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(xt)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -816,7 +852,10 @@ X_t=\alpha_1X_{t-1}+\ldots+\alpha_pX_{t-p}+e_t+\beta_1e_{t-1}+\ldots+\beta_qe_{t
 </figure>
 </div>
 </div>
+<details class="code-fold">
+<summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pacf</span>(xt)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
