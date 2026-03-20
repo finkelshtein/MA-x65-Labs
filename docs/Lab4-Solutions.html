@@ -276,6 +276,12 @@ window.Quarto = {
  <span class="menu-text">Lab 5 - Solutions</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lab6-Solutions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 6 - Solutions</span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -463,8 +469,9 @@ S_R=Z_1+\ldots+Z_N
 </div>
 </div>
 <ul>
-<li>By default, <code>head</code> shows <span class="math inline">\(6\)</span> rows. One can request more: ::: {.cell}</li>
+<li>By default, <code>head</code> shows <span class="math inline">\(6\)</span> rows. One can request more:</li>
 </ul>
+<div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(df,<span class="dv">10</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     x   y
@@ -479,7 +486,7 @@ S_R=Z_1+\ldots+Z_N
 9  109 225
 10 110 227</code></pre>
 </div>
-<p>:::</p>
+</div>
 <ul>
 <li>Try commands <code>ncol(df)</code>, <code>nrow(df)</code>, <code>dim(df)</code> to see their outputs.</li>
 </ul>
@@ -487,7 +494,8 @@ S_R=Z_1+\ldots+Z_N
 <h2 data-number="2.1" class="anchored" data-anchor-id="section-2"><span class="header-section-number">2.1</span> </h2>
 <div class="task">
 <p>Find the sum of all values in the column <code>y</code> of this data frame <code>df</code>.</p>
-<p>Check the answer: ::: {.cell}</p>
+<p>Check the answer:</p>
+<div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(df<span class="sc">$</span>y)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -496,7 +504,7 @@ S_R=Z_1+\ldots+Z_N
 <pre><code>[1] 997200</code></pre>
 </div>
 </div>
-<p>:::</p>
+</div>
 </section>
 </section>
 <section id="how-to-import-data-frames" class="level1" data-number="3">

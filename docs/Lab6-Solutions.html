@@ -67,7 +67,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./Lab5.html" rel="prev">
+<link href="./Lab5-Solutions.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -140,7 +140,7 @@ window.Quarto = {
 <link rel="stylesheet" href="styles.css">
 <meta property="og:title" content="Lab 6: Survival Models, Life Tables, and Exposure to Risk – MA-365/M65 Lab Assignments">
 <meta property="og:description" content="Lab Assignments for module MA-365/M65: Risk and Survival Models">
-<meta property="og:image" content="https://finkelshtein.github.io/MA-x65-Labs/Lab6_files/figure-html/unnamed-chunk-1-1.png">
+<meta property="og:image" content="https://finkelshtein.github.io/MA-x65-Labs/Lab6-Solutions_files/figure-html/unnamed-chunk-1-1.png">
 <meta property="og:site_name" content="MA-365/M65 Lab Assignments">
 <meta property="og:image:height" content="960">
 <meta property="og:image:width" content="1344">
@@ -155,7 +155,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lab1.html">Labs - Problems</a></li><li class="breadcrumb-item"><a href="./Lab6.html">Lab 6 - Problems</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lab1-Solutions.html">Labs - Solutions</a></li><li class="breadcrumb-item"><a href="./Lab6-Solutions.html">Lab 6 - Solutions</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -229,7 +229,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Lab6.html" class="sidebar-item-text sidebar-link active">
+  <a href="./Lab6.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab 6 - Problems</span></a>
   </div>
 </li>
@@ -277,7 +277,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Lab6-Solutions.html" class="sidebar-item-text sidebar-link">
+  <a href="./Lab6-Solutions.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Lab 6 - Solutions</span></a>
   </div>
 </li>
@@ -316,7 +316,7 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lab1.html">Labs - Problems</a></li><li class="breadcrumb-item"><a href="./Lab6.html">Lab 6 - Problems</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lab1-Solutions.html">Labs - Solutions</a></li><li class="breadcrumb-item"><a href="./Lab6-Solutions.html">Lab 6 - Solutions</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Lab 6: Survival Models, Life Tables, and Exposure to Risk</h1>
 </div>
@@ -369,7 +369,7 @@ window.Quarto = {
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Lab6_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Lab6-Solutions_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -386,13 +386,72 @@ window.Quarto = {
 <p>The third plot should include the graphs for <span class="math inline">\(S(t)=S_0(t)\)</span> for <span class="math inline">\(t\in[0,100]\)</span> for these two models.</p>
 <p>Note that, in <code>legend</code> function, the parameter <code>bty = "n"</code> removes the frame around the legend as on the plots below.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">5e-6</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>beta  <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fl">0.0005</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fl">0.00003</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> <span class="fl">1.09</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>mu_weibull <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  alpha <span class="sc">*</span> beta <span class="sc">*</span> x<span class="sc">^</span>(beta <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>mu_makeham <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  a <span class="sc">+</span> b <span class="sc">*</span> c<span class="sc">^</span>x</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>S_weibull <span class="ot">&lt;-</span> <span class="cf">function</span>(t) {</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">exp</span>(<span class="sc">-</span>alpha <span class="sc">*</span> t<span class="sc">^</span>beta)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>S_makeham <span class="ot">&lt;-</span> <span class="cf">function</span>(t) {</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">exp</span>(<span class="sc">-</span>a <span class="sc">*</span> t <span class="sc">-</span> b <span class="sc">*</span> (c<span class="sc">^</span>t <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">/</span> <span class="fu">log</span>(c))</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">100</span>, <span class="fl">0.1</span>)</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">100</span>, <span class="fl">0.1</span>)</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">1</span>))</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, <span class="fu">mu_weibull</span>(x), <span class="at">type =</span> <span class="st">"l"</span>, <span class="at">col =</span> <span class="st">'red'</span>, <span class="at">lwd =</span> <span class="dv">2</span>,</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Age x"</span>, <span class="at">ylab =</span> <span class="fu">expression</span>(mu[x]),</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="fu">expression</span>(<span class="st">"Forces of mortality "</span> <span class="sc">*</span> mu[x]))</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(x, <span class="fu">mu_makeham</span>(x), <span class="at">col =</span> <span class="st">'blue'</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">lty =</span> <span class="dv">1</span>)</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topleft"</span>,</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Weibull"</span>, <span class="st">"Gompertz-Makeham"</span>),</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>       <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">lty =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>), <span class="at">col=</span><span class="fu">c</span>(<span class="st">"red"</span>,<span class="st">"blue"</span>), <span class="at">bty =</span> <span class="st">"n"</span>)</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, <span class="fu">log</span>(<span class="fu">mu_weibull</span>(x)), <span class="at">type =</span> <span class="st">"l"</span>, <span class="at">col =</span> <span class="st">'red'</span>, <span class="at">lwd =</span> <span class="dv">2</span>,</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Age x"</span>, <span class="at">ylab =</span> <span class="fu">expression</span>(<span class="fu">log</span>(mu[x])),</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="fu">expression</span>(<span class="st">"Log-forces of mortality "</span> <span class="sc">*</span> <span class="fu">log</span>(mu[x])))</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(x, <span class="fu">log</span>(<span class="fu">mu_makeham</span>(x)), <span class="at">col =</span> <span class="st">'blue'</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">lty =</span> <span class="dv">1</span>)</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topleft"</span>,</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Weibull"</span>, <span class="st">"Gompertz-Makeham"</span>),</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>       <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">lty =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>), <span class="at">col=</span><span class="fu">c</span>(<span class="st">"red"</span>,<span class="st">"blue"</span>), <span class="at">bty =</span> <span class="st">"n"</span>)</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(t, <span class="fu">S_weibull</span>(t), <span class="at">type =</span> <span class="st">"l"</span>, <span class="at">lwd =</span> <span class="dv">2</span>,<span class="at">col =</span> <span class="st">'red'</span>, </span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Time t"</span>, <span class="at">ylab =</span> <span class="fu">expression</span>(<span class="fu">S</span>(t)),</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="fu">expression</span>(<span class="st">"Survival functions "</span> <span class="sc">*</span> <span class="fu">S</span>(t) <span class="sc">==</span> S[<span class="dv">0</span>](t)),</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(t, <span class="fu">S_makeham</span>(t), <span class="at">col =</span> <span class="st">'blue'</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">lty =</span> <span class="dv">1</span>)</span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topleft"</span>,</span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Weibull"</span>, <span class="st">"Gompertz-Makeham"</span>),</span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>       <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">lty =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>), <span class="at">col=</span><span class="fu">c</span>(<span class="st">"red"</span>,<span class="st">"blue"</span>), <span class="at">bty =</span> <span class="st">"n"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Lab6_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Lab6-Solutions_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 </div>
 </div>
 </section>
@@ -405,6 +464,11 @@ window.Quarto = {
 <div class="task">
 <p>Check the first and last rows of the dataset. For the last rows, use the <code>tail</code> function.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>elt <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"elt17.csv"</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(elt)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Age  Males Females
 1   0 100000  100000
@@ -414,6 +478,10 @@ window.Quarto = {
 5   4  99460   99564
 6   5  99448   99554</code></pre>
 </div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(elt)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>    Age Males Females
 111 110     4      14
@@ -426,10 +494,21 @@ window.Quarto = {
 </div>
 <p>Plot the values of <span class="math inline">\(l_x\)</span> for males and females on the same graph, for integer ages <span class="math inline">\(x\in[0,112]\)</span>, using different colours.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>lx_males <span class="ot">&lt;-</span> elt<span class="sc">$</span>Males</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>lx_females <span class="ot">&lt;-</span> elt<span class="sc">$</span>Females</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>age <span class="ot">&lt;-</span> elt<span class="sc">$</span>Age</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(age[<span class="dv">1</span><span class="sc">:</span><span class="dv">113</span>], lx_males[<span class="dv">1</span><span class="sc">:</span><span class="dv">113</span>], <span class="at">type=</span><span class="st">"l"</span>, <span class="at">col=</span><span class="st">"blue"</span>,<span class="at">xlab=</span><span class="st">"Age"</span>,<span class="at">ylab=</span><span class="st">"Lives"</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(age[<span class="dv">1</span><span class="sc">:</span><span class="dv">113</span>], lx_females[<span class="dv">1</span><span class="sc">:</span><span class="dv">113</span>], <span class="at">type=</span><span class="st">"l"</span>, <span class="at">col=</span><span class="st">"red"</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"bottomleft"</span>,</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Males"</span>, <span class="st">"Females"</span>),</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">lty =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>), <span class="at">col=</span><span class="fu">c</span>(<span class="st">"blue"</span>,<span class="st">"red"</span>), <span class="at">bty =</span> <span class="st">"n"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Lab6_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Lab6-Solutions_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -437,15 +516,15 @@ window.Quarto = {
 </div>
 <p>The <code>c(...)</code> function in R is very flexible. For example, if <code>v</code> is a vector and <code>n</code> is a number, then <code>c(v,n)</code> returns a longer vector:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(v,<span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(v,<span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1 2 3</code></pre>
 </div>
 </div>
 <p>The same would work if instead of <code>n</code> we would have another vector or even more general structure, or lack of data at all:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(v,<span class="cn">NA</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(v,<span class="cn">NA</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]  1  2 NA</code></pre>
 </div>
@@ -459,6 +538,14 @@ window.Quarto = {
 <p>Calculate <span class="math inline">\(d_x=l_x-l_{x+1}\)</span> for all possible <span class="math inline">\(x\)</span> for both males and females. (<em>Hint</em>: use <code>diff</code> function from <a href="Lab7.qmd">Lab 7</a>.) Fill the absent values of the vectors <span class="math inline">\(d=(d_x)\)</span> with <code>NA</code>. Assign the results to the dataset columns <code>MaleDx</code> and <code>FemaleDx</code>, respectively (this would create these columns).</p>
 <p>Check head and tail of the modified dataset.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>dx_males <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fu">diff</span>(lx_males), <span class="cn">NA</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>elt<span class="sc">$</span>MaleDx <span class="ot">&lt;-</span> dx_males</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>dx_females <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fu">diff</span>(lx_females), <span class="cn">NA</span>)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>elt<span class="sc">$</span>FemaleDx <span class="ot">&lt;-</span> dx_females</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(elt)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Age  Males Females MaleDx FemaleDx
 1   0 100000  100000    475      381
@@ -468,6 +555,10 @@ window.Quarto = {
 5   4  99460   99564     12       10
 6   5  99448   99554     10        9</code></pre>
 </div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(elt)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>    Age Males Females MaleDx FemaleDx
 111 110     4      14      2        7
@@ -485,10 +576,16 @@ window.Quarto = {
 <div class="task">
 <p>Recall that <span class="math inline">\(d_x=l_xq_x\)</span>, where <span class="math inline">\(q_x\)</span> is the probability of death within the next year. Plot the ratio <span class="math inline">\(q_x^{male}/q_x^{female}\)</span> for integer ages <span class="math inline">\(x\in[0,111]\)</span>.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>qx_males <span class="ot">&lt;-</span> dx_males<span class="sc">/</span>lx_males</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>qx_females <span class="ot">&lt;-</span> dx_females<span class="sc">/</span>lx_females</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(age[<span class="dv">1</span><span class="sc">:</span><span class="dv">112</span>],(qx_males<span class="sc">/</span>qx_females)[<span class="dv">1</span><span class="sc">:</span><span class="dv">112</span>], <span class="at">type=</span><span class="st">"l"</span>,<span class="at">xlab=</span><span class="st">"Age"</span>, <span class="at">ylab=</span><span class="st">"Ratio of q_x, males/females"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Lab6_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Lab6-Solutions_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -501,8 +598,8 @@ window.Quarto = {
 (x_1+\ldots+x_n, x_2+\ldots+x_n, x_3+\ldots+x_n,\ldots,x_n)
 \]</span> The trick is to reverse the vector (using the <code>rev</code> function), apply cumsum, and then reverse it back:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">20</span>,<span class="dv">30</span>)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rev</span>(<span class="fu">cumsum</span>(<span class="fu">rev</span>(a)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">20</span>,<span class="dv">30</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rev</span>(<span class="fu">cumsum</span>(<span class="fu">rev</span>(a)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 60 50 30</code></pre>
 </div>
@@ -517,10 +614,27 @@ e_x=\sum_{j\geq1}{}_j p_{x}, \qquad {}_j p_{x}=\frac{l_{x+j}}{l_x}
 \]</span></p>
 <p>Construct the vectors of <span class="math inline">\(e_x\)</span> for males and females. <strong>Note that</strong> the sum above starts with <span class="math inline">\(j=1\)</span>, not <span class="math inline">\(j=0\)</span>, i.e.&nbsp;the corresponding current value <span class="math inline">\(l_x\)</span> must be subtracted from the corresponding cumulative sum for each index <span class="math inline">\(x\)</span>. Plot, on the same graph, the graphs of <span class="math inline">\(x+e_x\)</span> for males and for females, for integer ages <span class="math inline">\(x\in[0,111]\)</span>. (We proved that <span class="math inline">\(x+\mathring{e}_x\)</span> is increasing in <span class="math inline">\(x\)</span>, where <span class="math inline">\(\mathring{e}_x\)</span> was the complete expectation of life, so let’s check this on the data.)</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>lx_males <span class="ot">&lt;-</span> lx_males[<span class="dv">1</span><span class="sc">:</span><span class="dv">112</span>]</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>lx_females <span class="ot">&lt;-</span> lx_females[<span class="dv">1</span><span class="sc">:</span><span class="dv">112</span>]</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>age <span class="ot">&lt;-</span> age[<span class="dv">1</span><span class="sc">:</span><span class="dv">112</span>]</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>ex_males <span class="ot">&lt;-</span> (<span class="fu">rev</span>(<span class="fu">cumsum</span>(<span class="fu">rev</span>(lx_males)))<span class="sc">-</span>lx_males)<span class="sc">/</span>lx_males</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>ex_females <span class="ot">&lt;-</span> (<span class="fu">rev</span>(<span class="fu">cumsum</span>(<span class="fu">rev</span>(lx_females)))<span class="sc">-</span>lx_females)<span class="sc">/</span>lx_females</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(age, age <span class="sc">+</span> ex_males, <span class="at">type=</span><span class="st">'l'</span>, <span class="at">xlab=</span><span class="st">"Age x"</span>,<span class="at">ylab=</span><span class="st">"Total expected lifetime after age x"</span>,<span class="at">col=</span><span class="st">'blue'</span>)</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(age, age <span class="sc">+</span> ex_females, <span class="at">type=</span><span class="st">'l'</span>, <span class="at">col=</span><span class="st">'red'</span>)</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topleft"</span>,</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Males"</span>, <span class="st">"Females"</span>),</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">lty =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>), <span class="at">col=</span><span class="fu">c</span>(<span class="st">"blue"</span>,<span class="st">"red"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Lab6_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Lab6-Solutions_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -562,10 +676,25 @@ m_x &amp;= \frac{d_x}{E_x^c}\\&amp;=\frac{d_x}{l_x-\frac{d_x}{2}}\\
 <div class="task">
 <p>Assuming UDD and small forces of mortality, estimate the forces of mortality for males and for females. Plot two graphs of <span class="math inline">\(\ln\hat{\mu}_x\)</span> on the same diagram (for integer ages <span class="math inline">\(x\in[0,111]\)</span>).</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>qx_males <span class="ot">&lt;-</span> qx_males[<span class="dv">1</span><span class="sc">:</span><span class="dv">112</span>]</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>qx_females <span class="ot">&lt;-</span> qx_females[<span class="dv">1</span><span class="sc">:</span><span class="dv">112</span>]</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>mux_males <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">*</span>qx_males<span class="sc">/</span>(<span class="dv">2</span><span class="sc">-</span>qx_males)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>mux_females <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">*</span>qx_females<span class="sc">/</span>(<span class="dv">2</span><span class="sc">-</span>qx_females)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(age, <span class="fu">log</span>(mux_males), <span class="at">type=</span><span class="st">'l'</span>, <span class="at">xlab=</span><span class="st">"Age x"</span>,<span class="at">ylab=</span><span class="st">"Log-force of mortality"</span>,<span class="at">col=</span><span class="st">'blue'</span>)</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(age, <span class="fu">log</span>(mux_females), <span class="at">type=</span><span class="st">'l'</span>, <span class="at">col=</span><span class="st">'red'</span>)</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topleft"</span>,</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Males"</span>, <span class="st">"Females"</span>),</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">lty =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>), <span class="at">col=</span><span class="fu">c</span>(<span class="st">"blue"</span>,<span class="st">"red"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Lab6_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Lab6-Solutions_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -579,7 +708,23 @@ m_x &amp;= \frac{d_x}{E_x^c}\\&amp;=\frac{d_x}{l_x-\frac{d_x}{2}}\\
 <p>Build the linear model for <span class="math inline">\(\ln\hat{\mu}_x = mx +k\)</span> based on values of integer ages <span class="math inline">\(x\in[25,95]\)</span> (think about the corresponding indexes); see <a href="./Lab4.html">Lab 4</a> for linear models: you can create a temporary data frame for the linear model, if needed. Find, from the linear model, the estimates <span class="math inline">\(\hat{m}\)</span>, <span class="math inline">\(\hat{k}\)</span> for <span class="math inline">\(m=\ln c\)</span> and <span class="math inline">\(k=\ln b\)</span>, and hence find estimates <span class="math inline">\(\hat{b}\)</span> and <span class="math inline">\(\hat{c}\)</span> for <span class="math inline">\(b\)</span> and <span class="math inline">\(c\)</span> (separately for males and females).</p>
 <p>Check the answer.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unname</span>(<span class="fu">c</span>(b_male, c_male, b_female, c_female))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>mux_m <span class="ot">&lt;-</span> mux_males[<span class="dv">26</span><span class="sc">:</span><span class="dv">96</span>]</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>mux_f <span class="ot">&lt;-</span> mux_females[<span class="dv">26</span><span class="sc">:</span><span class="dv">96</span>] </span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="dv">25</span><span class="sc">:</span><span class="dv">95</span>, <span class="at">males =</span> <span class="fu">log</span>(mux_m), <span class="at">females =</span> <span class="fu">log</span>(mux_f))</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>coef_m <span class="ot">&lt;-</span> <span class="fu">coef</span>(<span class="fu">lm</span>(<span class="at">formula =</span> males <span class="sc">~</span> x, <span class="at">data =</span> df))</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>coef_f <span class="ot">&lt;-</span> <span class="fu">coef</span>(<span class="fu">lm</span>(<span class="at">formula =</span> females <span class="sc">~</span> x, <span class="at">data =</span> df))</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>b_male <span class="ot">&lt;-</span> <span class="fu">exp</span>(coef_m[<span class="dv">1</span>])</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>c_male <span class="ot">&lt;-</span> <span class="fu">exp</span>(coef_m[<span class="dv">2</span>])</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>b_female <span class="ot">&lt;-</span> <span class="fu">exp</span>(coef_f[<span class="dv">1</span>])</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>c_female <span class="ot">&lt;-</span> <span class="fu">exp</span>(coef_f[<span class="dv">2</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unname</span>(<span class="fu">c</span>(b_male, c_male, b_female, c_female))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 3.693641e-05 1.096556e+00 1.667903e-05 1.103153e+00</code></pre>
 </div>
@@ -591,13 +736,27 @@ m_x &amp;= \frac{d_x}{E_x^c}\\&amp;=\frac{d_x}{l_x-\frac{d_x}{2}}\\
 <div class="task">
 <p>Plot two graphs in one column, one for males, another for females. On each graph, plot <span class="math inline">\(\mu_x\)</span> for <span class="math inline">\(x\in[0,111]\)</span>, and also plot <span class="math inline">\(\hat{b}\cdot \hat{c}^x\)</span> for <span class="math inline">\(x\in[25,95]\)</span> in another colour.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>))</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(age, mux_males, <span class="at">type=</span><span class="st">"l"</span>, <span class="at">col=</span><span class="st">"blue"</span>, <span class="at">xlab=</span><span class="st">"Age"</span>, <span class="at">ylab=</span><span class="st">"Force of mortality"</span>, <span class="at">main=</span><span class="st">"Males"</span>)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="dv">25</span><span class="sc">:</span><span class="dv">95</span>, b_male <span class="sc">*</span> c_male<span class="sc">**</span>(<span class="dv">25</span><span class="sc">:</span><span class="dv">95</span>), <span class="at">col =</span> <span class="st">"red"</span>)</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(age, mux_females, <span class="at">type=</span><span class="st">"l"</span>, <span class="at">col=</span><span class="st">"blue"</span>, <span class="at">xlab=</span><span class="st">"Age"</span>, <span class="at">ylab=</span><span class="st">"Force of mortality"</span>, <span class="at">main=</span><span class="st">"Females"</span>)</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="dv">25</span><span class="sc">:</span><span class="dv">95</span>, b_female <span class="sc">*</span> c_female<span class="sc">**</span>(<span class="dv">25</span><span class="sc">:</span><span class="dv">95</span>), <span class="at">col =</span> <span class="st">"red"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Lab6_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Lab6-Solutions_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 </div>
 </div>
 
@@ -1008,8 +1167,8 @@ m_x &amp;= \frac{d_x}{E_x^c}\\&amp;=\frac{d_x}{l_x-\frac{d_x}{2}}\\
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./Lab5.html" class="pagination-link" aria-label="Lab 5 - Problems">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Lab 5 - Problems</span>
+      <a href="./Lab5-Solutions.html" class="pagination-link" aria-label="Lab 5 - Solutions">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Lab 5 - Solutions</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

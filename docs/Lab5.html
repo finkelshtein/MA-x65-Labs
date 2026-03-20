@@ -276,6 +276,12 @@ window.Quarto = {
  <span class="menu-text">Lab 5 - Solutions</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lab6-Solutions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 6 - Solutions</span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -534,8 +540,16 @@ sd = \sigma), n = T)}
 <h1 data-number="4"><span class="header-section-number">4</span> Fitting the model and forecasting</h1>
 <p>Having the data, i.e.&nbsp;the values of <span class="math inline">\(X_t\)</span> for <span class="math inline">\(t=1,2,3,\ldots, T\)</span>, we can find an <span class="math inline">\(ARMA(p,q)\)</span> model that is the best to fit the data. The values for <span class="math inline">\(X_t\)</span> may be loaded from a file or e.g.&nbsp;we can use the previously generated vector of <code>xt</code>. Note that <code>xt</code> was just a sample path of certain <span class="math inline">\(ARMA(2,2)\)</span> process (i.e.&nbsp;the values were random), and we shouldn’t expect exact recovery of the values of <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>. The command is (notice the package we need to load):</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forecast)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">auto.arima</span>(xt)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forecast)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'forecast' was built under R version 4.4.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Registered S3 method overwritten by 'quantmod':
+  method            from
+  as.zoo.data.frame zoo </code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">auto.arima</span>(xt)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Series: xt 
 ARIMA(1,0,3) with zero mean 
@@ -553,7 +567,7 @@ AIC=28278.19   AICc=28278.19   BIC=28314.24</code></pre>
 <p>Note that if you change the seed <span class="math inline">\(100\)</span> above, the data <code>xt</code> would change, and the fitted model may be very different.</p>
 <p>On the other hand, if we have some insight about the type of the model, e.g.&nbsp;if we know that it was an <span class="math inline">\(ARMA(2,2)\)</span> process, we can specify this, to fit the parameters:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">arima</span>(xt, <span class="at">order=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">arima</span>(xt, <span class="at">order=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -571,9 +585,9 @@ sigma^2 estimated as 0.9889:  log likelihood = -14134.08,  aic = 28280.17</code>
 <p>Normally, this is not used to recover the model, but to predict (forecast) possible future for the current data.</p>
 <p>Let assign the result of fitting to a variable <code>fit</code>: <code>fit &lt;- arima(xt, order=c(2,0,2))</code> and use <code>predict</code> function to get next <span class="math inline">\(5\)</span> values (it’s hopeless to predict too much):</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">arima</span>(xt, <span class="at">order=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">2</span>))</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>future <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit, <span class="at">n.ahead=</span><span class="dv">5</span>)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>future</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">arima</span>(xt, <span class="at">order=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">0</span>,<span class="dv">2</span>))</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>future <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit, <span class="at">n.ahead=</span><span class="dv">5</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>future</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$pred
 Time Series:
@@ -593,12 +607,12 @@ Frequency = 1
 <p>As you can see the output is a data frame with two columns: predicted data and standard error.</p>
 <p>We can now plot the prediction “attached” to the end of the time series (recall that the time series <code>xt</code> ends at time <span class="math inline">\(10000\)</span>):</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(xt, <span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">9950</span>,<span class="dv">10010</span>), <span class="at">col=</span><span class="st">"blue"</span>)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(future<span class="sc">$</span>pred, <span class="at">col=</span><span class="st">"red"</span>)</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"bottomright"</span>,</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend=</span><span class="fu">c</span>(<span class="st">"Observed"</span>, <span class="st">"Forecast"</span>),</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"red"</span>),</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">lty =</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(xt, <span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">9950</span>,<span class="dv">10010</span>), <span class="at">col=</span><span class="st">"blue"</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(future<span class="sc">$</span>pred, <span class="at">col=</span><span class="st">"red"</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"bottomright"</span>,</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend=</span><span class="fu">c</span>(<span class="st">"Observed"</span>, <span class="st">"Forecast"</span>),</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"red"</span>),</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">lty =</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -631,14 +645,14 @@ Frequency = 1
 <p>Thus <span class="math inline">\(\rho(k)\)</span> measures the linear dependence between values of the time series separated by <span class="math inline">\(k\)</span> time steps.</p>
 <p>The empirical ACF (i.e.&nbsp;calculated from a sample) can be plotted using the function <code>acf</code>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>ar <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.6</span>, <span class="sc">-</span><span class="fl">0.4</span>, <span class="fl">0.3</span>, <span class="sc">-</span><span class="fl">0.2</span>, <span class="fl">0.15</span>, <span class="sc">-</span><span class="fl">0.1</span>, <span class="fl">0.08</span>, <span class="sc">-</span><span class="fl">0.06</span>, <span class="fl">0.04</span>, <span class="sc">-</span><span class="fl">0.02</span>)</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>ma <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="sc">-</span><span class="fl">0.3</span>, <span class="fl">0.25</span>, <span class="sc">-</span><span class="fl">0.2</span>, <span class="fl">0.15</span>, <span class="sc">-</span><span class="fl">0.1</span>, <span class="fl">0.08</span>, <span class="sc">-</span><span class="fl">0.06</span>, <span class="fl">0.04</span>, <span class="sc">-</span><span class="fl">0.02</span>)</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>xt <span class="ot">&lt;-</span> <span class="fu">arima.sim</span>(<span class="at">model =</span> <span class="fu">list</span>(<span class="at">ar =</span> ar, <span class="at">ma =</span> ma), <span class="at">n =</span> <span class="dv">10000</span>)</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(xt)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>ar <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.6</span>, <span class="sc">-</span><span class="fl">0.4</span>, <span class="fl">0.3</span>, <span class="sc">-</span><span class="fl">0.2</span>, <span class="fl">0.15</span>, <span class="sc">-</span><span class="fl">0.1</span>, <span class="fl">0.08</span>, <span class="sc">-</span><span class="fl">0.06</span>, <span class="fl">0.04</span>, <span class="sc">-</span><span class="fl">0.02</span>)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>ma <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="sc">-</span><span class="fl">0.3</span>, <span class="fl">0.25</span>, <span class="sc">-</span><span class="fl">0.2</span>, <span class="fl">0.15</span>, <span class="sc">-</span><span class="fl">0.1</span>, <span class="fl">0.08</span>, <span class="sc">-</span><span class="fl">0.06</span>, <span class="fl">0.04</span>, <span class="sc">-</span><span class="fl">0.02</span>)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>xt <span class="ot">&lt;-</span> <span class="fu">arima.sim</span>(<span class="at">model =</span> <span class="fu">list</span>(<span class="at">ar =</span> ar, <span class="at">ma =</span> ma), <span class="at">n =</span> <span class="dv">10000</span>)</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="fu">acf</span>(xt)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -702,8 +716,8 @@ X_t \approx \phi_{k1}X_{t-1}+\phi_{k2}X_{t-2}+\ldots+\phi_{kk}X_{t-k},
 <p>In other words, PACF<span class="math inline">\((k)\)</span> is the coefficient of <span class="math inline">\(X_{t-k}\)</span> in the best linear prediction of <span class="math inline">\(X_t\)</span> using the previous <span class="math inline">\(k\)</span> observations.</p>
 <p>The PACF can be plotted using</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># For a previously defined xt</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pacf</span>(xt)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># For a previously defined xt</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pacf</span>(xt)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
