@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Lab 6: Survival Models, Life Tables, and Exposure to Risk – MA-365/M65 Lab Assignments</title>
+<title>Lab 7: Kaplan–Meier estimate of the survival functions and Cox regression model – MA-365/M65 Lab Assignments</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -67,8 +67,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./Lab7.html" rel="next">
-<link href="./Lab5.html" rel="prev">
+<link href="./Lab6.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -139,9 +138,9 @@ window.Quarto = {
 </script>
 
 <link rel="stylesheet" href="styles.css">
-<meta property="og:title" content="Lab 6: Survival Models, Life Tables, and Exposure to Risk – MA-365/M65 Lab Assignments">
+<meta property="og:title" content="Lab 7: Kaplan–Meier estimate of the survival functions and Cox regression model – MA-365/M65 Lab Assignments">
 <meta property="og:description" content="Lab Assignments for module MA-365/M65: Risk and Survival Models">
-<meta property="og:image" content="https://finkelshtein.github.io/MA-x65-Labs/Lab6_files/figure-html/unnamed-chunk-1-1.png">
+<meta property="og:image" content="https://finkelshtein.github.io/MA-x65-Labs/Lab7_files/figure-html/unnamed-chunk-7-1.png">
 <meta property="og:site_name" content="MA-365/M65 Lab Assignments">
 <meta property="og:image:height" content="960">
 <meta property="og:image:width" content="1344">
@@ -156,7 +155,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lab1.html">Labs - Problems</a></li><li class="breadcrumb-item"><a href="./Lab6.html">Lab 6 - Problems</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lab1.html">Labs - Problems</a></li><li class="breadcrumb-item"><a href="./Lab7.html">Lab 7 - Problems</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -230,13 +229,13 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Lab6.html" class="sidebar-item-text sidebar-link active">
+  <a href="./Lab6.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab 6 - Problems</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Lab7.html" class="sidebar-item-text sidebar-link">
+  <a href="./Lab7.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Lab 7 - Problems</span></a>
   </div>
 </li>
@@ -300,22 +299,25 @@ window.Quarto = {
     <h2 id="toc-title">In this Lab</h2>
    
   <ul class="collapse">
-  <li><a href="#parametric-models" id="toc-parametric-models" class="nav-link active" data-scroll-target="#parametric-models"><span class="header-section-number">1</span> Parametric models</a>
+  <li><a href="#reminder-about-data-frames" id="toc-reminder-about-data-frames" class="nav-link active" data-scroll-target="#reminder-about-data-frames"><span class="header-section-number">1</span> Reminder about data frames</a>
   <ul class="collapse">
   <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"><span class="header-section-number">1.1</span> </a></li>
+  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1"><span class="header-section-number">1.2</span> </a></li>
+  <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2"><span class="header-section-number">1.3</span> </a></li>
   </ul></li>
-  <li><a href="#life-tables" id="toc-life-tables" class="nav-link" data-scroll-target="#life-tables"><span class="header-section-number">2</span> Life tables</a>
+  <li><a href="#kaplanmeier-estimate" id="toc-kaplanmeier-estimate" class="nav-link" data-scroll-target="#kaplanmeier-estimate"><span class="header-section-number">2</span> Kaplan–Meier estimate</a>
   <ul class="collapse">
-  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1"><span class="header-section-number">2.1</span> </a></li>
-  <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2"><span class="header-section-number">2.2</span> </a></li>
-  <li><a href="#section-3" id="toc-section-3" class="nav-link" data-scroll-target="#section-3"><span class="header-section-number">2.3</span> </a></li>
-  <li><a href="#section-4" id="toc-section-4" class="nav-link" data-scroll-target="#section-4"><span class="header-section-number">2.4</span> </a></li>
+  <li><a href="#section-3" id="toc-section-3" class="nav-link" data-scroll-target="#section-3"><span class="header-section-number">2.1</span> </a></li>
+  <li><a href="#section-4" id="toc-section-4" class="nav-link" data-scroll-target="#section-4"><span class="header-section-number">2.2</span> </a></li>
   </ul></li>
-  <li><a href="#fitting-the-data" id="toc-fitting-the-data" class="nav-link" data-scroll-target="#fitting-the-data"><span class="header-section-number">3</span> Fitting the data</a>
+  <li><a href="#kaplanmeier-with-covariates" id="toc-kaplanmeier-with-covariates" class="nav-link" data-scroll-target="#kaplanmeier-with-covariates"><span class="header-section-number">3</span> Kaplan–Meier with covariates</a>
   <ul class="collapse">
   <li><a href="#section-5" id="toc-section-5" class="nav-link" data-scroll-target="#section-5"><span class="header-section-number">3.1</span> </a></li>
-  <li><a href="#section-6" id="toc-section-6" class="nav-link" data-scroll-target="#section-6"><span class="header-section-number">3.2</span> </a></li>
-  <li><a href="#section-7" id="toc-section-7" class="nav-link" data-scroll-target="#section-7"><span class="header-section-number">3.3</span> </a></li>
+  </ul></li>
+  <li><a href="#cox-regression-model" id="toc-cox-regression-model" class="nav-link" data-scroll-target="#cox-regression-model"><span class="header-section-number">4</span> Cox regression model</a>
+  <ul class="collapse">
+  <li><a href="#section-6" id="toc-section-6" class="nav-link" data-scroll-target="#section-6"><span class="header-section-number">4.1</span> </a></li>
+  <li><a href="#section-7" id="toc-section-7" class="nav-link" data-scroll-target="#section-7"><span class="header-section-number">4.2</span> </a></li>
   </ul></li>
   </ul>
 </nav>
@@ -323,9 +325,9 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lab1.html">Labs - Problems</a></li><li class="breadcrumb-item"><a href="./Lab6.html">Lab 6 - Problems</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lab1.html">Labs - Problems</a></li><li class="breadcrumb-item"><a href="./Lab7.html">Lab 7 - Problems</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Lab 6: Survival Models, Life Tables, and Exposure to Risk</h1>
+<h1 class="title">Lab 7: Kaplan–Meier estimate of the survival functions and Cox regression model</h1>
 </div>
 
 
@@ -348,264 +350,410 @@ window.Quarto = {
   \newcommand{\E}{\mathbb{E}}
 \]</span></p>
 </div>
-<section id="parametric-models" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Parametric models</h1>
-<p><strong>Weibull model</strong></p>
-<p>Recall that in the Weibull model the force of mortality <span class="math inline">\(\mu_x\)</span> and the survival function <span class="math inline">\(S_x(t)=\mathbb{P}(T_x&gt;t)\)</span> are as follows:</p>
-<p><span class="math display">\[
-\mu_x = \alpha \beta x^{\beta-1}, \qquad S_x(t)=\exp\Bigl(-\alpha \bigl((x+t)^\beta-x^\beta\bigr)\Bigr),
-\]</span></p>
-<p>where <span class="math inline">\(\alpha,\beta&gt;0\)</span>. Although we could use the Weibull distribution function, it may be easier to define the required functions directly (see <a href="./Lab3.html">Lab 3</a> for how to define a function in R).</p>
-<p><strong>Gompertz and Gompertz–Makeham models</strong></p>
-<p>Recall that the Gompertz–Makeham model is given by</p>
-<p><span class="math display">\[
-\mu_x= a+b c^x, \qquad S_x(t)=\exp\biggl(-at-\frac{b}{\ln c} c^x(c^t-1)\biggr),
-\]</span></p>
-<p>where <span class="math inline">\(a,b,c&gt;0\)</span>, and the Gompertz model corresponds to <span class="math inline">\(a=0\)</span>.</p>
-<p><strong>Subplots in R</strong></p>
-<p>Often we need to present several plots together, making a grid of plots. This can be done using the <code>par</code> function in R, for example,</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>x<span class="ot">=</span><span class="fu">seq</span>(<span class="sc">-</span><span class="dv">2</span>,<span class="dv">2</span>,<span class="fl">0.1</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, x<span class="sc">**</span><span class="dv">2</span>, <span class="at">type=</span><span class="st">"l"</span>, <span class="at">main =</span> <span class="fu">expression</span>(<span class="st">"Graph of "</span> <span class="sc">*</span> y<span class="sc">==</span>x<span class="sc">**</span><span class="dv">2</span>), <span class="at">xlab=</span><span class="st">"x"</span>, <span class="at">ylab=</span><span class="fu">expression</span>(x<span class="sc">**</span><span class="dv">2</span>))</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, <span class="dv">2</span><span class="sc">*</span>x<span class="sc">**</span><span class="dv">2</span>, <span class="at">type=</span><span class="st">"l"</span>, <span class="at">main =</span> <span class="fu">expression</span>(<span class="st">"Graph of "</span> <span class="sc">*</span> y<span class="sc">==</span><span class="dv">2</span><span class="sc">*</span>x<span class="sc">**</span><span class="dv">2</span>), <span class="at">xlab=</span><span class="st">"x"</span>, <span class="at">ylab=</span><span class="fu">expression</span>(<span class="dv">2</span><span class="sc">*</span>x<span class="sc">**</span><span class="dv">2</span>))</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, <span class="dv">3</span><span class="sc">*</span>x<span class="sc">**</span><span class="dv">2</span>, <span class="at">type=</span><span class="st">"l"</span>, <span class="at">main =</span> <span class="fu">expression</span>(<span class="st">"Graph of "</span> <span class="sc">*</span> y<span class="sc">==</span><span class="dv">3</span><span class="sc">*</span>x<span class="sc">**</span><span class="dv">2</span>), <span class="at">xlab=</span><span class="st">"x"</span>, <span class="at">ylab=</span><span class="fu">expression</span>(<span class="dv">3</span><span class="sc">*</span>x<span class="sc">**</span><span class="dv">2</span>))</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x, <span class="dv">4</span><span class="sc">*</span>x<span class="sc">**</span><span class="dv">2</span>, <span class="at">type=</span><span class="st">"l"</span>, <span class="at">main =</span> <span class="fu">expression</span>(<span class="st">"Graph of "</span> <span class="sc">*</span> y<span class="sc">==</span><span class="dv">4</span><span class="sc">*</span>x<span class="sc">**</span><span class="dv">2</span>), <span class="at">xlab=</span><span class="st">"x"</span>, <span class="at">ylab=</span><span class="fu">expression</span>(<span class="dv">4</span><span class="sc">*</span>x<span class="sc">**</span><span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="Lab6_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>The parameter <code>mfrow</code> means that the plots are presented row by row. They can be presented column by column with the <code>mfcol</code> parameter.</p>
-<p><strong>It is crucial</strong> to restore the single-plot setting by the command <code>par(mfrow = c(1, 1))</code>.</p>
+<section id="reminder-about-data-frames" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Reminder about data frames</h1>
 <section id="section" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="section"><span class="header-section-number">1.1</span> </h2>
 <div class="task">
-<p>Let <span class="math inline">\(\alpha=5\cdot10^{-6}\)</span>, <span class="math inline">\(\beta=4\)</span>, <span class="math inline">\(a=0.0005\)</span>, <span class="math inline">\(b=0.00003\)</span>, <span class="math inline">\(c=1.09\)</span>.</p>
-<p>Produce three plots in one column. Include the legends to <strong>each</strong> plot.</p>
-<p>The first plot should include the graphs for the forces of mortality <span class="math inline">\(\mu_x\)</span> for <span class="math inline">\(x\in[0,100]\)</span> for <strong>two</strong> models: Weibull and Gompertz–Makeham.</p>
-<p>The second plot should include the graphs for <span class="math inline">\(\ln \mu_x\)</span> for <span class="math inline">\(x\in[0,100]\)</span> for these two models.</p>
-<p>The third plot should include the graphs for <span class="math inline">\(S(t)=S_0(t)\)</span> for <span class="math inline">\(t\in[0,100]\)</span> for these two models.</p>
-<p>Note that, in <code>legend</code> function, the parameter <code>bty = "n"</code> removes the frame around the legend as on the plots below.</p>
+<p>Download <a href="hm.csv">hm.csv</a>, store it in a variable <code>df</code>, and display the first rows of the dataset.</p>
 <div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>  ID time age drug status    entdate    enddate
+1  1    5  46    0      1 15/05/2015 14/10/2015
+2  2    6  35    1      0 19/09/2014 20/03/2015
+3  3    8  30    1      1 21/04/2016 20/12/2016
+4  4    3  30    1      1 03/01/2016 04/04/2016
+5  5   22  36    0      1 18/09/2014 19/07/2016
+6  6    1  32    1      0 18/03/2016 17/04/2016</code></pre>
+</div>
+</div>
+</div>
+<p>This data frame contains information about patients participating in a clinical trial.</p>
+<ul>
+<li><p><code>time</code>: duration of follow-up (in months)</p></li>
+<li><p><code>age</code>: age of the participant</p></li>
+<li><p><code>drug</code>: treatment indicator (<code>0</code> = no drug, <code>1</code> = drug)</p></li>
+<li><p><code>status</code>: event indicator:</p>
+<ul>
+<li><code>1</code> = event of interest observed</li>
+<li><code>0</code> = censored observation</li>
+</ul></li>
+</ul>
+<p>In this dataset, the event of interest is <strong>death related to the condition under study</strong>.</p>
+<p>If a patient dies from an unrelated cause, or leaves the study early, the observation is <strong>censored</strong>: we only know that the patient survived at least up to that time.</p>
+</section>
+<section id="section-1" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="section-1"><span class="header-section-number">1.2</span> </h2>
+<div class="task">
+<p>Find the mean age of the participants.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 36.07</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="section-2" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="section-2"><span class="header-section-number">1.3</span> </h2>
+<div class="task">
+<p>Find the number of observations (rows) in the dataset.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 100</code></pre>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="kaplanmeier-estimate" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Kaplan–Meier estimate</h1>
+<p>We use the package <code>survival</code> (you may need to install it, see <a href="./Lab2-Solutions.html#sec-package">Lab 2</a> on how to install a package).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survival)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>To work with survival data, we first create a <strong>survival object</strong> using <code>Surv()</code>:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>sf <span class="ot">&lt;-</span> <span class="fu">Surv</span>(df<span class="sc">$</span>time, df<span class="sc">$</span>status)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>sf</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  [1]  5   6+  8   3  22   1+  7   9   3  12   2+ 12   1  15  34   1   4  19+
+ [19]  3+  2   2+  6  60+ 11   2+  5   4+  1  13   3   2   1  30   7   4   8 
+ [37]  5  10   2   9  36   3   9   3  35   8  11  56+  2+  3  15   1  10   1 
+ [55]  7   3   3   2  32   3  10+ 11   3   7   5  31   5  58   1   3+ 43   1 
+ [73]  6  53  14   4  54   1   1   8   5   1   1   2   7+  1+ 10  24+  7  12+
+ [91]  4  57   1  12+  7   1   5  60+  2+  1 </code></pre>
+</div>
+</div>
+<p>Censored observations are marked with a <code>+</code>. This means that the event was not observed at that time.</p>
+<p>We now compute the Kaplan–Meier estimator:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>km <span class="ot">&lt;-</span> <span class="fu">survfit</span>(sf <span class="sc">~</span> <span class="dv">1</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>km</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call: survfit(formula = sf ~ 1)
+
+       n events median 0.95LCL 0.95UCL
+[1,] 100     80      7       5      10</code></pre>
+</div>
+</div>
+<p>The formula <code>~ 1</code> means that we estimate a <strong>single survival curve for the whole sample</strong>, without using any covariates.</p>
+<p><strong>Plotting the estimator:</strong></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(km)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Lab6_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Lab7_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
+<ul>
+<li><p>The solid line is the Kaplan–Meier estimate <span class="math inline">\(\hat{S}(t)\)</span></p></li>
+<li><p>The dashed lines represent a <strong><span class="math inline">\(95\)</span>% confidence interval</strong></p>
+<p>Roughly speaking, if we repeated the study many times, the true survival probabilities would lie within these bounds in about <span class="math inline">\(95\)</span>% of cases.</p></li>
+<li><p>To change the confidence level, we the paramter <code>conf.int=value</code> of function <code>plot</code> where <code>value</code> is a decimal between <span class="math inline">\(0\)</span> and <span class="math inline">\(1\)</span>.</p>
+<p>Higher confidence level → wider interval.</p></li>
+<li><p>Numerical values:</p></li>
+</ul>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(km)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call: survfit(formula = sf ~ 1)
+
+ time n.risk n.event survival std.err lower 95% CI upper 95% CI
+    1    100      15   0.8500  0.0357       0.7828        0.923
+    2     83       5   0.7988  0.0402       0.7237        0.882
+    3     73      10   0.6894  0.0473       0.6026        0.789
+    4     61       4   0.6442  0.0493       0.5544        0.748
+    5     56       7   0.5636  0.0517       0.4709        0.675
+    6     49       2   0.5406  0.0521       0.4476        0.653
+    7     46       6   0.4701  0.0526       0.3775        0.586
+    8     39       4   0.4219  0.0525       0.3306        0.538
+    9     35       3   0.3857  0.0520       0.2962        0.502
+   10     32       3   0.3496  0.0511       0.2625        0.466
+   11     28       3   0.3121  0.0500       0.2280        0.427
+   12     25       2   0.2872  0.0490       0.2055        0.401
+   13     21       1   0.2735  0.0486       0.1931        0.387
+   14     20       1   0.2598  0.0480       0.1809        0.373
+   15     19       2   0.2325  0.0467       0.1568        0.345
+   22     16       1   0.2179  0.0460       0.1441        0.330
+   30     14       1   0.2024  0.0453       0.1305        0.314
+   31     13       1   0.1868  0.0444       0.1173        0.298
+   32     12       1   0.1712  0.0433       0.1043        0.281
+   34     11       1   0.1557  0.0421       0.0916        0.264
+   35     10       1   0.1401  0.0407       0.0793        0.247
+   36      9       1   0.1245  0.0390       0.0674        0.230
+   43      8       1   0.1090  0.0371       0.0559        0.212
+   53      7       1   0.0934  0.0349       0.0449        0.194
+   54      6       1   0.0778  0.0324       0.0344        0.176
+   57      4       1   0.0584  0.0296       0.0216        0.157
+   58      3       1   0.0389  0.0253       0.0109        0.139</code></pre>
 </div>
-</section>
-</section>
-<section id="life-tables" class="level1" data-number="2">
-<h1 data-number="2"><span class="header-section-number">2</span> Life tables</h1>
-<p>Download the file <a href="elt17.csv">elt17.csv</a> which contains the values of <span class="math inline">\(l_x\)</span> for males and females at different ages from the <a href="https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/lifeexpectancies/bulletins/englishlifetablesno17/2015-09-01">English Life Tables No.17 (2010 to 2012)</a> dataset (you do not need to download the full dataset, just <a href="elt17.csv">elt17.csv</a> file). Upload it to your project.</p>
-<section id="section-1" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="section-1"><span class="header-section-number">2.1</span> </h2>
+</div>
+<pre><code>* `time`: event times
+
+* `n.risk`: individuals at risk just before time
+
+* `n.event`: number of events at that time
+
+* `surv`: estimated survival probability</code></pre>
+<ul>
+<li><p>Recall that the Kaplan–Meier estimator is</p>
+<p><span class="math display">\[
+\hat{S}(t) = \prod_{t_j \le t} \left(1 - \frac{d_j}{n_j}\right).
+\]</span></p></li>
+</ul>
+<p><strong>Extracting survival probabilities</strong></p>
+<p>Instead of reading values manually, we can query the model:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(km, <span class="at">times =</span> <span class="fu">c</span>(<span class="dv">13</span>, <span class="dv">42</span>))<span class="sc">$</span>surv</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.2734790 0.1245306</code></pre>
+</div>
+</div>
+<section id="section-3" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="section-3"><span class="header-section-number">2.1</span> </h2>
 <div class="task">
-<p>Check the first and last rows of the dataset. For the last rows, use the <code>tail</code> function.</p>
+<p>Compute the ratio <span class="math display">\[
+\frac{\hat{S}(17)}{\hat{S}(51)}.
+\]</span></p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>  Age  Males Females
-1   0 100000  100000
-2   1  99525   99619
-3   2  99495   99595
-4   3  99474   99578
-5   4  99460   99564
-6   5  99448   99554</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>    Age Males Females
-111 110     4      14
-112 111     2       7
-113 112     1       3
-114 113    NA       2
-115 114    NA       1
-116  NA    NA      NA</code></pre>
+<pre><code>[1] 2.133333</code></pre>
 </div>
 </div>
-<p>Plot the values of <span class="math inline">\(l_x\)</span> for males and females on the same graph, for integer ages <span class="math inline">\(x\in[0,112]\)</span>, using different colours.</p>
+</div>
+</section>
+<section id="section-4" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="section-4"><span class="header-section-number">2.2</span> </h2>
+<div class="task">
+<p>Find the estimated probability of the death in the next <span class="math inline">\(2\)</span> years.</p>
 <div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.7820714</code></pre>
+</div>
+</div>
+</div>
+<p><strong>Median survival time</strong></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>km</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call: survfit(formula = sf ~ 1)
+
+       n events median 0.95LCL 0.95UCL
+[1,] 100     80      7       5      10</code></pre>
+</div>
+</div>
+<p>The output includes the <strong>median survival time</strong>, i.e.&nbsp;the time when <span class="math inline">\(\hat{S}(t) = 0.5\)</span>.</p>
+</section>
+</section>
+<section id="kaplanmeier-with-covariates" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Kaplan–Meier with covariates</h1>
+<p>We now compare groups:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>kmdrug <span class="ot">&lt;-</span> <span class="fu">survfit</span>(sf <span class="sc">~</span> df<span class="sc">$</span>drug)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>kmdrug</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call: survfit(formula = sf ~ df$drug)
+
+           n events median 0.95LCL 0.95UCL
+df$drug=0 51     42     11       8      30
+df$drug=1 49     38      5       3       7</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(kmdrug, <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"red"</span>))</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"No drug"</span>, <span class="st">"Drug"</span>),</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"red"</span>), <span class="at">lty =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Lab6_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Lab7_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-</div>
-<p>The <code>c(...)</code> function in R is very flexible. For example, if <code>v</code> is a vector and <code>n</code> is a number, then <code>c(v,n)</code> returns a longer vector:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(v,<span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 1 2 3</code></pre>
-</div>
-</div>
-<p>The same would work if instead of <code>n</code> we would have another vector or even more general structure, or lack of data at all:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(v,<span class="cn">NA</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1]  1  2 NA</code></pre>
-</div>
-</div>
-<p>Note that <code>NA</code> is a special R-object which represents the lack of provided data. As you can see in the dataset <code>elt17.csv</code>, some data is absent.</p>
-<p>Note also that the command <code>datasetName$columnName</code> can be used even if the column with <code>columnName</code> does not yet exist. In this case, such a column would be created.</p>
-</section>
-<section id="section-2" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="section-2"><span class="header-section-number">2.2</span> </h2>
-<div class="task">
-<p>Calculate <span class="math inline">\(d_x=l_x-l_{x+1}\)</span> for all possible <span class="math inline">\(x\)</span> for both males and females. (<em>Hint</em>: use <code>diff</code> function from <a href="./Lab7.html">Lab 7</a>.) Fill the absent values of the vectors <span class="math inline">\(d=(d_x)\)</span> with <code>NA</code>. Assign the results to the dataset columns <code>MaleDx</code> and <code>FemaleDx</code>, respectively (this would create these columns).</p>
-<p>Check head and tail of the modified dataset.</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>  Age  Males Females MaleDx FemaleDx
-1   0 100000  100000    475      381
-2   1  99525   99619     30       24
-3   2  99495   99595     21       17
-4   3  99474   99578     14       14
-5   4  99460   99564     12       10
-6   5  99448   99554     10        9</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>    Age Males Females MaleDx FemaleDx
-111 110     4      14      2        7
-112 111     2       7      1        4
-113 112     1       3     NA        1
-114 113    NA       2     NA        1
-115 114    NA       1     NA       NA
-116  NA    NA      NA     NA       NA</code></pre>
-</div>
-</div>
-</div>
-</section>
-<section id="section-3" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="section-3"><span class="header-section-number">2.3</span> </h2>
-<div class="task">
-<p>Recall that <span class="math inline">\(d_x=l_xq_x\)</span>, where <span class="math inline">\(q_x\)</span> is the probability of death within the next year. Plot the ratio <span class="math inline">\(q_x^{male}/q_x^{female}\)</span> for integer ages <span class="math inline">\(x\in[0,111]\)</span>.</p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="Lab6_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<p>For the next task, you may need to use <code>cumsum</code> function discussed in <a href="./Lab1.html">Lab 1</a>. Recall that, for vector <span class="math inline">\((x_1,\ldots,x_n)\)</span> its cumulative sum would be the vector</p>
-<p><span class="math display">\[
-(x_1, x_1+x_2, x_1+x_2+x_3,\ldots, x_1+\ldots+x_n),
-\]</span> i.e.&nbsp;on each position one has the sum of the “head” of the vector up to that position. What if we want to have the sum of the “tail” of the vector, i.e. <span class="math display">\[
-(x_1+\ldots+x_n, x_2+\ldots+x_n, x_3+\ldots+x_n,\ldots,x_n)
-\]</span> The trick is to reverse the vector (using the <code>rev</code> function), apply cumsum, and then reverse it back:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">20</span>,<span class="dv">30</span>)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rev</span>(<span class="fu">cumsum</span>(<span class="fu">rev</span>(a)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 60 50 30</code></pre>
-</div>
-</div>
-</section>
-<section id="section-4" class="level2" data-number="2.4">
-<h2 data-number="2.4" class="anchored" data-anchor-id="section-4"><span class="header-section-number">2.4</span> </h2>
-<div class="task">
-<p>Recall that the curtate expectation of life <span class="math inline">\(e_x=\mathbb{E}([T_x])\)</span> (where <span class="math inline">\([\cdot]\)</span> denotes the integer part of a real number) can be found from the formulas:</p>
-<p><span class="math display">\[
-e_x=\sum_{j\geq1}{}_j p_{x}, \qquad {}_j p_{x}=\frac{l_{x+j}}{l_x}
-\]</span></p>
-<p>Construct the vectors of <span class="math inline">\(e_x\)</span> for males and females. <strong>Note that</strong> the sum above starts with <span class="math inline">\(j=1\)</span>, not <span class="math inline">\(j=0\)</span>, i.e.&nbsp;the corresponding current value <span class="math inline">\(l_x\)</span> must be subtracted from the corresponding cumulative sum for each index <span class="math inline">\(x\)</span>. Plot, on the same graph, the graphs of <span class="math inline">\(x+e_x\)</span> for males and for females, for integer ages <span class="math inline">\(x\in[0,111]\)</span>. (We proved that <span class="math inline">\(x+\mathring{e}_x\)</span> is increasing in <span class="math inline">\(x\)</span>, where <span class="math inline">\(\mathring{e}_x\)</span> was the complete expectation of life, so let’s check this on the data.)</p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="Lab6_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="fitting-the-data" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Fitting the data</h1>
-<p>As you could see from the task on parametric models, the difference between the Weibull model and the Gompertz/Gompertz–Makeham models can be easily seen through the graph of <span class="math inline">\(\ln\mu_x\)</span>: for the Weibull model</p>
-<p><span class="math display">\[
-\ln \mu_x  =  m \ln x + k, \qquad m=\beta-1, k=\ln(\alpha\beta),
-\]</span></p>
-<p>that has logarithmic growth in <span class="math inline">\(x\)</span>, whereas for the Gompertz–Makeham model, when <span class="math inline">\(a&gt;0\)</span> is small,</p>
-<p><span class="math display">\[
-\ln \mu_x =\ln(a+bc^x)\approx \ln(bc^x)= m x +k, \qquad m=\ln c, k= \ln b,
-\]</span></p>
-<p>that has the linear growth in <span class="math inline">\(x\)</span> (and for <span class="math inline">\(a=0\)</span>, in the Gompertz model, the equality is exact).</p>
-<p>Therefore, to check if the data follows Gompertz-type model, we can check if <span class="math inline">\(\ln \mu_x\)</span> appears approximately linear in <span class="math inline">\(x\)</span> (at least for some interval of <span class="math inline">\(x\)</span>, typically, for larger <span class="math inline">\(x\)</span>). If it is the case, one can determine the parameters <span class="math inline">\(b\)</span> and <span class="math inline">\(c\)</span> using the linear regression.</p>
-<p>To estimate <span class="math inline">\(\mu_x\)</span> from the table, we assume that deaths are distributed uniformly between integer years (UDD assumption). We know that then (see Lecture Notes)</p>
-<p><span class="math display">\[
-E_x^c= l_x-\frac{d_x}{2}.
-\]</span></p>
-<p>Therefore, the central rate of mortality</p>
-<p><span class="math display">\[
-\begin{aligned}
-m_x &amp;= \frac{d_x}{E_x^c}\\&amp;=\frac{d_x}{l_x-\frac{d_x}{2}}\\
-&amp;= \frac{2d_x}{2l_x-d_x}\\
-&amp;= \frac{2l_xq_x}{2l_x-l_xq_x}\\
-&amp;= \frac{2q_x}{2-q_x}.
-\end{aligned}
-\]</span></p>
-<p>Moreover, for small <span class="math inline">\(\mu_x\)</span>, we have that <span class="math inline">\(\mu_x\approx m_x\)</span>, i.e.&nbsp;we have an estimation for <span class="math inline">\(\mu_x\)</span>:</p>
-<p><span class="math display">\[
-\hat{\mu}_x = \frac{2q_x}{2-q_x}.
-\]</span></p>
 <section id="section-5" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="section-5"><span class="header-section-number">3.1</span> </h2>
 <div class="task">
-<p>Assuming UDD and small forces of mortality, estimate the forces of mortality for males and for females. Plot two graphs of <span class="math inline">\(\ln\hat{\mu}_x\)</span> on the same diagram (for integer ages <span class="math inline">\(x\in[0,111]\)</span>).</p>
+<p>Modify the plot so that:</p>
+<ul>
+<li><p>“No drug” is dashed seagreen</p></li>
+<li><p>“Drug” is solid orange</p></li>
+</ul>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Lab6_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Lab7_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 </div>
-<p>As we can see, between ages, approximately, <span class="math inline">\(25\)</span> and <span class="math inline">\(95\)</span> one has pretty good linear behaviour.</p>
-</section>
-<section id="section-6" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="section-6"><span class="header-section-number">3.2</span> </h2>
-<div class="task">
-<p>Build the linear model for <span class="math inline">\(\ln\hat{\mu}_x = mx +k\)</span> based on values of integer ages <span class="math inline">\(x\in[25,95]\)</span> (think about the corresponding indexes); see <a href="./Lab4.html">Lab 4</a> for linear models: you can create a temporary data frame for the linear model, if needed. Find, from the linear model, the estimates <span class="math inline">\(\hat{m}\)</span>, <span class="math inline">\(\hat{k}\)</span> for <span class="math inline">\(m=\ln c\)</span> and <span class="math inline">\(k=\ln b\)</span>, and hence find estimates <span class="math inline">\(\hat{b}\)</span> and <span class="math inline">\(\hat{c}\)</span> for <span class="math inline">\(b\)</span> and <span class="math inline">\(c\)</span> (separately for males and females).</p>
-<p>Check the answer.</p>
+<p><strong>Embedded data.</strong> The dataframe <code>lung</code> is embedded into <code>survival</code> package. You can get information about this data frame by typing in the console <code>?lung</code>.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unname</span>(<span class="fu">c</span>(b_male, c_male, b_female, c_female))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>kmlung <span class="ot">&lt;-</span> <span class="fu">survfit</span>(<span class="fu">Surv</span>(time, status <span class="sc">==</span> <span class="dv">2</span>) <span class="sc">~</span> sex, <span class="at">data =</span> lung)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>kmlung</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 3.693641e-05 1.096556e+00 1.667903e-05 1.103153e+00</code></pre>
+<pre><code>Call: survfit(formula = Surv(time, status == 2) ~ sex, data = lung)
+
+        n events median 0.95LCL 0.95UCL
+sex=1 138    112    270     212     310
+sex=2  90     53    426     348     550</code></pre>
 </div>
 </div>
-</div>
-</section>
-<section id="section-7" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="section-7"><span class="header-section-number">3.3</span> </h2>
-<div class="task">
-<p>Plot two graphs in one column, one for males, another for females. On each graph, plot <span class="math inline">\(\mu_x\)</span> for <span class="math inline">\(x\in[0,111]\)</span>, and also plot <span class="math inline">\(\hat{b}\cdot \hat{c}^x\)</span> for <span class="math inline">\(x\in[25,95]\)</span> in another colour.</p>
+<p>Here we explicitly define the event as <code>status == 2</code> (death), which is clearer.</p>
 <div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(kmlung, <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"red"</span>))</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Male"</span>, <span class="st">"Female"</span>),</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"red"</span>), <span class="at">lty =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Lab6_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Lab7_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
+<p>Surely, there are numerous R packages which can make plots more nice. For example, one can install and load <code>survminer</code> package:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survminer)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsurvplot</span>(kmlung, <span class="at">conf.int =</span> <span class="fl">0.95</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Lab7_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="cox-regression-model" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Cox regression model</h1>
+<p>The Cox model assumes:</p>
+<p><span class="math display">\[
+\lambda(t, z) = \lambda_0(t) e^{\beta z}.
+\]</span></p>
+<p>It assumes <strong>proportional hazards</strong>, meaning hazard ratios do not depend on time.</p>
+<p><strong>One covariate case</strong></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(time, status <span class="sc">==</span> <span class="dv">2</span>) <span class="sc">~</span> sex, <span class="at">data =</span> lung)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:
+coxph(formula = Surv(time, status == 2) ~ sex, data = lung)
+
+  n= 228, number of events= 165 
+
+       coef exp(coef) se(coef)      z Pr(&gt;|z|)   
+sex -0.5310    0.5880   0.1672 -3.176  0.00149 **
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+    exp(coef) exp(-coef) lower .95 upper .95
+sex     0.588      1.701    0.4237     0.816
+
+Concordance= 0.579  (se = 0.021 )
+Likelihood ratio test= 10.63  on 1 df,   p=0.001
+Wald test            = 10.09  on 1 df,   p=0.001
+Score (logrank) test = 10.33  on 1 df,   p=0.001</code></pre>
+</div>
+</div>
+<ul>
+<li><p><code>coef</code>: estimate of <span class="math inline">\(\beta\)</span></p></li>
+<li><p><code>exp(coef)</code>: <strong>hazard ratio</strong></p></li>
+</ul>
+<p>Interpretation:</p>
+<p>If <code>exp(coef) = 0.588</code>, then females have about <strong>0.588 times the hazard</strong> of males (i.e.&nbsp;about <strong>41% lower hazard</strong>).</p>
+<p><strong>Multiple covariates case</strong></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>fit2 <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(time, status <span class="sc">==</span> <span class="dv">2</span>) <span class="sc">~</span> sex <span class="sc">+</span> age, <span class="at">data =</span> lung)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:
+coxph(formula = Surv(time, status == 2) ~ sex + age, data = lung)
+
+  n= 228, number of events= 165 
+
+         coef exp(coef)  se(coef)      z Pr(&gt;|z|)   
+sex -0.513219  0.598566  0.167458 -3.065  0.00218 **
+age  0.017045  1.017191  0.009223  1.848  0.06459 . 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+    exp(coef) exp(-coef) lower .95 upper .95
+sex    0.5986     1.6707    0.4311    0.8311
+age    1.0172     0.9831    0.9990    1.0357
+
+Concordance= 0.603  (se = 0.025 )
+Likelihood ratio test= 14.12  on 2 df,   p=9e-04
+Wald test            = 13.47  on 2 df,   p=0.001
+Score (logrank) test = 13.72  on 2 df,   p=0.001</code></pre>
+</div>
+</div>
+<p>For age:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">coef</span>(fit2)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">exp</span>(b[<span class="st">"age"</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     age 
+1.017191 </code></pre>
+</div>
+</div>
+<p>This gives the multiplicative increase per year.</p>
+<section id="section-6" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="section-6"><span class="header-section-number">4.1</span> </h2>
+<div class="task">
+<p>Compute the hazard ratio for:</p>
+<ul>
+<li><p>a male aged 70</p></li>
+<li><p>a female aged 80</p></li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>     sex 
+1.408838 </code></pre>
+</div>
+</div>
+</div>
+<p><strong>Likelihood ratio test</strong></p>
+<p>A natural question is: when we used both age and gender covariates, we get different answers comparing with using eitehr of covariates alone. <strong>Does adding new covariates improve the model?</strong> More formally, let <span class="math inline">\(L_p\)</span> be the likelihood function with <span class="math inline">\(p\in\mathbb{N}\)</span> covariates and let <span class="math inline">\(L_{p+q}\)</span> be the likelihood function with <span class="math inline">\(p+q\in\mathbb{N}\)</span> covariates. How to estimate if <span class="math inline">\(q\)</span> additional covariates were significant to add?</p>
+<p>For this, one can use the statistical test. The test statistic is</p>
+<p><span class="math display">\[
+\lambda:= 2(l_{p+q}-l_p)=2(\ln L_{p+q}-\ln L_{p})=2\ln\frac{L_{p+q}}{L_p}&gt;0,
+\]</span></p>
+<p>where all functions are calculated at the points of their maximums. Note <span class="math inline">\(L_{p+q}&gt;L_p\)</span> because <span class="math inline">\(L_{p+q}\)</span> is calculated at maximum over all possible <span class="math inline">\(p+q\)</span> values, while <span class="math inline">\(L_p\)</span> may be understood as the maximum of the function of <span class="math inline">\(p+q\)</span> variables over the first <span class="math inline">\(p\)</span> variables with fixed last <span class="math inline">\(q\)</span> variables equal to <span class="math inline">\(0\)</span>:</p>
+<p><span class="math display">\[
+\beta_1 \cdot z_1+ \ldots +\beta_p \cdot z_p + 0\cdot z_{p+1} + \ldots + 0\cdot z_{p+q} =\beta_1 \cdot z_1+ \ldots +\beta_p \cdot z_p.
+\]</span></p>
+<p>The <span class="math inline">\(H_0\)</span> hypotehsis is then that <span class="math inline">\(\beta_{p+1}+\ldots+\beta_{p+q}=0\)</span>. The test is <span class="math inline">\(\chi^2\)</span> test with <span class="math inline">\(q\)</span> degrees of freedom:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>fit1 <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(time, status <span class="sc">==</span> <span class="dv">2</span>) <span class="sc">~</span> sex, <span class="at">data =</span> lung)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>fit2 <span class="ot">&lt;-</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(time, status <span class="sc">==</span> <span class="dv">2</span>) <span class="sc">~</span> sex <span class="sc">+</span> age, <span class="at">data =</span> lung)</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(fit1, fit2, <span class="at">test =</span> <span class="st">"LRT"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Deviance Table
+ Cox model: response is  Surv(time, status == 2)
+ Model 1: ~ sex
+ Model 2: ~ sex + age
+   loglik  Chisq Df Pr(&gt;|Chi|)  
+1 -744.59                       
+2 -742.85 3.4895  1    0.06176 .
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<p>The number <span class="math inline">\(0.06176\)</span> is the <span class="math inline">\(p\)</span>-value. Hence, if we need the (standard) <span class="math inline">\(5\)</span>% significance level, we do not regect the null hypothesis (as <span class="math inline">\(0.06176&gt;0.05\)</span>), so there is some evidence that age affects the hazard (<strong>after accounting for sex factor</strong>), but it is not strong enough at the <span class="math inline">\(5\)</span>% level.</p>
+</section>
+<section id="section-7" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="section-7"><span class="header-section-number">4.2</span> </h2>
+<div class="task">
+<p>Check if sex affects the hazard here, at the <span class="math inline">\(5\)</span>% level.</p>
+<p>Check you answer: the <span class="math inline">\(p\)</span>-value is <span class="math inline">\(0.001669&lt;0.05\)</span>, hence, we reject the null hypothesis that sex does not affect the hazard, i.e.&nbsp;after accounting for age, sex does significantly improve the model.</p>
 </div>
 
 
@@ -1015,14 +1163,11 @@ m_x &amp;= \frac{d_x}{E_x^c}\\&amp;=\frac{d_x}{l_x-\frac{d_x}{2}}\\
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./Lab5.html" class="pagination-link" aria-label="Lab 5 - Problems">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Lab 5 - Problems</span>
+      <a href="./Lab6.html" class="pagination-link" aria-label="Lab 6 - Problems">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Lab 6 - Problems</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./Lab7.html" class="pagination-link" aria-label="Lab 7 - Problems">
-        <span class="nav-page-text">Lab 7 - Problems</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->
