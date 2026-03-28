@@ -10,949 +10,201 @@
     ]
   },
   {
-    "objectID": "Lab6.html",
-    "href": "Lab6.html",
+    "objectID": "Lab7-Solutions.html",
+    "href": "Lab7-Solutions.html",
+    "title": "Lab 7: Kaplan–Meier estimate of the survival functions and Cox regression model",
+    "section": "",
+    "text": "\\[\n  \\renewcommand{\\P}{\\mathbb{P}}\n  \\newcommand{\\E}{\\mathbb{E}}\n\\]",
+    "crumbs": [
+      "Labs - Solutions",
+      "Lab 7 - Solutions"
+    ]
+  },
+  {
+    "objectID": "Lab7-Solutions.html#section",
+    "href": "Lab7-Solutions.html#section",
+    "title": "Lab 7: Kaplan–Meier estimate of the survival functions and Cox regression model",
+    "section": "1.1 ",
+    "text": "1.1 \n\nDownload hm.csv, store it in a variable df, and display the first rows of the dataset.\n\n\nCode\ndf &lt;- read.csv(\"hm.csv\")\nhead(df)\n\n\n  ID time age drug status    entdate    enddate\n1  1    5  46    0      1 15/05/2015 14/10/2015\n2  2    6  35    1      0 19/09/2014 20/03/2015\n3  3    8  30    1      1 21/04/2016 20/12/2016\n4  4    3  30    1      1 03/01/2016 04/04/2016\n5  5   22  36    0      1 18/09/2014 19/07/2016\n6  6    1  32    1      0 18/03/2016 17/04/2016\n\n\n\nThis data frame contains information about patients participating in a clinical trial.\n\ntime: duration of follow-up (in months)\nage: age of the participant\ndrug: treatment indicator (0 = no drug, 1 = drug)\nstatus: event indicator:\n\n1 = event of interest observed\n0 = censored observation\n\n\nIn this dataset, the event of interest is death related to the condition under study.\nIf a patient dies from an unrelated cause, or leaves the study early, the observation is censored: we only know that the patient survived at least up to that time.",
+    "crumbs": [
+      "Labs - Solutions",
+      "Lab 7 - Solutions"
+    ]
+  },
+  {
+    "objectID": "Lab7-Solutions.html#section-1",
+    "href": "Lab7-Solutions.html#section-1",
+    "title": "Lab 7: Kaplan–Meier estimate of the survival functions and Cox regression model",
+    "section": "1.2 ",
+    "text": "1.2 \n\nFind the mean age of the participants.\n\n\nCode\nmean(df$age)\n\n\n[1] 36.07",
+    "crumbs": [
+      "Labs - Solutions",
+      "Lab 7 - Solutions"
+    ]
+  },
+  {
+    "objectID": "Lab7-Solutions.html#section-2",
+    "href": "Lab7-Solutions.html#section-2",
+    "title": "Lab 7: Kaplan–Meier estimate of the survival functions and Cox regression model",
+    "section": "1.3 ",
+    "text": "1.3 \n\nFind the number of observations (rows) in the dataset.\n\n\nCode\nlength(df$age) \n\n\n[1] 100\n\n\nCode\n#or, better, \n# nrow(df)",
+    "crumbs": [
+      "Labs - Solutions",
+      "Lab 7 - Solutions"
+    ]
+  },
+  {
+    "objectID": "Lab7-Solutions.html#section-3",
+    "href": "Lab7-Solutions.html#section-3",
+    "title": "Lab 7: Kaplan–Meier estimate of the survival functions and Cox regression model",
+    "section": "2.1 ",
+    "text": "2.1 \n\nCompute the ratio \\[\n\\frac{\\hat{S}(17)}{\\hat{S}(51)}.\n\\]\n\n\nCode\ns &lt;- summary(km, times = c(17, 51))$surv\ns[1] / s[2]\n\n\n[1] 2.133333",
+    "crumbs": [
+      "Labs - Solutions",
+      "Lab 7 - Solutions"
+    ]
+  },
+  {
+    "objectID": "Lab7-Solutions.html#section-4",
+    "href": "Lab7-Solutions.html#section-4",
+    "title": "Lab 7: Kaplan–Meier estimate of the survival functions and Cox regression model",
+    "section": "2.2 ",
+    "text": "2.2 \n\nFind the estimated probability of the death in the next \\(2\\) years.\n\n\nCode\n# 2 years = 24 months\n# Prob of death = 1 - survival probability\n1- summary(km, times = 24)$surv\n\n\n[1] 0.7820714\n\n\n\nMedian survival time\n\nkm\n\nCall: survfit(formula = sf ~ 1)\n\n       n events median 0.95LCL 0.95UCL\n[1,] 100     80      7       5      10\n\n\nThe output includes the median survival time, i.e. the time when \\(\\hat{S}(t) = 0.5\\).",
+    "crumbs": [
+      "Labs - Solutions",
+      "Lab 7 - Solutions"
+    ]
+  },
+  {
+    "objectID": "Lab7-Solutions.html#section-5",
+    "href": "Lab7-Solutions.html#section-5",
+    "title": "Lab 7: Kaplan–Meier estimate of the survival functions and Cox regression model",
+    "section": "3.1 ",
+    "text": "3.1 \n\nModify the plot so that:\n\n“No drug” is dashed seagreen\n“Drug” is solid orange\n\n\n\nCode\nplot(kmdrug, col = c(\"seagreen\", \"orange\"), lty = c(2,1))\nlegend(\"topright\", legend = c(\"No drug\", \"Drug\"),\n       col = c(\"seagreen\", \"orange\"), lty = c(2,1))\n\n\n\n\n\n\n\n\n\n\nEmbedded data. The dataframe lung is embedded into survival package. You can get information about this data frame by typing in the console ?lung.\n\nkmlung &lt;- survfit(Surv(time, status == 2) ~ sex, data = lung)\nkmlung\n\nCall: survfit(formula = Surv(time, status == 2) ~ sex, data = lung)\n\n        n events median 0.95LCL 0.95UCL\nsex=1 138    112    270     212     310\nsex=2  90     53    426     348     550\n\n\nHere we explicitly define the event as status == 2 (death), which is clearer.\n\nplot(kmlung, col = c(\"blue\", \"red\"))\nlegend(\"topright\", legend = c(\"Male\", \"Female\"),\n       col = c(\"blue\", \"red\"), lty = c(1,1))\n\n\n\n\n\n\n\n\nSurely, there are numerous R packages which can make plots more nice. For example, one can install and load survminer package:\n\nlibrary(survminer)\nggsurvplot(kmlung, conf.int = 0.95)",
+    "crumbs": [
+      "Labs - Solutions",
+      "Lab 7 - Solutions"
+    ]
+  },
+  {
+    "objectID": "Lab7-Solutions.html#section-6",
+    "href": "Lab7-Solutions.html#section-6",
+    "title": "Lab 7: Kaplan–Meier estimate of the survival functions and Cox regression model",
+    "section": "4.1 ",
+    "text": "4.1 \n\nCompute the hazard ratio for:\n\na male aged 70\na female aged 80\n\n\n\nCode\nexp(b[\"sex\"]*(1-2) + b[\"age\"]*(70-80))\n\n\n     sex \n1.408838 \n\n\n\nLikelihood ratio test\nA natural question is: when we used both age and gender covariates, we get different answers comparing with using eitehr of covariates alone. Does adding new covariates improve the model? More formally, let \\(L_p\\) be the likelihood function with \\(p\\in\\mathbb{N}\\) covariates and let \\(L_{p+q}\\) be the likelihood function with \\(p+q\\in\\mathbb{N}\\) covariates. How to estimate if \\(q\\) additional covariates were significant to add?\nFor this, one can use the statistical test. The test statistic is\n\\[\n\\lambda:= 2(l_{p+q}-l_p)=2(\\ln L_{p+q}-\\ln L_{p})=2\\ln\\frac{L_{p+q}}{L_p}&gt;0,\n\\]\nwhere all functions are calculated at the points of their maximums. Note \\(L_{p+q}&gt;L_p\\) because \\(L_{p+q}\\) is calculated at maximum over all possible \\(p+q\\) values, while \\(L_p\\) may be understood as the maximum of the function of \\(p+q\\) variables over the first \\(p\\) variables with fixed last \\(q\\) variables equal to \\(0\\):\n\\[\n\\beta_1 \\cdot z_1+ \\ldots +\\beta_p \\cdot z_p + 0\\cdot z_{p+1} + \\ldots + 0\\cdot z_{p+q} =\\beta_1 \\cdot z_1+ \\ldots +\\beta_p \\cdot z_p.\n\\]\nThe \\(H_0\\) hypotehsis is then that \\(\\beta_{p+1}+\\ldots+\\beta_{p+q}=0\\). The test is \\(\\chi^2\\) test with \\(q\\) degrees of freedom:\n\nfit1 &lt;- coxph(Surv(time, status == 2) ~ sex, data = lung)\nfit2 &lt;- coxph(Surv(time, status == 2) ~ sex + age, data = lung)\n\nanova(fit1, fit2, test = \"LRT\")\n\nAnalysis of Deviance Table\n Cox model: response is  Surv(time, status == 2)\n Model 1: ~ sex\n Model 2: ~ sex + age\n   loglik  Chisq Df Pr(&gt;|Chi|)  \n1 -744.59                       \n2 -742.85 3.4895  1    0.06176 .\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\nThe number \\(0.06176\\) is the \\(p\\)-value. Hence, if we need the (standard) \\(5\\)% significance level, we do not regect the null hypothesis (as \\(0.06176&gt;0.05\\)), so there is some evidence that age affects the hazard (after accounting for sex factor), but it is not strong enough at the \\(5\\)% level.",
+    "crumbs": [
+      "Labs - Solutions",
+      "Lab 7 - Solutions"
+    ]
+  },
+  {
+    "objectID": "Lab7-Solutions.html#section-7",
+    "href": "Lab7-Solutions.html#section-7",
+    "title": "Lab 7: Kaplan–Meier estimate of the survival functions and Cox regression model",
+    "section": "4.2 ",
+    "text": "4.2 \n\nCheck if sex affects the hazard here, at the \\(5\\)% level.\n\n\nCode\nfit3 &lt;- coxph(Surv(time, status == 2) ~ age, data = lung)\n\nanova(fit3, fit2, test = \"LRT\")\n\n\nCheck you answer: the \\(p\\)-value is \\(0.001669&lt;0.05\\), hence, we reject the null hypothesis that sex does not affect the hazard, i.e. after accounting for age, sex does significantly improve the model.",
+    "crumbs": [
+      "Labs - Solutions",
+      "Lab 7 - Solutions"
+    ]
+  },
+  {
+    "objectID": "Lab6-Solutions.html",
+    "href": "Lab6-Solutions.html",
     "title": "Lab 6: Survival Models, Life Tables, and Exposure to Risk",
     "section": "",
     "text": "\\[\n  \\renewcommand{\\P}{\\mathbb{P}}\n  \\newcommand{\\E}{\\mathbb{E}}\n\\]",
     "crumbs": [
-      "Labs - Problems",
-      "Lab 6 - Problems"
+      "Labs - Solutions",
+      "Lab 6 - Solutions"
     ]
   },
   {
-    "objectID": "Lab6.html#section",
-    "href": "Lab6.html#section",
+    "objectID": "Lab6-Solutions.html#section",
+    "href": "Lab6-Solutions.html#section",
     "title": "Lab 6: Survival Models, Life Tables, and Exposure to Risk",
     "section": "1.1 ",
-    "text": "1.1 \n\nLet \\(\\alpha=5\\cdot10^{-6}\\), \\(\\beta=4\\), \\(a=0.0005\\), \\(b=0.00003\\), \\(c=1.09\\).\nProduce three plots in one column. Include the legends to each plot.\nThe first plot should include the graphs for the forces of mortality \\(\\mu_x\\) for \\(x\\in[0,100]\\) for two models: Weibull and Gompertz–Makeham.\nThe second plot should include the graphs for \\(\\ln \\mu_x\\) for \\(x\\in[0,100]\\) for these two models.\nThe third plot should include the graphs for \\(S(t)=S_0(t)\\) for \\(t\\in[0,100]\\) for these two models.\nNote that, in legend function, the parameter bty = \"n\" removes the frame around the legend as on the plots below.",
+    "text": "1.1 \n\nLet \\(\\alpha=5\\cdot10^{-6}\\), \\(\\beta=4\\), \\(a=0.0005\\), \\(b=0.00003\\), \\(c=1.09\\).\nProduce three plots in one column. Include the legends to each plot.\nThe first plot should include the graphs for the forces of mortality \\(\\mu_x\\) for \\(x\\in[0,100]\\) for two models: Weibull and Gompertz–Makeham.\nThe second plot should include the graphs for \\(\\ln \\mu_x\\) for \\(x\\in[0,100]\\) for these two models.\nThe third plot should include the graphs for \\(S(t)=S_0(t)\\) for \\(t\\in[0,100]\\) for these two models.\nNote that, in legend function, the parameter bty = \"n\" removes the frame around the legend as on the plots below.\n\n\nCode\nalpha &lt;- 5e-6\nbeta  &lt;- 4\n\na &lt;- 0.0005\nb &lt;- 0.00003\nc &lt;- 1.09\n\nmu_weibull &lt;- function(x) {\n  alpha * beta * x^(beta - 1)\n}\n\nmu_makeham &lt;- function(x) {\n  a + b * c^x\n}\n\nS_weibull &lt;- function(t) {\n  exp(-alpha * t^beta)\n}\n\nS_makeham &lt;- function(t) {\n  exp(-a * t - b * (c^t - 1) / log(c))\n}\n\nx &lt;- seq(0, 100, 0.1)\nt &lt;- seq(0, 100, 0.1)\n\npar(mfrow = c(3, 1))\n\nplot(x, mu_weibull(x), type = \"l\", col = 'red', lwd = 2,\n     xlab = \"Age x\", ylab = expression(mu[x]),\n     main = expression(\"Forces of mortality \" * mu[x]))\nlines(x, mu_makeham(x), col = 'blue', lwd = 2, lty = 1)\nlegend(\"topleft\",\n       legend = c(\"Weibull\", \"Gompertz-Makeham\"),\n       lwd = 2, lty = c(1, 1), col=c(\"red\",\"blue\"), bty = \"n\")\n\nplot(x, log(mu_weibull(x)), type = \"l\", col = 'red', lwd = 2,\n     xlab = \"Age x\", ylab = expression(log(mu[x])),\n     main = expression(\"Log-forces of mortality \" * log(mu[x])))\nlines(x, log(mu_makeham(x)), col = 'blue', lwd = 2, lty = 1)\nlegend(\"topleft\",\n       legend = c(\"Weibull\", \"Gompertz-Makeham\"),\n       lwd = 2, lty = c(1, 1), col=c(\"red\",\"blue\"), bty = \"n\")\n\nplot(t, S_weibull(t), type = \"l\", lwd = 2,col = 'red', \n     xlab = \"Time t\", ylab = expression(S(t)),\n     main = expression(\"Survival functions \" * S(t) == S[0](t)),\n     ylim = c(0, 1))\nlines(t, S_makeham(t), col = 'blue', lwd = 2, lty = 1)\nlegend(\"topleft\",\n       legend = c(\"Weibull\", \"Gompertz-Makeham\"),\n       lwd = 2, lty = c(1, 1), col=c(\"red\",\"blue\"), bty = \"n\")\n\n\n\n\n\n\n\n\n\nCode\npar(mfrow = c(1, 1))",
     "crumbs": [
-      "Labs - Problems",
-      "Lab 6 - Problems"
+      "Labs - Solutions",
+      "Lab 6 - Solutions"
     ]
   },
   {
-    "objectID": "Lab6.html#section-1",
-    "href": "Lab6.html#section-1",
+    "objectID": "Lab6-Solutions.html#section-1",
+    "href": "Lab6-Solutions.html#section-1",
     "title": "Lab 6: Survival Models, Life Tables, and Exposure to Risk",
     "section": "2.1 ",
-    "text": "2.1 \n\nCheck the first and last rows of the dataset. For the last rows, use the tail function.\n\n\n  Age  Males Females\n1   0 100000  100000\n2   1  99525   99619\n3   2  99495   99595\n4   3  99474   99578\n5   4  99460   99564\n6   5  99448   99554\n\n\n    Age Males Females\n111 110     4      14\n112 111     2       7\n113 112     1       3\n114 113    NA       2\n115 114    NA       1\n116  NA    NA      NA\n\n\nPlot the values of \\(l_x\\) for males and females on the same graph, for integer ages \\(x\\in[0,112]\\), using different colours.\n\n\n\n\n\n\n\n\n\n\nThe c(...) function in R is very flexible. For example, if v is a vector and n is a number, then c(v,n) returns a longer vector:\n\nv &lt;- c(1,2)\nc(v,3)\n\n[1] 1 2 3\n\n\nThe same would work if instead of n we would have another vector or even more general structure, or lack of data at all:\n\nc(v,NA)\n\n[1]  1  2 NA\n\n\nNote that NA is a special R-object which represents the lack of provided data. As you can see in the dataset elt17.csv, some data is absent.\nNote also that the command datasetName$columnName can be used even if the column with columnName does not yet exist. In this case, such a column would be created.",
+    "text": "2.1 \n\nCheck the first and last rows of the dataset. For the last rows, use the tail function.\n\n\nCode\nelt &lt;- read.csv(\"elt17.csv\")\nhead(elt)\n\n\n  Age  Males Females\n1   0 100000  100000\n2   1  99525   99619\n3   2  99495   99595\n4   3  99474   99578\n5   4  99460   99564\n6   5  99448   99554\n\n\nCode\ntail(elt)\n\n\n    Age Males Females\n111 110     4      14\n112 111     2       7\n113 112     1       3\n114 113    NA       2\n115 114    NA       1\n116  NA    NA      NA\n\n\nPlot the values of \\(l_x\\) for males and females on the same graph, for integer ages \\(x\\in[0,112]\\), using different colours.\n\n\nCode\nlx_males &lt;- elt$Males\nlx_females &lt;- elt$Females\nage &lt;- elt$Age\nplot(age[1:113], lx_males[1:113], type=\"l\", col=\"blue\",xlab=\"Age\",ylab=\"Lives\")\nlines(age[1:113], lx_females[1:113], type=\"l\", col=\"red\")\nlegend(\"bottomleft\",\n       legend = c(\"Males\", \"Females\"),\n       lwd = 2, lty = c(1, 1), col=c(\"blue\",\"red\"), bty = \"n\")\n\n\n\n\n\n\n\n\n\n\nThe c(...) function in R is very flexible. For example, if v is a vector and n is a number, then c(v,n) returns a longer vector:\n\nv &lt;- c(1,2)\nc(v,3)\n\n[1] 1 2 3\n\n\nThe same would work if instead of n we would have another vector or even more general structure, or lack of data at all:\n\nc(v,NA)\n\n[1]  1  2 NA\n\n\nNote that NA is a special R-object which represents the lack of provided data. As you can see in the dataset elt17.csv, some data is absent.\nNote also that the command datasetName$columnName can be used even if the column with columnName does not yet exist. In this case, such a column would be created.",
     "crumbs": [
-      "Labs - Problems",
-      "Lab 6 - Problems"
+      "Labs - Solutions",
+      "Lab 6 - Solutions"
     ]
   },
   {
-    "objectID": "Lab6.html#section-2",
-    "href": "Lab6.html#section-2",
+    "objectID": "Lab6-Solutions.html#section-2",
+    "href": "Lab6-Solutions.html#section-2",
     "title": "Lab 6: Survival Models, Life Tables, and Exposure to Risk",
     "section": "2.2 ",
-    "text": "2.2 \n\nCalculate \\(d_x=l_x-l_{x+1}\\) for all possible \\(x\\) for both males and females. (Hint: use diff function from Lab 7.) Fill the absent values of the vectors \\(d=(d_x)\\) with NA. Assign the results to the dataset columns MaleDx and FemaleDx, respectively (this would create these columns).\nCheck head and tail of the modified dataset.\n\n\n  Age  Males Females MaleDx FemaleDx\n1   0 100000  100000    475      381\n2   1  99525   99619     30       24\n3   2  99495   99595     21       17\n4   3  99474   99578     14       14\n5   4  99460   99564     12       10\n6   5  99448   99554     10        9\n\n\n    Age Males Females MaleDx FemaleDx\n111 110     4      14      2        7\n112 111     2       7      1        4\n113 112     1       3     NA        1\n114 113    NA       2     NA        1\n115 114    NA       1     NA       NA\n116  NA    NA      NA     NA       NA",
+    "text": "2.2 \n\nCalculate \\(d_x=l_x-l_{x+1}\\) for all possible \\(x\\) for both males and females. (Hint: use diff function from Lab 7.) Fill the absent values of the vectors \\(d=(d_x)\\) with NA. Assign the results to the dataset columns MaleDx and FemaleDx, respectively (this would create these columns).\nCheck head and tail of the modified dataset.\n\n\nCode\ndx_males &lt;- c(-diff(lx_males), NA)\nelt$MaleDx &lt;- dx_males\ndx_females &lt;- c(-diff(lx_females), NA)\nelt$FemaleDx &lt;- dx_females\nhead(elt)\n\n\n  Age  Males Females MaleDx FemaleDx\n1   0 100000  100000    475      381\n2   1  99525   99619     30       24\n3   2  99495   99595     21       17\n4   3  99474   99578     14       14\n5   4  99460   99564     12       10\n6   5  99448   99554     10        9\n\n\nCode\ntail(elt)\n\n\n    Age Males Females MaleDx FemaleDx\n111 110     4      14      2        7\n112 111     2       7      1        4\n113 112     1       3     NA        1\n114 113    NA       2     NA        1\n115 114    NA       1     NA       NA\n116  NA    NA      NA     NA       NA",
     "crumbs": [
-      "Labs - Problems",
-      "Lab 6 - Problems"
+      "Labs - Solutions",
+      "Lab 6 - Solutions"
     ]
   },
   {
-    "objectID": "Lab6.html#section-3",
-    "href": "Lab6.html#section-3",
+    "objectID": "Lab6-Solutions.html#section-3",
+    "href": "Lab6-Solutions.html#section-3",
     "title": "Lab 6: Survival Models, Life Tables, and Exposure to Risk",
     "section": "2.3 ",
-    "text": "2.3 \n\nRecall that \\(d_x=l_xq_x\\), where \\(q_x\\) is the probability of death within the next year. Plot the ratio \\(q_x^{male}/q_x^{female}\\) for integer ages \\(x\\in[0,111]\\).\n\n\n\n\n\n\n\n\n\n\nFor the next task, you may need to use cumsum function discussed in Lab 1. Recall that, for vector \\((x_1,\\ldots,x_n)\\) its cumulative sum would be the vector\n\\[\n(x_1, x_1+x_2, x_1+x_2+x_3,\\ldots, x_1+\\ldots+x_n),\n\\] i.e. on each position one has the sum of the “head” of the vector up to that position. What if we want to have the sum of the “tail” of the vector, i.e. \\[\n(x_1+\\ldots+x_n, x_2+\\ldots+x_n, x_3+\\ldots+x_n,\\ldots,x_n)\n\\] The trick is to reverse the vector (using the rev function), apply cumsum, and then reverse it back:\n\na &lt;- c(10,20,30)\nrev(cumsum(rev(a)))\n\n[1] 60 50 30",
+    "text": "2.3 \n\nRecall that \\(d_x=l_xq_x\\), where \\(q_x\\) is the probability of death within the next year. Plot the ratio \\(q_x^{male}/q_x^{female}\\) for integer ages \\(x\\in[0,111]\\).\n\n\nCode\nqx_males &lt;- dx_males/lx_males\nqx_females &lt;- dx_females/lx_females\nplot(age[1:112],(qx_males/qx_females)[1:112], type=\"l\",xlab=\"Age\", ylab=\"Ratio of q_x, males/females\")\n\n\n\n\n\n\n\n\n\n\nFor the next task, you may need to use cumsum function discussed in Lab 1. Recall that, for vector \\((x_1,\\ldots,x_n)\\) its cumulative sum would be the vector\n\\[\n(x_1, x_1+x_2, x_1+x_2+x_3,\\ldots, x_1+\\ldots+x_n),\n\\] i.e. on each position one has the sum of the “head” of the vector up to that position. What if we want to have the sum of the “tail” of the vector, i.e. \\[\n(x_1+\\ldots+x_n, x_2+\\ldots+x_n, x_3+\\ldots+x_n,\\ldots,x_n)\n\\] The trick is to reverse the vector (using the rev function), apply cumsum, and then reverse it back:\n\na &lt;- c(10,20,30)\nrev(cumsum(rev(a)))\n\n[1] 60 50 30",
     "crumbs": [
-      "Labs - Problems",
-      "Lab 6 - Problems"
+      "Labs - Solutions",
+      "Lab 6 - Solutions"
     ]
   },
   {
-    "objectID": "Lab6.html#section-4",
-    "href": "Lab6.html#section-4",
+    "objectID": "Lab6-Solutions.html#section-4",
+    "href": "Lab6-Solutions.html#section-4",
     "title": "Lab 6: Survival Models, Life Tables, and Exposure to Risk",
     "section": "2.4 ",
-    "text": "2.4 \n\nRecall that the curtate expectation of life \\(e_x=\\mathbb{E}([T_x])\\) (where \\([\\cdot]\\) denotes the integer part of a real number) can be found from the formulas:\n\\[\ne_x=\\sum_{j\\geq1}{}_j p_{x}, \\qquad {}_j p_{x}=\\frac{l_{x+j}}{l_x}\n\\]\nConstruct the vectors of \\(e_x\\) for males and females. Note that the sum above starts with \\(j=1\\), not \\(j=0\\), i.e. the corresponding current value \\(l_x\\) must be subtracted from the corresponding cumulative sum for each index \\(x\\). Plot, on the same graph, the graphs of \\(x+e_x\\) for males and for females, for integer ages \\(x\\in[0,111]\\). (We proved that \\(x+\\mathring{e}_x\\) is increasing in \\(x\\), where \\(\\mathring{e}_x\\) was the complete expectation of life, so let’s check this on the data.)",
+    "text": "2.4 \n\nRecall that the curtate expectation of life \\(e_x=\\mathbb{E}([T_x])\\) (where \\([\\cdot]\\) denotes the integer part of a real number) can be found from the formulas:\n\\[\ne_x=\\sum_{j\\geq1}{}_j p_{x}, \\qquad {}_j p_{x}=\\frac{l_{x+j}}{l_x}\n\\]\nConstruct the vectors of \\(e_x\\) for males and females. Note that the sum above starts with \\(j=1\\), not \\(j=0\\), i.e. the corresponding current value \\(l_x\\) must be subtracted from the corresponding cumulative sum for each index \\(x\\). Plot, on the same graph, the graphs of \\(x+e_x\\) for males and for females, for integer ages \\(x\\in[0,111]\\). (We proved that \\(x+\\mathring{e}_x\\) is increasing in \\(x\\), where \\(\\mathring{e}_x\\) was the complete expectation of life, so let’s check this on the data.)\n\n\nCode\nlx_males &lt;- lx_males[1:112]\nlx_females &lt;- lx_females[1:112]\nage &lt;- age[1:112]\n\nex_males &lt;- (rev(cumsum(rev(lx_males)))-lx_males)/lx_males\n\nex_females &lt;- (rev(cumsum(rev(lx_females)))-lx_females)/lx_females\n\nplot(age, age + ex_males, type='l', xlab=\"Age x\",ylab=\"Total expected lifetime after age x\",col='blue')\nlines(age, age + ex_females, type='l', col='red')\n\nlegend(\"topleft\",\n       legend = c(\"Males\", \"Females\"),\n       lwd = 2, lty = c(1, 1), col=c(\"blue\",\"red\"))",
     "crumbs": [
-      "Labs - Problems",
-      "Lab 6 - Problems"
+      "Labs - Solutions",
+      "Lab 6 - Solutions"
     ]
   },
   {
-    "objectID": "Lab6.html#section-5",
-    "href": "Lab6.html#section-5",
+    "objectID": "Lab6-Solutions.html#section-5",
+    "href": "Lab6-Solutions.html#section-5",
     "title": "Lab 6: Survival Models, Life Tables, and Exposure to Risk",
     "section": "3.1 ",
-    "text": "3.1 \n\nAssuming UDD and small forces of mortality, estimate the forces of mortality for males and for females. Plot two graphs of \\(\\ln\\hat{\\mu}_x\\) on the same diagram (for integer ages \\(x\\in[0,111]\\)).\n\n\n\n\n\n\n\n\n\n\nAs we can see, between ages, approximately, \\(25\\) and \\(95\\) one has pretty good linear behaviour.",
+    "text": "3.1 \n\nAssuming UDD and small forces of mortality, estimate the forces of mortality for males and for females. Plot two graphs of \\(\\ln\\hat{\\mu}_x\\) on the same diagram (for integer ages \\(x\\in[0,111]\\)).\n\n\nCode\nqx_males &lt;- qx_males[1:112]\nqx_females &lt;- qx_females[1:112]\n\nmux_males &lt;- 2*qx_males/(2-qx_males)\nmux_females &lt;- 2*qx_females/(2-qx_females)\n\nplot(age, log(mux_males), type='l', xlab=\"Age x\",ylab=\"Log-force of mortality\",col='blue')\nlines(age, log(mux_females), type='l', col='red')\n\nlegend(\"topleft\",\n       legend = c(\"Males\", \"Females\"),\n       lwd = 2, lty = c(1, 1), col=c(\"blue\",\"red\"))\n\n\n\n\n\n\n\n\n\n\nAs we can see, between ages, approximately, \\(25\\) and \\(95\\) one has pretty good linear behaviour.",
     "crumbs": [
-      "Labs - Problems",
-      "Lab 6 - Problems"
+      "Labs - Solutions",
+      "Lab 6 - Solutions"
     ]
   },
   {
-    "objectID": "Lab6.html#section-6",
-    "href": "Lab6.html#section-6",
+    "objectID": "Lab6-Solutions.html#section-6",
+    "href": "Lab6-Solutions.html#section-6",
     "title": "Lab 6: Survival Models, Life Tables, and Exposure to Risk",
     "section": "3.2 ",
-    "text": "3.2 \n\nBuild the linear model for \\(\\ln\\hat{\\mu}_x = mx +k\\) based on values of integer ages \\(x\\in[25,95]\\) (think about the corresponding indexes); see Lab 4 for linear models: you can create a temporary data frame for the linear model, if needed. Find, from the linear model, the estimates \\(\\hat{m}\\), \\(\\hat{k}\\) for \\(m=\\ln c\\) and \\(k=\\ln b\\), and hence find estimates \\(\\hat{b}\\) and \\(\\hat{c}\\) for \\(b\\) and \\(c\\) (separately for males and females).\nCheck the answer.\n\nunname(c(b_male, c_male, b_female, c_female))\n\n[1] 3.693641e-05 1.096556e+00 1.667903e-05 1.103153e+00",
+    "text": "3.2 \n\nBuild the linear model for \\(\\ln\\hat{\\mu}_x = mx +k\\) based on values of integer ages \\(x\\in[25,95]\\) (think about the corresponding indexes); see Lab 4 for linear models: you can create a temporary data frame for the linear model, if needed. Find, from the linear model, the estimates \\(\\hat{m}\\), \\(\\hat{k}\\) for \\(m=\\ln c\\) and \\(k=\\ln b\\), and hence find estimates \\(\\hat{b}\\) and \\(\\hat{c}\\) for \\(b\\) and \\(c\\) (separately for males and females).\nCheck the answer.\n\n\nCode\nmux_m &lt;- mux_males[26:96]\nmux_f &lt;- mux_females[26:96] \n\ndf &lt;- data.frame(x = 25:95, males = log(mux_m), females = log(mux_f))\n\ncoef_m &lt;- coef(lm(formula = males ~ x, data = df))\ncoef_f &lt;- coef(lm(formula = females ~ x, data = df))\nb_male &lt;- exp(coef_m[1])\nc_male &lt;- exp(coef_m[2])\nb_female &lt;- exp(coef_f[1])\nc_female &lt;- exp(coef_f[2])\n\n\n\nunname(c(b_male, c_male, b_female, c_female))\n\n[1] 3.693641e-05 1.096556e+00 1.667903e-05 1.103153e+00",
     "crumbs": [
-      "Labs - Problems",
-      "Lab 6 - Problems"
+      "Labs - Solutions",
+      "Lab 6 - Solutions"
     ]
   },
   {
-    "objectID": "Lab6.html#section-7",
-    "href": "Lab6.html#section-7",
+    "objectID": "Lab6-Solutions.html#section-7",
+    "href": "Lab6-Solutions.html#section-7",
     "title": "Lab 6: Survival Models, Life Tables, and Exposure to Risk",
     "section": "3.3 ",
-    "text": "3.3 \n\nPlot two graphs in one column, one for males, another for females. On each graph, plot \\(\\mu_x\\) for \\(x\\in[0,111]\\), and also plot \\(\\hat{b}\\cdot \\hat{c}^x\\) for \\(x\\in[25,95]\\) in another colour.",
-    "crumbs": [
-      "Labs - Problems",
-      "Lab 6 - Problems"
-    ]
-  },
-  {
-    "objectID": "Lab5.html",
-    "href": "Lab5.html",
-    "title": "Lab 5: Time series",
-    "section": "",
-    "text": "\\[\n  \\renewcommand{\\P}{\\mathbb{P}}\n  \\newcommand{\\E}{\\mathbb{E}}\n\\]",
-    "crumbs": [
-      "Labs - Problems",
-      "Lab 5 - Problems"
-    ]
-  },
-  {
-    "objectID": "Lab5.html#section",
-    "href": "Lab5.html#section",
-    "title": "Lab 5: Time series",
-    "section": "2.1 ",
-    "text": "2.1 \n\nThe previous time series is weakly stationary. Modify the code to generate a non-stationary \\(AR(1)\\) time-series, similar to the following one:",
-    "crumbs": [
-      "Labs - Problems",
-      "Lab 5 - Problems"
-    ]
-  },
-  {
-    "objectID": "Lab5.html#sec-task2",
-    "href": "Lab5.html#sec-task2",
-    "title": "Lab 5: Time series",
-    "section": "2.2 ",
-    "text": "2.2 \n\nModify the code to generate the following \\(ARMA(2,2)\\) time series \\[\nX_t = 0.3X_{t-1} +0.1 X_{t-2}+e_{t}+0.25e_{t-1}-0.5e_{t-2},\n\\] where \\(e_t\\sim N(0,0.7^2)\\), \\(X_1=X_2=1\\), \\(t=1,\\ldots, 10000\\).\nHint: note that you need now \\(2\\) initial values to generate the rest \\(n-2\\) values.\n\n\n\n\n\n\n\n\n\n\nRemark: Note that the characteristic equation for \\(AR\\)-part is \\[\n1-0.3z-0.1z^2=0, \\qquad z^2+3z-10=0, \\qquad z_1=-5, z_2=2,\n\\] i.e. both roots are such that \\(|z|&gt;1\\), hence, the process is weakly stationary.",
-    "crumbs": [
-      "Labs - Problems",
-      "Lab 5 - Problems"
-    ]
-  },
-  {
-    "objectID": "Lab5.html#section-1",
-    "href": "Lab5.html#section-1",
-    "title": "Lab 5: Time series",
-    "section": "2.3 ",
-    "text": "2.3 \n\nModify the previous code so that the characteristic equation would have the roots \\(z_1=1\\) and \\(z_2=-2\\) (keeping the same \\(MA\\)-part). Choose maximal time \\(100000\\). Set seed \\(101\\) at the beginning of your code.\nThe process is not stationary with the output like this:\n\n\n\n\n\n\n\n\n\n\nRemark: Note that if any root satisfies \\(|z|&lt;1\\), then the values of \\(X_t\\) would become very large (exponentially large) for small \\(t\\sim 30\\).\nRecall that the root \\(z=1\\) means that if we consider the differencing: \\[\nY_t=\\nabla X_t=(1-B)X_t=X_t-X_{t-1}\n\\] then \\(Y_t\\) is an ARMA time series with the characteristic equation having all other roots (if \\(z=1\\) is the multiple root of multiplicity \\(j\\), then it’s true for \\(Y_t=\\nabla^j X_t\\)). Here \\(z=1\\) is a root of multiplicity \\(j=1\\), so \\(Y_t=\\nabla X_t\\) has the characteristic equation with the only root \\(z=-2\\), i.e. \\(Y_t\\) is ARMA\\((1,2)\\) time series, which is stationary (as \\(|z|=|-2|&gt;1\\)). In our notations, it means that \\(X_t\\) is an ARIMA\\((1,1,2)\\) (recall that in some sources, and also in the notations of arima object discussed below it’s called ARIMA\\(({\\color{red}2},1,2)\\) time series, as it has AR\\((2)\\) part itself, whereas our notations were about AR-part for \\(Y_t\\) rather than \\(X_t\\)).\nIn R, there is a fast way to calculate the differencing \\(Y_t=X_t-X_{t-1}\\) having vector x we just consider y &lt;- diff(x). Note that if \\(x=(x_1,\\ldots,x_n)\\), then \\(y=(x_2-x_1,x_3-x_2,\\ldots,x_n-x_{n-1})\\) i.e. \\(y\\) has \\(n-1\\) entries only.",
-    "crumbs": [
-      "Labs - Problems",
-      "Lab 5 - Problems"
-    ]
-  },
-  {
-    "objectID": "Lab5.html#section-2",
-    "href": "Lab5.html#section-2",
-    "title": "Lab 5: Time series",
-    "section": "2.4 ",
-    "text": "2.4 \n\nPlot the graph of \\(Y_t\\). Notice that the output reflects the stationarity of the time series.",
-    "crumbs": [
-      "Labs - Problems",
-      "Lab 5 - Problems"
-    ]
-  },
-  {
-    "objectID": "Lab5.html#section-3",
-    "href": "Lab5.html#section-3",
-    "title": "Lab 5: Time series",
-    "section": "3.1 ",
-    "text": "3.1 \n\nRedo Task 2.2 using arima.sim function. Set seed \\(100\\). Assign the result to xt. Plot the output.\n\n\n\n\n\n\n\n\n\n\nWe can also “zoom” the plot, e.g. between \\(t=5000\\) and \\(t=6000\\). Note that a slicing xt[n:m] is a vector, and it may be converted to time series:\n\nplot(ts(xt[5000:6000]))\n\n\n\n\n\n\n\n\nAs you can see, the times are not the original ones, here \\(0\\) stands for the starting time \\(5000\\).\nOne of the way to keep the original times is to use the parameter start of the funciton ts:\n\nplot(ts(xt[5000:6000], start=5000))",
-    "crumbs": [
-      "Labs - Problems",
-      "Lab 5 - Problems"
-    ]
-  },
-  {
-    "objectID": "Lab5.html#section-4",
-    "href": "Lab5.html#section-4",
-    "title": "Lab 5: Time series",
-    "section": "3.2 ",
-    "text": "3.2 \n\nGiven that a ts object has all properties of a vector, find \\(X_{1000}\\) and the mean of all \\(10000\\) found values \\(X_t\\).\nNote that the latter value is close to \\(0\\), as expected:\n\n\n[1] 0.062928746 0.005488778",
-    "crumbs": [
-      "Labs - Problems",
-      "Lab 5 - Problems"
-    ]
-  },
-  {
-    "objectID": "Lab5.html#section-5",
-    "href": "Lab5.html#section-5",
-    "title": "Lab 5: Time series",
-    "section": "4.1 ",
-    "text": "4.1 \n\nCheck what happen if we try to predict next \\(50\\) values.",
-    "crumbs": [
-      "Labs - Problems",
-      "Lab 5 - Problems"
-    ]
-  },
-  {
-    "objectID": "Lab5.html#section-6",
-    "href": "Lab5.html#section-6",
-    "title": "Lab 5: Time series",
-    "section": "5.1 ",
-    "text": "5.1 \n\nGenerate an \\(MA(3)\\) time series and plot its ACF.\n\n\n\n\n\n\n\n\n\nAs you can see only the first \\(3\\) lags (at \\(k=1,2,3\\)) are not close to zero (and obviously \\(k=0\\) gives the value \\(1\\), so the total number of “non-zero” bars is \\(4\\), but we are looking for bars with \\(k&gt;0\\)).\n\nThe partial autocorrelation function (PACF) measures the dependence between \\(X_t\\) and \\(X_{t-k}\\) after removing the influence of the intermediate observations\n\\[\nX_{t-1},X_{t-2},\\ldots,X_{t-k+1}.\n\\]\nMore precisely,\n\\[\n\\mathrm{PACF}(k) = \\mathrm{Corr}(X_t,X_{t-k}\\mid X_{t-1},\\ldots,X_{t-k+1}).\n\\]\nThus PACF measures the direct linear dependence between observations \\(k\\) steps apart.\nEquivalently, PACF can be interpreted using the best linear predictor. Consider the approximation\n\\[\nX_t \\approx \\phi_{k1}X_{t-1}+\\phi_{k2}X_{t-2}+\\ldots+\\phi_{kk}X_{t-k},\n\\]\nwhich minimises the mean squared prediction error between \\(X_t\\) and the right hand side.\nThen\n\\[\n\\mathrm{PACF}(k)=\\phi_{kk}.\n\\]\nIn other words, PACF\\((k)\\) is the coefficient of \\(X_{t-k}\\) in the best linear prediction of \\(X_t\\) using the previous \\(k\\) observations.\nThe PACF can be plotted using\n\n# For a previously defined xt\npacf(xt)\n\n\n\n\n\n\n\n\nConsider an autoregressive process\n\\[\nX_t=\\alpha_1X_{t-1}+\\ldots+\\alpha_pX_{t-p}+e_t.\n\\]\nOnce the first \\(p\\) lags are known, older observations do not provide additional linear information about \\(X_t\\). Therefore\n\\[\n\\mathrm{PACF}(k)=0 \\qquad (k&gt;p).\n\\]\nThus the PACF truncates after lag \\(p\\).",
-    "crumbs": [
-      "Labs - Problems",
-      "Lab 5 - Problems"
-    ]
-  },
-  {
-    "objectID": "Lab5.html#section-7",
-    "href": "Lab5.html#section-7",
-    "title": "Lab 5: Time series",
-    "section": "5.2 ",
-    "text": "5.2 \n\nGenerate an \\(AR(3)\\) process and examine its PACF.\n\n\n\n\n\n\n\n\n\nAs you can see, PACF effectively vanishes after lag \\(3\\) (stress that, in contrast to ACF, PACF at \\(k=0\\) is not defined at all, so here we look at all non-vanishing bars).\n\nHowever, for an \\(ARMA(p,q)\\) process\n\\[\nX_t=\\alpha_1X_{t-1}+\\ldots+\\alpha_pX_{t-p}+e_t+\\beta_1e_{t-1}+\\ldots+\\beta_qe_{t-q},\n\\]\nneither the ACF nor the PACF truncates. Both functions typically decay gradually.",
-    "crumbs": [
-      "Labs - Problems",
-      "Lab 5 - Problems"
-    ]
-  },
-  {
-    "objectID": "Lab5.html#section-8",
-    "href": "Lab5.html#section-8",
-    "title": "Lab 5: Time series",
-    "section": "5.3 ",
-    "text": "5.3 \nGenerate an \\(ARMA(2,1)\\) process, and plot its ACF and PACF:\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCompare the behaviour of the ACF and PACF. ACF gives a “hint” that \\(q\\) may be \\(1\\) and PACF gives a hint that \\(p\\) may be \\(2\\) (as the first two bars are “significantly” larger than te rest). Surely, arima function gives much more reliable answer, but acf and pacf can be used for visual analysis.",
-    "crumbs": [
-      "Labs - Problems",
-      "Lab 5 - Problems"
-    ]
-  },
-  {
-    "objectID": "Lab4.html",
-    "href": "Lab4.html",
-    "title": "Lab 4: Reinsurance. Data frames",
-    "section": "",
-    "text": "For the next task, you will need to use function pmax. If a is a vector \\((a_1,\\ldots,a_m)\\) and x is a number, then usual max(a,x) returns \\[\n\\max\\{a_1,\\ldots,a_m,x\\}\n\\] that is a number, whereas pmax(a,x) returns \\[\n\\bigl(\\max\\{a_1,x\\},\\ldots,\\max\\{a_m,x\\})\n\\] that is a vector.\n\n\n\nSet seed \\(234\\). Simulate \\(15000\\) values for a reinsurer where (aggregated) claims have a compound Poisson distribution with parameter \\(900\\) and the individual claims have log-normal distribution \\(logN(7,0.3^2)\\) under individual excess of loss with retention \\(1700\\). Find the mean and the standard deviation of the obtained data, i.e. using the notations from the lecture notes, estimate \\(\\E(S_R)\\) for\n\\[\nS_R=Z_1+\\ldots+Z_N\n\\]\nfrom the sample, and also estimate \\(\\sigma(S_R)\\) from the sample.\nCheck the answer.\n\n\n[1] 16640.800  2872.169\n\n\n\n\n\n\n\nWe can see, using formulas from the lecture notes, that in the assumption of the previous task \\[\n\\E(S) = \\E(N)\\E(X)=900\\cdot e^{7+0.5\\cdot 0.3^2}=1032398\n\\] (you can also check that the mean of the sample: for \\(S\\) (not \\(S_R\\)), with the seed \\(234\\) it would be \\(1032358\\), pretty close). Suppose now that the reinsurer applies the aggregated excess \\(M\\), i.e. the insurer pays \\[\n  S_I=\\begin{cases}\n  S, & \\text{if } S \\leq M,\\\\\n  M, & \\text{if } S &gt; M\n  \\end{cases}\n\\] and the reinsurer pays \\[\n  S_R=S-S_I=\\begin{cases}\n  0, & \\text{if } S \\leq M,\\\\\n  S-M, & \\text{if } S &gt; M.\n  \\end{cases}\n\\]\nLet \\(M=\\E(S)=1032398\\). Modify the previous code and find \\(\\E(S_R)\\), the average paid by the reinsurer under this agreement.\nCheck the answer.\n\n\n[1] 14297.37",
-    "crumbs": [
-      "Labs - Problems",
-      "Lab 4 - Problems"
-    ]
-  },
-  {
-    "objectID": "Lab4.html#section",
-    "href": "Lab4.html#section",
-    "title": "Lab 4: Reinsurance. Data frames",
-    "section": "",
-    "text": "Set seed \\(234\\). Simulate \\(15000\\) values for a reinsurer where (aggregated) claims have a compound Poisson distribution with parameter \\(900\\) and the individual claims have log-normal distribution \\(logN(7,0.3^2)\\) under individual excess of loss with retention \\(1700\\). Find the mean and the standard deviation of the obtained data, i.e. using the notations from the lecture notes, estimate \\(\\E(S_R)\\) for\n\\[\nS_R=Z_1+\\ldots+Z_N\n\\]\nfrom the sample, and also estimate \\(\\sigma(S_R)\\) from the sample.\nCheck the answer.\n\n\n[1] 16640.800  2872.169",
-    "crumbs": [
-      "Labs - Problems",
-      "Lab 4 - Problems"
-    ]
-  },
-  {
-    "objectID": "Lab4.html#section-1",
-    "href": "Lab4.html#section-1",
-    "title": "Lab 4: Reinsurance. Data frames",
-    "section": "",
-    "text": "We can see, using formulas from the lecture notes, that in the assumption of the previous task \\[\n\\E(S) = \\E(N)\\E(X)=900\\cdot e^{7+0.5\\cdot 0.3^2}=1032398\n\\] (you can also check that the mean of the sample: for \\(S\\) (not \\(S_R\\)), with the seed \\(234\\) it would be \\(1032358\\), pretty close). Suppose now that the reinsurer applies the aggregated excess \\(M\\), i.e. the insurer pays \\[\n  S_I=\\begin{cases}\n  S, & \\text{if } S \\leq M,\\\\\n  M, & \\text{if } S &gt; M\n  \\end{cases}\n\\] and the reinsurer pays \\[\n  S_R=S-S_I=\\begin{cases}\n  0, & \\text{if } S \\leq M,\\\\\n  S-M, & \\text{if } S &gt; M.\n  \\end{cases}\n\\]\nLet \\(M=\\E(S)=1032398\\). Modify the previous code and find \\(\\E(S_R)\\), the average paid by the reinsurer under this agreement.\nCheck the answer.\n\n\n[1] 14297.37",
-    "crumbs": [
-      "Labs - Problems",
-      "Lab 4 - Problems"
-    ]
-  },
-  {
-    "objectID": "Lab4.html#section-2",
-    "href": "Lab4.html#section-2",
-    "title": "Lab 4: Reinsurance. Data frames",
-    "section": "2.1 ",
-    "text": "2.1 \n\nFind the sum of all values in the column y of this data frame df.\nCheck the answer:\n\n\n[1] 997200",
-    "crumbs": [
-      "Labs - Problems",
-      "Lab 4 - Problems"
-    ]
-  },
-  {
-    "objectID": "Lab4.html#section-3",
-    "href": "Lab4.html#section-3",
-    "title": "Lab 4: Reinsurance. Data frames",
-    "section": "3.1 ",
-    "text": "3.1 \n\nDo the following steps:\n\nDownload file numbers.csv and save it in a directory (folder) on your computer (usually it’s “Documents” or “Downloads”).\nSave your R-file your are working with in R-Studio to the same directory (folder).\nClick with right mouse button on the file name at the top of R-Studio window and choose “Set working directory”.\n\nOR (instead of 3)\n\nGo to menu “Session”, choose “Set working directory”, and then choose “To source file location”\n\nIf you did 1-3 correctly, in “Files” tab on the (down) right part of R-Studio you will see your R-file and the downloaded CSV-file in the same directory.\n\nLoad the saved file by the command\n\n\ndf &lt;- read.csv(\"numbers.csv\")\n\nCheck yourself:\n\nhead(df)\n\n           x        y\n1 1.98193075 8.554741\n2 0.08423538 4.008477\n3 0.33576991 4.920004\n4 0.44245007 4.861317\n5 0.09377962 4.023355\n6 0.42974243 5.109215",
-    "crumbs": [
-      "Labs - Problems",
-      "Lab 4 - Problems"
-    ]
-  },
-  {
-    "objectID": "Lab4.html#section-4",
-    "href": "Lab4.html#section-4",
-    "title": "Lab 4: Reinsurance. Data frames",
-    "section": "3.2 ",
-    "text": "3.2 \n\nIt is given that the data in column x of “numbers.csv” file are independent values of a random variable \\(X\\sim Exp(\\lambda)\\). Find the estimate \\(\\hat{\\lambda}\\) for the parameter \\(\\lambda\\) using the method of moments (see Lecture Notes).\nCheck your answer:\n\n\n[1] 1.152757",
-    "crumbs": [
-      "Labs - Problems",
-      "Lab 4 - Problems"
-    ]
-  },
-  {
-    "objectID": "Lab4.html#section-5",
-    "href": "Lab4.html#section-5",
-    "title": "Lab 4: Reinsurance. Data frames",
-    "section": "4.1 ",
-    "text": "4.1 \n\nFind the average of all values of y from df such that the corresponding values of x are larger than \\(1\\).\nCheck your answer:\n\n\n[1] 7.687361",
-    "crumbs": [
-      "Labs - Problems",
-      "Lab 4 - Problems"
-    ]
-  },
-  {
-    "objectID": "Lab4.html#section-6",
-    "href": "Lab4.html#section-6",
-    "title": "Lab 4: Reinsurance. Data frames",
-    "section": "5.1 ",
-    "text": "5.1 \n\nPlot on the same diagram the scatter plot \\(y\\) against \\(x\\) as it is shown above, but in blue color, and plot the line \\(y=kx+b\\) with the found values of \\(k\\) and \\(b\\) (do not copy-paste, use coef function) in red colour. (See Lab 3 for plotting two graphs on one diagram).",
-    "crumbs": [
-      "Labs - Problems",
-      "Lab 4 - Problems"
-    ]
-  },
-  {
-    "objectID": "Lab3.html",
-    "href": "Lab3.html",
-    "title": "Lab 3: Parameter Estimation, Loops, Compound Distributions",
-    "section": "",
-    "text": "\\[\n  \\renewcommand{\\P}{\\mathbb{P}}\n  \\newcommand{\\E}{\\mathbb{E}}\n\\]",
-    "crumbs": [
-      "Labs - Problems",
-      "Lab 3 - Problems"
-    ]
-  },
-  {
-    "objectID": "Lab3.html#section",
-    "href": "Lab3.html#section",
-    "title": "Lab 3: Parameter Estimation, Loops, Compound Distributions",
-    "section": "1.1 ",
-    "text": "1.1 \n\nSet seed 123. Generate \\(100\\) random values of \\(Y\\sim N(5,9)\\), and assign them to vector y. Assign the MLE for \\(\\mu=\\mathbb{E}(Y)\\) to variable mu and assign the MLE for \\(\\sigma=\\sigma(Y)\\) to variable sigma. Output the vector \\((\\mu,\\sigma,\\mu+\\sigma)\\). Check the answer.\n\n\n[1] 5.271218 2.724721 7.995939",
-    "crumbs": [
-      "Labs - Problems",
-      "Lab 3 - Problems"
-    ]
-  },
-  {
-    "objectID": "Lab3.html#section-1",
-    "href": "Lab3.html#section-1",
-    "title": "Lab 3: Parameter Estimation, Loops, Compound Distributions",
-    "section": "1.2 ",
-    "text": "1.2 \n\nImagine that you don’t know that the first data x has exponential distribution and decided to try a normal distribution \\(N(\\mu,\\sigma^2)\\). It is still possible to calculate MLE for its parameters, though it’s likely that the estimated standard errors will be high. Given that the standard errors are in the sd component of fitdistr function, calculate the vector of standard errors for \\(\\mu\\) and \\(\\sigma\\).\n\n\n[1] 1.3598213 0.9615389\n\n\n\n\nEven when standard errors are relatively small, it is still reasonable to ask ourselves how can we be certain that the data follows the particular disribution. Various statistical tests may be applied. For ungrouped data, as we have e.g. in vector x, the Kolmogorov–Smirnov test is widely used.\n\nks.test(x, \"pexp\", rate = lambda_mle)\n\n\n  Exact one-sample Kolmogorov-Smirnov test\n\ndata:  x\nD = 0.10167, p-value = 0.6423\nalternative hypothesis: two-sided\n\n\nIt tests whether we should reject the null-hypothesis \\(H_0\\) that the data follows the exponential distribution, against the alternative hypothesis \\(H_1\\) that it does not.\nAs you can see ks.test function has several arguments:\n\nvector of the data (x);\nname of the R function for the CDF we test against (pexp);\nvalue(s) for the parameter(s) of that R function, using their name(s) (rate here; remember that you can always type in concole ?functionname to learn about the parameters of functionname); the values were previously obtained from MLE.\n\nThe output (recall that you may get different numbers as your data x was likely different) shows the number D (sum of absolute values of differences (residual distances) between the theoretical CDF and the CDF which can be calculated from the data, see the graph below), the smaller it is, the better prediction is. And also it shoes the \\(p\\)-value; in contrary, if \\(p\\)-value is small (close to \\(0\\)) it would mean that we have to reject \\(H_0\\) as then \\(p\\)-value would be the probability to observe the given data if \\(H_0\\) were true. Here \\(p\\)-value is pretty large, so there is no evidences to reject \\(H_0\\).",
-    "crumbs": [
-      "Labs - Problems",
-      "Lab 3 - Problems"
-    ]
-  },
-  {
-    "objectID": "Lab3.html#section-2",
-    "href": "Lab3.html#section-2",
-    "title": "Lab 3: Parameter Estimation, Loops, Compound Distributions",
-    "section": "1.3 ",
-    "text": "1.3 \n\nFor the data y and MLE estimates mu and sigma from Task 1.1, apply the Kolmogorov–Smirnov test to test the null hypothesis that y follows the normal distribution with these two parameters. Check the output.\n\n\n\n    Asymptotic one-sample Kolmogorov-Smirnov test\n\ndata:  y\nD = 0.058719, p-value = 0.8808\nalternative hypothesis: two-sided",
-    "crumbs": [
-      "Labs - Problems",
-      "Lab 3 - Problems"
-    ]
-  },
-  {
-    "objectID": "Lab3.html#section-3",
-    "href": "Lab3.html#section-3",
-    "title": "Lab 3: Parameter Estimation, Loops, Compound Distributions",
-    "section": "2.1 ",
-    "text": "2.1 \n\nSet seed \\(23\\). Generate \\(10^5\\) an exponential random variable with mean \\(3\\) (think about the value of the rate argument). Record the maximum of them (use R-function max). Repeat this procedure \\(10^3\\) times. Calculate the proportion of the found maximums which are larger then \\(50\\).\nCheck the answer:\n\n\n[1] 0.006",
-    "crumbs": [
-      "Labs - Problems",
-      "Lab 3 - Problems"
-    ]
-  },
-  {
-    "objectID": "Lab3.html#section-4",
-    "href": "Lab3.html#section-4",
-    "title": "Lab 3: Parameter Estimation, Loops, Compound Distributions",
-    "section": "3.1 ",
-    "text": "3.1 \n\nSet seed \\(123\\). Generate \\(10000\\) values from a compound Poisson distribution with Poisson parameter \\(\\lambda=1000\\) and individual claims which have gamma distribution \\(\\Gamma(750,0.25)\\) (recall that here \\(0.25\\) is called rate in the corresponding R functions).\nIn other words, you will have some numbers \\(N_1,\\ldots, N_{10000}\\) which came from the Poisson distribution, and for each \\(N_k\\), you have to generate \\(N_k\\) numbers from the gamma distribution: \\(X_1^{(k)},\\ldots,X_{N_k}^{(k)}\\), and then you got the corresponding value of a compound Poisson random variables \\[\nS^{(k)} = X_1^{(k)}+\\ldots+X_{N_k}^{(k)}.\n\\]\nFind the mean and the standard deviation (sd function) of the obtained sample of the compound Poisson random variables.\nHint: generate a vector N of \\(n=10000\\) Poisson r.v., and create a zero-vector S of length \\(10000\\) using numeric function. Then you will use a loop in \\(k\\) (\\(1\\leq k\\leq 10000\\)) inside which you generate the corresponding values of \\(X_i^{(k)}\\) and get their sums \\(S^{(k)}\\); and the latter would be assigned to S[k].\nCheck the answer:\n\n\n[1] 2997650.56   93719.71\n\n\nNote that (see Lecture Notes) \\[\n\\E(S)=\\E(N)\\E(X)=1000\\cdot\\frac{750}{0.25}=3000000,\n\\] so the mean for the sample we obtained is close to the theoretical expectation.",
-    "crumbs": [
-      "Labs - Problems",
-      "Lab 3 - Problems"
-    ]
-  },
-  {
-    "objectID": "Lab3.html#section-5",
-    "href": "Lab3.html#section-5",
-    "title": "Lab 3: Parameter Estimation, Loops, Compound Distributions",
-    "section": "3.2 ",
-    "text": "3.2 \n\nIn contrast to \\(\\E(S)\\) and \\(\\mathrm{Var}(S)\\), the probability distribution of \\(S\\) is hard for precise theoretical analysis. For example, there is not a “compact” formula for \\[\n\\P(S&gt;\\E(S))=\\P(S&gt;3000000).\n\\] Your task is to estimate this probability by looking at the ratio of \\(S^{(k)}&gt;3000000\\) in the sample you previously obtained to all \\(S^{(k)}\\).\nCheck the answer.\n\n\n[1] 0.4881\n\n\n\n\nRecall that a number \\(q\\) is called \\(\\alpha\\)-percentile for a random variable \\(X\\), if \\(\\mathbb{P}(X\\leq q)=\\alpha\\). As we discussed in Lab 1, in R, it’s called “quantiles”, and the corresponding functions starts with “q”: qexp, qnorm etc.\nWe also discussed on a lecturethe notion of percentiles/quantiles for the data samples: we should order the sample, and find the number which divides it in the proportion \\(\\alpha/(1-\\alpha)\\). The corresponding R function is called quantile:\n\nu &lt;- rpois(n = 10, lambda = 100) \nsort(u) # This command is NOT needed for the quantile R function, it is just for better visualisation of the quantile function\n\n [1]  83  92  94  94  95  97 100 103 106 109\n\nquantile(u,0.3)\n\n30% \n 94",
-    "crumbs": [
-      "Labs - Problems",
-      "Lab 3 - Problems"
-    ]
-  },
-  {
-    "objectID": "Lab3.html#section-6",
-    "href": "Lab3.html#section-6",
-    "title": "Lab 3: Parameter Estimation, Loops, Compound Distributions",
-    "section": "3.3 ",
-    "text": "3.3 \n\nFind, based on the previously obtained sample of \\(S^{(k)}\\), the number \\(q\\) such that \\[\n\\P(S\\leq q) = 0.9\n\\] Assign the result to q.\nCheck the answer.\n\nq\n\n    90% \n3115719 \n\n\nNow, modify the code from the previous Task to check that \\(\\P(S\\leq 3115719) = 0.9\\).\n\n\n[1] 0.9",
-    "crumbs": [
-      "Labs - Problems",
-      "Lab 3 - Problems"
-    ]
-  },
-  {
-    "objectID": "Lab2.html",
-    "href": "Lab2.html",
-    "title": "Lab 2: Probability Distributions, Plotting, Creating Functions",
-    "section": "",
-    "text": "\\[\n  \\renewcommand{\\P}{\\mathbb{P}}\n  \\newcommand{\\E}{\\mathbb{E}}\n\\]",
-    "crumbs": [
-      "Labs - Problems",
-      "Lab 2 - Problems"
-    ]
-  },
-  {
-    "objectID": "Lab2.html#section",
-    "href": "Lab2.html#section",
-    "title": "Lab 2: Probability Distributions, Plotting, Creating Functions",
-    "section": "1.1 ",
-    "text": "1.1 \n\nPlot graph of \\(y=x^2\\) on \\(x\\in[-10,10]\\). (Hint: divide \\([-10,10]\\) on many small pieces using seq function discussed in Lab 1, and assign the output of this function to vector x, create vector y of squares of x and, hence, connect values of \\(y\\) at ends of these pieces by straight lines; if the pieces are small, it would like a smooth curve).\nTry by yourself, if it does not work, unfold the code below.\n\n\nCode\n# Recall that R applies any function to a vector component-wise (entry-wise), \n# i.e. if there is a vector `x` and a function `f`, \n# then `f(x)` will be the vector whose first component \n# is the value of `f` on the first compnent of `x` and so on.\nx &lt;- seq(-10, 10, 0.1)\ny &lt;- x**2\nplot(x,y, type='l')",
-    "crumbs": [
-      "Labs - Problems",
-      "Lab 2 - Problems"
-    ]
-  },
-  {
-    "objectID": "Lab2.html#section-1",
-    "href": "Lab2.html#section-1",
-    "title": "Lab 2: Probability Distributions, Plotting, Creating Functions",
-    "section": "1.2 ",
-    "text": "1.2 \n\nLet \\(X\\sim Exp(0.3)\\). Plot the graph of the survival function \\(S_X(x)\\) for \\(x\\in [0,10]\\) using pexp function (also discussed in Lab 1).\nThe expected output:",
-    "crumbs": [
-      "Labs - Problems",
-      "Lab 2 - Problems"
-    ]
-  },
-  {
-    "objectID": "Lab2.html#section-2",
-    "href": "Lab2.html#section-2",
-    "title": "Lab 2: Probability Distributions, Plotting, Creating Functions",
-    "section": "2.1 ",
-    "text": "2.1 \n\nLet \\(Y\\sim\\ln\\mathrm{N}(0.01,0.2^2)\\). Plot the graph of the density \\(f_Y(x)\\) for \\(x\\in[0,3]\\). Use xlab and ylab arguments of the plot function to set-up the names “x value” and “Density” for the horizontal and vertical axes. (We didn’t use them before, so their defaults values, which are empty lines, like xlab='', were used by R in the past). Use main argument of the plot function to set-up the title “Normal distribution density” for the whole plot.\nCheck the output (to make the graph smother, use smaller step in seq function while defining the x values).",
-    "crumbs": [
-      "Labs - Problems",
-      "Lab 2 - Problems"
-    ]
-  },
-  {
-    "objectID": "Lab2.html#section-3",
-    "href": "Lab2.html#section-3",
-    "title": "Lab 2: Probability Distributions, Plotting, Creating Functions",
-    "section": "2.2 ",
-    "text": "2.2 \n\nThe hazard function of a random variable \\(X\\) is defined as follows: \\[\nh_X(x) := \\frac{f_X(x)}{1-F_X(x)}.\n\\] Let \\(X\\sim \\mathrm{N}(4, 0.4)\\). Calculate \\(h_X(2)\\).\nCheck the output:\n\n\n[1] 0.004253513",
-    "crumbs": [
-      "Labs - Problems",
-      "Lab 2 - Problems"
-    ]
-  },
-  {
-    "objectID": "Lab2.html#section-4",
-    "href": "Lab2.html#section-4",
-    "title": "Lab 2: Probability Distributions, Plotting, Creating Functions",
-    "section": "3.1 ",
-    "text": "3.1 \n\nSet seed 131 (see Task 3.3 of Lab 1). Generate \\(10^6\\) random variables distributed with \\(W(0.76,0.25)\\) (i.e. calculate \\(\\sigma\\) from Equation 4 and use the needed function described above); and assign this to a vector. Calculate the sample mean of these values (and assign it to a variable). Calculate the expected value \\(\\mathbb{E}(X)\\) of \\(X\\sim W(0.76,0.25)\\) using Equation 2 and assign it to another variable: note that, for the Gamma-function \\(\\Gamma(x)\\) in Equation 2, you can use R-code gamma(x) (notice the small first letter; e.g. gamma(5) will return 24). Finally, find the absolute value of the difference between the found sample mean and the expected value.\nCheck your answer:\n\n\n[1] 0.005210536\n\n\n\n\nInstead of recalculating the parameters every time we need to use parametrisation Equation 1 instead of the built-in parametrisation Equation 3, we may want to use another functions designed to deal with the parametrisation Equation 1. One can either define needed functions by ourselves or use the functions defined in external libraries (packages).",
-    "crumbs": [
-      "Labs - Problems",
-      "Lab 2 - Problems"
-    ]
-  },
-  {
-    "objectID": "Lab2.html#section-5",
-    "href": "Lab2.html#section-5",
-    "title": "Lab 2: Probability Distributions, Plotting, Creating Functions",
-    "section": "4.1 ",
-    "text": "4.1 \n\nDefine the function rweibull65 which would have three arguments n, shape, scale, where shape corresponds to \\(\\beta\\) and scale to \\(\\alpha\\) in Equation 1, and which would return n Weibull random values distributed with \\(W(\\alpha,\\beta)\\) with shape\\(=\\beta\\) and scale\\(=\\alpha\\); so that this function rweibull65 would call rweibull inside its body; see also the remark below.\n\nRun the following code to check your function:\n\nset.seed(12)\nrweibull65(2, 1.2, 2.3)\n\n[1] 1.1318101 0.1312781\n\n\n\nRemark. R distinguishes the name of the argument and the argument itself. For example, in the defined above function sindeg the argument is called x. So we can specify the argument (though it’s not needed here since it’s the only argument):\n\nsindeg(x = 30)\n\n[1] 0.5\n\n\nNow, imagine we have a variable in our program which is also called x. Then we can write inside the function x = x:\n\nx &lt;- 30\nsindeg(x = x)\n\n[1] 0.5\n\n\nR will understand that, in x = x the left x is the name of the argument of function sindeg, whereas the right x is the variable defined earlier.",
-    "crumbs": [
-      "Labs - Problems",
-      "Lab 2 - Problems"
-    ]
-  },
-  {
-    "objectID": "Lab2.html#section-6",
-    "href": "Lab2.html#section-6",
-    "title": "Lab 2: Probability Distributions, Plotting, Creating Functions",
-    "section": "5.1 ",
-    "text": "5.1 \n\nLet \\(X\\sim W(1.2, 3.1)\\). Using functions pweibullPH and qweibullPH, find \\(b\\) such that \\(\\P(1\\leq X\\leq b)=0.25\\).\n\nCheck your answer:\n\n\n[1] 1.339862",
-    "crumbs": [
-      "Labs - Problems",
-      "Lab 2 - Problems"
-    ]
-  },
-  {
-    "objectID": "Lab2.html#section-7",
-    "href": "Lab2.html#section-7",
-    "title": "Lab 2: Probability Distributions, Plotting, Creating Functions",
-    "section": "6.1 ",
-    "text": "6.1 \n\nDefine function pburr which would have \\(4\\) arguments: x, alpha, lambda, gamma which would return the value of \\(F_{Burr}(x)\\) for the given values of the parameters.\nCheck your code by calculating \\(F_{Burr}(0.5)\\) for \\(\\alpha=1\\), \\(\\lambda=2\\), \\(\\gamma=3\\):\n\n\n[1] 0.05882353\n\n\n\n\nWe discussed previously how to plot the graph of a function. Often we need to plot several graphs on the same diagram, e.g. in different colours. The argument col of function plot is responsible for colours:\n\n\nx &lt;- seq(-2*pi,2*pi, 0.05)\ny &lt;- sin(x)\nplot(x, y, col = 'red', type='l')\n\n\n\n\n\n\n\n\nhowever, to plot another graph we would need to replace the second plot by lines (without type='l'). The last lines add the legend to the graph:\n\nx &lt;- seq(-2*pi,2*pi, 0.05)\ny &lt;- sin(x)\nz &lt;- cos(x)\nplot(x, y, col = 'red', type='l')\nlines(x, z, col = 'blue')\n\nlegend(x = \"topright\",          # Position\n       legend = c(\"sin(x)\", \"cos(x)\"),  # Legend texts\n       lty = c(1, 1),           # Line types: 1 stands for solid\n       col = c('red', 'blue'),  # Line colours\n       lwd = 2,                 # Line width\n       bg = 'light blue')      # Background color of the legend",
-    "crumbs": [
-      "Labs - Problems",
-      "Lab 2 - Problems"
-    ]
-  },
-  {
-    "objectID": "Lab2.html#section-8",
-    "href": "Lab2.html#section-8",
-    "title": "Lab 2: Probability Distributions, Plotting, Creating Functions",
-    "section": "6.2 ",
-    "text": "6.2 \n\nPlot graphs of \\(F_{Burr}(x)\\) for \\(\\alpha=1\\), \\(\\lambda=2\\) and \\(\\gamma=3\\) (blue graph) or \\(\\gamma=0.3\\) (red graph); let \\(x\\in[1,5]\\). Add legend to get the result:",
-    "crumbs": [
-      "Labs - Problems",
-      "Lab 2 - Problems"
-    ]
-  },
-  {
-    "objectID": "Lab1.html",
-    "href": "Lab1.html",
-    "title": "Lab 1: From basics to probability distributions",
-    "section": "",
-    "text": "\\[\n  \\renewcommand{\\P}{\\mathbb{P}}\n  \\newcommand{\\E}{\\mathbb{E}}\n\\]",
-    "crumbs": [
-      "Labs - Problems",
-      "Lab 1 - Problems"
-    ]
-  },
-  {
-    "objectID": "Lab1.html#section",
-    "href": "Lab1.html#section",
-    "title": "Lab 1: From basics to probability distributions",
-    "section": "2.1 ",
-    "text": "2.1 \n\nLet \\(X\\) be the random variable that is the result of throwing a (fair) dice, i.e. \\(X\\) may take either of values \\(1,2,3,4,5,6\\) with equal probabilities \\(\\frac16\\).\n\nDefine vector \\[\nx=(x_1,x_2,\\ldots,x_6)=(1,2,\\ldots,6)\n\\] of values of \\(X\\) and assign it to R-variable x.\nDefine vector \\[\np=(p_1,p_2,\\ldots,p_6)=\\Bigl(\\frac16,\\frac16,\\ldots,\\frac16\\Bigr)\n\\] of the probabilities, and assign it to R-variable p.\nRecall that the expectation of \\(X\\) is \\[\n\\E(X)=\\sum_{i=1}^6 x_ip_i=x_1p_1+\\ldots x_6p_6=x\\cdot p.\n\\] Calculate \\(\\E(X)\\) (using the previously considered functions).\n\nCheck the answer.\n\n\n[1] 3.5",
-    "crumbs": [
-      "Labs - Problems",
-      "Lab 1 - Problems"
-    ]
-  },
-  {
-    "objectID": "Lab1.html#section-1",
-    "href": "Lab1.html#section-1",
-    "title": "Lab 1: From basics to probability distributions",
-    "section": "2.2 ",
-    "text": "2.2 \n\nRecall that the variance of a random variable can be found by the following formulas: \\[\n\\begin{aligned}\\mathrm{Var}(X) &= \\mathbb{E}\\Bigl(\\bigl(X-\\mathbb{E}(X)\\bigr)^2\\Bigr)\\\\\n    &= \\sum_{i=1}^6 \\bigl(x_i-\\mathbb{E}(X)\\bigr)^2p_i\\end{aligned}.\n\\] Find \\(\\mathrm{Var}(X)\\) (using the previously considered functions).\nCheck the answer:\n\n\n[1] 2.916667",
-    "crumbs": [
-      "Labs - Problems",
-      "Lab 1 - Problems"
-    ]
-  },
-  {
-    "objectID": "Lab1.html#section-2",
-    "href": "Lab1.html#section-2",
-    "title": "Lab 1: From basics to probability distributions",
-    "section": "2.3 ",
-    "text": "2.3 \n\nLet \\(X=(1,2,\\ldots,2024)\\) and \\(Y=(Y_1,\\ldots,Y_{2024})\\) with\n\\[\nY_k = X_1+\\ldots+X_k, \\qquad 1\\leq k\\leq 2024.\n\\]\nFind how many components of \\(Y\\) are bigger than \\(10^6\\). (Hint: remember that True stands for 1).\nCheck the answer:\n\n\n[1] 611\n\n\n\n\nSlicing\n\n\nIf x is a vector, to access its component with index i one needs to use x[i]:\n\n\n\n[1] 6\n\n\n\nRemark. Note that the indexation in R starts with 1 (in contrast to e.g. Python).\n\n\nWe can also get a slice of a vector by specifying the range of indexes, e.g.\n\n\n\n[1]  6  8 10\n\n\n\nThe indexes do not need to follow some order:\n\n\n\n[1]  6 14  2",
-    "crumbs": [
-      "Labs - Problems",
-      "Lab 1 - Problems"
-    ]
-  },
-  {
-    "objectID": "Lab1.html#section-3",
-    "href": "Lab1.html#section-3",
-    "title": "Lab 1: From basics to probability distributions",
-    "section": "3.1 ",
-    "text": "3.1 \n\nLet \\(X\\sim Exp(0.1)\\). Find \\(\\P(1&lt;X\\leq3)\\).\nCheck the answer.\n\n\n[1] 0.1640192\n\n\n\n\nThe survival function \\(S_X(x) = \\P(X&gt;x)\\) can be calculated, of course, from the relation \\(S_X(x) = 1- F_X(x)\\). There is, however, more numerically exact way by using the argument lower.tail = FALSE (or lower.tail = F) for function pexp:\n\n\n\n[1] 0.2231302\n\n\nthat coincides with\n\n\n[1] 0.2231302\n\n\nat least in the first 5 decimal figures.\n(Surely, for the exponential distribution one has an explicit simple formula: \\(S_X(x)= e^{-\\lambda x}\\).)\n\nGamma distribution\n\n\nRecall that, for \\(X\\sim \\Gamma(\\alpha,\\lambda)\\),\n\\[\nf_X(x)=\\frac{\\lambda^\\alpha}{\\Gamma(\\alpha)}x^{\\alpha-1} e^{-\\lambda x}, \\quad x\\geq0.\n\\]\nThe corresponding R functions, e.g. dgamma, pgamma etc., should hence have at least 3 arguments. \\(\\alpha\\) corresponds to shape (second parameter) and \\(\\lambda\\) corresponds to rate (third parameter), i.e. e.g., for \\(X\\sim\\Gamma(0.1,2)\\), \\(f_X(3)\\) can be calculated as follows:\n\n\n\n[1] 0.000103893\n\n\nIt may be more convenient (though not necessary) to write explicitly: dgamma(3, shape = 0.1, rate = 2).\n\nBy the definition, for any \\(p\\in(0,1)\\), the \\(p\\)-quantile is the value of \\(x\\), such that\n\\[\nF_X(x) = \\P(X\\leq x) = p,\n\\]\ni.e. \\(x=F_X^{-1}(p)\\). The corresponding R-function has prefix q. For example, for \\(X\\sim\\Gamma(0.1,2)\\), to find \\(x\\) such that \\(F_X(x)=0.2\\) we can use the following code:\n\n\n\n[1] 3.109401e-08\n\n\nand we can check that, indeed, \\(F_X(x)=0.2\\) for the found value of \\(x\\):\n\n\n[1] 0.2",
-    "crumbs": [
-      "Labs - Problems",
-      "Lab 1 - Problems"
-    ]
-  },
-  {
-    "objectID": "Lab1.html#section-4",
-    "href": "Lab1.html#section-4",
-    "title": "Lab 1: From basics to probability distributions",
-    "section": "3.2 ",
-    "text": "3.2 \n\nLet \\(X\\sim \\Gamma(3, 2)\\). Find \\(a\\) such that \\(\\P(a\\leq X &lt; 5)=0.4\\). (Hint: find first \\(F_X(a)\\) and then find \\(a\\).) Assign the answer to R variable a.\nCheck the answer:\n\na\n\n[1] 1.546295\n\n\n\n\nTo generate n (independent) random values distributed according to \\(\\Gamma(\\alpha, \\lambda)\\), we use the command rgamma(n, shape = alpha, rate = lambda). The output is a vector (of the length n).\nSince the values are random, if you run the same rgamma command again and again, the output will be different all the time:\n\n\n\n[1] 0.0005612651 0.0299092083\n\n\nand another output for the same input:\n\n\n[1] 0.05120926 0.14020223\n\n\nTo fix the output, we should “set a seed”: write the code set.seed(m) with any natural number instead of m. For each m, there will be a fixed output. If you change m, the output will also changes.",
-    "crumbs": [
-      "Labs - Problems",
-      "Lab 1 - Problems"
-    ]
-  },
-  {
-    "objectID": "Lab1.html#section-5",
-    "href": "Lab1.html#section-5",
-    "title": "Lab 1: From basics to probability distributions",
-    "section": "3.3 ",
-    "text": "3.3 \n\nSet the seed \\(123\\), i.e. write set.seed(123) before your code. Generate \\(10000\\) values of \\(X\\sim\\Gamma(2,3)\\). Find the mean (average) of these values and assign it to the variable m. You may either use sum function discussed above (and average it) or mean function (use ?mean if experience difficulties).\nCheck the answer:\n\nm\n\n[1] 0.6592689\n\n\n\nYou may check that this answer will remain the same for each new run, as the randomness is “frozen” now.\n\nNote that, by LLN (the Low of Large Numbers), the obtained mean (i.e. a sample mean) should be close to \\(\\E(X)=\\frac{\\alpha}{\\lambda}\\). And indeed, the received value is close to \\(\\frac23\\approx0.66\\), we may calculate this in R, of course (using abs function for an absolute value of a number):\n\n\n\n[1] 0.00739773",
-    "crumbs": [
-      "Labs - Problems",
-      "Lab 1 - Problems"
-    ]
-  },
-  {
-    "objectID": "Lab1-Solutions.html",
-    "href": "Lab1-Solutions.html",
-    "title": "Lab 1: Solutions",
-    "section": "",
-    "text": "\\[\n  \\renewcommand{\\P}{\\mathbb{P}}\n  \\newcommand{\\E}{\\mathbb{E}}\n\\]",
+    "text": "3.3 \n\nPlot two graphs in one column, one for males, another for females. On each graph, plot \\(\\mu_x\\) for \\(x\\in[0,111]\\), and also plot \\(\\hat{b}\\cdot \\hat{c}^x\\) for \\(x\\in[25,95]\\) in another colour.\n\n\nCode\npar(mfrow = c(2, 1))\n\nplot(age, mux_males, type=\"l\", col=\"blue\", xlab=\"Age\", ylab=\"Force of mortality\", main=\"Males\")\nlines(25:95, b_male * c_male**(25:95), col = \"red\")\n\nplot(age, mux_females, type=\"l\", col=\"blue\", xlab=\"Age\", ylab=\"Force of mortality\", main=\"Females\")\nlines(25:95, b_female * c_female**(25:95), col = \"red\")\n\n\n\n\n\n\n\n\n\nCode\npar(mfrow = c(1, 1))",
     "crumbs": [
       "Labs - Solutions",
-      "Lab 1 - Solutions"
-    ]
-  },
-  {
-    "objectID": "Lab1-Solutions.html#section",
-    "href": "Lab1-Solutions.html#section",
-    "title": "Lab 1: Solutions",
-    "section": "2.1 ",
-    "text": "2.1 \n\nLet \\(X\\) be the random variable that is the result of throwing a (fair) dice, i.e. \\(X\\) may take either of values \\(1,2,3,4,5,6\\) with equal probabilities \\(\\frac16\\).\n\nDefine vector \\[\nx=(x_1,x_2,\\ldots,x_6)=(1,2,\\ldots,6)\n\\] of values of \\(X\\) and assign it to R-variable x.\nDefine vector \\[\np=(p_1,p_2,\\ldots,p_6)=\\Bigl(\\frac16,\\frac16,\\ldots,\\frac16\\Bigr)\n\\] of the probabilities, and assign it to R-variable p.\nRecall that the expectation of \\(X\\) is \\[\n\\E(X)=\\sum_{i=1}^6 x_ip_i=x_1p_1+\\ldots x_6p_6=x\\cdot p.\n\\] Calculate \\(\\E(X)\\) (using the previously considered functions).\n\nCheck the answer. (Unfold the code.)\n\n\nCode\nx &lt;- seq(1,6)\np &lt;- rep(1/6, 6)\nsum(x*p)\n\n\n[1] 3.5",
-    "crumbs": [
-      "Labs - Solutions",
-      "Lab 1 - Solutions"
-    ]
-  },
-  {
-    "objectID": "Lab1-Solutions.html#section-1",
-    "href": "Lab1-Solutions.html#section-1",
-    "title": "Lab 1: Solutions",
-    "section": "2.2 ",
-    "text": "2.2 \n\nRecall that the variance of a random variable can be found by the following formulas: \\[\n\\begin{aligned}\\mathrm{Var}(X) &= \\mathbb{E}\\Bigl(\\bigl(X-\\mathbb{E}(X)\\bigr)^2\\Bigr)\\\\\n    &= \\sum_{i=1}^6 \\bigl(x_i-\\mathbb{E}(X)\\bigr)^2p_i\\end{aligned}.\n\\] Find \\(\\mathrm{Var}(X)\\) (using the previously considered functions).\nCheck the answer:\n\n\nCode\nsum(p*(x-sum(x*p))**2)\n\n\n[1] 2.916667",
-    "crumbs": [
-      "Labs - Solutions",
-      "Lab 1 - Solutions"
-    ]
-  },
-  {
-    "objectID": "Lab1-Solutions.html#section-2",
-    "href": "Lab1-Solutions.html#section-2",
-    "title": "Lab 1: Solutions",
-    "section": "2.3 ",
-    "text": "2.3 \n\nLet \\(X=(1,2,\\ldots,2024)\\) and \\(Y=(Y_1,\\ldots,Y_{2024})\\) with\n\\[\nY_k = X_1+\\ldots+X_k, \\qquad 1\\leq k\\leq 2024.\n\\]\nFind how many components of \\(Y\\) are bigger than \\(10^6\\). (Hint: remember that True stands for 1).\nCheck the answer:\n\n\nCode\nx &lt;- 1:2024\ny &lt;- cumsum(x)\nsum(y&gt;10**6)\n\n\n[1] 611\n\n\n\n\nSlicing\n\n\nIf x is a vector, to access its component with index i one needs to use x[i]:\n\n\na &lt;- seq(2,20,2)\na[3]\n\n[1] 6\n\n\n\nRemark. Note that the indexation in R starts with 1 (in contrast to e.g. Python).\n\n\nWe can also get a slice of a vector by specifying the range of indexes, e.g.\n\n\na[3:5]\n\n[1]  6  8 10\n\n\n\nThe indexes do not need to follow some order:\n\n\na[c(3,7,1)]\n\n[1]  6 14  2",
-    "crumbs": [
-      "Labs - Solutions",
-      "Lab 1 - Solutions"
-    ]
-  },
-  {
-    "objectID": "Lab1-Solutions.html#section-3",
-    "href": "Lab1-Solutions.html#section-3",
-    "title": "Lab 1: Solutions",
-    "section": "3.1 ",
-    "text": "3.1 \n\nLet \\(X\\sim Exp(0.1)\\). Find \\(\\P(1&lt;X\\leq3)\\).\n\n\nSolution. We know that (see Equation 1 above)\n\\[\n\\P(1&lt;X\\leq3) = F_X(3) - F_X(1)\n\\]\nTherefore, we can use the code\n\n\nCode\npexp(3, 0.1) - pexp(1, 0.1)\n\n\n[1] 0.1640192\n\n\n\n\nThe survival function \\(S_X(x) = \\P(X&gt;x)\\) can be calculated, of course, from the relation \\(S_X(x) = 1- F_X(x)\\). There is, however, more numerically exact way by using the argument lower.tail = FALSE (or lower.tail = F) for function pexp:\n\n\npexp(0.5, 3,  lower.tail  = F) \n\n[1] 0.2231302\n\n\nthat coincides with\n\n1 - pexp(0.5, 3)\n\n[1] 0.2231302\n\n\nat least in the first 5 decimal figures.\n(Surely, for the exponential distribution one has an explicit simple formula: \\(S_X(x)= e^{-\\lambda x}\\).)\n\nGamma distribution\n\n\nRecall that, for \\(X\\sim \\Gamma(\\alpha,\\lambda)\\),\n\n\\[\nf_X(x)=\\frac{\\lambda^\\alpha}{\\Gamma(\\alpha)}x^{\\alpha-1} e^{-\\lambda x}, \\quad x\\geq0.\n\\]\n\nThe corresponding R functions, e.g. dgamma, pgamma etc., should hence have at least 3 arguments. \\(\\alpha\\) corresponds to shape (second parameter) and \\(\\lambda\\) corresponds to rate (third parameter), i.e. e.g., for \\(X\\sim\\Gamma(0.1,2)\\), \\(f_X(3)\\) can be calculated as follows:\n\n\ndgamma(3, 0.1, 2)\n\n[1] 0.000103893\n\n\nIt may be more convenient (though not necessary) to write explicitly: dgamma(3, shape = 0.1, rate = 2).\n\nBy the definition, for any \\(p\\in(0,1)\\), the \\(p\\)-quantile is the value of \\(x\\), such that\n\n\\[\nF_X(x) = \\P(X\\leq x) = p,\n\\]\ni.e. \\(x=F_X^{-1}(p)\\). The corresponding R-function has prefix q. For example, for \\(X\\sim\\Gamma(0.1,2)\\), to find \\(x\\) such that \\(F_X(x)=0.2\\) we can use the following code:\n\nx &lt;- qgamma(0.2, shape = 0.1, rate = 2)\nx\n\n[1] 3.109401e-08\n\n\nand we can check that, indeed, \\(F_X(x)=0.2\\) for the found value of \\(x\\):\n\npgamma(x, shape = 0.1, rate = 2)\n\n[1] 0.2",
-    "crumbs": [
-      "Labs - Solutions",
-      "Lab 1 - Solutions"
-    ]
-  },
-  {
-    "objectID": "Lab1-Solutions.html#section-4",
-    "href": "Lab1-Solutions.html#section-4",
-    "title": "Lab 1: Solutions",
-    "section": "3.2 ",
-    "text": "3.2 \n\nLet \\(X\\sim \\Gamma(3, 2)\\). Find \\(a\\) such that \\(\\P(a\\leq X &lt; 5)=0.4\\). (Hint: find first \\(F_X(a)\\) and then find \\(a\\).) Assign the answer to R variable a.\n\n\nSolution. We have that\n\\[\nF_X(5)-F_X(a) = 0.4,\n\\]\nhence,\n\\[\nF_X(a)=F_X(5)-0.4.\n\\]\n\n\nCode\n# F(5) - F(a) = 0.4\n# F(a) = F(5) - 0.4\nfa &lt;- pgamma(5, shape = 3, rate = 2) - 0.4\na &lt;- qgamma(fa, shape = 3, rate = 2)\n\n\n\n\nTo generate n (independent) random values distributed according to \\(\\Gamma(\\alpha, \\lambda)\\), we use the command rgamma(n, shape = alpha, rate = lambda). The output is a vector (of the length n).\nSince the values are random, if you run the same rgamma command again and again, the output will be different all the time:\n\n\nrgamma(2, shape = 0.1, rate = 0.2)\n\n[1] 1.619667 1.364637\n\n\nand another output for the same input:\n\nrgamma(2, shape = 0.1, rate = 0.2)\n\n[1] 0.001953884 0.702667760\n\n\nTo fix the output, we should “set a seed”: write the code set.seed(m) with any natural number instead of m. For each m, there will be a fixed output. If you change m, the output will also changes.",
-    "crumbs": [
-      "Labs - Solutions",
-      "Lab 1 - Solutions"
-    ]
-  },
-  {
-    "objectID": "Lab1-Solutions.html#section-5",
-    "href": "Lab1-Solutions.html#section-5",
-    "title": "Lab 1: Solutions",
-    "section": "3.3 ",
-    "text": "3.3 \n\nSet the seed \\(123\\), i.e. write set.seed(123) before your code. Generate \\(10000\\) values of \\(X\\sim\\Gamma(2,3)\\). Find the mean (average) of these values and assign it to the variable m. You may either use sum function discussed above (and average it) or mean function (use ?mean if experience difficulties).\n\n\nCode\nset.seed(123)\nx &lt;- rgamma(10000, shape = 2, rate = 3)\nm &lt;- mean(x)\n\n\nCheck the answer:\n\nm\n\n[1] 0.6592689\n\n\n\nYou may check that this answer will remain the same for each new run, as the randomness is “frozen” now.\n\nNote that, by LLN (the Low of Large Numbers), the obtained mean (i.e. a sample mean) should be close to \\(\\E(X)=\\frac{\\alpha}{\\lambda}\\). And indeed, the received value is close to \\(\\frac23\\approx0.66\\), we may calculate this in R, of course (using abs function for an absolute value of a number):\n\n\nabs(m - 2/3)\n\n[1] 0.00739773",
-    "crumbs": [
-      "Labs - Solutions",
-      "Lab 1 - Solutions"
-    ]
-  },
-  {
-    "objectID": "Lab2-Solutions.html",
-    "href": "Lab2-Solutions.html",
-    "title": "Lab 2: Probability Distributions, Plotting, Creating Functions",
-    "section": "",
-    "text": "\\[\n  \\renewcommand{\\P}{\\mathbb{P}}\n  \\newcommand{\\E}{\\mathbb{E}}\n\\]",
-    "crumbs": [
-      "Labs - Solutions",
-      "Lab 2 - Solutions"
-    ]
-  },
-  {
-    "objectID": "Lab2-Solutions.html#section",
-    "href": "Lab2-Solutions.html#section",
-    "title": "Lab 2: Probability Distributions, Plotting, Creating Functions",
-    "section": "1.1 ",
-    "text": "1.1 \n\nPlot graph of \\(y=x^2\\) on \\(x\\in[-10,10]\\). (Hint: divide \\([-10,10]\\) on many small pieces using seq function discussed in Lab 1, and assign the output of this function to vector x, create vector y of squares of x and, hence, connect values of \\(y\\) at ends of these pieces by straight lines; if the pieces are small, it would like a smooth curve).\nTry by yourself, if it does not work, unfold the code below.\n\n\nCode\n# Recall that R applies any function to a vector component-wise (entry-wise), \n# i.e. if there is a vector `x` and a function `f`, \n# then `f(x)` will be the vector whose first component \n# is the value of `f` on the first compnent of `x` and so on.\nx &lt;- seq(-10, 10, 0.1)\ny &lt;- x**2\nplot(x,y, type='l')",
-    "crumbs": [
-      "Labs - Solutions",
-      "Lab 2 - Solutions"
-    ]
-  },
-  {
-    "objectID": "Lab2-Solutions.html#section-1",
-    "href": "Lab2-Solutions.html#section-1",
-    "title": "Lab 2: Probability Distributions, Plotting, Creating Functions",
-    "section": "1.2 ",
-    "text": "1.2 \n\nLet \\(X\\sim Exp(0.3)\\). Plot the graph of the survival function \\(S_X(x)\\) for \\(x\\in [0,10]\\) using pexp function (also discussed in Lab 1).\nThe expected output:\n\n\nCode\nx &lt;- seq(0, 10, 0.1)\ny &lt;- pexp(x, 0.3, lower.tail = F)\nplot(x,y, type='l')",
-    "crumbs": [
-      "Labs - Solutions",
-      "Lab 2 - Solutions"
-    ]
-  },
-  {
-    "objectID": "Lab2-Solutions.html#section-2",
-    "href": "Lab2-Solutions.html#section-2",
-    "title": "Lab 2: Probability Distributions, Plotting, Creating Functions",
-    "section": "2.1 ",
-    "text": "2.1 \n\nLet \\(Y\\sim\\ln\\mathrm{N}(0.01,0.2^2)\\). Plot the graph of the density \\(f_Y(x)\\) for \\(x\\in[0,3]\\). Use xlab and ylab arguments of the plot function to set-up the names “x value” and “Density” for the horizontal and vertical axes. (We didn’t use them before, so their defaults values, which are empty lines, like xlab='', were used by R in the past). Use main argument of the plot function to set-up the title “Normal distribution density” for the whole plot.\nCheck the output (to make the graph smother, use smaller step in seq function while defining the x values).\n\n\nCode\nx &lt;- seq(0, 3, 0.01)\ny &lt;- dlnorm(x, meanlog = 0.01, sdlog = 0.2)\nplot(x,y, type=\"l\", xlab=\"x value\", ylab=\"Density\", main=\"Log-normal distribution density\")",
-    "crumbs": [
-      "Labs - Solutions",
-      "Lab 2 - Solutions"
-    ]
-  },
-  {
-    "objectID": "Lab2-Solutions.html#section-3",
-    "href": "Lab2-Solutions.html#section-3",
-    "title": "Lab 2: Probability Distributions, Plotting, Creating Functions",
-    "section": "2.2 ",
-    "text": "2.2 \n\nThe hazard function of a random variable \\(X\\) is defined as follows: \\[\nh_X(x) := \\frac{f_X(x)}{1-F_X(x)}.\n\\] Let \\(X\\sim \\mathrm{N}(4, 0.4)\\). Calculate \\(h_X(2)\\).\nCheck the output:\n\n\nCode\nsigma = sqrt(0.4) # square root of sigma^2 = 0.4\ndnorm(2, 4, sigma)/pnorm(2, 4, sigma, lower.tail = F)\n\n\n[1] 0.004253513",
-    "crumbs": [
-      "Labs - Solutions",
-      "Lab 2 - Solutions"
-    ]
-  },
-  {
-    "objectID": "Lab2-Solutions.html#section-4",
-    "href": "Lab2-Solutions.html#section-4",
-    "title": "Lab 2: Probability Distributions, Plotting, Creating Functions",
-    "section": "3.1 ",
-    "text": "3.1 \n\nSet seed 131 (see Task 3.3 of Lab 1). Generate \\(10^6\\) random variables distributed with \\(W(0.76,0.25)\\) (i.e. calculate \\(\\sigma\\) from Equation 4 and use the needed function described above); and assign this to a vector. Calculate the sample mean of these values (and assign it to a variable). Calculate the expected value \\(\\mathbb{E}(X)\\) of \\(X\\sim W(0.76,0.25)\\) using Equation 2 and assign it to another variable: note that, for the Gamma-function \\(\\Gamma(x)\\) in Equation 2, you can use R-code gamma(x) (notice the small first letter; e.g. gamma(5) will return 24). Finally, find the absolute value of the difference between the found sample mean and the expected value.\nCheck your answer:\n\n\nCode\nalpha = 0.76\nbeta = 0.25\nsigma = alpha**(-1/beta)\nset.seed(131)\nx &lt;- rweibull(10**6, shape=beta, scale=sigma)\nm &lt;- mean(x)\ne &lt;- gamma(1+1/beta) * alpha**(-1/beta)\nabs(m-e)\n\n\n[1] 0.005210536\n\n\n\n\nInstead of recalculating the parameters every time we need to use parametrisation Equation 1 instead of the built-in parametrisation Equation 3, we may want to use another functions designed to deal with the parametrisation Equation 1. One can either define needed functions by ourselves or use the functions defined in external libraries (packages).",
-    "crumbs": [
-      "Labs - Solutions",
-      "Lab 2 - Solutions"
-    ]
-  },
-  {
-    "objectID": "Lab2-Solutions.html#section-5",
-    "href": "Lab2-Solutions.html#section-5",
-    "title": "Lab 2: Probability Distributions, Plotting, Creating Functions",
-    "section": "4.1 ",
-    "text": "4.1 \n\nDefine the function rweibull65 which would have three arguments n, shape, scale, where shape corresponds to \\(\\beta\\) and scale to \\(\\alpha\\) in Equation 1, and which would return n Weibull random values distributed with \\(W(\\alpha,\\beta)\\) with shape\\(=\\beta\\) and scale\\(=\\alpha\\); so that this function rweibull65 would call rweibull inside its body; see also the remark below.\n\n\nCode\nrweibull65 &lt;- function(n, shape, scale){\n    another_scale &lt;- scale**(-1/shape)\n    rweibull(n, shape = shape, scale = another_scale)\n}\n\n\nRun the following code to check your function:\n\nset.seed(12)\nrweibull65(2, 1.2, 2.3)\n\n[1] 1.1318101 0.1312781\n\n\n\n\nRemark. R distinguishes the name of the argument and the argument itself. For example, in the defined above function sindeg the argument is called x. So we can specify the argument (though it’s not needed here since it’s the only argument):\n\nsindeg(x = 30)\n\n[1] 0.5\n\n\nNow, imagine we have a variable in our program which is also called x. Then we can write inside the function x = x:\n\nx &lt;- 30\nsindeg(x = x)\n\n[1] 0.5\n\n\nR will understand that, in x = x the left x is the name of the argument of function sindeg, whereas the right x is the variable defined earlier.",
-    "crumbs": [
-      "Labs - Solutions",
-      "Lab 2 - Solutions"
-    ]
-  },
-  {
-    "objectID": "Lab2-Solutions.html#section-6",
-    "href": "Lab2-Solutions.html#section-6",
-    "title": "Lab 2: Probability Distributions, Plotting, Creating Functions",
-    "section": "5.1 ",
-    "text": "5.1 \n\nLet \\(X\\sim W(1.2, 3.1)\\). Using functions pweibullPH and qweibullPH, find \\(b\\) such that \\(\\P(1\\leq X\\leq b)=0.25\\).\nCheck your answer:\n\n\nCode\n# F(b)-F(1)=0.25\n# F(b)=F(1)+0.25\nfb &lt;- pweibullPH(1, shape=3.1, scale = 1.2)+0.25\nb &lt;- qweibullPH(fb, shape=3.1, scale = 1.2)\nb\n\n\n[1] 1.339862",
-    "crumbs": [
-      "Labs - Solutions",
-      "Lab 2 - Solutions"
-    ]
-  },
-  {
-    "objectID": "Lab2-Solutions.html#section-7",
-    "href": "Lab2-Solutions.html#section-7",
-    "title": "Lab 2: Probability Distributions, Plotting, Creating Functions",
-    "section": "6.1 ",
-    "text": "6.1 \n\nDefine function pburr which would have \\(4\\) arguments: x, alpha, lambda, gamma which would return the value of \\(F_{Burr}(x)\\) for the given values of the parameters.\n\n\nCode\npburr &lt;- function(x, alpha, lambda, gamma){\n    1 - (lambda/(lambda+x**gamma))**alpha\n}\n\n\nCheck your code by calculating \\(F_{Burr}(0.5)\\) for \\(\\alpha=1\\), \\(\\lambda=2\\), \\(\\gamma=3\\):\n\n\nCode\npburr(0.5, alpha = 1, lambda = 2, gamma = 3)\n\n\n[1] 0.05882353\n\n\n\n\nWe discussed previously how to plot the graph of a function. Often we need to plot several graphs on the same diagram, e.g. in different colours. The argument col of function plot is responsible for colours:\n\n\nx &lt;- seq(-2*pi,2*pi, 0.05)\ny &lt;- sin(x)\nplot(x, y, col = 'red', type='l')\n\n\n\n\n\n\n\n\nhowever, to plot another graph we would need to replace the second plot by lines (without type='l'). The last lines add the legend to the graph:\n\nx &lt;- seq(-2*pi,2*pi, 0.05)\ny &lt;- sin(x)\nz &lt;- cos(x)\nplot(x, y, col = 'red', type='l')\nlines(x, z, col = 'blue')\n\nlegend(x = \"topright\",          # Position\n       legend = c(\"sin(x)\", \"cos(x)\"),  # Legend texts\n       lty = c(1, 1),           # Line types: 1 stands for solid\n       col = c('red', 'blue'),  # Line colours\n       lwd = 2,                 # Line width\n       bg = 'light blue')      # Background color of the legend",
-    "crumbs": [
-      "Labs - Solutions",
-      "Lab 2 - Solutions"
-    ]
-  },
-  {
-    "objectID": "Lab2-Solutions.html#section-8",
-    "href": "Lab2-Solutions.html#section-8",
-    "title": "Lab 2: Probability Distributions, Plotting, Creating Functions",
-    "section": "6.2 ",
-    "text": "6.2 \n\nPlot graphs of \\(F_{Burr}(x)\\) for \\(\\alpha=1\\), \\(\\lambda=2\\) and \\(\\gamma=3\\) (blue graph) or \\(\\gamma=0.3\\) (red graph); let \\(x\\in[1,5]\\). Add legend to get the result:\n\n\n\nCode\nx &lt;- seq(1,5, 0.05)\ny &lt;- pburr(x, alpha = 1, lambda = 2, gamma = 3)\nz &lt;- pburr(x, alpha = 1, lambda = 2, gamma = 0.3)\nplot(x, y, col = 'blue', type='l')\nlines(x, z, col = 'red')\n\nlegend(x = \"topright\", \n       legend = c(\"gamma=3\", \"gamma=0.3\"),\n       lty = c(1, 1),       \n       col = c('blue', 'red'),\n       lwd = 2,            \n       bg = 'light blue')",
-    "crumbs": [
-      "Labs - Solutions",
-      "Lab 2 - Solutions"
-    ]
-  },
-  {
-    "objectID": "Lab3-Solutions.html",
-    "href": "Lab3-Solutions.html",
-    "title": "Lab 3: Parameter Estimation, Loops, Compound Distributions",
-    "section": "",
-    "text": "\\[\n  \\renewcommand{\\P}{\\mathbb{P}}\n  \\newcommand{\\E}{\\mathbb{E}}\n\\]",
-    "crumbs": [
-      "Labs - Solutions",
-      "Lab 3 - Solutions"
-    ]
-  },
-  {
-    "objectID": "Lab3-Solutions.html#section",
-    "href": "Lab3-Solutions.html#section",
-    "title": "Lab 3: Parameter Estimation, Loops, Compound Distributions",
-    "section": "1.1 ",
-    "text": "1.1 \n\nSet seed 123. Generate \\(100\\) random values of \\(Y\\sim N(5,9)\\), and assign them to vector y. Assign the MLE for \\(\\mu=\\mathbb{E}(Y)\\) to variable mu and assign the MLE for \\(\\sigma=\\sigma(Y)\\) to variable sigma. Output the vector \\((\\mu,\\sigma,\\mu+\\sigma)\\). Check the answer.\n\n\nCode\nset.seed(123)\ny &lt;- rnorm(n = 100, mean = 5, sd = 3)\nf &lt;- fitdistr(y, \"normal\")\nmu &lt;- unname(f$estimate[1])\nsigma &lt;- unname(f$estimate[2])\nc(mu, sigma, mu+sigma)\n\n\n[1] 5.271218 2.724721 7.995939",
-    "crumbs": [
-      "Labs - Solutions",
-      "Lab 3 - Solutions"
-    ]
-  },
-  {
-    "objectID": "Lab3-Solutions.html#section-1",
-    "href": "Lab3-Solutions.html#section-1",
-    "title": "Lab 3: Parameter Estimation, Loops, Compound Distributions",
-    "section": "1.2 ",
-    "text": "1.2 \n\nImagine that you don’t know that the first data x has exponential distribution and decided to try a normal distribution \\(N(\\mu,\\sigma^2)\\). It is still possible to calculate MLE for its parameters, though it’s likely that the estimated standard errors will be high. Given that the standard errors are in the sd component of fitdistr function, calculate the vector of standard errors for \\(\\mu\\) and \\(\\sigma\\).\n\n\nCode\ng &lt;- fitdistr(x, \"normal\")\nmu_stand_error &lt;- unname(g$sd[1])\nsd_stand_error &lt;- unname(g$sd[2])\nc(mu_stand_error, sd_stand_error)\n\n\n[1] 1.3598213 0.9615389\n\n\n\n\nEven when standard errors are relatively small, it is still reasonable to ask ourselves how can we be certain that the data follows the particular disribution. Various statistical tests may be applied. For ungrouped data, as we have e.g. in vector x, the Kolmogorov–Smirnov test is widely used.\n\nks.test(x, \"pexp\", rate = lambda_mle)\n\n\n  Exact one-sample Kolmogorov-Smirnov test\n\ndata:  x\nD = 0.10167, p-value = 0.6423\nalternative hypothesis: two-sided\n\n\nIt tests whether we should reject the null-hypothesis \\(H_0\\) that the data follows the exponential distribution, against the alternative hypothesis \\(H_1\\) that it does not.\nAs you can see ks.test function has several arguments:\n\nvector of the data (x);\nname of the R function for the CDF we test against (pexp);\nvalue(s) for the parameter(s) of that R function, using their name(s) (rate here; remember that you can always type in concole ?functionname to learn about the parameters of functionname); the values were previously obtained from MLE.\n\nThe output (recall that you may get different numbers as your data x was likely different) shows the number D (sum of absolute values of differences (residual distances) between the theoretical CDF and the CDF which can be calculated from the data, see the graph below), the smaller it is, the better prediction is. And also it shoes the \\(p\\)-value; in contrary, if \\(p\\)-value is small (close to \\(0\\)) it would mean that we have to reject \\(H_0\\) as then \\(p\\)-value would be the probability to observe the given data if \\(H_0\\) were true. Here \\(p\\)-value is pretty large, so there is no evidences to reject \\(H_0\\).",
-    "crumbs": [
-      "Labs - Solutions",
-      "Lab 3 - Solutions"
-    ]
-  },
-  {
-    "objectID": "Lab3-Solutions.html#section-2",
-    "href": "Lab3-Solutions.html#section-2",
-    "title": "Lab 3: Parameter Estimation, Loops, Compound Distributions",
-    "section": "1.3 ",
-    "text": "1.3 \n\nFor the data y and MLE estimates mu and sigma from Task 1.1, apply the Kolmogorov–Smirnov test to test the null hypothesis that y follows the normal distribution with these two parameters. Check the output.\n\n\nCode\nks.test(y, \"pnorm\", mean = mu, sd = sigma)\n\n\n\n    Asymptotic one-sample Kolmogorov-Smirnov test\n\ndata:  y\nD = 0.058719, p-value = 0.8808\nalternative hypothesis: two-sided",
-    "crumbs": [
-      "Labs - Solutions",
-      "Lab 3 - Solutions"
-    ]
-  },
-  {
-    "objectID": "Lab3-Solutions.html#section-3",
-    "href": "Lab3-Solutions.html#section-3",
-    "title": "Lab 3: Parameter Estimation, Loops, Compound Distributions",
-    "section": "2.1 ",
-    "text": "2.1 \n\nSet seed \\(23\\). Generate \\(10^5\\) an exponential random variable with mean \\(3\\) (think about the value of the rate argument). Record the maximum of them (use R-function max). Repeat this procedure \\(10^3\\) times. Calculate the proportion of the found maximums which are larger then \\(50\\).\nCheck the answer:\n\n\nCode\nn &lt;- 10**5\nm &lt;- 10**3\nlambda &lt;- 1/3\nmaxs &lt;- rep(0, m)\nset.seed(23)\nfor (i in 1:m){\n    x &lt;- rexp(n, rate = lambda)\n    maxs[i] &lt;- max(x)\n}\nsum(maxs &gt; 50) / m\n\n\n[1] 0.006",
-    "crumbs": [
-      "Labs - Solutions",
-      "Lab 3 - Solutions"
-    ]
-  },
-  {
-    "objectID": "Lab3-Solutions.html#section-4",
-    "href": "Lab3-Solutions.html#section-4",
-    "title": "Lab 3: Parameter Estimation, Loops, Compound Distributions",
-    "section": "3.1 ",
-    "text": "3.1 \n\nSet seed \\(123\\). Generate \\(10000\\) values from a compound Poisson distribution with Poisson parameter \\(\\lambda=1000\\) and individual claims which have gamma distribution \\(\\Gamma(750,0.25)\\) (recall that here \\(0.25\\) is called rate in the corresponding R functions).\nIn other words, you will have some numbers \\(N_1,\\ldots, N_{10000}\\) which came from the Poisson distribution, and for each \\(N_k\\), you have to generate \\(N_k\\) numbers from the gamma distribution: \\(X_1^{(k)},\\ldots,X_{N_k}^{(k)}\\), and then you got the corresponding value of a compound Poisson random variables \\[\nS^{(k)} = X_1^{(k)}+\\ldots+X_{N_k}^{(k)}.\n\\]\nFind the mean and the standard deviation (sd function) of the obtained sample of the compound Poisson random variables.\nHint: generate a vector N of \\(n=10000\\) Poisson r.v., and create a zero-vector S of length \\(10000\\) using numeric function. Then you will use a loop in \\(k\\) (\\(1\\leq k\\leq 10000\\)) inside which you generate the corresponding values of \\(X_i^{(k)}\\) and get their sums \\(S^{(k)}\\); and the latter would be assigned to S[k].\nCheck the answer:\n\n\nCode\nset.seed(123)\nn &lt;- 10^4\nN &lt;- rpois(n, lambda = 1000) # You may omit text \"lambda = \" here\nS &lt;- numeric(n)\nfor (k in 1:n)\n{\n  x &lt;- rgamma(N[k], shape = 750, rate = 0.25)\n  S[k] &lt;- sum(x)\n}\nc( mean(S), sd(S) )\n\n\n[1] 2997650.56   93719.71\n\n\nNote that (see Lecture Notes) \\[\n\\E(S)=\\E(N)\\E(X)=1000\\cdot\\frac{750}{0.25}=3000000,\n\\] so the mean for the sample we obtained is close to the theoretical expectation.",
-    "crumbs": [
-      "Labs - Solutions",
-      "Lab 3 - Solutions"
-    ]
-  },
-  {
-    "objectID": "Lab3-Solutions.html#section-5",
-    "href": "Lab3-Solutions.html#section-5",
-    "title": "Lab 3: Parameter Estimation, Loops, Compound Distributions",
-    "section": "3.2 ",
-    "text": "3.2 \n\nIn contrast to \\(\\E(S)\\) and \\(\\mathrm{Var}(S)\\), the probability distribution of \\(S\\) is hard for precise theoretical analysis. For example, there is not a “compact” formula for \\[\n\\P(S&gt;\\E(S))=\\P(S&gt;3000000).\n\\] Your task is to estimate this probability by looking at the ratio of \\(S^{(k)}&gt;3000000\\) in the sample you previously obtained to all \\(S^{(k)}\\).\nCheck the answer.\n\n\nCode\nsum(S&gt;3000000)/n\n\n\n[1] 0.4881\n\n\n\n\nRecall that a number \\(q\\) is called \\(\\alpha\\)-percentile for a random variable \\(X\\), if \\(\\mathbb{P}(X\\leq q)=\\alpha\\). As we discussed in Lab 1, in R, it’s called “quantiles”, and the corresponding functions starts with “q”: qexp, qnorm etc.\nWe also discussed on a lecturethe notion of percentiles/quantiles for the data samples: we should order the sample, and find the number which divides it in the proportion \\(\\alpha/(1-\\alpha)\\). The corresponding R function is called quantile:\n\nu &lt;- rpois(n = 10, lambda = 100) \nsort(u) # This command is NOT needed for the quantile R function, it is just for better visualisation of the quantile function\n\n [1]  83  92  94  94  95  97 100 103 106 109\n\nquantile(u,0.3)\n\n30% \n 94",
-    "crumbs": [
-      "Labs - Solutions",
-      "Lab 3 - Solutions"
-    ]
-  },
-  {
-    "objectID": "Lab3-Solutions.html#section-6",
-    "href": "Lab3-Solutions.html#section-6",
-    "title": "Lab 3: Parameter Estimation, Loops, Compound Distributions",
-    "section": "3.3 ",
-    "text": "3.3 \n\nFind, based on the previously obtained sample of \\(S^{(k)}\\), the number \\(q\\) such that \\[\n\\P(S\\leq q) = 0.9\n\\] Assign the result to q.\nCheck the answer.\n\n\nCode\nq &lt;- quantile(S,0.9)\nq\n\n\n    90% \n3115719 \n\n\nNow, modify the code from the previous Task to check that \\(\\P(S\\leq 3115719) = 0.9\\).\n\n\nCode\nsum(S&lt;=q)/n\n\n\n[1] 0.9",
-    "crumbs": [
-      "Labs - Solutions",
-      "Lab 3 - Solutions"
-    ]
-  },
-  {
-    "objectID": "Lab4-Solutions.html",
-    "href": "Lab4-Solutions.html",
-    "title": "Lab 4: Reinsurance. Data frames",
-    "section": "",
-    "text": "For the next task, you will need to use function pmax. If a is a vector \\((a_1,\\ldots,a_m)\\) and x is a number, then usual max(a,x) returns \\[\n\\max\\{a_1,\\ldots,a_m,x\\}\n\\] that is a number, whereas pmax(a,x) returns \\[\n\\bigl(\\max\\{a_1,x\\},\\ldots,\\max\\{a_m,x\\})\n\\] that is a vector.\n\n\n\nSet seed \\(234\\). Simulate \\(15000\\) values for a reinsurer where (aggregated) claims have a compound Poisson distribution with parameter \\(900\\) and the individual claims have log-normal distribution \\(logN(7,0.3^2)\\) under individual excess of loss with retention \\(1700\\). Find the mean and the standard deviation of the obtained data, i.e. using the notations from the lecture notes, estimate \\(\\E(S_R)\\) for\n\\[\nS_R=Z_1+\\ldots+Z_N\n\\]\nfrom the sample, and also estimate \\(\\sigma(S_R)\\) from the sample.\nCheck the answer.\n\n\nCode\nset.seed(234)\nn &lt;- rpois(15000, lambda = 900) \nsR &lt;- numeric(15000)\nfor (k in 1:15000)\n{\n  x &lt;- rlnorm(n[k], meanlog = 7, sdlog = 0.3)\n  z &lt;- pmax(0,x-1700)\n  sR[k] &lt;- sum(z)\n}\nc( mean(sR), sd(sR) )\n\n\n[1] 16640.800  2872.169\n\n\n\n\n\n\n\nWe can see, using formulas from the lecture notes, that in the assumption of the previous task \\[\n\\E(S) = \\E(N)\\E(X)=900\\cdot e^{7+0.5\\cdot 0.3^2}=1032398\n\\] (you can also check that the mean of the sample: for \\(S\\) (not \\(S_R\\)), with the seed \\(234\\) it would be \\(1032358\\), pretty close). Suppose now that the reinsurer applies the aggregated excess \\(M\\), i.e. the insurer pays \\[\n  S_I=\\begin{cases}\n  S, & \\text{if } S \\leq M,\\\\\n  M, & \\text{if } S &gt; M\n  \\end{cases}\n\\] and the reinsurer pays \\[\n  S_R=S-S_I=\\begin{cases}\n  0, & \\text{if } S \\leq M,\\\\\n  S-M, & \\text{if } S &gt; M.\n  \\end{cases}\n\\]\nLet \\(M=\\E(S)=1032398\\). Modify the previous code and find \\(\\E(S_R)\\), the average paid by the reinsurer under this agreement.\nCheck the answer.\n\n\nCode\nset.seed(234)\nn &lt;- rpois(15000, lambda = 900) \ns &lt;- numeric(15000)\nfor (k in 1:15000)\n{\n  x &lt;- rlnorm(n[k], meanlog = 7, sdlog = 0.3)\n  s[k] &lt;- sum(x)\n}\nsR &lt;- pmax(0,s-1032398)\nmean(sR)\n\n\n[1] 14297.37",
-    "crumbs": [
-      "Labs - Solutions",
-      "Lab 4 - Solutions"
-    ]
-  },
-  {
-    "objectID": "Lab4-Solutions.html#section",
-    "href": "Lab4-Solutions.html#section",
-    "title": "Lab 4: Reinsurance. Data frames",
-    "section": "",
-    "text": "Set seed \\(234\\). Simulate \\(15000\\) values for a reinsurer where (aggregated) claims have a compound Poisson distribution with parameter \\(900\\) and the individual claims have log-normal distribution \\(logN(7,0.3^2)\\) under individual excess of loss with retention \\(1700\\). Find the mean and the standard deviation of the obtained data, i.e. using the notations from the lecture notes, estimate \\(\\E(S_R)\\) for\n\\[\nS_R=Z_1+\\ldots+Z_N\n\\]\nfrom the sample, and also estimate \\(\\sigma(S_R)\\) from the sample.\nCheck the answer.\n\n\nCode\nset.seed(234)\nn &lt;- rpois(15000, lambda = 900) \nsR &lt;- numeric(15000)\nfor (k in 1:15000)\n{\n  x &lt;- rlnorm(n[k], meanlog = 7, sdlog = 0.3)\n  z &lt;- pmax(0,x-1700)\n  sR[k] &lt;- sum(z)\n}\nc( mean(sR), sd(sR) )\n\n\n[1] 16640.800  2872.169",
-    "crumbs": [
-      "Labs - Solutions",
-      "Lab 4 - Solutions"
-    ]
-  },
-  {
-    "objectID": "Lab4-Solutions.html#section-1",
-    "href": "Lab4-Solutions.html#section-1",
-    "title": "Lab 4: Reinsurance. Data frames",
-    "section": "",
-    "text": "We can see, using formulas from the lecture notes, that in the assumption of the previous task \\[\n\\E(S) = \\E(N)\\E(X)=900\\cdot e^{7+0.5\\cdot 0.3^2}=1032398\n\\] (you can also check that the mean of the sample: for \\(S\\) (not \\(S_R\\)), with the seed \\(234\\) it would be \\(1032358\\), pretty close). Suppose now that the reinsurer applies the aggregated excess \\(M\\), i.e. the insurer pays \\[\n  S_I=\\begin{cases}\n  S, & \\text{if } S \\leq M,\\\\\n  M, & \\text{if } S &gt; M\n  \\end{cases}\n\\] and the reinsurer pays \\[\n  S_R=S-S_I=\\begin{cases}\n  0, & \\text{if } S \\leq M,\\\\\n  S-M, & \\text{if } S &gt; M.\n  \\end{cases}\n\\]\nLet \\(M=\\E(S)=1032398\\). Modify the previous code and find \\(\\E(S_R)\\), the average paid by the reinsurer under this agreement.\nCheck the answer.\n\n\nCode\nset.seed(234)\nn &lt;- rpois(15000, lambda = 900) \ns &lt;- numeric(15000)\nfor (k in 1:15000)\n{\n  x &lt;- rlnorm(n[k], meanlog = 7, sdlog = 0.3)\n  s[k] &lt;- sum(x)\n}\nsR &lt;- pmax(0,s-1032398)\nmean(sR)\n\n\n[1] 14297.37",
-    "crumbs": [
-      "Labs - Solutions",
-      "Lab 4 - Solutions"
-    ]
-  },
-  {
-    "objectID": "Lab4-Solutions.html#section-2",
-    "href": "Lab4-Solutions.html#section-2",
-    "title": "Lab 4: Reinsurance. Data frames",
-    "section": "2.1 ",
-    "text": "2.1 \n\nFind the sum of all values in the column y of this data frame df.\nCheck the answer:\n\n\nCode\nsum(df$y)\n\n\n[1] 997200",
-    "crumbs": [
-      "Labs - Solutions",
-      "Lab 4 - Solutions"
-    ]
-  },
-  {
-    "objectID": "Lab4-Solutions.html#section-3",
-    "href": "Lab4-Solutions.html#section-3",
-    "title": "Lab 4: Reinsurance. Data frames",
-    "section": "3.1 ",
-    "text": "3.1 \n\nDo the following steps:\n\nDownload file numbers.csv and save it in a directory (folder) on your computer (usually it’s “Documents” or “Downloads”).\nSave your R-file your are working with in R-Studio to the same directory (folder).\nClick with right mouse button on the file name at the top of R-Studio window and choose “Set working directory”.\n\nOR (instead of 3)\n\nGo to menu “Session”, choose “Set working directory”, and then choose “To source file location”\n\nIf you did 1-3 correctly, in “Files” tab on the (down) right part of R-Studio you will see your R-file and the downloaded CSV-file in the same directory.\n\nLoad the saved file by the command\n\n\ndf &lt;- read.csv(\"numbers.csv\")\n\nCheck yourself:\n\nhead(df)\n\n           x        y\n1 1.98193075 8.554741\n2 0.08423538 4.008477\n3 0.33576991 4.920004\n4 0.44245007 4.861317\n5 0.09377962 4.023355\n6 0.42974243 5.109215",
-    "crumbs": [
-      "Labs - Solutions",
-      "Lab 4 - Solutions"
-    ]
-  },
-  {
-    "objectID": "Lab4-Solutions.html#section-4",
-    "href": "Lab4-Solutions.html#section-4",
-    "title": "Lab 4: Reinsurance. Data frames",
-    "section": "3.2 ",
-    "text": "3.2 \n\nIt is given that the data in column x of “numbers.csv” file are independent values of a random variable \\(X\\sim Exp(\\lambda)\\). Find the estimate \\(\\hat{\\lambda}\\) for the parameter \\(\\lambda\\) using the method of moments (see Lecture Notes).\nCheck your answer:\n\n\nCode\n1/mean(df$x)\n\n\n[1] 1.152757",
-    "crumbs": [
-      "Labs - Solutions",
-      "Lab 4 - Solutions"
-    ]
-  },
-  {
-    "objectID": "Lab4-Solutions.html#section-5",
-    "href": "Lab4-Solutions.html#section-5",
-    "title": "Lab 4: Reinsurance. Data frames",
-    "section": "4.1 ",
-    "text": "4.1 \n\nFind the average of all values of y from df such that the corresponding values of x are larger than \\(1\\).\nCheck your answer:\n\n\nCode\nmean(df[df$x &gt; 1,]$y)\n\n\n[1] 7.687361",
-    "crumbs": [
-      "Labs - Solutions",
-      "Lab 4 - Solutions"
-    ]
-  },
-  {
-    "objectID": "Lab4-Solutions.html#section-6",
-    "href": "Lab4-Solutions.html#section-6",
-    "title": "Lab 4: Reinsurance. Data frames",
-    "section": "5.1 ",
-    "text": "5.1 \n\nPlot on the same diagram the scatter plot \\(y\\) against \\(x\\) as it is shown above, but in blue color, and plot the line \\(y=kx+b\\) with the found values of \\(k\\) and \\(b\\) (do not copy-paste, use coef function) in red colour. (See Lab 3 for plotting two graphs on one diagram).\n\n\nCode\nx &lt;- df$x\ny &lt;- df$y\nplot(x, y, col = 'blue')\nlines(x, ans[2]*x + ans[1], col = 'red')",
-    "crumbs": [
-      "Labs - Solutions",
-      "Lab 4 - Solutions"
+      "Lab 6 - Solutions"
     ]
   },
   {
@@ -1077,102 +329,949 @@
     ]
   },
   {
-    "objectID": "Lab6-Solutions.html",
-    "href": "Lab6-Solutions.html",
-    "title": "Lab 6: Survival Models, Life Tables, and Exposure to Risk",
+    "objectID": "Lab4-Solutions.html",
+    "href": "Lab4-Solutions.html",
+    "title": "Lab 4: Reinsurance. Data frames",
+    "section": "",
+    "text": "For the next task, you will need to use function pmax. If a is a vector \\((a_1,\\ldots,a_m)\\) and x is a number, then usual max(a,x) returns \\[\n\\max\\{a_1,\\ldots,a_m,x\\}\n\\] that is a number, whereas pmax(a,x) returns \\[\n\\bigl(\\max\\{a_1,x\\},\\ldots,\\max\\{a_m,x\\})\n\\] that is a vector.\n\n\n\nSet seed \\(234\\). Simulate \\(15000\\) values for a reinsurer where (aggregated) claims have a compound Poisson distribution with parameter \\(900\\) and the individual claims have log-normal distribution \\(logN(7,0.3^2)\\) under individual excess of loss with retention \\(1700\\). Find the mean and the standard deviation of the obtained data, i.e. using the notations from the lecture notes, estimate \\(\\E(S_R)\\) for\n\\[\nS_R=Z_1+\\ldots+Z_N\n\\]\nfrom the sample, and also estimate \\(\\sigma(S_R)\\) from the sample.\nCheck the answer.\n\n\nCode\nset.seed(234)\nn &lt;- rpois(15000, lambda = 900) \nsR &lt;- numeric(15000)\nfor (k in 1:15000)\n{\n  x &lt;- rlnorm(n[k], meanlog = 7, sdlog = 0.3)\n  z &lt;- pmax(0,x-1700)\n  sR[k] &lt;- sum(z)\n}\nc( mean(sR), sd(sR) )\n\n\n[1] 16640.800  2872.169\n\n\n\n\n\n\n\nWe can see, using formulas from the lecture notes, that in the assumption of the previous task \\[\n\\E(S) = \\E(N)\\E(X)=900\\cdot e^{7+0.5\\cdot 0.3^2}=1032398\n\\] (you can also check that the mean of the sample: for \\(S\\) (not \\(S_R\\)), with the seed \\(234\\) it would be \\(1032358\\), pretty close). Suppose now that the reinsurer applies the aggregated excess \\(M\\), i.e. the insurer pays \\[\n  S_I=\\begin{cases}\n  S, & \\text{if } S \\leq M,\\\\\n  M, & \\text{if } S &gt; M\n  \\end{cases}\n\\] and the reinsurer pays \\[\n  S_R=S-S_I=\\begin{cases}\n  0, & \\text{if } S \\leq M,\\\\\n  S-M, & \\text{if } S &gt; M.\n  \\end{cases}\n\\]\nLet \\(M=\\E(S)=1032398\\). Modify the previous code and find \\(\\E(S_R)\\), the average paid by the reinsurer under this agreement.\nCheck the answer.\n\n\nCode\nset.seed(234)\nn &lt;- rpois(15000, lambda = 900) \ns &lt;- numeric(15000)\nfor (k in 1:15000)\n{\n  x &lt;- rlnorm(n[k], meanlog = 7, sdlog = 0.3)\n  s[k] &lt;- sum(x)\n}\nsR &lt;- pmax(0,s-1032398)\nmean(sR)\n\n\n[1] 14297.37",
+    "crumbs": [
+      "Labs - Solutions",
+      "Lab 4 - Solutions"
+    ]
+  },
+  {
+    "objectID": "Lab4-Solutions.html#section",
+    "href": "Lab4-Solutions.html#section",
+    "title": "Lab 4: Reinsurance. Data frames",
+    "section": "",
+    "text": "Set seed \\(234\\). Simulate \\(15000\\) values for a reinsurer where (aggregated) claims have a compound Poisson distribution with parameter \\(900\\) and the individual claims have log-normal distribution \\(logN(7,0.3^2)\\) under individual excess of loss with retention \\(1700\\). Find the mean and the standard deviation of the obtained data, i.e. using the notations from the lecture notes, estimate \\(\\E(S_R)\\) for\n\\[\nS_R=Z_1+\\ldots+Z_N\n\\]\nfrom the sample, and also estimate \\(\\sigma(S_R)\\) from the sample.\nCheck the answer.\n\n\nCode\nset.seed(234)\nn &lt;- rpois(15000, lambda = 900) \nsR &lt;- numeric(15000)\nfor (k in 1:15000)\n{\n  x &lt;- rlnorm(n[k], meanlog = 7, sdlog = 0.3)\n  z &lt;- pmax(0,x-1700)\n  sR[k] &lt;- sum(z)\n}\nc( mean(sR), sd(sR) )\n\n\n[1] 16640.800  2872.169",
+    "crumbs": [
+      "Labs - Solutions",
+      "Lab 4 - Solutions"
+    ]
+  },
+  {
+    "objectID": "Lab4-Solutions.html#section-1",
+    "href": "Lab4-Solutions.html#section-1",
+    "title": "Lab 4: Reinsurance. Data frames",
+    "section": "",
+    "text": "We can see, using formulas from the lecture notes, that in the assumption of the previous task \\[\n\\E(S) = \\E(N)\\E(X)=900\\cdot e^{7+0.5\\cdot 0.3^2}=1032398\n\\] (you can also check that the mean of the sample: for \\(S\\) (not \\(S_R\\)), with the seed \\(234\\) it would be \\(1032358\\), pretty close). Suppose now that the reinsurer applies the aggregated excess \\(M\\), i.e. the insurer pays \\[\n  S_I=\\begin{cases}\n  S, & \\text{if } S \\leq M,\\\\\n  M, & \\text{if } S &gt; M\n  \\end{cases}\n\\] and the reinsurer pays \\[\n  S_R=S-S_I=\\begin{cases}\n  0, & \\text{if } S \\leq M,\\\\\n  S-M, & \\text{if } S &gt; M.\n  \\end{cases}\n\\]\nLet \\(M=\\E(S)=1032398\\). Modify the previous code and find \\(\\E(S_R)\\), the average paid by the reinsurer under this agreement.\nCheck the answer.\n\n\nCode\nset.seed(234)\nn &lt;- rpois(15000, lambda = 900) \ns &lt;- numeric(15000)\nfor (k in 1:15000)\n{\n  x &lt;- rlnorm(n[k], meanlog = 7, sdlog = 0.3)\n  s[k] &lt;- sum(x)\n}\nsR &lt;- pmax(0,s-1032398)\nmean(sR)\n\n\n[1] 14297.37",
+    "crumbs": [
+      "Labs - Solutions",
+      "Lab 4 - Solutions"
+    ]
+  },
+  {
+    "objectID": "Lab4-Solutions.html#section-2",
+    "href": "Lab4-Solutions.html#section-2",
+    "title": "Lab 4: Reinsurance. Data frames",
+    "section": "2.1 ",
+    "text": "2.1 \n\nFind the sum of all values in the column y of this data frame df.\nCheck the answer:\n\n\nCode\nsum(df$y)\n\n\n[1] 997200",
+    "crumbs": [
+      "Labs - Solutions",
+      "Lab 4 - Solutions"
+    ]
+  },
+  {
+    "objectID": "Lab4-Solutions.html#section-3",
+    "href": "Lab4-Solutions.html#section-3",
+    "title": "Lab 4: Reinsurance. Data frames",
+    "section": "3.1 ",
+    "text": "3.1 \n\nDo the following steps:\n\nDownload file numbers.csv and save it in a directory (folder) on your computer (usually it’s “Documents” or “Downloads”).\nSave your R-file your are working with in R-Studio to the same directory (folder).\nClick with right mouse button on the file name at the top of R-Studio window and choose “Set working directory”.\n\nOR (instead of 3)\n\nGo to menu “Session”, choose “Set working directory”, and then choose “To source file location”\n\nIf you did 1-3 correctly, in “Files” tab on the (down) right part of R-Studio you will see your R-file and the downloaded CSV-file in the same directory.\n\nLoad the saved file by the command\n\n\ndf &lt;- read.csv(\"numbers.csv\")\n\nCheck yourself:\n\nhead(df)\n\n           x        y\n1 1.98193075 8.554741\n2 0.08423538 4.008477\n3 0.33576991 4.920004\n4 0.44245007 4.861317\n5 0.09377962 4.023355\n6 0.42974243 5.109215",
+    "crumbs": [
+      "Labs - Solutions",
+      "Lab 4 - Solutions"
+    ]
+  },
+  {
+    "objectID": "Lab4-Solutions.html#section-4",
+    "href": "Lab4-Solutions.html#section-4",
+    "title": "Lab 4: Reinsurance. Data frames",
+    "section": "3.2 ",
+    "text": "3.2 \n\nIt is given that the data in column x of “numbers.csv” file are independent values of a random variable \\(X\\sim Exp(\\lambda)\\). Find the estimate \\(\\hat{\\lambda}\\) for the parameter \\(\\lambda\\) using the method of moments (see Lecture Notes).\nCheck your answer:\n\n\nCode\n1/mean(df$x)\n\n\n[1] 1.152757",
+    "crumbs": [
+      "Labs - Solutions",
+      "Lab 4 - Solutions"
+    ]
+  },
+  {
+    "objectID": "Lab4-Solutions.html#section-5",
+    "href": "Lab4-Solutions.html#section-5",
+    "title": "Lab 4: Reinsurance. Data frames",
+    "section": "4.1 ",
+    "text": "4.1 \n\nFind the average of all values of y from df such that the corresponding values of x are larger than \\(1\\).\nCheck your answer:\n\n\nCode\nmean(df[df$x &gt; 1,]$y)\n\n\n[1] 7.687361",
+    "crumbs": [
+      "Labs - Solutions",
+      "Lab 4 - Solutions"
+    ]
+  },
+  {
+    "objectID": "Lab4-Solutions.html#section-6",
+    "href": "Lab4-Solutions.html#section-6",
+    "title": "Lab 4: Reinsurance. Data frames",
+    "section": "5.1 ",
+    "text": "5.1 \n\nPlot on the same diagram the scatter plot \\(y\\) against \\(x\\) as it is shown above, but in blue color, and plot the line \\(y=kx+b\\) with the found values of \\(k\\) and \\(b\\) (do not copy-paste, use coef function) in red colour. (See Lab 3 for plotting two graphs on one diagram).\n\n\nCode\nx &lt;- df$x\ny &lt;- df$y\nplot(x, y, col = 'blue')\nlines(x, ans[2]*x + ans[1], col = 'red')",
+    "crumbs": [
+      "Labs - Solutions",
+      "Lab 4 - Solutions"
+    ]
+  },
+  {
+    "objectID": "Lab3-Solutions.html",
+    "href": "Lab3-Solutions.html",
+    "title": "Lab 3: Parameter Estimation, Loops, Compound Distributions",
     "section": "",
     "text": "\\[\n  \\renewcommand{\\P}{\\mathbb{P}}\n  \\newcommand{\\E}{\\mathbb{E}}\n\\]",
     "crumbs": [
       "Labs - Solutions",
-      "Lab 6 - Solutions"
+      "Lab 3 - Solutions"
     ]
   },
   {
-    "objectID": "Lab6-Solutions.html#section",
-    "href": "Lab6-Solutions.html#section",
+    "objectID": "Lab3-Solutions.html#section",
+    "href": "Lab3-Solutions.html#section",
+    "title": "Lab 3: Parameter Estimation, Loops, Compound Distributions",
+    "section": "1.1 ",
+    "text": "1.1 \n\nSet seed 123. Generate \\(100\\) random values of \\(Y\\sim N(5,9)\\), and assign them to vector y. Assign the MLE for \\(\\mu=\\mathbb{E}(Y)\\) to variable mu and assign the MLE for \\(\\sigma=\\sigma(Y)\\) to variable sigma. Output the vector \\((\\mu,\\sigma,\\mu+\\sigma)\\). Check the answer.\n\n\nCode\nset.seed(123)\ny &lt;- rnorm(n = 100, mean = 5, sd = 3)\nf &lt;- fitdistr(y, \"normal\")\nmu &lt;- unname(f$estimate[1])\nsigma &lt;- unname(f$estimate[2])\nc(mu, sigma, mu+sigma)\n\n\n[1] 5.271218 2.724721 7.995939",
+    "crumbs": [
+      "Labs - Solutions",
+      "Lab 3 - Solutions"
+    ]
+  },
+  {
+    "objectID": "Lab3-Solutions.html#section-1",
+    "href": "Lab3-Solutions.html#section-1",
+    "title": "Lab 3: Parameter Estimation, Loops, Compound Distributions",
+    "section": "1.2 ",
+    "text": "1.2 \n\nImagine that you don’t know that the first data x has exponential distribution and decided to try a normal distribution \\(N(\\mu,\\sigma^2)\\). It is still possible to calculate MLE for its parameters, though it’s likely that the estimated standard errors will be high. Given that the standard errors are in the sd component of fitdistr function, calculate the vector of standard errors for \\(\\mu\\) and \\(\\sigma\\).\n\n\nCode\ng &lt;- fitdistr(x, \"normal\")\nmu_stand_error &lt;- unname(g$sd[1])\nsd_stand_error &lt;- unname(g$sd[2])\nc(mu_stand_error, sd_stand_error)\n\n\n[1] 1.3598213 0.9615389\n\n\n\n\nEven when standard errors are relatively small, it is still reasonable to ask ourselves how can we be certain that the data follows the particular disribution. Various statistical tests may be applied. For ungrouped data, as we have e.g. in vector x, the Kolmogorov–Smirnov test is widely used.\n\nks.test(x, \"pexp\", rate = lambda_mle)\n\n\n  Exact one-sample Kolmogorov-Smirnov test\n\ndata:  x\nD = 0.10167, p-value = 0.6423\nalternative hypothesis: two-sided\n\n\nIt tests whether we should reject the null-hypothesis \\(H_0\\) that the data follows the exponential distribution, against the alternative hypothesis \\(H_1\\) that it does not.\nAs you can see ks.test function has several arguments:\n\nvector of the data (x);\nname of the R function for the CDF we test against (pexp);\nvalue(s) for the parameter(s) of that R function, using their name(s) (rate here; remember that you can always type in concole ?functionname to learn about the parameters of functionname); the values were previously obtained from MLE.\n\nThe output (recall that you may get different numbers as your data x was likely different) shows the number D (sum of absolute values of differences (residual distances) between the theoretical CDF and the CDF which can be calculated from the data, see the graph below), the smaller it is, the better prediction is. And also it shoes the \\(p\\)-value; in contrary, if \\(p\\)-value is small (close to \\(0\\)) it would mean that we have to reject \\(H_0\\) as then \\(p\\)-value would be the probability to observe the given data if \\(H_0\\) were true. Here \\(p\\)-value is pretty large, so there is no evidences to reject \\(H_0\\).",
+    "crumbs": [
+      "Labs - Solutions",
+      "Lab 3 - Solutions"
+    ]
+  },
+  {
+    "objectID": "Lab3-Solutions.html#section-2",
+    "href": "Lab3-Solutions.html#section-2",
+    "title": "Lab 3: Parameter Estimation, Loops, Compound Distributions",
+    "section": "1.3 ",
+    "text": "1.3 \n\nFor the data y and MLE estimates mu and sigma from Task 1.1, apply the Kolmogorov–Smirnov test to test the null hypothesis that y follows the normal distribution with these two parameters. Check the output.\n\n\nCode\nks.test(y, \"pnorm\", mean = mu, sd = sigma)\n\n\n\n    Asymptotic one-sample Kolmogorov-Smirnov test\n\ndata:  y\nD = 0.058719, p-value = 0.8808\nalternative hypothesis: two-sided",
+    "crumbs": [
+      "Labs - Solutions",
+      "Lab 3 - Solutions"
+    ]
+  },
+  {
+    "objectID": "Lab3-Solutions.html#section-3",
+    "href": "Lab3-Solutions.html#section-3",
+    "title": "Lab 3: Parameter Estimation, Loops, Compound Distributions",
+    "section": "2.1 ",
+    "text": "2.1 \n\nSet seed \\(23\\). Generate \\(10^5\\) an exponential random variable with mean \\(3\\) (think about the value of the rate argument). Record the maximum of them (use R-function max). Repeat this procedure \\(10^3\\) times. Calculate the proportion of the found maximums which are larger then \\(50\\).\nCheck the answer:\n\n\nCode\nn &lt;- 10**5\nm &lt;- 10**3\nlambda &lt;- 1/3\nmaxs &lt;- rep(0, m)\nset.seed(23)\nfor (i in 1:m){\n    x &lt;- rexp(n, rate = lambda)\n    maxs[i] &lt;- max(x)\n}\nsum(maxs &gt; 50) / m\n\n\n[1] 0.006",
+    "crumbs": [
+      "Labs - Solutions",
+      "Lab 3 - Solutions"
+    ]
+  },
+  {
+    "objectID": "Lab3-Solutions.html#section-4",
+    "href": "Lab3-Solutions.html#section-4",
+    "title": "Lab 3: Parameter Estimation, Loops, Compound Distributions",
+    "section": "3.1 ",
+    "text": "3.1 \n\nSet seed \\(123\\). Generate \\(10000\\) values from a compound Poisson distribution with Poisson parameter \\(\\lambda=1000\\) and individual claims which have gamma distribution \\(\\Gamma(750,0.25)\\) (recall that here \\(0.25\\) is called rate in the corresponding R functions).\nIn other words, you will have some numbers \\(N_1,\\ldots, N_{10000}\\) which came from the Poisson distribution, and for each \\(N_k\\), you have to generate \\(N_k\\) numbers from the gamma distribution: \\(X_1^{(k)},\\ldots,X_{N_k}^{(k)}\\), and then you got the corresponding value of a compound Poisson random variables \\[\nS^{(k)} = X_1^{(k)}+\\ldots+X_{N_k}^{(k)}.\n\\]\nFind the mean and the standard deviation (sd function) of the obtained sample of the compound Poisson random variables.\nHint: generate a vector N of \\(n=10000\\) Poisson r.v., and create a zero-vector S of length \\(10000\\) using numeric function. Then you will use a loop in \\(k\\) (\\(1\\leq k\\leq 10000\\)) inside which you generate the corresponding values of \\(X_i^{(k)}\\) and get their sums \\(S^{(k)}\\); and the latter would be assigned to S[k].\nCheck the answer:\n\n\nCode\nset.seed(123)\nn &lt;- 10^4\nN &lt;- rpois(n, lambda = 1000) # You may omit text \"lambda = \" here\nS &lt;- numeric(n)\nfor (k in 1:n)\n{\n  x &lt;- rgamma(N[k], shape = 750, rate = 0.25)\n  S[k] &lt;- sum(x)\n}\nc( mean(S), sd(S) )\n\n\n[1] 2997650.56   93719.71\n\n\nNote that (see Lecture Notes) \\[\n\\E(S)=\\E(N)\\E(X)=1000\\cdot\\frac{750}{0.25}=3000000,\n\\] so the mean for the sample we obtained is close to the theoretical expectation.",
+    "crumbs": [
+      "Labs - Solutions",
+      "Lab 3 - Solutions"
+    ]
+  },
+  {
+    "objectID": "Lab3-Solutions.html#section-5",
+    "href": "Lab3-Solutions.html#section-5",
+    "title": "Lab 3: Parameter Estimation, Loops, Compound Distributions",
+    "section": "3.2 ",
+    "text": "3.2 \n\nIn contrast to \\(\\E(S)\\) and \\(\\mathrm{Var}(S)\\), the probability distribution of \\(S\\) is hard for precise theoretical analysis. For example, there is not a “compact” formula for \\[\n\\P(S&gt;\\E(S))=\\P(S&gt;3000000).\n\\] Your task is to estimate this probability by looking at the ratio of \\(S^{(k)}&gt;3000000\\) in the sample you previously obtained to all \\(S^{(k)}\\).\nCheck the answer.\n\n\nCode\nsum(S&gt;3000000)/n\n\n\n[1] 0.4881\n\n\n\n\nRecall that a number \\(q\\) is called \\(\\alpha\\)-percentile for a random variable \\(X\\), if \\(\\mathbb{P}(X\\leq q)=\\alpha\\). As we discussed in Lab 1, in R, it’s called “quantiles”, and the corresponding functions starts with “q”: qexp, qnorm etc.\nWe also discussed on a lecturethe notion of percentiles/quantiles for the data samples: we should order the sample, and find the number which divides it in the proportion \\(\\alpha/(1-\\alpha)\\). The corresponding R function is called quantile:\n\nu &lt;- rpois(n = 10, lambda = 100) \nsort(u) # This command is NOT needed for the quantile R function, it is just for better visualisation of the quantile function\n\n [1]  83  92  94  94  95  97 100 103 106 109\n\nquantile(u,0.3)\n\n30% \n 94",
+    "crumbs": [
+      "Labs - Solutions",
+      "Lab 3 - Solutions"
+    ]
+  },
+  {
+    "objectID": "Lab3-Solutions.html#section-6",
+    "href": "Lab3-Solutions.html#section-6",
+    "title": "Lab 3: Parameter Estimation, Loops, Compound Distributions",
+    "section": "3.3 ",
+    "text": "3.3 \n\nFind, based on the previously obtained sample of \\(S^{(k)}\\), the number \\(q\\) such that \\[\n\\P(S\\leq q) = 0.9\n\\] Assign the result to q.\nCheck the answer.\n\n\nCode\nq &lt;- quantile(S,0.9)\nq\n\n\n    90% \n3115719 \n\n\nNow, modify the code from the previous Task to check that \\(\\P(S\\leq 3115719) = 0.9\\).\n\n\nCode\nsum(S&lt;=q)/n\n\n\n[1] 0.9",
+    "crumbs": [
+      "Labs - Solutions",
+      "Lab 3 - Solutions"
+    ]
+  },
+  {
+    "objectID": "Lab2-Solutions.html",
+    "href": "Lab2-Solutions.html",
+    "title": "Lab 2: Probability Distributions, Plotting, Creating Functions",
+    "section": "",
+    "text": "\\[\n  \\renewcommand{\\P}{\\mathbb{P}}\n  \\newcommand{\\E}{\\mathbb{E}}\n\\]",
+    "crumbs": [
+      "Labs - Solutions",
+      "Lab 2 - Solutions"
+    ]
+  },
+  {
+    "objectID": "Lab2-Solutions.html#section",
+    "href": "Lab2-Solutions.html#section",
+    "title": "Lab 2: Probability Distributions, Plotting, Creating Functions",
+    "section": "1.1 ",
+    "text": "1.1 \n\nPlot graph of \\(y=x^2\\) on \\(x\\in[-10,10]\\). (Hint: divide \\([-10,10]\\) on many small pieces using seq function discussed in Lab 1, and assign the output of this function to vector x, create vector y of squares of x and, hence, connect values of \\(y\\) at ends of these pieces by straight lines; if the pieces are small, it would like a smooth curve).\nTry by yourself, if it does not work, unfold the code below.\n\n\nCode\n# Recall that R applies any function to a vector component-wise (entry-wise), \n# i.e. if there is a vector `x` and a function `f`, \n# then `f(x)` will be the vector whose first component \n# is the value of `f` on the first compnent of `x` and so on.\nx &lt;- seq(-10, 10, 0.1)\ny &lt;- x**2\nplot(x,y, type='l')",
+    "crumbs": [
+      "Labs - Solutions",
+      "Lab 2 - Solutions"
+    ]
+  },
+  {
+    "objectID": "Lab2-Solutions.html#section-1",
+    "href": "Lab2-Solutions.html#section-1",
+    "title": "Lab 2: Probability Distributions, Plotting, Creating Functions",
+    "section": "1.2 ",
+    "text": "1.2 \n\nLet \\(X\\sim Exp(0.3)\\). Plot the graph of the survival function \\(S_X(x)\\) for \\(x\\in [0,10]\\) using pexp function (also discussed in Lab 1).\nThe expected output:\n\n\nCode\nx &lt;- seq(0, 10, 0.1)\ny &lt;- pexp(x, 0.3, lower.tail = F)\nplot(x,y, type='l')",
+    "crumbs": [
+      "Labs - Solutions",
+      "Lab 2 - Solutions"
+    ]
+  },
+  {
+    "objectID": "Lab2-Solutions.html#section-2",
+    "href": "Lab2-Solutions.html#section-2",
+    "title": "Lab 2: Probability Distributions, Plotting, Creating Functions",
+    "section": "2.1 ",
+    "text": "2.1 \n\nLet \\(Y\\sim\\ln\\mathrm{N}(0.01,0.2^2)\\). Plot the graph of the density \\(f_Y(x)\\) for \\(x\\in[0,3]\\). Use xlab and ylab arguments of the plot function to set-up the names “x value” and “Density” for the horizontal and vertical axes. (We didn’t use them before, so their defaults values, which are empty lines, like xlab='', were used by R in the past). Use main argument of the plot function to set-up the title “Normal distribution density” for the whole plot.\nCheck the output (to make the graph smother, use smaller step in seq function while defining the x values).\n\n\nCode\nx &lt;- seq(0, 3, 0.01)\ny &lt;- dlnorm(x, meanlog = 0.01, sdlog = 0.2)\nplot(x,y, type=\"l\", xlab=\"x value\", ylab=\"Density\", main=\"Log-normal distribution density\")",
+    "crumbs": [
+      "Labs - Solutions",
+      "Lab 2 - Solutions"
+    ]
+  },
+  {
+    "objectID": "Lab2-Solutions.html#section-3",
+    "href": "Lab2-Solutions.html#section-3",
+    "title": "Lab 2: Probability Distributions, Plotting, Creating Functions",
+    "section": "2.2 ",
+    "text": "2.2 \n\nThe hazard function of a random variable \\(X\\) is defined as follows: \\[\nh_X(x) := \\frac{f_X(x)}{1-F_X(x)}.\n\\] Let \\(X\\sim \\mathrm{N}(4, 0.4)\\). Calculate \\(h_X(2)\\).\nCheck the output:\n\n\nCode\nsigma = sqrt(0.4) # square root of sigma^2 = 0.4\ndnorm(2, 4, sigma)/pnorm(2, 4, sigma, lower.tail = F)\n\n\n[1] 0.004253513",
+    "crumbs": [
+      "Labs - Solutions",
+      "Lab 2 - Solutions"
+    ]
+  },
+  {
+    "objectID": "Lab2-Solutions.html#section-4",
+    "href": "Lab2-Solutions.html#section-4",
+    "title": "Lab 2: Probability Distributions, Plotting, Creating Functions",
+    "section": "3.1 ",
+    "text": "3.1 \n\nSet seed 131 (see Task 3.3 of Lab 1). Generate \\(10^6\\) random variables distributed with \\(W(0.76,0.25)\\) (i.e. calculate \\(\\sigma\\) from Equation 4 and use the needed function described above); and assign this to a vector. Calculate the sample mean of these values (and assign it to a variable). Calculate the expected value \\(\\mathbb{E}(X)\\) of \\(X\\sim W(0.76,0.25)\\) using Equation 2 and assign it to another variable: note that, for the Gamma-function \\(\\Gamma(x)\\) in Equation 2, you can use R-code gamma(x) (notice the small first letter; e.g. gamma(5) will return 24). Finally, find the absolute value of the difference between the found sample mean and the expected value.\nCheck your answer:\n\n\nCode\nalpha = 0.76\nbeta = 0.25\nsigma = alpha**(-1/beta)\nset.seed(131)\nx &lt;- rweibull(10**6, shape=beta, scale=sigma)\nm &lt;- mean(x)\ne &lt;- gamma(1+1/beta) * alpha**(-1/beta)\nabs(m-e)\n\n\n[1] 0.005210536\n\n\n\n\nInstead of recalculating the parameters every time we need to use parametrisation Equation 1 instead of the built-in parametrisation Equation 3, we may want to use another functions designed to deal with the parametrisation Equation 1. One can either define needed functions by ourselves or use the functions defined in external libraries (packages).",
+    "crumbs": [
+      "Labs - Solutions",
+      "Lab 2 - Solutions"
+    ]
+  },
+  {
+    "objectID": "Lab2-Solutions.html#section-5",
+    "href": "Lab2-Solutions.html#section-5",
+    "title": "Lab 2: Probability Distributions, Plotting, Creating Functions",
+    "section": "4.1 ",
+    "text": "4.1 \n\nDefine the function rweibull65 which would have three arguments n, shape, scale, where shape corresponds to \\(\\beta\\) and scale to \\(\\alpha\\) in Equation 1, and which would return n Weibull random values distributed with \\(W(\\alpha,\\beta)\\) with shape\\(=\\beta\\) and scale\\(=\\alpha\\); so that this function rweibull65 would call rweibull inside its body; see also the remark below.\n\n\nCode\nrweibull65 &lt;- function(n, shape, scale){\n    another_scale &lt;- scale**(-1/shape)\n    rweibull(n, shape = shape, scale = another_scale)\n}\n\n\nRun the following code to check your function:\n\nset.seed(12)\nrweibull65(2, 1.2, 2.3)\n\n[1] 1.1318101 0.1312781\n\n\n\n\nRemark. R distinguishes the name of the argument and the argument itself. For example, in the defined above function sindeg the argument is called x. So we can specify the argument (though it’s not needed here since it’s the only argument):\n\nsindeg(x = 30)\n\n[1] 0.5\n\n\nNow, imagine we have a variable in our program which is also called x. Then we can write inside the function x = x:\n\nx &lt;- 30\nsindeg(x = x)\n\n[1] 0.5\n\n\nR will understand that, in x = x the left x is the name of the argument of function sindeg, whereas the right x is the variable defined earlier.",
+    "crumbs": [
+      "Labs - Solutions",
+      "Lab 2 - Solutions"
+    ]
+  },
+  {
+    "objectID": "Lab2-Solutions.html#section-6",
+    "href": "Lab2-Solutions.html#section-6",
+    "title": "Lab 2: Probability Distributions, Plotting, Creating Functions",
+    "section": "5.1 ",
+    "text": "5.1 \n\nLet \\(X\\sim W(1.2, 3.1)\\). Using functions pweibullPH and qweibullPH, find \\(b\\) such that \\(\\P(1\\leq X\\leq b)=0.25\\).\nCheck your answer:\n\n\nCode\n# F(b)-F(1)=0.25\n# F(b)=F(1)+0.25\nfb &lt;- pweibullPH(1, shape=3.1, scale = 1.2)+0.25\nb &lt;- qweibullPH(fb, shape=3.1, scale = 1.2)\nb\n\n\n[1] 1.339862",
+    "crumbs": [
+      "Labs - Solutions",
+      "Lab 2 - Solutions"
+    ]
+  },
+  {
+    "objectID": "Lab2-Solutions.html#section-7",
+    "href": "Lab2-Solutions.html#section-7",
+    "title": "Lab 2: Probability Distributions, Plotting, Creating Functions",
+    "section": "6.1 ",
+    "text": "6.1 \n\nDefine function pburr which would have \\(4\\) arguments: x, alpha, lambda, gamma which would return the value of \\(F_{Burr}(x)\\) for the given values of the parameters.\n\n\nCode\npburr &lt;- function(x, alpha, lambda, gamma){\n    1 - (lambda/(lambda+x**gamma))**alpha\n}\n\n\nCheck your code by calculating \\(F_{Burr}(0.5)\\) for \\(\\alpha=1\\), \\(\\lambda=2\\), \\(\\gamma=3\\):\n\n\nCode\npburr(0.5, alpha = 1, lambda = 2, gamma = 3)\n\n\n[1] 0.05882353\n\n\n\n\nWe discussed previously how to plot the graph of a function. Often we need to plot several graphs on the same diagram, e.g. in different colours. The argument col of function plot is responsible for colours:\n\n\nx &lt;- seq(-2*pi,2*pi, 0.05)\ny &lt;- sin(x)\nplot(x, y, col = 'red', type='l')\n\n\n\n\n\n\n\n\nhowever, to plot another graph we would need to replace the second plot by lines (without type='l'). The last lines add the legend to the graph:\n\nx &lt;- seq(-2*pi,2*pi, 0.05)\ny &lt;- sin(x)\nz &lt;- cos(x)\nplot(x, y, col = 'red', type='l')\nlines(x, z, col = 'blue')\n\nlegend(x = \"topright\",          # Position\n       legend = c(\"sin(x)\", \"cos(x)\"),  # Legend texts\n       lty = c(1, 1),           # Line types: 1 stands for solid\n       col = c('red', 'blue'),  # Line colours\n       lwd = 2,                 # Line width\n       bg = 'light blue')      # Background color of the legend",
+    "crumbs": [
+      "Labs - Solutions",
+      "Lab 2 - Solutions"
+    ]
+  },
+  {
+    "objectID": "Lab2-Solutions.html#section-8",
+    "href": "Lab2-Solutions.html#section-8",
+    "title": "Lab 2: Probability Distributions, Plotting, Creating Functions",
+    "section": "6.2 ",
+    "text": "6.2 \n\nPlot graphs of \\(F_{Burr}(x)\\) for \\(\\alpha=1\\), \\(\\lambda=2\\) and \\(\\gamma=3\\) (blue graph) or \\(\\gamma=0.3\\) (red graph); let \\(x\\in[1,5]\\). Add legend to get the result:\n\n\n\nCode\nx &lt;- seq(1,5, 0.05)\ny &lt;- pburr(x, alpha = 1, lambda = 2, gamma = 3)\nz &lt;- pburr(x, alpha = 1, lambda = 2, gamma = 0.3)\nplot(x, y, col = 'blue', type='l')\nlines(x, z, col = 'red')\n\nlegend(x = \"topright\", \n       legend = c(\"gamma=3\", \"gamma=0.3\"),\n       lty = c(1, 1),       \n       col = c('blue', 'red'),\n       lwd = 2,            \n       bg = 'light blue')",
+    "crumbs": [
+      "Labs - Solutions",
+      "Lab 2 - Solutions"
+    ]
+  },
+  {
+    "objectID": "Lab1-Solutions.html",
+    "href": "Lab1-Solutions.html",
+    "title": "Lab 1: Solutions",
+    "section": "",
+    "text": "\\[\n  \\renewcommand{\\P}{\\mathbb{P}}\n  \\newcommand{\\E}{\\mathbb{E}}\n\\]",
+    "crumbs": [
+      "Labs - Solutions",
+      "Lab 1 - Solutions"
+    ]
+  },
+  {
+    "objectID": "Lab1-Solutions.html#section",
+    "href": "Lab1-Solutions.html#section",
+    "title": "Lab 1: Solutions",
+    "section": "2.1 ",
+    "text": "2.1 \n\nLet \\(X\\) be the random variable that is the result of throwing a (fair) dice, i.e. \\(X\\) may take either of values \\(1,2,3,4,5,6\\) with equal probabilities \\(\\frac16\\).\n\nDefine vector \\[\nx=(x_1,x_2,\\ldots,x_6)=(1,2,\\ldots,6)\n\\] of values of \\(X\\) and assign it to R-variable x.\nDefine vector \\[\np=(p_1,p_2,\\ldots,p_6)=\\Bigl(\\frac16,\\frac16,\\ldots,\\frac16\\Bigr)\n\\] of the probabilities, and assign it to R-variable p.\nRecall that the expectation of \\(X\\) is \\[\n\\E(X)=\\sum_{i=1}^6 x_ip_i=x_1p_1+\\ldots x_6p_6=x\\cdot p.\n\\] Calculate \\(\\E(X)\\) (using the previously considered functions).\n\nCheck the answer. (Unfold the code.)\n\n\nCode\nx &lt;- seq(1,6)\np &lt;- rep(1/6, 6)\nsum(x*p)\n\n\n[1] 3.5",
+    "crumbs": [
+      "Labs - Solutions",
+      "Lab 1 - Solutions"
+    ]
+  },
+  {
+    "objectID": "Lab1-Solutions.html#section-1",
+    "href": "Lab1-Solutions.html#section-1",
+    "title": "Lab 1: Solutions",
+    "section": "2.2 ",
+    "text": "2.2 \n\nRecall that the variance of a random variable can be found by the following formulas: \\[\n\\begin{aligned}\\mathrm{Var}(X) &= \\mathbb{E}\\Bigl(\\bigl(X-\\mathbb{E}(X)\\bigr)^2\\Bigr)\\\\\n    &= \\sum_{i=1}^6 \\bigl(x_i-\\mathbb{E}(X)\\bigr)^2p_i\\end{aligned}.\n\\] Find \\(\\mathrm{Var}(X)\\) (using the previously considered functions).\nCheck the answer:\n\n\nCode\nsum(p*(x-sum(x*p))**2)\n\n\n[1] 2.916667",
+    "crumbs": [
+      "Labs - Solutions",
+      "Lab 1 - Solutions"
+    ]
+  },
+  {
+    "objectID": "Lab1-Solutions.html#section-2",
+    "href": "Lab1-Solutions.html#section-2",
+    "title": "Lab 1: Solutions",
+    "section": "2.3 ",
+    "text": "2.3 \n\nLet \\(X=(1,2,\\ldots,2024)\\) and \\(Y=(Y_1,\\ldots,Y_{2024})\\) with\n\\[\nY_k = X_1+\\ldots+X_k, \\qquad 1\\leq k\\leq 2024.\n\\]\nFind how many components of \\(Y\\) are bigger than \\(10^6\\). (Hint: remember that True stands for 1).\nCheck the answer:\n\n\nCode\nx &lt;- 1:2024\ny &lt;- cumsum(x)\nsum(y&gt;10**6)\n\n\n[1] 611\n\n\n\n\nSlicing\n\n\nIf x is a vector, to access its component with index i one needs to use x[i]:\n\n\na &lt;- seq(2,20,2)\na[3]\n\n[1] 6\n\n\n\nRemark. Note that the indexation in R starts with 1 (in contrast to e.g. Python).\n\n\nWe can also get a slice of a vector by specifying the range of indexes, e.g.\n\n\na[3:5]\n\n[1]  6  8 10\n\n\n\nThe indexes do not need to follow some order:\n\n\na[c(3,7,1)]\n\n[1]  6 14  2",
+    "crumbs": [
+      "Labs - Solutions",
+      "Lab 1 - Solutions"
+    ]
+  },
+  {
+    "objectID": "Lab1-Solutions.html#section-3",
+    "href": "Lab1-Solutions.html#section-3",
+    "title": "Lab 1: Solutions",
+    "section": "3.1 ",
+    "text": "3.1 \n\nLet \\(X\\sim Exp(0.1)\\). Find \\(\\P(1&lt;X\\leq3)\\).\n\n\nSolution. We know that (see Equation 1 above)\n\\[\n\\P(1&lt;X\\leq3) = F_X(3) - F_X(1)\n\\]\nTherefore, we can use the code\n\n\nCode\npexp(3, 0.1) - pexp(1, 0.1)\n\n\n[1] 0.1640192\n\n\n\n\nThe survival function \\(S_X(x) = \\P(X&gt;x)\\) can be calculated, of course, from the relation \\(S_X(x) = 1- F_X(x)\\). There is, however, more numerically exact way by using the argument lower.tail = FALSE (or lower.tail = F) for function pexp:\n\n\npexp(0.5, 3,  lower.tail  = F) \n\n[1] 0.2231302\n\n\nthat coincides with\n\n1 - pexp(0.5, 3)\n\n[1] 0.2231302\n\n\nat least in the first 5 decimal figures.\n(Surely, for the exponential distribution one has an explicit simple formula: \\(S_X(x)= e^{-\\lambda x}\\).)\n\nGamma distribution\n\n\nRecall that, for \\(X\\sim \\Gamma(\\alpha,\\lambda)\\),\n\n\\[\nf_X(x)=\\frac{\\lambda^\\alpha}{\\Gamma(\\alpha)}x^{\\alpha-1} e^{-\\lambda x}, \\quad x\\geq0.\n\\]\n\nThe corresponding R functions, e.g. dgamma, pgamma etc., should hence have at least 3 arguments. \\(\\alpha\\) corresponds to shape (second parameter) and \\(\\lambda\\) corresponds to rate (third parameter), i.e. e.g., for \\(X\\sim\\Gamma(0.1,2)\\), \\(f_X(3)\\) can be calculated as follows:\n\n\ndgamma(3, 0.1, 2)\n\n[1] 0.000103893\n\n\nIt may be more convenient (though not necessary) to write explicitly: dgamma(3, shape = 0.1, rate = 2).\n\nBy the definition, for any \\(p\\in(0,1)\\), the \\(p\\)-quantile is the value of \\(x\\), such that\n\n\\[\nF_X(x) = \\P(X\\leq x) = p,\n\\]\ni.e. \\(x=F_X^{-1}(p)\\). The corresponding R-function has prefix q. For example, for \\(X\\sim\\Gamma(0.1,2)\\), to find \\(x\\) such that \\(F_X(x)=0.2\\) we can use the following code:\n\nx &lt;- qgamma(0.2, shape = 0.1, rate = 2)\nx\n\n[1] 3.109401e-08\n\n\nand we can check that, indeed, \\(F_X(x)=0.2\\) for the found value of \\(x\\):\n\npgamma(x, shape = 0.1, rate = 2)\n\n[1] 0.2",
+    "crumbs": [
+      "Labs - Solutions",
+      "Lab 1 - Solutions"
+    ]
+  },
+  {
+    "objectID": "Lab1-Solutions.html#section-4",
+    "href": "Lab1-Solutions.html#section-4",
+    "title": "Lab 1: Solutions",
+    "section": "3.2 ",
+    "text": "3.2 \n\nLet \\(X\\sim \\Gamma(3, 2)\\). Find \\(a\\) such that \\(\\P(a\\leq X &lt; 5)=0.4\\). (Hint: find first \\(F_X(a)\\) and then find \\(a\\).) Assign the answer to R variable a.\n\n\nSolution. We have that\n\\[\nF_X(5)-F_X(a) = 0.4,\n\\]\nhence,\n\\[\nF_X(a)=F_X(5)-0.4.\n\\]\n\n\nCode\n# F(5) - F(a) = 0.4\n# F(a) = F(5) - 0.4\nfa &lt;- pgamma(5, shape = 3, rate = 2) - 0.4\na &lt;- qgamma(fa, shape = 3, rate = 2)\n\n\n\n\nTo generate n (independent) random values distributed according to \\(\\Gamma(\\alpha, \\lambda)\\), we use the command rgamma(n, shape = alpha, rate = lambda). The output is a vector (of the length n).\nSince the values are random, if you run the same rgamma command again and again, the output will be different all the time:\n\n\nrgamma(2, shape = 0.1, rate = 0.2)\n\n[1] 1.619667 1.364637\n\n\nand another output for the same input:\n\nrgamma(2, shape = 0.1, rate = 0.2)\n\n[1] 0.001953884 0.702667760\n\n\nTo fix the output, we should “set a seed”: write the code set.seed(m) with any natural number instead of m. For each m, there will be a fixed output. If you change m, the output will also changes.",
+    "crumbs": [
+      "Labs - Solutions",
+      "Lab 1 - Solutions"
+    ]
+  },
+  {
+    "objectID": "Lab1-Solutions.html#section-5",
+    "href": "Lab1-Solutions.html#section-5",
+    "title": "Lab 1: Solutions",
+    "section": "3.3 ",
+    "text": "3.3 \n\nSet the seed \\(123\\), i.e. write set.seed(123) before your code. Generate \\(10000\\) values of \\(X\\sim\\Gamma(2,3)\\). Find the mean (average) of these values and assign it to the variable m. You may either use sum function discussed above (and average it) or mean function (use ?mean if experience difficulties).\n\n\nCode\nset.seed(123)\nx &lt;- rgamma(10000, shape = 2, rate = 3)\nm &lt;- mean(x)\n\n\nCheck the answer:\n\nm\n\n[1] 0.6592689\n\n\n\nYou may check that this answer will remain the same for each new run, as the randomness is “frozen” now.\n\nNote that, by LLN (the Low of Large Numbers), the obtained mean (i.e. a sample mean) should be close to \\(\\E(X)=\\frac{\\alpha}{\\lambda}\\). And indeed, the received value is close to \\(\\frac23\\approx0.66\\), we may calculate this in R, of course (using abs function for an absolute value of a number):\n\n\nabs(m - 2/3)\n\n[1] 0.00739773",
+    "crumbs": [
+      "Labs - Solutions",
+      "Lab 1 - Solutions"
+    ]
+  },
+  {
+    "objectID": "Lab1.html",
+    "href": "Lab1.html",
+    "title": "Lab 1: From basics to probability distributions",
+    "section": "",
+    "text": "\\[\n  \\renewcommand{\\P}{\\mathbb{P}}\n  \\newcommand{\\E}{\\mathbb{E}}\n\\]",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 1 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab1.html#section",
+    "href": "Lab1.html#section",
+    "title": "Lab 1: From basics to probability distributions",
+    "section": "2.1 ",
+    "text": "2.1 \n\nLet \\(X\\) be the random variable that is the result of throwing a (fair) dice, i.e. \\(X\\) may take either of values \\(1,2,3,4,5,6\\) with equal probabilities \\(\\frac16\\).\n\nDefine vector \\[\nx=(x_1,x_2,\\ldots,x_6)=(1,2,\\ldots,6)\n\\] of values of \\(X\\) and assign it to R-variable x.\nDefine vector \\[\np=(p_1,p_2,\\ldots,p_6)=\\Bigl(\\frac16,\\frac16,\\ldots,\\frac16\\Bigr)\n\\] of the probabilities, and assign it to R-variable p.\nRecall that the expectation of \\(X\\) is \\[\n\\E(X)=\\sum_{i=1}^6 x_ip_i=x_1p_1+\\ldots x_6p_6=x\\cdot p.\n\\] Calculate \\(\\E(X)\\) (using the previously considered functions).\n\nCheck the answer.\n\n\n[1] 3.5",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 1 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab1.html#section-1",
+    "href": "Lab1.html#section-1",
+    "title": "Lab 1: From basics to probability distributions",
+    "section": "2.2 ",
+    "text": "2.2 \n\nRecall that the variance of a random variable can be found by the following formulas: \\[\n\\begin{aligned}\\mathrm{Var}(X) &= \\mathbb{E}\\Bigl(\\bigl(X-\\mathbb{E}(X)\\bigr)^2\\Bigr)\\\\\n    &= \\sum_{i=1}^6 \\bigl(x_i-\\mathbb{E}(X)\\bigr)^2p_i\\end{aligned}.\n\\] Find \\(\\mathrm{Var}(X)\\) (using the previously considered functions).\nCheck the answer:\n\n\n[1] 2.916667",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 1 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab1.html#section-2",
+    "href": "Lab1.html#section-2",
+    "title": "Lab 1: From basics to probability distributions",
+    "section": "2.3 ",
+    "text": "2.3 \n\nLet \\(X=(1,2,\\ldots,2024)\\) and \\(Y=(Y_1,\\ldots,Y_{2024})\\) with\n\\[\nY_k = X_1+\\ldots+X_k, \\qquad 1\\leq k\\leq 2024.\n\\]\nFind how many components of \\(Y\\) are bigger than \\(10^6\\). (Hint: remember that True stands for 1).\nCheck the answer:\n\n\n[1] 611\n\n\n\n\nSlicing\n\n\nIf x is a vector, to access its component with index i one needs to use x[i]:\n\n\n\n[1] 6\n\n\n\nRemark. Note that the indexation in R starts with 1 (in contrast to e.g. Python).\n\n\nWe can also get a slice of a vector by specifying the range of indexes, e.g.\n\n\n\n[1]  6  8 10\n\n\n\nThe indexes do not need to follow some order:\n\n\n\n[1]  6 14  2",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 1 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab1.html#section-3",
+    "href": "Lab1.html#section-3",
+    "title": "Lab 1: From basics to probability distributions",
+    "section": "3.1 ",
+    "text": "3.1 \n\nLet \\(X\\sim Exp(0.1)\\). Find \\(\\P(1&lt;X\\leq3)\\).\nCheck the answer.\n\n\n[1] 0.1640192\n\n\n\n\nThe survival function \\(S_X(x) = \\P(X&gt;x)\\) can be calculated, of course, from the relation \\(S_X(x) = 1- F_X(x)\\). There is, however, more numerically exact way by using the argument lower.tail = FALSE (or lower.tail = F) for function pexp:\n\n\n\n[1] 0.2231302\n\n\nthat coincides with\n\n\n[1] 0.2231302\n\n\nat least in the first 5 decimal figures.\n(Surely, for the exponential distribution one has an explicit simple formula: \\(S_X(x)= e^{-\\lambda x}\\).)\n\nGamma distribution\n\n\nRecall that, for \\(X\\sim \\Gamma(\\alpha,\\lambda)\\),\n\\[\nf_X(x)=\\frac{\\lambda^\\alpha}{\\Gamma(\\alpha)}x^{\\alpha-1} e^{-\\lambda x}, \\quad x\\geq0.\n\\]\nThe corresponding R functions, e.g. dgamma, pgamma etc., should hence have at least 3 arguments. \\(\\alpha\\) corresponds to shape (second parameter) and \\(\\lambda\\) corresponds to rate (third parameter), i.e. e.g., for \\(X\\sim\\Gamma(0.1,2)\\), \\(f_X(3)\\) can be calculated as follows:\n\n\n\n[1] 0.000103893\n\n\nIt may be more convenient (though not necessary) to write explicitly: dgamma(3, shape = 0.1, rate = 2).\n\nBy the definition, for any \\(p\\in(0,1)\\), the \\(p\\)-quantile is the value of \\(x\\), such that\n\\[\nF_X(x) = \\P(X\\leq x) = p,\n\\]\ni.e. \\(x=F_X^{-1}(p)\\). The corresponding R-function has prefix q. For example, for \\(X\\sim\\Gamma(0.1,2)\\), to find \\(x\\) such that \\(F_X(x)=0.2\\) we can use the following code:\n\n\n\n[1] 3.109401e-08\n\n\nand we can check that, indeed, \\(F_X(x)=0.2\\) for the found value of \\(x\\):\n\n\n[1] 0.2",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 1 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab1.html#section-4",
+    "href": "Lab1.html#section-4",
+    "title": "Lab 1: From basics to probability distributions",
+    "section": "3.2 ",
+    "text": "3.2 \n\nLet \\(X\\sim \\Gamma(3, 2)\\). Find \\(a\\) such that \\(\\P(a\\leq X &lt; 5)=0.4\\). (Hint: find first \\(F_X(a)\\) and then find \\(a\\).) Assign the answer to R variable a.\nCheck the answer:\n\na\n\n[1] 1.546295\n\n\n\n\nTo generate n (independent) random values distributed according to \\(\\Gamma(\\alpha, \\lambda)\\), we use the command rgamma(n, shape = alpha, rate = lambda). The output is a vector (of the length n).\nSince the values are random, if you run the same rgamma command again and again, the output will be different all the time:\n\n\n\n[1] 0.0005612651 0.0299092083\n\n\nand another output for the same input:\n\n\n[1] 0.05120926 0.14020223\n\n\nTo fix the output, we should “set a seed”: write the code set.seed(m) with any natural number instead of m. For each m, there will be a fixed output. If you change m, the output will also changes.",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 1 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab1.html#section-5",
+    "href": "Lab1.html#section-5",
+    "title": "Lab 1: From basics to probability distributions",
+    "section": "3.3 ",
+    "text": "3.3 \n\nSet the seed \\(123\\), i.e. write set.seed(123) before your code. Generate \\(10000\\) values of \\(X\\sim\\Gamma(2,3)\\). Find the mean (average) of these values and assign it to the variable m. You may either use sum function discussed above (and average it) or mean function (use ?mean if experience difficulties).\nCheck the answer:\n\nm\n\n[1] 0.6592689\n\n\n\nYou may check that this answer will remain the same for each new run, as the randomness is “frozen” now.\n\nNote that, by LLN (the Low of Large Numbers), the obtained mean (i.e. a sample mean) should be close to \\(\\E(X)=\\frac{\\alpha}{\\lambda}\\). And indeed, the received value is close to \\(\\frac23\\approx0.66\\), we may calculate this in R, of course (using abs function for an absolute value of a number):\n\n\n\n[1] 0.00739773",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 1 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab2.html",
+    "href": "Lab2.html",
+    "title": "Lab 2: Probability Distributions, Plotting, Creating Functions",
+    "section": "",
+    "text": "\\[\n  \\renewcommand{\\P}{\\mathbb{P}}\n  \\newcommand{\\E}{\\mathbb{E}}\n\\]",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 2 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab2.html#section",
+    "href": "Lab2.html#section",
+    "title": "Lab 2: Probability Distributions, Plotting, Creating Functions",
+    "section": "1.1 ",
+    "text": "1.1 \n\nPlot graph of \\(y=x^2\\) on \\(x\\in[-10,10]\\). (Hint: divide \\([-10,10]\\) on many small pieces using seq function discussed in Lab 1, and assign the output of this function to vector x, create vector y of squares of x and, hence, connect values of \\(y\\) at ends of these pieces by straight lines; if the pieces are small, it would like a smooth curve).\nTry by yourself, if it does not work, unfold the code below.\n\n\nCode\n# Recall that R applies any function to a vector component-wise (entry-wise), \n# i.e. if there is a vector `x` and a function `f`, \n# then `f(x)` will be the vector whose first component \n# is the value of `f` on the first compnent of `x` and so on.\nx &lt;- seq(-10, 10, 0.1)\ny &lt;- x**2\nplot(x,y, type='l')",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 2 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab2.html#section-1",
+    "href": "Lab2.html#section-1",
+    "title": "Lab 2: Probability Distributions, Plotting, Creating Functions",
+    "section": "1.2 ",
+    "text": "1.2 \n\nLet \\(X\\sim Exp(0.3)\\). Plot the graph of the survival function \\(S_X(x)\\) for \\(x\\in [0,10]\\) using pexp function (also discussed in Lab 1).\nThe expected output:",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 2 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab2.html#section-2",
+    "href": "Lab2.html#section-2",
+    "title": "Lab 2: Probability Distributions, Plotting, Creating Functions",
+    "section": "2.1 ",
+    "text": "2.1 \n\nLet \\(Y\\sim\\ln\\mathrm{N}(0.01,0.2^2)\\). Plot the graph of the density \\(f_Y(x)\\) for \\(x\\in[0,3]\\). Use xlab and ylab arguments of the plot function to set-up the names “x value” and “Density” for the horizontal and vertical axes. (We didn’t use them before, so their defaults values, which are empty lines, like xlab='', were used by R in the past). Use main argument of the plot function to set-up the title “Normal distribution density” for the whole plot.\nCheck the output (to make the graph smother, use smaller step in seq function while defining the x values).",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 2 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab2.html#section-3",
+    "href": "Lab2.html#section-3",
+    "title": "Lab 2: Probability Distributions, Plotting, Creating Functions",
+    "section": "2.2 ",
+    "text": "2.2 \n\nThe hazard function of a random variable \\(X\\) is defined as follows: \\[\nh_X(x) := \\frac{f_X(x)}{1-F_X(x)}.\n\\] Let \\(X\\sim \\mathrm{N}(4, 0.4)\\). Calculate \\(h_X(2)\\).\nCheck the output:\n\n\n[1] 0.004253513",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 2 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab2.html#section-4",
+    "href": "Lab2.html#section-4",
+    "title": "Lab 2: Probability Distributions, Plotting, Creating Functions",
+    "section": "3.1 ",
+    "text": "3.1 \n\nSet seed 131 (see Task 3.3 of Lab 1). Generate \\(10^6\\) random variables distributed with \\(W(0.76,0.25)\\) (i.e. calculate \\(\\sigma\\) from Equation 4 and use the needed function described above); and assign this to a vector. Calculate the sample mean of these values (and assign it to a variable). Calculate the expected value \\(\\mathbb{E}(X)\\) of \\(X\\sim W(0.76,0.25)\\) using Equation 2 and assign it to another variable: note that, for the Gamma-function \\(\\Gamma(x)\\) in Equation 2, you can use R-code gamma(x) (notice the small first letter; e.g. gamma(5) will return 24). Finally, find the absolute value of the difference between the found sample mean and the expected value.\nCheck your answer:\n\n\n[1] 0.005210536\n\n\n\n\nInstead of recalculating the parameters every time we need to use parametrisation Equation 1 instead of the built-in parametrisation Equation 3, we may want to use another functions designed to deal with the parametrisation Equation 1. One can either define needed functions by ourselves or use the functions defined in external libraries (packages).",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 2 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab2.html#section-5",
+    "href": "Lab2.html#section-5",
+    "title": "Lab 2: Probability Distributions, Plotting, Creating Functions",
+    "section": "4.1 ",
+    "text": "4.1 \n\nDefine the function rweibull65 which would have three arguments n, shape, scale, where shape corresponds to \\(\\beta\\) and scale to \\(\\alpha\\) in Equation 1, and which would return n Weibull random values distributed with \\(W(\\alpha,\\beta)\\) with shape\\(=\\beta\\) and scale\\(=\\alpha\\); so that this function rweibull65 would call rweibull inside its body; see also the remark below.\n\nRun the following code to check your function:\n\nset.seed(12)\nrweibull65(2, 1.2, 2.3)\n\n[1] 1.1318101 0.1312781\n\n\n\nRemark. R distinguishes the name of the argument and the argument itself. For example, in the defined above function sindeg the argument is called x. So we can specify the argument (though it’s not needed here since it’s the only argument):\n\nsindeg(x = 30)\n\n[1] 0.5\n\n\nNow, imagine we have a variable in our program which is also called x. Then we can write inside the function x = x:\n\nx &lt;- 30\nsindeg(x = x)\n\n[1] 0.5\n\n\nR will understand that, in x = x the left x is the name of the argument of function sindeg, whereas the right x is the variable defined earlier.",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 2 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab2.html#section-6",
+    "href": "Lab2.html#section-6",
+    "title": "Lab 2: Probability Distributions, Plotting, Creating Functions",
+    "section": "5.1 ",
+    "text": "5.1 \n\nLet \\(X\\sim W(1.2, 3.1)\\). Using functions pweibullPH and qweibullPH, find \\(b\\) such that \\(\\P(1\\leq X\\leq b)=0.25\\).\n\nCheck your answer:\n\n\n[1] 1.339862",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 2 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab2.html#section-7",
+    "href": "Lab2.html#section-7",
+    "title": "Lab 2: Probability Distributions, Plotting, Creating Functions",
+    "section": "6.1 ",
+    "text": "6.1 \n\nDefine function pburr which would have \\(4\\) arguments: x, alpha, lambda, gamma which would return the value of \\(F_{Burr}(x)\\) for the given values of the parameters.\nCheck your code by calculating \\(F_{Burr}(0.5)\\) for \\(\\alpha=1\\), \\(\\lambda=2\\), \\(\\gamma=3\\):\n\n\n[1] 0.05882353\n\n\n\n\nWe discussed previously how to plot the graph of a function. Often we need to plot several graphs on the same diagram, e.g. in different colours. The argument col of function plot is responsible for colours:\n\n\nx &lt;- seq(-2*pi,2*pi, 0.05)\ny &lt;- sin(x)\nplot(x, y, col = 'red', type='l')\n\n\n\n\n\n\n\n\nhowever, to plot another graph we would need to replace the second plot by lines (without type='l'). The last lines add the legend to the graph:\n\nx &lt;- seq(-2*pi,2*pi, 0.05)\ny &lt;- sin(x)\nz &lt;- cos(x)\nplot(x, y, col = 'red', type='l')\nlines(x, z, col = 'blue')\n\nlegend(x = \"topright\",          # Position\n       legend = c(\"sin(x)\", \"cos(x)\"),  # Legend texts\n       lty = c(1, 1),           # Line types: 1 stands for solid\n       col = c('red', 'blue'),  # Line colours\n       lwd = 2,                 # Line width\n       bg = 'light blue')      # Background color of the legend",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 2 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab2.html#section-8",
+    "href": "Lab2.html#section-8",
+    "title": "Lab 2: Probability Distributions, Plotting, Creating Functions",
+    "section": "6.2 ",
+    "text": "6.2 \n\nPlot graphs of \\(F_{Burr}(x)\\) for \\(\\alpha=1\\), \\(\\lambda=2\\) and \\(\\gamma=3\\) (blue graph) or \\(\\gamma=0.3\\) (red graph); let \\(x\\in[1,5]\\). Add legend to get the result:",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 2 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab3.html",
+    "href": "Lab3.html",
+    "title": "Lab 3: Parameter Estimation, Loops, Compound Distributions",
+    "section": "",
+    "text": "\\[\n  \\renewcommand{\\P}{\\mathbb{P}}\n  \\newcommand{\\E}{\\mathbb{E}}\n\\]",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 3 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab3.html#section",
+    "href": "Lab3.html#section",
+    "title": "Lab 3: Parameter Estimation, Loops, Compound Distributions",
+    "section": "1.1 ",
+    "text": "1.1 \n\nSet seed 123. Generate \\(100\\) random values of \\(Y\\sim N(5,9)\\), and assign them to vector y. Assign the MLE for \\(\\mu=\\mathbb{E}(Y)\\) to variable mu and assign the MLE for \\(\\sigma=\\sigma(Y)\\) to variable sigma. Output the vector \\((\\mu,\\sigma,\\mu+\\sigma)\\). Check the answer.\n\n\n[1] 5.271218 2.724721 7.995939",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 3 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab3.html#section-1",
+    "href": "Lab3.html#section-1",
+    "title": "Lab 3: Parameter Estimation, Loops, Compound Distributions",
+    "section": "1.2 ",
+    "text": "1.2 \n\nImagine that you don’t know that the first data x has exponential distribution and decided to try a normal distribution \\(N(\\mu,\\sigma^2)\\). It is still possible to calculate MLE for its parameters, though it’s likely that the estimated standard errors will be high. Given that the standard errors are in the sd component of fitdistr function, calculate the vector of standard errors for \\(\\mu\\) and \\(\\sigma\\).\n\n\n[1] 1.3598213 0.9615389\n\n\n\n\nEven when standard errors are relatively small, it is still reasonable to ask ourselves how can we be certain that the data follows the particular disribution. Various statistical tests may be applied. For ungrouped data, as we have e.g. in vector x, the Kolmogorov–Smirnov test is widely used.\n\nks.test(x, \"pexp\", rate = lambda_mle)\n\n\n  Exact one-sample Kolmogorov-Smirnov test\n\ndata:  x\nD = 0.10167, p-value = 0.6423\nalternative hypothesis: two-sided\n\n\nIt tests whether we should reject the null-hypothesis \\(H_0\\) that the data follows the exponential distribution, against the alternative hypothesis \\(H_1\\) that it does not.\nAs you can see ks.test function has several arguments:\n\nvector of the data (x);\nname of the R function for the CDF we test against (pexp);\nvalue(s) for the parameter(s) of that R function, using their name(s) (rate here; remember that you can always type in concole ?functionname to learn about the parameters of functionname); the values were previously obtained from MLE.\n\nThe output (recall that you may get different numbers as your data x was likely different) shows the number D (sum of absolute values of differences (residual distances) between the theoretical CDF and the CDF which can be calculated from the data, see the graph below), the smaller it is, the better prediction is. And also it shoes the \\(p\\)-value; in contrary, if \\(p\\)-value is small (close to \\(0\\)) it would mean that we have to reject \\(H_0\\) as then \\(p\\)-value would be the probability to observe the given data if \\(H_0\\) were true. Here \\(p\\)-value is pretty large, so there is no evidences to reject \\(H_0\\).",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 3 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab3.html#section-2",
+    "href": "Lab3.html#section-2",
+    "title": "Lab 3: Parameter Estimation, Loops, Compound Distributions",
+    "section": "1.3 ",
+    "text": "1.3 \n\nFor the data y and MLE estimates mu and sigma from Task 1.1, apply the Kolmogorov–Smirnov test to test the null hypothesis that y follows the normal distribution with these two parameters. Check the output.\n\n\n\n    Asymptotic one-sample Kolmogorov-Smirnov test\n\ndata:  y\nD = 0.058719, p-value = 0.8808\nalternative hypothesis: two-sided",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 3 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab3.html#section-3",
+    "href": "Lab3.html#section-3",
+    "title": "Lab 3: Parameter Estimation, Loops, Compound Distributions",
+    "section": "2.1 ",
+    "text": "2.1 \n\nSet seed \\(23\\). Generate \\(10^5\\) an exponential random variable with mean \\(3\\) (think about the value of the rate argument). Record the maximum of them (use R-function max). Repeat this procedure \\(10^3\\) times. Calculate the proportion of the found maximums which are larger then \\(50\\).\nCheck the answer:\n\n\n[1] 0.006",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 3 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab3.html#section-4",
+    "href": "Lab3.html#section-4",
+    "title": "Lab 3: Parameter Estimation, Loops, Compound Distributions",
+    "section": "3.1 ",
+    "text": "3.1 \n\nSet seed \\(123\\). Generate \\(10000\\) values from a compound Poisson distribution with Poisson parameter \\(\\lambda=1000\\) and individual claims which have gamma distribution \\(\\Gamma(750,0.25)\\) (recall that here \\(0.25\\) is called rate in the corresponding R functions).\nIn other words, you will have some numbers \\(N_1,\\ldots, N_{10000}\\) which came from the Poisson distribution, and for each \\(N_k\\), you have to generate \\(N_k\\) numbers from the gamma distribution: \\(X_1^{(k)},\\ldots,X_{N_k}^{(k)}\\), and then you got the corresponding value of a compound Poisson random variables \\[\nS^{(k)} = X_1^{(k)}+\\ldots+X_{N_k}^{(k)}.\n\\]\nFind the mean and the standard deviation (sd function) of the obtained sample of the compound Poisson random variables.\nHint: generate a vector N of \\(n=10000\\) Poisson r.v., and create a zero-vector S of length \\(10000\\) using numeric function. Then you will use a loop in \\(k\\) (\\(1\\leq k\\leq 10000\\)) inside which you generate the corresponding values of \\(X_i^{(k)}\\) and get their sums \\(S^{(k)}\\); and the latter would be assigned to S[k].\nCheck the answer:\n\n\n[1] 2997650.56   93719.71\n\n\nNote that (see Lecture Notes) \\[\n\\E(S)=\\E(N)\\E(X)=1000\\cdot\\frac{750}{0.25}=3000000,\n\\] so the mean for the sample we obtained is close to the theoretical expectation.",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 3 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab3.html#section-5",
+    "href": "Lab3.html#section-5",
+    "title": "Lab 3: Parameter Estimation, Loops, Compound Distributions",
+    "section": "3.2 ",
+    "text": "3.2 \n\nIn contrast to \\(\\E(S)\\) and \\(\\mathrm{Var}(S)\\), the probability distribution of \\(S\\) is hard for precise theoretical analysis. For example, there is not a “compact” formula for \\[\n\\P(S&gt;\\E(S))=\\P(S&gt;3000000).\n\\] Your task is to estimate this probability by looking at the ratio of \\(S^{(k)}&gt;3000000\\) in the sample you previously obtained to all \\(S^{(k)}\\).\nCheck the answer.\n\n\n[1] 0.4881\n\n\n\n\nRecall that a number \\(q\\) is called \\(\\alpha\\)-percentile for a random variable \\(X\\), if \\(\\mathbb{P}(X\\leq q)=\\alpha\\). As we discussed in Lab 1, in R, it’s called “quantiles”, and the corresponding functions starts with “q”: qexp, qnorm etc.\nWe also discussed on a lecturethe notion of percentiles/quantiles for the data samples: we should order the sample, and find the number which divides it in the proportion \\(\\alpha/(1-\\alpha)\\). The corresponding R function is called quantile:\n\nu &lt;- rpois(n = 10, lambda = 100) \nsort(u) # This command is NOT needed for the quantile R function, it is just for better visualisation of the quantile function\n\n [1]  83  92  94  94  95  97 100 103 106 109\n\nquantile(u,0.3)\n\n30% \n 94",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 3 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab3.html#section-6",
+    "href": "Lab3.html#section-6",
+    "title": "Lab 3: Parameter Estimation, Loops, Compound Distributions",
+    "section": "3.3 ",
+    "text": "3.3 \n\nFind, based on the previously obtained sample of \\(S^{(k)}\\), the number \\(q\\) such that \\[\n\\P(S\\leq q) = 0.9\n\\] Assign the result to q.\nCheck the answer.\n\nq\n\n    90% \n3115719 \n\n\nNow, modify the code from the previous Task to check that \\(\\P(S\\leq 3115719) = 0.9\\).\n\n\n[1] 0.9",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 3 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab4.html",
+    "href": "Lab4.html",
+    "title": "Lab 4: Reinsurance. Data frames",
+    "section": "",
+    "text": "For the next task, you will need to use function pmax. If a is a vector \\((a_1,\\ldots,a_m)\\) and x is a number, then usual max(a,x) returns \\[\n\\max\\{a_1,\\ldots,a_m,x\\}\n\\] that is a number, whereas pmax(a,x) returns \\[\n\\bigl(\\max\\{a_1,x\\},\\ldots,\\max\\{a_m,x\\})\n\\] that is a vector.\n\n\n\nSet seed \\(234\\). Simulate \\(15000\\) values for a reinsurer where (aggregated) claims have a compound Poisson distribution with parameter \\(900\\) and the individual claims have log-normal distribution \\(logN(7,0.3^2)\\) under individual excess of loss with retention \\(1700\\). Find the mean and the standard deviation of the obtained data, i.e. using the notations from the lecture notes, estimate \\(\\E(S_R)\\) for\n\\[\nS_R=Z_1+\\ldots+Z_N\n\\]\nfrom the sample, and also estimate \\(\\sigma(S_R)\\) from the sample.\nCheck the answer.\n\n\n[1] 16640.800  2872.169\n\n\n\n\n\n\n\nWe can see, using formulas from the lecture notes, that in the assumption of the previous task \\[\n\\E(S) = \\E(N)\\E(X)=900\\cdot e^{7+0.5\\cdot 0.3^2}=1032398\n\\] (you can also check that the mean of the sample: for \\(S\\) (not \\(S_R\\)), with the seed \\(234\\) it would be \\(1032358\\), pretty close). Suppose now that the reinsurer applies the aggregated excess \\(M\\), i.e. the insurer pays \\[\n  S_I=\\begin{cases}\n  S, & \\text{if } S \\leq M,\\\\\n  M, & \\text{if } S &gt; M\n  \\end{cases}\n\\] and the reinsurer pays \\[\n  S_R=S-S_I=\\begin{cases}\n  0, & \\text{if } S \\leq M,\\\\\n  S-M, & \\text{if } S &gt; M.\n  \\end{cases}\n\\]\nLet \\(M=\\E(S)=1032398\\). Modify the previous code and find \\(\\E(S_R)\\), the average paid by the reinsurer under this agreement.\nCheck the answer.\n\n\n[1] 14297.37",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 4 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab4.html#section",
+    "href": "Lab4.html#section",
+    "title": "Lab 4: Reinsurance. Data frames",
+    "section": "",
+    "text": "Set seed \\(234\\). Simulate \\(15000\\) values for a reinsurer where (aggregated) claims have a compound Poisson distribution with parameter \\(900\\) and the individual claims have log-normal distribution \\(logN(7,0.3^2)\\) under individual excess of loss with retention \\(1700\\). Find the mean and the standard deviation of the obtained data, i.e. using the notations from the lecture notes, estimate \\(\\E(S_R)\\) for\n\\[\nS_R=Z_1+\\ldots+Z_N\n\\]\nfrom the sample, and also estimate \\(\\sigma(S_R)\\) from the sample.\nCheck the answer.\n\n\n[1] 16640.800  2872.169",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 4 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab4.html#section-1",
+    "href": "Lab4.html#section-1",
+    "title": "Lab 4: Reinsurance. Data frames",
+    "section": "",
+    "text": "We can see, using formulas from the lecture notes, that in the assumption of the previous task \\[\n\\E(S) = \\E(N)\\E(X)=900\\cdot e^{7+0.5\\cdot 0.3^2}=1032398\n\\] (you can also check that the mean of the sample: for \\(S\\) (not \\(S_R\\)), with the seed \\(234\\) it would be \\(1032358\\), pretty close). Suppose now that the reinsurer applies the aggregated excess \\(M\\), i.e. the insurer pays \\[\n  S_I=\\begin{cases}\n  S, & \\text{if } S \\leq M,\\\\\n  M, & \\text{if } S &gt; M\n  \\end{cases}\n\\] and the reinsurer pays \\[\n  S_R=S-S_I=\\begin{cases}\n  0, & \\text{if } S \\leq M,\\\\\n  S-M, & \\text{if } S &gt; M.\n  \\end{cases}\n\\]\nLet \\(M=\\E(S)=1032398\\). Modify the previous code and find \\(\\E(S_R)\\), the average paid by the reinsurer under this agreement.\nCheck the answer.\n\n\n[1] 14297.37",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 4 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab4.html#section-2",
+    "href": "Lab4.html#section-2",
+    "title": "Lab 4: Reinsurance. Data frames",
+    "section": "2.1 ",
+    "text": "2.1 \n\nFind the sum of all values in the column y of this data frame df.\nCheck the answer:\n\n\n[1] 997200",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 4 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab4.html#section-3",
+    "href": "Lab4.html#section-3",
+    "title": "Lab 4: Reinsurance. Data frames",
+    "section": "3.1 ",
+    "text": "3.1 \n\nDo the following steps:\n\nDownload file numbers.csv and save it in a directory (folder) on your computer (usually it’s “Documents” or “Downloads”).\nSave your R-file your are working with in R-Studio to the same directory (folder).\nClick with right mouse button on the file name at the top of R-Studio window and choose “Set working directory”.\n\nOR (instead of 3)\n\nGo to menu “Session”, choose “Set working directory”, and then choose “To source file location”\n\nIf you did 1-3 correctly, in “Files” tab on the (down) right part of R-Studio you will see your R-file and the downloaded CSV-file in the same directory.\n\nLoad the saved file by the command\n\n\ndf &lt;- read.csv(\"numbers.csv\")\n\nCheck yourself:\n\nhead(df)\n\n           x        y\n1 1.98193075 8.554741\n2 0.08423538 4.008477\n3 0.33576991 4.920004\n4 0.44245007 4.861317\n5 0.09377962 4.023355\n6 0.42974243 5.109215",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 4 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab4.html#section-4",
+    "href": "Lab4.html#section-4",
+    "title": "Lab 4: Reinsurance. Data frames",
+    "section": "3.2 ",
+    "text": "3.2 \n\nIt is given that the data in column x of “numbers.csv” file are independent values of a random variable \\(X\\sim Exp(\\lambda)\\). Find the estimate \\(\\hat{\\lambda}\\) for the parameter \\(\\lambda\\) using the method of moments (see Lecture Notes).\nCheck your answer:\n\n\n[1] 1.152757",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 4 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab4.html#section-5",
+    "href": "Lab4.html#section-5",
+    "title": "Lab 4: Reinsurance. Data frames",
+    "section": "4.1 ",
+    "text": "4.1 \n\nFind the average of all values of y from df such that the corresponding values of x are larger than \\(1\\).\nCheck your answer:\n\n\n[1] 7.687361",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 4 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab4.html#section-6",
+    "href": "Lab4.html#section-6",
+    "title": "Lab 4: Reinsurance. Data frames",
+    "section": "5.1 ",
+    "text": "5.1 \n\nPlot on the same diagram the scatter plot \\(y\\) against \\(x\\) as it is shown above, but in blue color, and plot the line \\(y=kx+b\\) with the found values of \\(k\\) and \\(b\\) (do not copy-paste, use coef function) in red colour. (See Lab 3 for plotting two graphs on one diagram).",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 4 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab5.html",
+    "href": "Lab5.html",
+    "title": "Lab 5: Time series",
+    "section": "",
+    "text": "\\[\n  \\renewcommand{\\P}{\\mathbb{P}}\n  \\newcommand{\\E}{\\mathbb{E}}\n\\]",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 5 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab5.html#section",
+    "href": "Lab5.html#section",
+    "title": "Lab 5: Time series",
+    "section": "2.1 ",
+    "text": "2.1 \n\nThe previous time series is weakly stationary. Modify the code to generate a non-stationary \\(AR(1)\\) time-series, similar to the following one:",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 5 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab5.html#sec-task2",
+    "href": "Lab5.html#sec-task2",
+    "title": "Lab 5: Time series",
+    "section": "2.2 ",
+    "text": "2.2 \n\nModify the code to generate the following \\(ARMA(2,2)\\) time series \\[\nX_t = 0.3X_{t-1} +0.1 X_{t-2}+e_{t}+0.25e_{t-1}-0.5e_{t-2},\n\\] where \\(e_t\\sim N(0,0.7^2)\\), \\(X_1=X_2=1\\), \\(t=1,\\ldots, 10000\\).\nHint: note that you need now \\(2\\) initial values to generate the rest \\(n-2\\) values.\n\n\n\n\n\n\n\n\n\n\nRemark: Note that the characteristic equation for \\(AR\\)-part is \\[\n1-0.3z-0.1z^2=0, \\qquad z^2+3z-10=0, \\qquad z_1=-5, z_2=2,\n\\] i.e. both roots are such that \\(|z|&gt;1\\), hence, the process is weakly stationary.",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 5 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab5.html#section-1",
+    "href": "Lab5.html#section-1",
+    "title": "Lab 5: Time series",
+    "section": "2.3 ",
+    "text": "2.3 \n\nModify the previous code so that the characteristic equation would have the roots \\(z_1=1\\) and \\(z_2=-2\\) (keeping the same \\(MA\\)-part). Choose maximal time \\(100000\\). Set seed \\(101\\) at the beginning of your code.\nThe process is not stationary with the output like this:\n\n\n\n\n\n\n\n\n\n\nRemark: Note that if any root satisfies \\(|z|&lt;1\\), then the values of \\(X_t\\) would become very large (exponentially large) for small \\(t\\sim 30\\).\nRecall that the root \\(z=1\\) means that if we consider the differencing: \\[\nY_t=\\nabla X_t=(1-B)X_t=X_t-X_{t-1}\n\\] then \\(Y_t\\) is an ARMA time series with the characteristic equation having all other roots (if \\(z=1\\) is the multiple root of multiplicity \\(j\\), then it’s true for \\(Y_t=\\nabla^j X_t\\)). Here \\(z=1\\) is a root of multiplicity \\(j=1\\), so \\(Y_t=\\nabla X_t\\) has the characteristic equation with the only root \\(z=-2\\), i.e. \\(Y_t\\) is ARMA\\((1,2)\\) time series, which is stationary (as \\(|z|=|-2|&gt;1\\)). In our notations, it means that \\(X_t\\) is an ARIMA\\((1,1,2)\\) (recall that in some sources, and also in the notations of arima object discussed below it’s called ARIMA\\(({\\color{red}2},1,2)\\) time series, as it has AR\\((2)\\) part itself, whereas our notations were about AR-part for \\(Y_t\\) rather than \\(X_t\\)).\nIn R, there is a fast way to calculate the differencing \\(Y_t=X_t-X_{t-1}\\) having vector x we just consider y &lt;- diff(x). Note that if \\(x=(x_1,\\ldots,x_n)\\), then \\(y=(x_2-x_1,x_3-x_2,\\ldots,x_n-x_{n-1})\\) i.e. \\(y\\) has \\(n-1\\) entries only.",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 5 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab5.html#section-2",
+    "href": "Lab5.html#section-2",
+    "title": "Lab 5: Time series",
+    "section": "2.4 ",
+    "text": "2.4 \n\nPlot the graph of \\(Y_t\\). Notice that the output reflects the stationarity of the time series.",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 5 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab5.html#section-3",
+    "href": "Lab5.html#section-3",
+    "title": "Lab 5: Time series",
+    "section": "3.1 ",
+    "text": "3.1 \n\nRedo Task 2.2 using arima.sim function. Set seed \\(100\\). Assign the result to xt. Plot the output.\n\n\n\n\n\n\n\n\n\n\nWe can also “zoom” the plot, e.g. between \\(t=5000\\) and \\(t=6000\\). Note that a slicing xt[n:m] is a vector, and it may be converted to time series:\n\nplot(ts(xt[5000:6000]))\n\n\n\n\n\n\n\n\nAs you can see, the times are not the original ones, here \\(0\\) stands for the starting time \\(5000\\).\nOne of the way to keep the original times is to use the parameter start of the funciton ts:\n\nplot(ts(xt[5000:6000], start=5000))",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 5 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab5.html#section-4",
+    "href": "Lab5.html#section-4",
+    "title": "Lab 5: Time series",
+    "section": "3.2 ",
+    "text": "3.2 \n\nGiven that a ts object has all properties of a vector, find \\(X_{1000}\\) and the mean of all \\(10000\\) found values \\(X_t\\).\nNote that the latter value is close to \\(0\\), as expected:\n\n\n[1] 0.062928746 0.005488778",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 5 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab5.html#section-5",
+    "href": "Lab5.html#section-5",
+    "title": "Lab 5: Time series",
+    "section": "4.1 ",
+    "text": "4.1 \n\nCheck what happen if we try to predict next \\(50\\) values.",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 5 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab5.html#section-6",
+    "href": "Lab5.html#section-6",
+    "title": "Lab 5: Time series",
+    "section": "5.1 ",
+    "text": "5.1 \n\nGenerate an \\(MA(3)\\) time series and plot its ACF.\n\n\n\n\n\n\n\n\n\nAs you can see only the first \\(3\\) lags (at \\(k=1,2,3\\)) are not close to zero (and obviously \\(k=0\\) gives the value \\(1\\), so the total number of “non-zero” bars is \\(4\\), but we are looking for bars with \\(k&gt;0\\)).\n\nThe partial autocorrelation function (PACF) measures the dependence between \\(X_t\\) and \\(X_{t-k}\\) after removing the influence of the intermediate observations\n\\[\nX_{t-1},X_{t-2},\\ldots,X_{t-k+1}.\n\\]\nMore precisely,\n\\[\n\\mathrm{PACF}(k) = \\mathrm{Corr}(X_t,X_{t-k}\\mid X_{t-1},\\ldots,X_{t-k+1}).\n\\]\nThus PACF measures the direct linear dependence between observations \\(k\\) steps apart.\nEquivalently, PACF can be interpreted using the best linear predictor. Consider the approximation\n\\[\nX_t \\approx \\phi_{k1}X_{t-1}+\\phi_{k2}X_{t-2}+\\ldots+\\phi_{kk}X_{t-k},\n\\]\nwhich minimises the mean squared prediction error between \\(X_t\\) and the right hand side.\nThen\n\\[\n\\mathrm{PACF}(k)=\\phi_{kk}.\n\\]\nIn other words, PACF\\((k)\\) is the coefficient of \\(X_{t-k}\\) in the best linear prediction of \\(X_t\\) using the previous \\(k\\) observations.\nThe PACF can be plotted using\n\n# For a previously defined xt\npacf(xt)\n\n\n\n\n\n\n\n\nConsider an autoregressive process\n\\[\nX_t=\\alpha_1X_{t-1}+\\ldots+\\alpha_pX_{t-p}+e_t.\n\\]\nOnce the first \\(p\\) lags are known, older observations do not provide additional linear information about \\(X_t\\). Therefore\n\\[\n\\mathrm{PACF}(k)=0 \\qquad (k&gt;p).\n\\]\nThus the PACF truncates after lag \\(p\\).",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 5 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab5.html#section-7",
+    "href": "Lab5.html#section-7",
+    "title": "Lab 5: Time series",
+    "section": "5.2 ",
+    "text": "5.2 \n\nGenerate an \\(AR(3)\\) process and examine its PACF.\n\n\n\n\n\n\n\n\n\nAs you can see, PACF effectively vanishes after lag \\(3\\) (stress that, in contrast to ACF, PACF at \\(k=0\\) is not defined at all, so here we look at all non-vanishing bars).\n\nHowever, for an \\(ARMA(p,q)\\) process\n\\[\nX_t=\\alpha_1X_{t-1}+\\ldots+\\alpha_pX_{t-p}+e_t+\\beta_1e_{t-1}+\\ldots+\\beta_qe_{t-q},\n\\]\nneither the ACF nor the PACF truncates. Both functions typically decay gradually.",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 5 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab5.html#section-8",
+    "href": "Lab5.html#section-8",
+    "title": "Lab 5: Time series",
+    "section": "5.3 ",
+    "text": "5.3 \nGenerate an \\(ARMA(2,1)\\) process, and plot its ACF and PACF:\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCompare the behaviour of the ACF and PACF. ACF gives a “hint” that \\(q\\) may be \\(1\\) and PACF gives a hint that \\(p\\) may be \\(2\\) (as the first two bars are “significantly” larger than te rest). Surely, arima function gives much more reliable answer, but acf and pacf can be used for visual analysis.",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 5 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab6.html",
+    "href": "Lab6.html",
+    "title": "Lab 6: Survival Models, Life Tables, and Exposure to Risk",
+    "section": "",
+    "text": "\\[\n  \\renewcommand{\\P}{\\mathbb{P}}\n  \\newcommand{\\E}{\\mathbb{E}}\n\\]",
+    "crumbs": [
+      "Labs - Problems",
+      "Lab 6 - Problems"
+    ]
+  },
+  {
+    "objectID": "Lab6.html#section",
+    "href": "Lab6.html#section",
     "title": "Lab 6: Survival Models, Life Tables, and Exposure to Risk",
     "section": "1.1 ",
-    "text": "1.1 \n\nLet \\(\\alpha=5\\cdot10^{-6}\\), \\(\\beta=4\\), \\(a=0.0005\\), \\(b=0.00003\\), \\(c=1.09\\).\nProduce three plots in one column. Include the legends to each plot.\nThe first plot should include the graphs for the forces of mortality \\(\\mu_x\\) for \\(x\\in[0,100]\\) for two models: Weibull and Gompertz–Makeham.\nThe second plot should include the graphs for \\(\\ln \\mu_x\\) for \\(x\\in[0,100]\\) for these two models.\nThe third plot should include the graphs for \\(S(t)=S_0(t)\\) for \\(t\\in[0,100]\\) for these two models.\nNote that, in legend function, the parameter bty = \"n\" removes the frame around the legend as on the plots below.\n\n\nCode\nalpha &lt;- 5e-6\nbeta  &lt;- 4\n\na &lt;- 0.0005\nb &lt;- 0.00003\nc &lt;- 1.09\n\nmu_weibull &lt;- function(x) {\n  alpha * beta * x^(beta - 1)\n}\n\nmu_makeham &lt;- function(x) {\n  a + b * c^x\n}\n\nS_weibull &lt;- function(t) {\n  exp(-alpha * t^beta)\n}\n\nS_makeham &lt;- function(t) {\n  exp(-a * t - b * (c^t - 1) / log(c))\n}\n\nx &lt;- seq(0, 100, 0.1)\nt &lt;- seq(0, 100, 0.1)\n\npar(mfrow = c(3, 1))\n\nplot(x, mu_weibull(x), type = \"l\", col = 'red', lwd = 2,\n     xlab = \"Age x\", ylab = expression(mu[x]),\n     main = expression(\"Forces of mortality \" * mu[x]))\nlines(x, mu_makeham(x), col = 'blue', lwd = 2, lty = 1)\nlegend(\"topleft\",\n       legend = c(\"Weibull\", \"Gompertz-Makeham\"),\n       lwd = 2, lty = c(1, 1), col=c(\"red\",\"blue\"), bty = \"n\")\n\nplot(x, log(mu_weibull(x)), type = \"l\", col = 'red', lwd = 2,\n     xlab = \"Age x\", ylab = expression(log(mu[x])),\n     main = expression(\"Log-forces of mortality \" * log(mu[x])))\nlines(x, log(mu_makeham(x)), col = 'blue', lwd = 2, lty = 1)\nlegend(\"topleft\",\n       legend = c(\"Weibull\", \"Gompertz-Makeham\"),\n       lwd = 2, lty = c(1, 1), col=c(\"red\",\"blue\"), bty = \"n\")\n\nplot(t, S_weibull(t), type = \"l\", lwd = 2,col = 'red', \n     xlab = \"Time t\", ylab = expression(S(t)),\n     main = expression(\"Survival functions \" * S(t) == S[0](t)),\n     ylim = c(0, 1))\nlines(t, S_makeham(t), col = 'blue', lwd = 2, lty = 1)\nlegend(\"topleft\",\n       legend = c(\"Weibull\", \"Gompertz-Makeham\"),\n       lwd = 2, lty = c(1, 1), col=c(\"red\",\"blue\"), bty = \"n\")\n\n\n\n\n\n\n\n\n\nCode\npar(mfrow = c(1, 1))",
+    "text": "1.1 \n\nLet \\(\\alpha=5\\cdot10^{-6}\\), \\(\\beta=4\\), \\(a=0.0005\\), \\(b=0.00003\\), \\(c=1.09\\).\nProduce three plots in one column. Include the legends to each plot.\nThe first plot should include the graphs for the forces of mortality \\(\\mu_x\\) for \\(x\\in[0,100]\\) for two models: Weibull and Gompertz–Makeham.\nThe second plot should include the graphs for \\(\\ln \\mu_x\\) for \\(x\\in[0,100]\\) for these two models.\nThe third plot should include the graphs for \\(S(t)=S_0(t)\\) for \\(t\\in[0,100]\\) for these two models.\nNote that, in legend function, the parameter bty = \"n\" removes the frame around the legend as on the plots below.",
     "crumbs": [
-      "Labs - Solutions",
-      "Lab 6 - Solutions"
+      "Labs - Problems",
+      "Lab 6 - Problems"
     ]
   },
   {
-    "objectID": "Lab6-Solutions.html#section-1",
-    "href": "Lab6-Solutions.html#section-1",
+    "objectID": "Lab6.html#section-1",
+    "href": "Lab6.html#section-1",
     "title": "Lab 6: Survival Models, Life Tables, and Exposure to Risk",
     "section": "2.1 ",
-    "text": "2.1 \n\nCheck the first and last rows of the dataset. For the last rows, use the tail function.\n\n\nCode\nelt &lt;- read.csv(\"elt17.csv\")\nhead(elt)\n\n\n  Age  Males Females\n1   0 100000  100000\n2   1  99525   99619\n3   2  99495   99595\n4   3  99474   99578\n5   4  99460   99564\n6   5  99448   99554\n\n\nCode\ntail(elt)\n\n\n    Age Males Females\n111 110     4      14\n112 111     2       7\n113 112     1       3\n114 113    NA       2\n115 114    NA       1\n116  NA    NA      NA\n\n\nPlot the values of \\(l_x\\) for males and females on the same graph, for integer ages \\(x\\in[0,112]\\), using different colours.\n\n\nCode\nlx_males &lt;- elt$Males\nlx_females &lt;- elt$Females\nage &lt;- elt$Age\nplot(age[1:113], lx_males[1:113], type=\"l\", col=\"blue\",xlab=\"Age\",ylab=\"Lives\")\nlines(age[1:113], lx_females[1:113], type=\"l\", col=\"red\")\nlegend(\"bottomleft\",\n       legend = c(\"Males\", \"Females\"),\n       lwd = 2, lty = c(1, 1), col=c(\"blue\",\"red\"), bty = \"n\")\n\n\n\n\n\n\n\n\n\n\nThe c(...) function in R is very flexible. For example, if v is a vector and n is a number, then c(v,n) returns a longer vector:\n\nv &lt;- c(1,2)\nc(v,3)\n\n[1] 1 2 3\n\n\nThe same would work if instead of n we would have another vector or even more general structure, or lack of data at all:\n\nc(v,NA)\n\n[1]  1  2 NA\n\n\nNote that NA is a special R-object which represents the lack of provided data. As you can see in the dataset elt17.csv, some data is absent.\nNote also that the command datasetName$columnName can be used even if the column with columnName does not yet exist. In this case, such a column would be created.",
+    "text": "2.1 \n\nCheck the first and last rows of the dataset. For the last rows, use the tail function.\n\n\n  Age  Males Females\n1   0 100000  100000\n2   1  99525   99619\n3   2  99495   99595\n4   3  99474   99578\n5   4  99460   99564\n6   5  99448   99554\n\n\n    Age Males Females\n111 110     4      14\n112 111     2       7\n113 112     1       3\n114 113    NA       2\n115 114    NA       1\n116  NA    NA      NA\n\n\nPlot the values of \\(l_x\\) for males and females on the same graph, for integer ages \\(x\\in[0,112]\\), using different colours.\n\n\n\n\n\n\n\n\n\n\nThe c(...) function in R is very flexible. For example, if v is a vector and n is a number, then c(v,n) returns a longer vector:\n\nv &lt;- c(1,2)\nc(v,3)\n\n[1] 1 2 3\n\n\nThe same would work if instead of n we would have another vector or even more general structure, or lack of data at all:\n\nc(v,NA)\n\n[1]  1  2 NA\n\n\nNote that NA is a special R-object which represents the lack of provided data. As you can see in the dataset elt17.csv, some data is absent.\nNote also that the command datasetName$columnName can be used even if the column with columnName does not yet exist. In this case, such a column would be created.",
     "crumbs": [
-      "Labs - Solutions",
-      "Lab 6 - Solutions"
+      "Labs - Problems",
+      "Lab 6 - Problems"
     ]
   },
   {
-    "objectID": "Lab6-Solutions.html#section-2",
-    "href": "Lab6-Solutions.html#section-2",
+    "objectID": "Lab6.html#section-2",
+    "href": "Lab6.html#section-2",
     "title": "Lab 6: Survival Models, Life Tables, and Exposure to Risk",
     "section": "2.2 ",
-    "text": "2.2 \n\nCalculate \\(d_x=l_x-l_{x+1}\\) for all possible \\(x\\) for both males and females. (Hint: use diff function from Lab 7.) Fill the absent values of the vectors \\(d=(d_x)\\) with NA. Assign the results to the dataset columns MaleDx and FemaleDx, respectively (this would create these columns).\nCheck head and tail of the modified dataset.\n\n\nCode\ndx_males &lt;- c(-diff(lx_males), NA)\nelt$MaleDx &lt;- dx_males\ndx_females &lt;- c(-diff(lx_females), NA)\nelt$FemaleDx &lt;- dx_females\nhead(elt)\n\n\n  Age  Males Females MaleDx FemaleDx\n1   0 100000  100000    475      381\n2   1  99525   99619     30       24\n3   2  99495   99595     21       17\n4   3  99474   99578     14       14\n5   4  99460   99564     12       10\n6   5  99448   99554     10        9\n\n\nCode\ntail(elt)\n\n\n    Age Males Females MaleDx FemaleDx\n111 110     4      14      2        7\n112 111     2       7      1        4\n113 112     1       3     NA        1\n114 113    NA       2     NA        1\n115 114    NA       1     NA       NA\n116  NA    NA      NA     NA       NA",
+    "text": "2.2 \n\nCalculate \\(d_x=l_x-l_{x+1}\\) for all possible \\(x\\) for both males and females. (Hint: use diff function from Lab 7.) Fill the absent values of the vectors \\(d=(d_x)\\) with NA. Assign the results to the dataset columns MaleDx and FemaleDx, respectively (this would create these columns).\nCheck head and tail of the modified dataset.\n\n\n  Age  Males Females MaleDx FemaleDx\n1   0 100000  100000    475      381\n2   1  99525   99619     30       24\n3   2  99495   99595     21       17\n4   3  99474   99578     14       14\n5   4  99460   99564     12       10\n6   5  99448   99554     10        9\n\n\n    Age Males Females MaleDx FemaleDx\n111 110     4      14      2        7\n112 111     2       7      1        4\n113 112     1       3     NA        1\n114 113    NA       2     NA        1\n115 114    NA       1     NA       NA\n116  NA    NA      NA     NA       NA",
     "crumbs": [
-      "Labs - Solutions",
-      "Lab 6 - Solutions"
+      "Labs - Problems",
+      "Lab 6 - Problems"
     ]
   },
   {
-    "objectID": "Lab6-Solutions.html#section-3",
-    "href": "Lab6-Solutions.html#section-3",
+    "objectID": "Lab6.html#section-3",
+    "href": "Lab6.html#section-3",
     "title": "Lab 6: Survival Models, Life Tables, and Exposure to Risk",
     "section": "2.3 ",
-    "text": "2.3 \n\nRecall that \\(d_x=l_xq_x\\), where \\(q_x\\) is the probability of death within the next year. Plot the ratio \\(q_x^{male}/q_x^{female}\\) for integer ages \\(x\\in[0,111]\\).\n\n\nCode\nqx_males &lt;- dx_males/lx_males\nqx_females &lt;- dx_females/lx_females\nplot(age[1:112],(qx_males/qx_females)[1:112], type=\"l\",xlab=\"Age\", ylab=\"Ratio of q_x, males/females\")\n\n\n\n\n\n\n\n\n\n\nFor the next task, you may need to use cumsum function discussed in Lab 1. Recall that, for vector \\((x_1,\\ldots,x_n)\\) its cumulative sum would be the vector\n\\[\n(x_1, x_1+x_2, x_1+x_2+x_3,\\ldots, x_1+\\ldots+x_n),\n\\] i.e. on each position one has the sum of the “head” of the vector up to that position. What if we want to have the sum of the “tail” of the vector, i.e. \\[\n(x_1+\\ldots+x_n, x_2+\\ldots+x_n, x_3+\\ldots+x_n,\\ldots,x_n)\n\\] The trick is to reverse the vector (using the rev function), apply cumsum, and then reverse it back:\n\na &lt;- c(10,20,30)\nrev(cumsum(rev(a)))\n\n[1] 60 50 30",
+    "text": "2.3 \n\nRecall that \\(d_x=l_xq_x\\), where \\(q_x\\) is the probability of death within the next year. Plot the ratio \\(q_x^{male}/q_x^{female}\\) for integer ages \\(x\\in[0,111]\\).\n\n\n\n\n\n\n\n\n\n\nFor the next task, you may need to use cumsum function discussed in Lab 1. Recall that, for vector \\((x_1,\\ldots,x_n)\\) its cumulative sum would be the vector\n\\[\n(x_1, x_1+x_2, x_1+x_2+x_3,\\ldots, x_1+\\ldots+x_n),\n\\] i.e. on each position one has the sum of the “head” of the vector up to that position. What if we want to have the sum of the “tail” of the vector, i.e. \\[\n(x_1+\\ldots+x_n, x_2+\\ldots+x_n, x_3+\\ldots+x_n,\\ldots,x_n)\n\\] The trick is to reverse the vector (using the rev function), apply cumsum, and then reverse it back:\n\na &lt;- c(10,20,30)\nrev(cumsum(rev(a)))\n\n[1] 60 50 30",
     "crumbs": [
-      "Labs - Solutions",
-      "Lab 6 - Solutions"
+      "Labs - Problems",
+      "Lab 6 - Problems"
     ]
   },
   {
-    "objectID": "Lab6-Solutions.html#section-4",
-    "href": "Lab6-Solutions.html#section-4",
+    "objectID": "Lab6.html#section-4",
+    "href": "Lab6.html#section-4",
     "title": "Lab 6: Survival Models, Life Tables, and Exposure to Risk",
     "section": "2.4 ",
-    "text": "2.4 \n\nRecall that the curtate expectation of life \\(e_x=\\mathbb{E}([T_x])\\) (where \\([\\cdot]\\) denotes the integer part of a real number) can be found from the formulas:\n\\[\ne_x=\\sum_{j\\geq1}{}_j p_{x}, \\qquad {}_j p_{x}=\\frac{l_{x+j}}{l_x}\n\\]\nConstruct the vectors of \\(e_x\\) for males and females. Note that the sum above starts with \\(j=1\\), not \\(j=0\\), i.e. the corresponding current value \\(l_x\\) must be subtracted from the corresponding cumulative sum for each index \\(x\\). Plot, on the same graph, the graphs of \\(x+e_x\\) for males and for females, for integer ages \\(x\\in[0,111]\\). (We proved that \\(x+\\mathring{e}_x\\) is increasing in \\(x\\), where \\(\\mathring{e}_x\\) was the complete expectation of life, so let’s check this on the data.)\n\n\nCode\nlx_males &lt;- lx_males[1:112]\nlx_females &lt;- lx_females[1:112]\nage &lt;- age[1:112]\n\nex_males &lt;- (rev(cumsum(rev(lx_males)))-lx_males)/lx_males\n\nex_females &lt;- (rev(cumsum(rev(lx_females)))-lx_females)/lx_females\n\nplot(age, age + ex_males, type='l', xlab=\"Age x\",ylab=\"Total expected lifetime after age x\",col='blue')\nlines(age, age + ex_females, type='l', col='red')\n\nlegend(\"topleft\",\n       legend = c(\"Males\", \"Females\"),\n       lwd = 2, lty = c(1, 1), col=c(\"blue\",\"red\"))",
+    "text": "2.4 \n\nRecall that the curtate expectation of life \\(e_x=\\mathbb{E}([T_x])\\) (where \\([\\cdot]\\) denotes the integer part of a real number) can be found from the formulas:\n\\[\ne_x=\\sum_{j\\geq1}{}_j p_{x}, \\qquad {}_j p_{x}=\\frac{l_{x+j}}{l_x}\n\\]\nConstruct the vectors of \\(e_x\\) for males and females. Note that the sum above starts with \\(j=1\\), not \\(j=0\\), i.e. the corresponding current value \\(l_x\\) must be subtracted from the corresponding cumulative sum for each index \\(x\\). Plot, on the same graph, the graphs of \\(x+e_x\\) for males and for females, for integer ages \\(x\\in[0,111]\\). (We proved that \\(x+\\mathring{e}_x\\) is increasing in \\(x\\), where \\(\\mathring{e}_x\\) was the complete expectation of life, so let’s check this on the data.)",
     "crumbs": [
-      "Labs - Solutions",
-      "Lab 6 - Solutions"
+      "Labs - Problems",
+      "Lab 6 - Problems"
     ]
   },
   {
-    "objectID": "Lab6-Solutions.html#section-5",
-    "href": "Lab6-Solutions.html#section-5",
+    "objectID": "Lab6.html#section-5",
+    "href": "Lab6.html#section-5",
     "title": "Lab 6: Survival Models, Life Tables, and Exposure to Risk",
     "section": "3.1 ",
-    "text": "3.1 \n\nAssuming UDD and small forces of mortality, estimate the forces of mortality for males and for females. Plot two graphs of \\(\\ln\\hat{\\mu}_x\\) on the same diagram (for integer ages \\(x\\in[0,111]\\)).\n\n\nCode\nqx_males &lt;- qx_males[1:112]\nqx_females &lt;- qx_females[1:112]\n\nmux_males &lt;- 2*qx_males/(2-qx_males)\nmux_females &lt;- 2*qx_females/(2-qx_females)\n\nplot(age, log(mux_males), type='l', xlab=\"Age x\",ylab=\"Log-force of mortality\",col='blue')\nlines(age, log(mux_females), type='l', col='red')\n\nlegend(\"topleft\",\n       legend = c(\"Males\", \"Females\"),\n       lwd = 2, lty = c(1, 1), col=c(\"blue\",\"red\"))\n\n\n\n\n\n\n\n\n\n\nAs we can see, between ages, approximately, \\(25\\) and \\(95\\) one has pretty good linear behaviour.",
+    "text": "3.1 \n\nAssuming UDD and small forces of mortality, estimate the forces of mortality for males and for females. Plot two graphs of \\(\\ln\\hat{\\mu}_x\\) on the same diagram (for integer ages \\(x\\in[0,111]\\)).\n\n\n\n\n\n\n\n\n\n\nAs we can see, between ages, approximately, \\(25\\) and \\(95\\) one has pretty good linear behaviour.",
     "crumbs": [
-      "Labs - Solutions",
-      "Lab 6 - Solutions"
+      "Labs - Problems",
+      "Lab 6 - Problems"
     ]
   },
   {
-    "objectID": "Lab6-Solutions.html#section-6",
-    "href": "Lab6-Solutions.html#section-6",
+    "objectID": "Lab6.html#section-6",
+    "href": "Lab6.html#section-6",
     "title": "Lab 6: Survival Models, Life Tables, and Exposure to Risk",
     "section": "3.2 ",
-    "text": "3.2 \n\nBuild the linear model for \\(\\ln\\hat{\\mu}_x = mx +k\\) based on values of integer ages \\(x\\in[25,95]\\) (think about the corresponding indexes); see Lab 4 for linear models: you can create a temporary data frame for the linear model, if needed. Find, from the linear model, the estimates \\(\\hat{m}\\), \\(\\hat{k}\\) for \\(m=\\ln c\\) and \\(k=\\ln b\\), and hence find estimates \\(\\hat{b}\\) and \\(\\hat{c}\\) for \\(b\\) and \\(c\\) (separately for males and females).\nCheck the answer.\n\n\nCode\nmux_m &lt;- mux_males[26:96]\nmux_f &lt;- mux_females[26:96] \n\ndf &lt;- data.frame(x = 25:95, males = log(mux_m), females = log(mux_f))\n\ncoef_m &lt;- coef(lm(formula = males ~ x, data = df))\ncoef_f &lt;- coef(lm(formula = females ~ x, data = df))\nb_male &lt;- exp(coef_m[1])\nc_male &lt;- exp(coef_m[2])\nb_female &lt;- exp(coef_f[1])\nc_female &lt;- exp(coef_f[2])\n\n\n\nunname(c(b_male, c_male, b_female, c_female))\n\n[1] 3.693641e-05 1.096556e+00 1.667903e-05 1.103153e+00",
+    "text": "3.2 \n\nBuild the linear model for \\(\\ln\\hat{\\mu}_x = mx +k\\) based on values of integer ages \\(x\\in[25,95]\\) (think about the corresponding indexes); see Lab 4 for linear models: you can create a temporary data frame for the linear model, if needed. Find, from the linear model, the estimates \\(\\hat{m}\\), \\(\\hat{k}\\) for \\(m=\\ln c\\) and \\(k=\\ln b\\), and hence find estimates \\(\\hat{b}\\) and \\(\\hat{c}\\) for \\(b\\) and \\(c\\) (separately for males and females).\nCheck the answer.\n\nunname(c(b_male, c_male, b_female, c_female))\n\n[1] 3.693641e-05 1.096556e+00 1.667903e-05 1.103153e+00",
     "crumbs": [
-      "Labs - Solutions",
-      "Lab 6 - Solutions"
+      "Labs - Problems",
+      "Lab 6 - Problems"
     ]
   },
   {
-    "objectID": "Lab6-Solutions.html#section-7",
-    "href": "Lab6-Solutions.html#section-7",
+    "objectID": "Lab6.html#section-7",
+    "href": "Lab6.html#section-7",
     "title": "Lab 6: Survival Models, Life Tables, and Exposure to Risk",
     "section": "3.3 ",
-    "text": "3.3 \n\nPlot two graphs in one column, one for males, another for females. On each graph, plot \\(\\mu_x\\) for \\(x\\in[0,111]\\), and also plot \\(\\hat{b}\\cdot \\hat{c}^x\\) for \\(x\\in[25,95]\\) in another colour.\n\n\nCode\npar(mfrow = c(2, 1))\n\nplot(age, mux_males, type=\"l\", col=\"blue\", xlab=\"Age\", ylab=\"Force of mortality\", main=\"Males\")\nlines(25:95, b_male * c_male**(25:95), col = \"red\")\n\nplot(age, mux_females, type=\"l\", col=\"blue\", xlab=\"Age\", ylab=\"Force of mortality\", main=\"Females\")\nlines(25:95, b_female * c_female**(25:95), col = \"red\")\n\n\n\n\n\n\n\n\n\nCode\npar(mfrow = c(1, 1))",
+    "text": "3.3 \n\nPlot two graphs in one column, one for males, another for females. On each graph, plot \\(\\mu_x\\) for \\(x\\in[0,111]\\), and also plot \\(\\hat{b}\\cdot \\hat{c}^x\\) for \\(x\\in[25,95]\\) in another colour.",
     "crumbs": [
-      "Labs - Solutions",
-      "Lab 6 - Solutions"
+      "Labs - Problems",
+      "Lab 6 - Problems"
     ]
   },
   {
