@@ -1,0 +1,1389 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.40">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Lab 8: Graduation – MA-365/M65 Lab Assignments</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./Lab7.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-70e52673ab01eacf4446dd4d819793d2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles.css">
+<meta property="og:title" content="Lab 8: Graduation – MA-365/M65 Lab Assignments">
+<meta property="og:description" content="Lab Assignments for module MA-365/M65: Risk and Survival Models">
+<meta property="og:image" content="https://finkelshtein.github.io/MA-x65-Labs/Lab8_files/figure-html/unnamed-chunk-2-1.png">
+<meta property="og:site_name" content="MA-365/M65 Lab Assignments">
+<meta property="og:image:height" content="960">
+<meta property="og:image:width" content="1344">
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lab1.html">Labs - Problems</a></li><li class="breadcrumb-item"><a href="./Lab8.html">Lab 8 - Problems</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-center sidebar-header">
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="./images/graph.jpg" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Site overview</span></a>
+  </div>
+</li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Labs - Problems</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lab1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 1 - Problems</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lab2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 2 - Problems</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lab3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 3 - Problems</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lab4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 4 - Problems</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lab5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 5 - Problems</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lab6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 6 - Problems</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lab7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 7 - Problems</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lab8.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Lab 8 - Problems</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Labs - Solutions</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lab1-Solutions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 1 - Solutions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lab2-Solutions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 2 - Solutions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lab3-Solutions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 3 - Solutions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lab4-Solutions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 4 - Solutions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lab5-Solutions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 5 - Solutions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lab6-Solutions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 6 - Solutions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Lab7-Solutions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 7 - Solutions</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+    <h2 id="toc-title">In this Lab</h2>
+   
+  <ul class="collapse">
+  <li><a href="#graduation" id="toc-graduation" class="nav-link active" data-scroll-target="#graduation"><span class="header-section-number">1</span> Graduation</a>
+  <ul class="collapse">
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"><span class="header-section-number">1.1</span> </a></li>
+  </ul></li>
+  <li><a href="#moving-average-graduation" id="toc-moving-average-graduation" class="nav-link" data-scroll-target="#moving-average-graduation"><span class="header-section-number">2</span> Moving-average graduation</a>
+  <ul class="collapse">
+  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1"><span class="header-section-number">2.1</span> </a></li>
+  </ul></li>
+  <li><a href="#parametric-graduation-gompertz-model" id="toc-parametric-graduation-gompertz-model" class="nav-link" data-scroll-target="#parametric-graduation-gompertz-model"><span class="header-section-number">3</span> Parametric graduation: Gompertz model</a>
+  <ul class="collapse">
+  <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2"><span class="header-section-number">3.1</span> </a></li>
+  </ul></li>
+  <li><a href="#testing-a-graduation" id="toc-testing-a-graduation" class="nav-link" data-scroll-target="#testing-a-graduation"><span class="header-section-number">4</span> Testing a graduation</a>
+  <ul class="collapse">
+  <li><a href="#section-3" id="toc-section-3" class="nav-link" data-scroll-target="#section-3"><span class="header-section-number">4.1</span> </a></li>
+  </ul></li>
+  <li><a href="#mortality-projection-leecarter-model" id="toc-mortality-projection-leecarter-model" class="nav-link" data-scroll-target="#mortality-projection-leecarter-model"><span class="header-section-number">5</span> Mortality projection: Lee–Carter model</a>
+  <ul class="collapse">
+  <li><a href="#section-4" id="toc-section-4" class="nav-link" data-scroll-target="#section-4"><span class="header-section-number">5.1</span> </a></li>
+  <li><a href="#section-5" id="toc-section-5" class="nav-link" data-scroll-target="#section-5"><span class="header-section-number">5.2</span> </a></li>
+  <li><a href="#section-6" id="toc-section-6" class="nav-link" data-scroll-target="#section-6"><span class="header-section-number">5.3</span> </a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lab1.html">Labs - Problems</a></li><li class="breadcrumb-item"><a href="./Lab8.html">Lab 8 - Problems</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Lab 8: Graduation</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="hidden">
+<p><span class="math display">\[
+  \renewcommand{\P}{\mathbb{P}}
+  \newcommand{\E}{\mathbb{E}}
+\]</span></p>
+</div>
+<section id="graduation" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Graduation</h1>
+<p>The file <a href="grad.csv">grad.csv</a> contains mortality data by age.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>grad <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"grad.csv"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(grad)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  age central_exposure deaths     mu_true
+1  50            12158     46 0.003200000
+2  51            12584     47 0.003472000
+3  52            11631     34 0.003767120
+4  53            11842     45 0.004087325
+5  54            11192     49 0.004434748
+6  55            10408     43 0.004811701</code></pre>
+</div>
+</div>
+<p>The needed columns are:</p>
+<ul>
+<li><code>age</code>: integer age <span class="math inline">\(x\)</span>;</li>
+<li><code>central_exposure</code>: central exposed to risk <span class="math inline">\(E_x^c\)</span>;</li>
+<li><code>deaths</code>: observed deaths <span class="math inline">\(D_x\)</span>.</li>
+</ul>
+<p>The column <code>mu_true</code> is included only because the data are synthetic. In real life we would not know it.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Theory reminder: crude central rate of mortality">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Theory reminder: crude central rate of mortality
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The crude central rate of mortality is <span class="math display">\[
+\hat m_x=\frac{D_x}{E_x^c}.
+\]</span> It is a random empirical estimate. Under the Poisson model <span class="math display">\[
+D_x\sim Po(E_x^c\mu_x),
+\]</span> we have <span class="math display">\[
+\mathbb E(D_x)=E_x^c\mu_x,
+\qquad
+\operatorname{Var}(D_x)=E_x^c\mu_x.
+\]</span> Hence <span class="math display">\[
+\mathbb E(\hat m_x)=\mu_x,
+\qquad
+\operatorname{Var}(\hat m_x)=\frac{\mu_x}{E_x^c}.
+\]</span> So crude rates are less stable when exposure is small.</p>
+</div>
+</div>
+<section id="section" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="section"><span class="header-section-number">1.1</span> </h2>
+<div class="task">
+<p>Create a new column <code>m_crude</code> in the dataset containing the crude central rate <span class="math display">\[
+\hat m_x=\frac{D_x}{E_x^c}.
+\]</span> Plot it against age.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Lab8_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p>As you can see, the crude rates become more irregular at high ages, as then the central exposure is smaller, so the variance of the crude central rate is larger. This is one of the main reasons for graduation.</p>
+</section>
+</section>
+<section id="moving-average-graduation" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Moving-average graduation</h1>
+<div class="callout callout-style-default callout-note callout-titled" title="Theory reminder: moving average">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Theory reminder: moving average
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A moving average is a non-parametric graduation method. It produces a smoother sequence at integer ages. For example, a 3-point moving average is <span class="math display">\[
+m_x^{(g)}=\frac{\hat m_{x-1}+\hat m_x+\hat m_{x+1}}{3}.
+\]</span> This does not create a continuous function of age. It regularises the sequence of crude rates. Note that the choice of the first and last element of the graduated vector is subject to an agreement. We will use the approach when the first and the last elements remain unchanged: e.g.&nbsp;if <span class="math inline">\(\hat m=(\hat m_1,\hat m_2,\hat m_3, \hat m_4)\)</span> then</p>
+<p><span class="math display">\[
+m_1^{(g)}=\hat m_1, \quad m_2^{(g)}=\frac{\hat m_{1}+\hat m_2+\hat m_{3}}{3}, \quad m_3^{(g)}=\frac{\hat m_{2}+\hat m_3+\hat m_{4}}{3}, \quad m_4^{(g)}=\hat m_4.
+\]</span></p>
+</div>
+</div>
+<p>It may be useful to know that <code>head</code> and <code>tail</code> functions may have negative arguments: if <code>a</code> is a vector, <code>head(a,-k)</code> gives all entries of <span class="math inline">\(a\)</span> up to the <span class="math inline">\(k\)</span>-th element <strong>from the end</strong>, whereas <code>tail(a,-k)</code> returns last elements ignoring the first <span class="math inline">\(k\)</span>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">20</span>,<span class="dv">30</span>,<span class="dv">40</span>,<span class="dv">50</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(a,<span class="sc">-</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 10 20 30</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(a,<span class="sc">-</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 30 40 50</code></pre>
+</div>
+</div>
+<section id="section-1" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="section-1"><span class="header-section-number">2.1</span> </h2>
+<div class="task">
+<p>Graduate the crude central rates using 3-point moving average: create a new column <code>m_ma3</code> in the dataset. Plot crude and graduated rates together.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Lab8_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="parametric-graduation-gompertz-model" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Parametric graduation: Gompertz model</h1>
+<div class="callout callout-style-default callout-note callout-titled" title="Theory reminder: Gompertz graduation">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Theory reminder: Gompertz graduation
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The Gompertz model assumes <span class="math display">\[
+\mu_x^{(g)}=bc^x,
+\qquad b&gt;0,\ c&gt;1.
+\]</span> Taking logs gives <span class="math display">\[
+\log \mu_x^{(g)}=\log b+x\log c.
+\]</span> Thus a Gompertz model can be fitted by linear regression on the log scale (see also <a href="./Lab4-Solutions.html">Lab 4</a> and <a href="./Lab6-Solutions.html">Lab 6</a>).</p>
+</div>
+</div>
+<section id="section-2" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="section-2"><span class="header-section-number">3.1</span> </h2>
+<div class="task">
+<p>Fit a Gompertz model to the crude central rates using <code>lm</code> function. Add the fitted values to the dataset as <code>mu_gomp</code>. Plot the crude rates, moving average rates, and Gompertz graduated rates.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Lab8_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="testing-a-graduation" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Testing a graduation</h1>
+<p>We now test the Gompertz graduation.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Theory reminder: standardised residuals and $\chi^2$-test">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Theory reminder: standardised residuals and <span class="math inline">\(\chi^2\)</span>-test
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Given a graduated force of mortality <span class="math inline">\(\mu_x^{(g)}\)</span>, the model-based expected number of deaths is <span class="math display">\[
+E_x^c\mu_x^{(g)}.
+\]</span> The standardised residual is <span class="math display">\[
+Z_x=\frac{D_x-E_x^c\mu_x^{(g)}}{\sqrt{E_x^c\mu_x^{(g)}}}.
+\]</span> If the graduation is good, then approximately <span class="math display">\[
+Z_x\sim N(0,1),
+\]</span> and the residuals should behave like random noise.</p>
+<p>For <span class="math inline">\(\chi^2\)</span>-test, the statistics is <span class="math display">\[
+\chi^2=\sum_x Z_x^2.
+\]</span> and the degrees of freedom are <span class="math display">\[
+k=(\text{number of ages})-(\text{number of fitted parameters}).
+\]</span> For Gompertz, the number of fitted parameters is 2.</p>
+</div>
+</div>
+<p>We have mentioned <span class="math inline">\(\chi^2\)</span>-test in <a href="./Lab7-Solutions.html">Lab7</a>, however, it was done internally inside <code>anova</code> function. To deal with this directly, one needs <code>chisq</code> distribution. The functions are the same as for any other probability distribution: <code>pchisq</code> gives probability, <code>qchisq</code> gives quantile, and so on. The functions have an argument <code>df</code>: the number of the degrees of freedom. Another important argument is <code>lower.tail</code>. By default it’s <code>TRUE</code>, however, to get <span class="math inline">\(p\)</span>-values we need the probability that the statistics is in the critical range, so we need <span class="math inline">\(\mathbb{P}(X&gt;x)\)</span> if <span class="math inline">\(X\)</span> is the statistics. Hence, we need <code>lower.tail=FALSE</code>.</p>
+<section id="section-3" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="section-3"><span class="header-section-number">4.1</span> </h2>
+<div class="task">
+<p>Calculate the <span class="math inline">\(p\)</span>-value for <span class="math inline">\(\chi^2\)</span>-test for <span class="math inline">\(\mu_x^{(g)}\)</span> obtained from the Gompertz graduation.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.2769698</code></pre>
+</div>
+</div>
+</div>
+<p>Since <span class="math inline">\(p\)</span>-value is quite large (bigger than any standard significance level: <span class="math inline">\(0.05\)</span>, <span class="math inline">\(0.1\)</span> etc.), we <strong>do not reject</strong> the null-hypothesis that the Gompertz model provides an adequate fit.</p>
+</section>
+</section>
+<section id="mortality-projection-leecarter-model" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Mortality projection: Lee–Carter model</h1>
+<p>We first load the projection data from the <a href="mort.csv">mort.csv</a> file:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>proj <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"mort.csv"</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(proj)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  age year central_exposure deaths mu_underlying_for_reference
+1  55 2000            17819     54                 0.002390410
+2  55 2001            18026     37                 0.002382742
+3  55 2002            17811     44                 0.002374237
+4  55 2003            18544     37                 0.002364036
+5  55 2004            18165     45                 0.002355657
+6  55 2005            17246     46                 0.002347995</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(proj)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    age year central_exposure deaths mu_underlying_for_reference
+770  85 2019             8509    238                  0.02551346
+771  85 2020             8801    207                  0.02532243
+772  85 2021             8875    215                  0.02520268
+773  85 2022             8831    215                  0.02506062
+774  85 2023             9023    225                  0.02489386
+775  85 2024             8691    269                  0.02469307</code></pre>
+</div>
+</div>
+<p>The data contain observations by age and year:</p>
+<ul>
+<li><p>observed deaths <span class="math inline">\(D_{x,t}\)</span>;</p></li>
+<li><p>central exposure <span class="math inline">\(E_{x,t}^c\)</span>.</p></li>
+</ul>
+<p>The column <code>mu_true</code> is included only because the data are synthetic. In real life we would not know it.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Theory reminder: Lee--Carter model">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Theory reminder: Lee–Carter model
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The Lee–Carter model is <span class="math display">\[
+\log \hat m_{x,t}=a_x+b_xk_t+\varepsilon_{x,t}.
+\]</span> Here:</p>
+<ul>
+<li><p><span class="math inline">\(a_x\)</span> is the average age pattern;</p></li>
+<li><p><span class="math inline">\(k_t\)</span> is the period mortality index;</p></li>
+<li><p><span class="math inline">\(b_x\)</span> is the sensitivity at age <span class="math inline">\(x\)</span> to changes in <span class="math inline">\(k_t\)</span>.</p></li>
+</ul>
+<p>The usual constraints are</p>
+<p><span class="math display">\[
+\sum_x b_x=1, \qquad \sum_t k_t=0.
+\]</span></p>
+</div>
+</div>
+<p><strong>It is given that, in the dataset, the each age has data for the same set of calendar years.</strong> The following code create the column of crude central rates <span class="math inline">\(\hat m_{x,t}=D_{x,t}/E_{x,t}^c\)</span> and reshape the vector of <strong>the logariphms</strong> of these rates into a matrix with ages as rows and years as columns.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>proj<span class="sc">$</span>m_crude <span class="ot">=</span> proj<span class="sc">$</span>deaths <span class="sc">/</span> proj<span class="sc">$</span>central_exposure</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>ages  <span class="ot">&lt;-</span> <span class="fu">sort</span>(<span class="fu">unique</span>(proj<span class="sc">$</span>age))</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>years <span class="ot">&lt;-</span> <span class="fu">sort</span>(<span class="fu">unique</span>(proj<span class="sc">$</span>year))</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>log_rates_matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log</span>(proj<span class="sc">$</span>m_crude),</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">nrow =</span> <span class="fu">length</span>(ages),</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">ncol =</span> <span class="fu">length</span>(years),</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">byrow =</span> <span class="cn">FALSE</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(log_rates_matrix) <span class="ot">&lt;-</span> ages</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(log_rates_matrix) <span class="ot">&lt;-</span> years</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>log_rates_matrix</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        2000      2001      2002      2003      2004      2005      2006
+55 -5.799037 -5.788102 -5.899394 -5.734847 -5.920429 -5.432663 -5.732516
+56 -6.188653 -6.034121 -6.192031 -5.860517 -5.918958 -5.664952 -5.537394
+57 -6.003382 -6.145340 -5.868590 -5.978131 -5.444008 -5.575243 -5.646519
+58 -6.216984 -6.215959 -5.919936 -5.703191 -5.611457 -5.915700 -5.783641
+59 -6.000589 -5.852934 -5.864614 -5.796161 -5.691593 -5.749270 -5.452325
+60 -5.926694 -6.108922 -5.849796 -5.823046 -5.830071 -5.553277 -5.543345
+61 -5.910345 -5.869244 -5.869558 -5.708494 -5.830821 -5.613685 -5.541966
+62 -6.275354 -5.759344 -5.893280 -6.015364 -5.536534 -5.693862 -5.514388
+63 -5.986871 -5.810651 -5.817760 -5.765630 -5.695601 -5.615229 -5.636605
+64 -5.889198 -6.102508 -5.971967 -5.544750 -5.658405 -5.420596 -5.453035
+65 -5.941381 -5.947625 -6.027859 -5.667106 -5.442714 -5.315789 -5.453514
+66 -6.038649 -6.137881 -5.757850 -5.596781 -5.665957 -5.664874 -5.702770
+67 -6.003681 -5.909702 -6.051409 -5.719550 -5.583373 -5.558456 -5.863994
+68 -5.889400 -5.876054 -5.994691 -5.833172 -5.665916 -5.612005 -5.579223
+69 -6.333495 -6.419690 -5.810774 -5.818420 -5.687320 -5.767259 -5.422711
+70 -5.955060 -6.086132 -5.934954 -5.622180 -5.428444 -5.621091 -5.284943
+71 -5.989212 -6.095174 -5.961005 -5.704972 -5.630865 -5.333443 -5.575205
+72 -6.064508 -5.895654 -5.876510 -5.700559 -5.570193 -5.765655 -5.357515
+73 -6.151426 -5.866220 -5.942916 -5.500825 -5.689194 -5.972247 -5.369393
+74 -6.234462 -6.000707 -5.934837 -5.602566 -5.814418 -5.647553 -5.579862
+75 -5.991906 -5.758142 -5.978002 -5.617060 -5.581282 -5.663369 -5.441696
+76 -6.254031 -5.715748 -5.660044 -6.033644 -5.760069 -5.583237 -5.271440
+77 -6.101731 -5.874243 -6.000630 -5.714472 -5.622267 -5.465884 -5.552631
+78 -6.170826 -6.091310 -6.022715 -5.852260 -5.742666 -5.561333 -5.178904
+79 -6.266373 -6.057127 -5.984265 -5.836155 -5.660503 -5.926242 -5.513557
+80 -6.136817 -5.741100 -5.769478 -5.968218 -5.573383 -5.470982 -5.599083
+81 -5.977013 -5.876477 -5.780294 -5.892546 -5.716040 -5.530222 -5.687415
+82 -6.006185 -5.970067 -6.043763 -5.806640 -5.490808 -5.617485 -5.331870
+83 -5.935288 -5.937031 -5.746483 -5.895968 -5.634393 -5.410689 -5.400552
+84 -6.413404 -5.895559 -5.804410 -5.581058 -5.957778 -5.408479 -5.549766
+85 -5.694417 -5.907594 -5.823375 -5.840642 -5.653166 -5.575361 -5.222606
+        2007      2008      2009      2010      2011      2012      2013
+55 -5.520505 -5.429727 -5.292179 -5.024531 -5.099286 -5.145010 -4.759293
+56 -5.371957 -5.530877 -5.441610 -5.355612 -4.952794 -5.111843 -4.733496
+57 -5.718516 -5.264613 -5.330961 -5.022506 -5.198007 -4.980357 -4.671059
+58 -5.713855 -5.298093 -5.095283 -5.141963 -5.171903 -4.715666 -4.709614
+59 -5.436781 -5.022841 -5.363490 -5.236750 -5.146934 -4.855349 -4.648940
+60 -5.677190 -5.166457 -5.080600 -5.163303 -5.133472 -4.825226 -4.761932
+61 -5.530297 -5.282115 -5.169916 -5.227609 -5.282717 -4.865733 -4.680409
+62 -5.621766 -5.161557 -5.259299 -5.074693 -5.162068 -4.906562 -4.733654
+63 -5.494595 -5.018134 -5.384713 -5.094103 -5.153292 -4.845335 -4.663751
+64 -5.495117 -5.353293 -5.098271 -5.119331 -4.840983 -4.999712 -4.627852
+65 -5.225816 -5.260269 -5.148163 -5.266743 -4.742296 -4.814864 -4.756408
+66 -5.600699 -5.239796 -5.268359 -5.166093 -4.911894 -5.068821 -4.748870
+67 -5.506044 -5.236375 -5.258814 -5.275695 -4.961558 -4.863402 -4.869961
+68 -5.401057 -5.218529 -5.327606 -5.307580 -4.852996 -4.859892 -4.644546
+69 -5.337607 -5.256176 -5.242373 -5.266161 -4.976166 -4.837472 -4.824609
+70 -5.219502 -5.346063 -5.202894 -4.915295 -4.914332 -4.934161 -5.092333
+71 -5.113754 -5.325724 -5.302487 -5.020158 -4.761615 -4.767000 -4.823168
+72 -5.344302 -5.242684 -5.313813 -4.818821 -4.871692 -5.067709 -4.779272
+73 -5.469466 -5.270828 -5.348394 -4.992723 -4.928255 -4.824803 -5.078917
+74 -5.486803 -5.347108 -5.412106 -4.965274 -4.909600 -5.045922 -5.112369
+75 -5.210442 -5.330198 -5.352659 -5.058291 -4.999863 -4.942445 -4.981469
+76 -5.413352 -5.328401 -4.885639 -4.910122 -4.999152 -4.813200 -4.913880
+77 -5.446280 -5.333188 -5.257014 -4.914304 -5.163550 -4.802828 -4.676001
+78 -5.596145 -5.339528 -4.921197 -5.059038 -4.963604 -4.970699 -4.699940
+79 -5.608186 -5.397974 -5.025316 -4.938608 -4.824718 -4.918095 -4.658756
+80 -5.381411 -5.291482 -5.031922 -4.812327 -5.008336 -4.790945 -4.811291
+81 -5.457706 -5.422810 -5.133637 -4.949710 -4.997963 -5.135128 -4.504385
+82 -5.668421 -5.392733 -5.143512 -4.880273 -5.178056 -4.932637 -4.643762
+83 -5.275752 -5.262080 -5.056904 -4.931655 -5.150585 -4.821356 -4.573950
+84 -5.205379 -5.127778 -5.155950 -5.292139 -5.270508 -4.932278 -4.687725
+85 -5.507108 -5.317228 -5.314654 -5.068833 -5.200458 -4.663612 -4.638905
+        2014      2015      2016      2017      2018      2019      2020
+55 -4.754225 -4.680394 -4.513072 -4.344007 -4.315009 -4.115204 -4.273464
+56 -4.641064 -4.709362 -4.587708 -4.360908 -4.236363 -4.267554 -4.193649
+57 -4.610244 -4.837182 -4.632854 -4.192486 -4.270496 -4.119231 -4.080358
+58 -4.716626 -4.762585 -4.542436 -4.283536 -4.293953 -4.324847 -4.153308
+59 -4.629779 -4.673077 -4.326176 -4.461181 -4.300513 -4.235705 -4.408174
+60 -4.758863 -4.596597 -4.326242 -4.416408 -4.280901 -4.293364 -4.014832
+61 -4.780917 -4.559944 -4.557663 -4.238926 -4.269087 -4.178088 -4.041476
+62 -4.969234 -4.684727 -4.194939 -4.425408 -4.257729 -4.243478 -3.995973
+63 -4.809059 -4.736039 -4.430724 -4.278529 -4.385524 -4.218414 -3.895937
+64 -4.858575 -4.606756 -4.346173 -4.382879 -4.344474 -4.181687 -4.068972
+65 -4.795630 -4.449271 -4.473449 -4.397554 -4.165673 -4.190038 -3.882615
+66 -4.702516 -4.494098 -4.619829 -4.396674 -4.338524 -3.979462 -3.966443
+67 -4.761295 -4.531196 -4.332650 -4.280496 -4.255704 -3.907532 -3.956815
+68 -4.639125 -4.508623 -4.347251 -4.450526 -4.380463 -4.003925 -3.905961
+69 -4.773685 -4.514086 -4.577892 -4.310475 -4.346737 -4.179946 -4.081322
+70 -4.840166 -4.488541 -4.656746 -4.383656 -4.417828 -4.207441 -3.892264
+71 -4.467495 -4.452347 -4.482820 -4.533794 -4.441760 -4.165338 -3.971340
+72 -4.541390 -4.447993 -4.538514 -4.402586 -4.056150 -4.283381 -4.018939
+73 -4.541309 -4.418662 -4.382027 -4.443754 -4.150779 -4.021399 -3.944643
+74 -4.461973 -4.572684 -4.380962 -4.455678 -4.264719 -4.032267 -4.066371
+75 -4.612275 -4.590012 -4.381773 -4.452721 -4.225966 -4.180769 -4.181589
+76 -4.656044 -4.515955 -4.478657 -4.354837 -4.136704 -4.180928 -4.095698
+77 -4.429635 -4.549435 -4.636064 -4.536679 -4.134584 -4.111076 -4.291685
+78 -4.569452 -4.665641 -4.461673 -4.093489 -4.133832 -4.258517 -4.082034
+79 -4.544486 -4.603259 -4.483003 -4.235669 -4.078640 -4.127951 -4.031526
+80 -4.513473 -4.622431 -4.489572 -4.180542 -4.440848 -4.081638 -4.162151
+81 -4.846685 -4.803017 -4.522056 -4.312141 -4.036766 -4.134066 -4.134277
+82 -4.526865 -4.525346 -4.603604 -4.132295 -4.155394 -4.250378 -4.073098
+83 -4.558268 -4.671542 -4.398104 -4.306868 -4.196398 -4.167460 -4.168813
+84 -4.542949 -4.543734 -4.318607 -4.289518 -4.189242 -4.278198 -3.910194
+85 -4.789037 -4.476073 -4.328238 -4.292075 -4.317588 -4.107960 -3.901259
+        2021      2022      2023      2024
+55 -3.884726 -3.816692 -3.815030 -3.801921
+56 -3.968893 -4.005412 -3.706958 -3.610343
+57 -3.955356 -3.885300 -3.839509 -3.791294
+58 -3.895514 -3.913577 -3.808466 -3.795435
+59 -3.922863 -3.802077 -3.981756 -3.852342
+60 -4.029861 -3.791484 -3.907826 -3.715603
+61 -4.028087 -3.729890 -3.905218 -3.585664
+62 -3.864308 -3.889307 -3.751854 -3.576736
+63 -3.779520 -3.925304 -3.936185 -3.531567
+64 -3.923541 -3.894122 -3.755315 -3.568036
+65 -3.840896 -3.998683 -3.783456 -3.555472
+66 -4.051355 -3.839618 -3.850789 -3.648400
+67 -3.945175 -3.955777 -3.582023 -3.449629
+68 -4.044684 -3.913789 -3.795800 -3.552595
+69 -3.913174 -3.927388 -3.646320 -3.709622
+70 -3.951544 -4.001935 -3.557976 -3.622956
+71 -3.845608 -4.012834 -3.632484 -3.628620
+72 -4.049568 -3.909921 -3.578568 -3.555966
+73 -4.037463 -3.585433 -3.632382 -3.682103
+74 -3.854682 -3.721831 -3.728076 -3.661272
+75 -4.029126 -3.755599 -3.678589 -3.463650
+76 -3.967637 -3.681436 -3.730773 -3.678646
+77 -4.082094 -3.705093 -3.749386 -3.547587
+78 -3.984190 -3.797563 -3.531638 -3.711384
+79 -3.897447 -3.650718 -3.680709 -3.588309
+80 -3.862183 -3.753784 -3.824379 -3.576609
+81 -3.741812 -3.742206 -3.622984 -3.749902
+82 -3.777496 -3.767228 -3.821056 -3.720356
+83 -3.807125 -3.807662 -3.814004 -3.715386
+84 -3.848706 -3.754436 -3.880566 -3.691432
+85 -3.737893 -3.777429 -3.768523 -3.475332</code></pre>
+</div>
+</div>
+<p>Note how the output is presented (too many columns to fit into the default width).</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Theory reminder: estimating $a_x$">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Theory reminder: estimating <span class="math inline">\(a_x\)</span>
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In the Lee–Carter model <span class="math display">\[
+\log \hat m_{x,t}=a_x+b_xk_t+\varepsilon_{x,t},
+\]</span> we impose <span class="math display">\[
+\sum_t k_t=0.
+\]</span> Therefore, averaging over time gives <span class="math display">\[
+\hat a_x=\frac{1}{n}\sum_t \log \hat m_{x,t}.
+\]</span></p>
+</div>
+</div>
+<section id="section-4" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="section-4"><span class="header-section-number">5.1</span> </h2>
+<div class="task">
+<p>Calculate vector <code>a_hat</code> of <span class="math inline">\(\hat a_x\)</span> using a loop (cycle). Then centre the matrix by subtracting <span class="math inline">\(\hat a_x\)</span> from each row (also in a loop).</p>
+<p>Check yourself by calculating the sum of the elements of the resulting matrix (denote it <code>Y</code>):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">sum</span>(Y))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -1.731948e-14</code></pre>
+</div>
+</div>
+<p>The sum should be close to <span class="math inline">\(0\)</span>.</p>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Theory reminder: SVD step">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Theory reminder: SVD step
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>After centring, the Lee–Carter model becomes <span class="math display">\[
+y_{x,t}\approx b_xk_t.
+\]</span></p>
+<p>In matrix form: <span class="math display">\[
+Y\approx bk^T.
+\]</span></p>
+<p>Thus we want the best rank-one approximation to <span class="math inline">\(Y\)</span>. This is obtained using the first singular component: <span class="math display">\[
+Y\approx d_1u^{(1)}(v^{(1)})^T.
+\]</span></p>
+<p>So initially we take <span class="math display">\[
+b^*=u^{(1)},\qquad k^*=d_1v^{(1)}.
+\]</span></p>
+</div>
+</div>
+<p>The code below extracts preliminary estimates <span class="math inline">\(b^*\)</span> and <span class="math inline">\(k^*\)</span> (notice the usage of <code>svd</code> function and its output).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>sv <span class="ot">&lt;-</span> <span class="fu">svd</span>(Y)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>d1 <span class="ot">&lt;-</span> sv<span class="sc">$</span>d[<span class="dv">1</span>]</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>b_star <span class="ot">&lt;-</span> sv<span class="sc">$</span>u[, <span class="dv">1</span>]</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>k_star <span class="ot">&lt;-</span> d1 <span class="sc">*</span> sv<span class="sc">$</span>v[, <span class="dv">1</span>]</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(b_star) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(log_rates_matrix)</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(k_star) <span class="ot">&lt;-</span> <span class="fu">colnames</span>(log_rates_matrix)</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>b_star</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        55         56         57         58         59         60         61 
+-0.1710041 -0.1881469 -0.1790666 -0.1839355 -0.1663484 -0.1764549 -0.1767574 
+        62         63         64         65         66         67         68 
+-0.1839330 -0.1758993 -0.1739683 -0.1718301 -0.1788325 -0.1897182 -0.1788876 
+        69         70         71         72         73         74         75 
+-0.1877295 -0.1705331 -0.1745237 -0.1774087 -0.1864326 -0.1879987 -0.1746784 
+        76         77         78         79         80         81         82 
+-0.1770213 -0.1772266 -0.1867107 -0.1971022 -0.1755777 -0.1820445 -0.1813751 
+        83         84         85 
+-0.1708588 -0.1821413 -0.1797620 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>k_star</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      2000       2001       2002       2003       2004       2005       2006 
+ 6.5951963  6.0470048  5.7404499  4.9603753  4.4201112  4.0725804  3.5347092 
+      2007       2008       2009       2010       2011       2012       2013 
+ 3.2329647  2.2868874  1.8854586  1.1091421  0.8251375  0.1731611 -0.6430719 
+      2014       2015       2016       2017       2018       2019       2020 
+-1.1642605 -1.5819345 -2.2901777 -2.9649845 -3.4700822 -3.9669521 -4.5398555 
+      2021       2022       2023       2024 
+-5.3099302 -5.8189185 -6.2574060 -6.8756049 </code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Theory reminder: normalisation">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Theory reminder: normalisation
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The Lee–Carter parameters are not unique, because <span class="math display">\[
+b_xk_t=(cb_x)\left(\frac{k_t}{c}\right).
+\]</span></p>
+<p>We impose <span class="math display">\[
+\sum_x b_x=1,
+\qquad
+\sum_t k_t=0.
+\]</span></p>
+</div>
+</div>
+<p>We first centre <span class="math inline">\(k_t\)</span> by subtracting from each its element the vector’s aveareg, and then we rescale <span class="math inline">\(b_x\)</span> so that its sum is 1:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First centre k</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>k_bar <span class="ot">&lt;-</span> <span class="fu">sum</span>(k_star) <span class="sc">/</span> <span class="fu">length</span>(k_star)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>k_centred <span class="ot">&lt;-</span> k_star <span class="sc">-</span> k_bar</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Adjust a to preserve fitted values</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>a_adj <span class="ot">&lt;-</span> a_hat <span class="sc">+</span> b_star <span class="sc">*</span> k_bar</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Now scale b so that sum(b)=1</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="fu">sum</span>(b_star)</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>b_hat <span class="ot">&lt;-</span> b_star <span class="sc">/</span> B</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>k_hat <span class="ot">&lt;-</span> B <span class="sc">*</span> k_centred</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Store names</span></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(a_adj) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(log_rates_matrix)</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(b_hat) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(log_rates_matrix)</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(k_hat) <span class="ot">&lt;-</span> <span class="fu">colnames</span>(log_rates_matrix)</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Check constraints</span></span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(b_hat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(k_hat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.820766e-14</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Theory reminder: fitted values">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Theory reminder: fitted values
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The fitted Lee–Carter log-mortality surface is <span class="math display">\[
+\widehat{\log m}_{x,t}=\hat a_x+\hat b_x\hat k_t.
+\]</span></p>
+<p>Therefore, <span class="math display">\[
+\hat m_{x,t}^{LC}=\exp(\hat a_x+\hat b_x\hat k_t).
+\]</span></p>
+</div>
+</div>
+</section>
+<section id="section-5" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="section-5"><span class="header-section-number">5.2</span> </h2>
+<div class="task">
+<p>Construct the fitted matrix of log central rates and compare it with the original observed log crude rates. Use <code>matrix(0, nrow = i, ncol = j)</code> to predefine a matrix with <span class="math inline">\(i\)</span> rows and <span class="math inline">\(j\)</span> columns.</p>
+</div>
+</section>
+<section id="section-6" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="section-6"><span class="header-section-number">5.3</span> </h2>
+<div class="task">
+<p>Plot observed and fitted log central rates for one selected year, e.g.&nbsp;<span class="math inline">\(2020\)</span>. Note that, in the above, the rows and columns have not numeric but string indexes, to get an element of a matrix one needs <code>matrix_name["65","2000"]</code> rather than <code>matrix_name[65,2000]</code>. It can be also useful to sue the function <code>as.numeric()</code> to convert its argument from string to numbers: <code>as.numeric("65")</code> would return <span class="math inline">\(65\)</span>.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Lab8_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p>After fitting the Lee–Carter model, projection is reduced to forecasting the one-dimensional time series <span class="math inline">\(k_t\)</span> which we will not consider here.</p>
+
+
+</section>
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/finkelshtein\.github\.io\/MA-x65-Labs\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./Lab7.html" class="pagination-link" aria-label="Lab 7 - Problems">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Lab 7 - Problems</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>© Copyright 2026, Dmitri Finkelshtein</p>
+</div>   
+    <div class="nav-footer-center">
+<p>MA-365/M65: Lab Assignments</p>
+</div>
+    <div class="nav-footer-right">
+<p>This page is built with <a href="https://quarto.org/">Quarto</a>.</p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
