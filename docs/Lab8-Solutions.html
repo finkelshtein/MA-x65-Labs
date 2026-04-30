@@ -67,7 +67,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./Lab7.html" rel="prev">
+<link href="./Lab7-Solutions.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -140,7 +140,7 @@ window.Quarto = {
 <link rel="stylesheet" href="styles.css">
 <meta property="og:title" content="Lab 8: Graduation – MA-365/M65 Lab Assignments">
 <meta property="og:description" content="Lab Assignments for module MA-365/M65: Risk and Survival Models">
-<meta property="og:image" content="https://finkelshtein.github.io/MA-x65-Labs/Lab8_files/figure-html/unnamed-chunk-2-1.png">
+<meta property="og:image" content="https://finkelshtein.github.io/MA-x65-Labs/Lab8-Solutions_files/figure-html/unnamed-chunk-2-1.png">
 <meta property="og:site_name" content="MA-365/M65 Lab Assignments">
 <meta property="og:image:height" content="960">
 <meta property="og:image:width" content="1344">
@@ -155,7 +155,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lab1.html">Labs - Problems</a></li><li class="breadcrumb-item"><a href="./Lab8.html">Lab 8 - Problems</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lab1-Solutions.html">Labs - Solutions</a></li><li class="breadcrumb-item"><a href="./Lab8-Solutions.html">Lab 8 - Solutions</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -241,7 +241,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Lab8.html" class="sidebar-item-text sidebar-link active">
+  <a href="./Lab8.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Lab 8 - Problems</span></a>
   </div>
 </li>
@@ -301,7 +301,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Lab8-Solutions.html" class="sidebar-item-text sidebar-link">
+  <a href="./Lab8-Solutions.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Lab 8 - Solutions</span></a>
   </div>
 </li>
@@ -345,7 +345,7 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lab1.html">Labs - Problems</a></li><li class="breadcrumb-item"><a href="./Lab8.html">Lab 8 - Problems</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./Lab1-Solutions.html">Labs - Solutions</a></li><li class="breadcrumb-item"><a href="./Lab8-Solutions.html">Lab 8 - Solutions</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Lab 8: Graduation</h1>
 </div>
@@ -425,10 +425,16 @@ D_x\sim Po(E_x^c\mu_x),
 \hat m_x=\frac{D_x}{E_x^c}.
 \]</span> Plot it against age.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>grad<span class="sc">$</span>m_crude <span class="ot">&lt;-</span> grad<span class="sc">$</span>deaths <span class="sc">/</span> grad<span class="sc">$</span>central_exposure</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(grad<span class="sc">$</span>age, grad<span class="sc">$</span>m_crude, <span class="at">xlab=</span><span class="st">"Age"</span>, <span class="at">ylab=</span><span class="st">"Central mortality rate"</span>, <span class="at">type=</span><span class="st">"l"</span>, <span class="at">col=</span><span class="st">"blue"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Lab8_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Lab8-Solutions_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -459,12 +465,12 @@ m_1^{(g)}=\hat m_1, \quad m_2^{(g)}=\frac{\hat m_{1}+\hat m_2+\hat m_{3}}{3}, \q
 </div>
 <p>It may be useful to know that <code>head</code> and <code>tail</code> functions may have negative arguments: if <code>a</code> is a vector, <code>head(a,-k)</code> gives all entries of <span class="math inline">\(a\)</span> up to the <span class="math inline">\(k\)</span>-th element <strong>from the end</strong>, whereas <code>tail(a,-k)</code> returns last elements ignoring the first <span class="math inline">\(k\)</span>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">20</span>,<span class="dv">30</span>,<span class="dv">40</span>,<span class="dv">50</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(a,<span class="sc">-</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">20</span>,<span class="dv">30</span>,<span class="dv">40</span>,<span class="dv">50</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(a,<span class="sc">-</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 10 20 30</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(a,<span class="sc">-</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(a,<span class="sc">-</span><span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 30 40 50</code></pre>
 </div>
@@ -474,10 +480,23 @@ m_1^{(g)}=\hat m_1, \quad m_2^{(g)}=\frac{\hat m_{1}+\hat m_2+\hat m_{3}}{3}, \q
 <div class="task">
 <p>Graduate the crude central rates using 3-point moving average: create a new column <code>m_ma3</code> in the dataset. Plot crude and graduated rates together.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> grad<span class="sc">$</span>m_crude <span class="co"># A temporal variable</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>m_shifted_forward <span class="ot">&lt;-</span> <span class="fu">c</span>(m[<span class="dv">1</span>], <span class="fu">head</span>(m,<span class="sc">-</span><span class="dv">1</span>))</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>m_shifted_backward <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">tail</span>(m,<span class="sc">-</span><span class="dv">1</span>), m[<span class="fu">length</span>(m)])</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>grad<span class="sc">$</span>m_ma3 <span class="ot">&lt;-</span> (m_shifted_backward <span class="sc">+</span> m <span class="sc">+</span> m_shifted_forward)<span class="sc">/</span><span class="dv">3</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(grad<span class="sc">$</span>age, grad<span class="sc">$</span>m_crude, <span class="at">xlab=</span><span class="st">"Age"</span>, <span class="at">ylab=</span><span class="st">"Central mortality rates"</span>, <span class="at">type=</span><span class="st">"l"</span>, <span class="at">col=</span><span class="st">"blue"</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(grad<span class="sc">$</span>age, grad<span class="sc">$</span>m_ma3, <span class="at">col =</span> <span class="st">'red'</span>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topleft"</span>,</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Crude"</span>, <span class="st">"Moving average"</span>),</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">lty =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>), <span class="at">col=</span><span class="fu">c</span>(<span class="st">"blue"</span>,<span class="st">"red"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Lab8_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Lab8-Solutions_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -510,10 +529,23 @@ m_1^{(g)}=\hat m_1, \quad m_2^{(g)}=\frac{\hat m_{1}+\hat m_2+\hat m_{3}}{3}, \q
 <div class="task">
 <p>Fit a Gompertz model to the crude central rates using <code>lm</code> function. Add the fitted values to the dataset as <code>mu_gomp</code>. Plot the crude rates, moving average rates, and Gompertz graduated rates.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>coefs <span class="ot">&lt;-</span> <span class="fu">coef</span>(<span class="fu">lm</span>(<span class="at">formula =</span> <span class="fu">log</span>(m_crude) <span class="sc">~</span> age, <span class="at">data =</span> grad))</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>gomp_b <span class="ot">&lt;-</span> <span class="fu">exp</span>(coefs[<span class="dv">1</span>])</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>gomp_c <span class="ot">&lt;-</span> <span class="fu">exp</span>(coefs[<span class="dv">2</span>])</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>grad<span class="sc">$</span>m_gomp <span class="ot">&lt;-</span> gomp_b <span class="sc">*</span> (gomp_c<span class="sc">**</span>grad<span class="sc">$</span>age)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(grad<span class="sc">$</span>age, grad<span class="sc">$</span>m_crude, <span class="at">xlab=</span><span class="st">"Age"</span>, <span class="at">ylab=</span><span class="st">"Central mortality rates"</span>, <span class="at">type=</span><span class="st">"l"</span>, <span class="at">col=</span><span class="st">"blue"</span>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(grad<span class="sc">$</span>age, grad<span class="sc">$</span>m_ma3, <span class="at">col =</span> <span class="st">'red'</span>)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(grad<span class="sc">$</span>age, grad<span class="sc">$</span>m_gomp, <span class="at">col =</span> <span class="st">'brown'</span>, <span class="at">lty=</span><span class="dv">2</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topleft"</span>,</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Crude"</span>, <span class="st">"Moving average"</span>, <span class="st">"Gompertz"</span>),</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">lty =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>), <span class="at">lwd =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">2</span>), <span class="at">col=</span><span class="fu">c</span>(<span class="st">"blue"</span>,<span class="st">"red"</span>,<span class="st">"brown"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Lab8_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Lab8-Solutions_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -554,6 +586,15 @@ k=(\text{number of ages})-(\text{number of fitted parameters}).
 <div class="task">
 <p>Calculate the <span class="math inline">\(p\)</span>-value for <span class="math inline">\(\chi^2\)</span>-test for <span class="math inline">\(\mu_x^{(g)}\)</span> obtained from the Gompertz graduation.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>expected_gomp <span class="ot">=</span> grad<span class="sc">$</span>central_exposure <span class="sc">*</span> grad<span class="sc">$</span>m_gomp</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>z_gomp <span class="ot">=</span> (grad<span class="sc">$</span>deaths <span class="sc">-</span> expected_gomp) <span class="sc">/</span> <span class="fu">sqrt</span>(expected_gomp)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>chi_stat <span class="ot">&lt;-</span> <span class="fu">sum</span>(z_gomp<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">nrow</span>(grad) <span class="sc">-</span> <span class="dv">2</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>p_value_chi <span class="ot">&lt;-</span> <span class="fu">pchisq</span>(chi_stat, <span class="at">df =</span> df, <span class="at">lower.tail=</span><span class="cn">FALSE</span>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>p_value_chi</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.2769698</code></pre>
 </div>
@@ -566,26 +607,26 @@ k=(\text{number of ages})-(\text{number of fitted parameters}).
 <h1 data-number="5"><span class="header-section-number">5</span> Mortality projection: Lee–Carter model</h1>
 <p>We first load the projection data from the <a href="mort.csv">mort.csv</a> file:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>proj <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"mort.csv"</span>)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(proj)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>proj <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"mort.csv"</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(proj)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  age year central_exposure deaths mu_underlying_for_reference
-1  55 2000            17819     54                 0.002390410
-2  55 2001            18026     37                 0.002382742
-3  55 2002            17811     44                 0.002374237
-4  55 2003            18544     37                 0.002364036
-5  55 2004            18165     45                 0.002355657
-6  55 2005            17246     46                 0.002347995</code></pre>
+<pre><code>  age year central_exposure deaths     mu_true
+1  55 2000            17819     54 0.002390410
+2  55 2001            18026     37 0.002382742
+3  55 2002            17811     44 0.002374237
+4  55 2003            18544     37 0.002364036
+5  55 2004            18165     45 0.002355657
+6  55 2005            17246     46 0.002347995</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(proj)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(proj)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>    age year central_exposure deaths mu_underlying_for_reference
-770  85 2019             8509    238                  0.02551346
-771  85 2020             8801    207                  0.02532243
-772  85 2021             8875    215                  0.02520268
-773  85 2022             8831    215                  0.02506062
-774  85 2023             9023    225                  0.02489386
-775  85 2024             8691    269                  0.02469307</code></pre>
+<pre><code>    age year central_exposure deaths    mu_true
+770  85 2019             8509    238 0.02551346
+771  85 2020             8801    207 0.02532244
+772  85 2021             8875    215 0.02520268
+773  85 2022             8831    215 0.02506062
+774  85 2023             9023    225 0.02489386
+775  85 2024             8691    269 0.02469307</code></pre>
 </div>
 </div>
 <p>The data contain observations by age and year:</p>
@@ -620,21 +661,21 @@ k=(\text{number of ages})-(\text{number of fitted parameters}).
 </div>
 <p><strong>It is given that, in the dataset, the each age has data for the same set of calendar years.</strong> The following code create the column of crude central rates <span class="math inline">\(\hat m_{x,t}=D_{x,t}/E_{x,t}^c\)</span> and reshape the vector of <strong>the logariphms</strong> of these rates into a matrix with ages as rows and years as columns.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>proj<span class="sc">$</span>m_crude <span class="ot">=</span> proj<span class="sc">$</span>deaths <span class="sc">/</span> proj<span class="sc">$</span>central_exposure</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>ages  <span class="ot">&lt;-</span> <span class="fu">sort</span>(<span class="fu">unique</span>(proj<span class="sc">$</span>age))</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>years <span class="ot">&lt;-</span> <span class="fu">sort</span>(<span class="fu">unique</span>(proj<span class="sc">$</span>year))</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>log_rates_matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log</span>(proj<span class="sc">$</span>m_crude),</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">nrow =</span> <span class="fu">length</span>(ages),</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">ncol =</span> <span class="fu">length</span>(years),</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">byrow =</span> <span class="cn">FALSE</span></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(log_rates_matrix) <span class="ot">&lt;-</span> ages</span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(log_rates_matrix) <span class="ot">&lt;-</span> years</span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>log_rates_matrix</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>proj<span class="sc">$</span>m_crude <span class="ot">=</span> proj<span class="sc">$</span>deaths <span class="sc">/</span> proj<span class="sc">$</span>central_exposure</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>ages  <span class="ot">&lt;-</span> <span class="fu">sort</span>(<span class="fu">unique</span>(proj<span class="sc">$</span>age))</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>years <span class="ot">&lt;-</span> <span class="fu">sort</span>(<span class="fu">unique</span>(proj<span class="sc">$</span>year))</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>log_rates_matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">log</span>(proj<span class="sc">$</span>m_crude),</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">nrow =</span> <span class="fu">length</span>(ages),</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">ncol =</span> <span class="fu">length</span>(years),</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">byrow =</span> <span class="cn">FALSE</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(log_rates_matrix) <span class="ot">&lt;-</span> ages</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(log_rates_matrix) <span class="ot">&lt;-</span> years</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>log_rates_matrix</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>        2000      2001      2002      2003      2004      2005      2006
 55 -5.799037 -5.788102 -5.899394 -5.734847 -5.920429 -5.432663 -5.732516
@@ -790,9 +831,31 @@ k=(\text{number of ages})-(\text{number of fitted parameters}).
 <h2 data-number="5.1" class="anchored" data-anchor-id="section-4"><span class="header-section-number">5.1</span> </h2>
 <div class="task">
 <p>Calculate vector <code>a_hat</code> of <span class="math inline">\(\hat a_x\)</span> using a loop (cycle). Then centre the matrix by subtracting <span class="math inline">\(\hat a_x\)</span> from each row (also in a loop).</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Number of ages and years</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">nrow</span>(log_rates_matrix)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">ncol</span>(log_rates_matrix)</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimate a_x </span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>a_hat <span class="ot">&lt;-</span> <span class="fu">numeric</span>(m)</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>m) {</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  a_hat[i] <span class="ot">&lt;-</span> <span class="fu">sum</span>(log_rates_matrix[i, ]) <span class="sc">/</span> n</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Centre the matrix </span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> log_rates_matrix</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>m) {</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>  Y[i, ] <span class="ot">&lt;-</span> log_rates_matrix[i, ] <span class="sc">-</span> a_hat[i]</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
 <p>Check yourself by calculating the sum of the elements of the resulting matrix (denote it <code>Y</code>):</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">sum</span>(Y))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">sum</span>(Y))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -1.731948e-14</code></pre>
 </div>
@@ -825,16 +888,16 @@ b^*=u^{(1)},\qquad k^*=d_1v^{(1)}.
 </div>
 <p>The code below extracts preliminary estimates <span class="math inline">\(b^*\)</span> and <span class="math inline">\(k^*\)</span> (notice the usage of <code>svd</code> function and its output).</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>sv <span class="ot">&lt;-</span> <span class="fu">svd</span>(Y)</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>d1 <span class="ot">&lt;-</span> sv<span class="sc">$</span>d[<span class="dv">1</span>]</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>b_star <span class="ot">&lt;-</span> sv<span class="sc">$</span>u[, <span class="dv">1</span>]</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>k_star <span class="ot">&lt;-</span> d1 <span class="sc">*</span> sv<span class="sc">$</span>v[, <span class="dv">1</span>]</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(b_star) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(log_rates_matrix)</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(k_star) <span class="ot">&lt;-</span> <span class="fu">colnames</span>(log_rates_matrix)</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>b_star</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>sv <span class="ot">&lt;-</span> <span class="fu">svd</span>(Y)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>d1 <span class="ot">&lt;-</span> sv<span class="sc">$</span>d[<span class="dv">1</span>]</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>b_star <span class="ot">&lt;-</span> sv<span class="sc">$</span>u[, <span class="dv">1</span>]</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>k_star <span class="ot">&lt;-</span> d1 <span class="sc">*</span> sv<span class="sc">$</span>v[, <span class="dv">1</span>]</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(b_star) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(log_rates_matrix)</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(k_star) <span class="ot">&lt;-</span> <span class="fu">colnames</span>(log_rates_matrix)</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>b_star</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>        55         56         57         58         59         60         61 
 -0.1710041 -0.1881469 -0.1790666 -0.1839355 -0.1663484 -0.1764549 -0.1767574 
@@ -847,7 +910,7 @@ b^*=u^{(1)},\qquad k^*=d_1v^{(1)}.
         83         84         85 
 -0.1708588 -0.1821413 -0.1797620 </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>k_star</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>k_star</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      2000       2001       2002       2003       2004       2005       2006 
  6.5951963  6.0470048  5.7404499  4.9603753  4.4201112  4.0725804  3.5347092 
@@ -881,30 +944,30 @@ b_xk_t=(cb_x)\left(\frac{k_t}{c}\right).
 </div>
 <p>We first centre <span class="math inline">\(k_t\)</span> by subtracting from each its element the vector’s aveareg, and then we rescale <span class="math inline">\(b_x\)</span> so that its sum is 1:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First centre k</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>k_bar <span class="ot">&lt;-</span> <span class="fu">sum</span>(k_star) <span class="sc">/</span> <span class="fu">length</span>(k_star)</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>k_centred <span class="ot">&lt;-</span> k_star <span class="sc">-</span> k_bar</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Adjust a to preserve fitted values</span></span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>a_adj <span class="ot">&lt;-</span> a_hat <span class="sc">+</span> b_star <span class="sc">*</span> k_bar</span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Now scale b so that sum(b)=1</span></span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="fu">sum</span>(b_star)</span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>b_hat <span class="ot">&lt;-</span> b_star <span class="sc">/</span> B</span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>k_hat <span class="ot">&lt;-</span> B <span class="sc">*</span> k_centred</span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Store names</span></span>
-<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(a_adj) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(log_rates_matrix)</span>
-<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(b_hat) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(log_rates_matrix)</span>
-<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(k_hat) <span class="ot">&lt;-</span> <span class="fu">colnames</span>(log_rates_matrix)</span>
-<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Check constraints</span></span>
-<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(b_hat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First centre k</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>k_bar <span class="ot">&lt;-</span> <span class="fu">sum</span>(k_star) <span class="sc">/</span> <span class="fu">length</span>(k_star)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>k_centred <span class="ot">&lt;-</span> k_star <span class="sc">-</span> k_bar</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Adjust a to preserve fitted values</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>a_adj <span class="ot">&lt;-</span> a_hat <span class="sc">+</span> b_star <span class="sc">*</span> k_bar</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Now scale b so that sum(b)=1</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="fu">sum</span>(b_star)</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>b_hat <span class="ot">&lt;-</span> b_star <span class="sc">/</span> B</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>k_hat <span class="ot">&lt;-</span> B <span class="sc">*</span> k_centred</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Store names</span></span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(a_adj) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(log_rates_matrix)</span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(b_hat) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(log_rates_matrix)</span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(k_hat) <span class="ot">&lt;-</span> <span class="fu">colnames</span>(log_rates_matrix)</span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Check constraints</span></span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(b_hat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(k_hat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(k_hat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.820766e-14</code></pre>
 </div>
@@ -932,6 +995,23 @@ b_xk_t=(cb_x)\left(\frac{k_t}{c}\right).
 <h2 data-number="5.2" class="anchored" data-anchor-id="section-5"><span class="header-section-number">5.2</span> </h2>
 <div class="task">
 <p>Construct the fitted matrix of log central rates and compare it with the original observed log crude rates. Use <code>matrix(0, nrow = i, ncol = j)</code> to predefine a matrix with <span class="math inline">\(i\)</span> rows and <span class="math inline">\(j\)</span> columns.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>fitted_log_matrix <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">0</span>, <span class="at">nrow =</span> m, <span class="at">ncol =</span> n)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>m) {</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n) {</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>    fitted_log_matrix[i, j] <span class="ot">&lt;-</span> a_adj[i] <span class="sc">+</span> b_hat[i] <span class="sc">*</span> k_hat[j]</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(fitted_log_matrix) <span class="ot">&lt;-</span> <span class="fu">rownames</span>(log_rates_matrix)</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(fitted_log_matrix) <span class="ot">&lt;-</span> <span class="fu">colnames</span>(log_rates_matrix)</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>fitted_m_matrix <span class="ot">&lt;-</span> <span class="fu">exp</span>(fitted_log_matrix)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
 </div>
 </section>
 <section id="section-6" class="level2" data-number="5.3">
@@ -939,10 +1019,34 @@ b_xk_t=(cb_x)\left(\frac{k_t}{c}\right).
 <div class="task">
 <p>Plot observed and fitted log central rates for one selected year, e.g.&nbsp;<span class="math inline">\(2020\)</span>. Note that, in the above, the rows and columns have not numeric but string indexes, to get an element of a matrix one needs <code>matrix_name["65","2000"]</code> rather than <code>matrix_name[65,2000]</code>. It can be also useful to sue the function <code>as.numeric()</code> to convert its argument from string to numbers: <code>as.numeric("65")</code> would return <span class="math inline">\(65\)</span>.</p>
 <div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>selected_year <span class="ot">&lt;-</span> <span class="st">"2020"</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">as.numeric</span>(<span class="fu">rownames</span>(log_rates_matrix)),</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>     log_rates_matrix[, selected_year],</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">type =</span> <span class="st">"l"</span>,</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="st">"blue"</span>,</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Age"</span>,</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Log central mortality rate"</span>,</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="fu">paste</span>(<span class="st">"Observed and fitted log rates in"</span>, selected_year))</span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">as.numeric</span>(<span class="fu">rownames</span>(log_rates_matrix)),</span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>      fitted_log_matrix[, selected_year],</span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">col =</span> <span class="st">"red"</span>,</span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">lty =</span> <span class="dv">2</span>,</span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topleft"</span>,</span>
+<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Observed"</span>, <span class="st">"Lee-Carter fitted"</span>),</span>
+<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"red"</span>),</span>
+<span id="cb30-20"><a href="#cb30-20" aria-hidden="true" tabindex="-1"></a>       <span class="at">lty =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>),</span>
+<span id="cb30-21"><a href="#cb30-21" aria-hidden="true" tabindex="-1"></a>       <span class="at">lwd =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Lab8_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Lab8-Solutions_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1357,8 +1461,8 @@ b_xk_t=(cb_x)\left(\frac{k_t}{c}\right).
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./Lab7.html" class="pagination-link" aria-label="Lab 7 - Problems">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Lab 7 - Problems</span>
+      <a href="./Lab7-Solutions.html" class="pagination-link" aria-label="Lab 7 - Solutions">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Lab 7 - Solutions</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
