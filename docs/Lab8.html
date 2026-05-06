@@ -569,23 +569,23 @@ k=(\text{number of ages})-(\text{number of fitted parameters}).
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>proj <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"mort.csv"</span>)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(proj)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  age year central_exposure deaths mu_underlying_for_reference
-1  55 2000            17819     54                 0.002390410
-2  55 2001            18026     37                 0.002382742
-3  55 2002            17811     44                 0.002374237
-4  55 2003            18544     37                 0.002364036
-5  55 2004            18165     45                 0.002355657
-6  55 2005            17246     46                 0.002347995</code></pre>
+<pre><code>  age year central_exposure deaths     mu_true
+1  55 2000            17819     54 0.002390410
+2  55 2001            18026     37 0.002382742
+3  55 2002            17811     44 0.002374237
+4  55 2003            18544     37 0.002364036
+5  55 2004            18165     45 0.002355657
+6  55 2005            17246     46 0.002347995</code></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tail</span>(proj)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>    age year central_exposure deaths mu_underlying_for_reference
-770  85 2019             8509    238                  0.02551346
-771  85 2020             8801    207                  0.02532243
-772  85 2021             8875    215                  0.02520268
-773  85 2022             8831    215                  0.02506062
-774  85 2023             9023    225                  0.02489386
-775  85 2024             8691    269                  0.02469307</code></pre>
+<pre><code>    age year central_exposure deaths    mu_true
+770  85 2019             8509    238 0.02551346
+771  85 2020             8801    207 0.02532244
+772  85 2021             8875    215 0.02520268
+773  85 2022             8831    215 0.02506062
+774  85 2023             9023    225 0.02489386
+775  85 2024             8691    269 0.02469307</code></pre>
 </div>
 </div>
 <p>The data contain observations by age and year:</p>

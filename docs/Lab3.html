@@ -369,41 +369,49 @@ window.Quarto = {
 <ul>
 <li><p>We discussed on lectures the maximum likelihood estimate (MLE) for unknown parameters of the data. One of the ways to use it in R, is to load package <code>MASS</code> (all capital letters). The command is then <code>fitdistr(DataVector, "name_of_distribution")</code>, where <code>DataVector</code> is the vector of values we want to fit, and <code>"name_of_distribution"</code> is a string like <code>"exponential"</code>, <code>"gamma"</code>, <code>"lognormal"</code>, <code>"normal"</code>, <code>"Poisson"</code>, <code>"weibull"</code>, and some others.</p></li>
 <li><p>To start, hence, you <strong>need to install</strong> package <code>MASS</code> to R-Studio (see <a href="./Lab2-Solutions.html#sec-package">Lab 2</a> on how to install a package).</p></li>
-<li><p>Let’s first generate <span class="math inline">\(50\)</span> values of a random variable <span class="math inline">\(X\sim Exp(\lambda)\)</span> with <span class="math inline">\(\lambda=0.1\)</span>.</p>
+<li><p>Let’s first generate <span class="math inline">\(50\)</span> values of a random variable <span class="math inline">\(X\sim Exp(\lambda)\)</span> with <span class="math inline">\(\lambda=0.1\)</span>.</p></li>
+</ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rexp</span>(<span class="at">n=</span><span class="dv">50</span>, <span class="at">rate=</span><span class="fl">0.1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div></li>
-<li><p>Now, suppose that we have only this data available and we want to estimate the value of <span class="math inline">\(\lambda\)</span> given that we believe the data is exponentially distributed.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">rexp</span>(<span class="at">n=</span><span class="dv">50</span>, <span class="at">rate=</span><span class="fl">0.1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ul>
+<li>Now, suppose that we have only this data available and we want to estimate the value of <span class="math inline">\(\lambda\)</span> given that we believe the data is exponentially distributed.</li>
+</ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First we load the previously installed package</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(MASS)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">fitdistr</span>(x, <span class="st">"exponential"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>  <span class="co"># First we load the previously installed package</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(MASS)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fitdistr</span>(x, <span class="st">"exponential"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      rate   
   0.09849806 
  (0.01392973)</code></pre>
 </div>
-</div></li>
+</div>
+<ul>
 <li><p><strong>Note that</strong> since <code>x</code> was random, your numbers may be (very) different.</p></li>
 <li><p>The first line of the output is the MLE <span class="math inline">\(\lambda_*\)</span>, which is apparently pretty close to <span class="math inline">\(0.1\)</span>. The second line of the output is the estimated standard errors (informally speaking, smaller—better!)</p></li>
-<li><p>We can access the MLE value itself (e.g.&nbsp;to use it later) by assigning <code>fitdistr</code> output to a variable, call it <code>f</code>, and access the component <code>estimate</code> of the object <code>f</code>, using standard for R <code>class$component</code> syntax:</p>
+<li><p>We can access the MLE value itself (e.g.&nbsp;to use it later) by assigning <code>fitdistr</code> output to a variable, call it <code>f</code>, and access the component <code>estimate</code> of the object <code>f</code>, using standard for R <code>class$component</code> syntax:</p></li>
+</ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> <span class="fu">fitdistr</span>(x, <span class="st">"exponential"</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>f<span class="sc">$</span>estimate</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>  f <span class="ot">&lt;-</span> <span class="fu">fitdistr</span>(x, <span class="st">"exponential"</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  f<span class="sc">$</span>estimate</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      rate 
 0.09849806 </code></pre>
 </div>
-</div></li>
-<li><p>It’s still not a number itself but a pair of name of the parameter (“rate”) and its MLE. To get the value, we <strong>unname</strong> it:</p>
+</div>
+<ul>
+<li>It’s still not a number itself but a pair of name of the parameter (“rate”) and its MLE. To get the value, we <strong>unname</strong> it:</li>
+</ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>lambda_mle <span class="ot">&lt;-</span> <span class="fu">unname</span>(f<span class="sc">$</span>estimate)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>lambda_mle</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>  lambda_mle <span class="ot">&lt;-</span> <span class="fu">unname</span>(f<span class="sc">$</span>estimate)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  lambda_mle</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.09849806</code></pre>
 </div>
-</div></li>
-<li><p>Note that, in this example, <code>f$estimate</code> had only one component (for one parameter <code>rate</code>). We could also write <code>unname(f$estimate[1])</code>. If there are several parameteres to estimate, we would use <code>f$estimate[2]</code>, <code>f$estimate[3]</code> etc.</p></li>
+</div>
+<ul>
+<li>Note that, in this example, <code>f$estimate</code> had only one component (for one parameter <code>rate</code>). We could also write <code>unname(f$estimate[1])</code>. If there are several parameteres to estimate, we would use <code>f$estimate[2]</code>, <code>f$estimate[3]</code> etc.</li>
 </ul>
 <section id="section" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="section"><span class="header-section-number">1.1</span> </h2>
@@ -427,18 +435,20 @@ window.Quarto = {
 </div>
 </div>
 <ul>
-<li><p>Even when standard errors are relatively small, it is still reasonable to ask ourselves how can we be certain that the data follows the particular disribution. Various statistical tests may be applied. For ungrouped data, as we have e.g.&nbsp;in vector <code>x</code>, the Kolmogorov–Smirnov test is widely used.</p>
+<li>Even when standard errors are relatively small, it is still reasonable to ask ourselves how can we be certain that the data follows the particular disribution. Various statistical tests may be applied. For ungrouped data, as we have e.g.&nbsp;in vector <code>x</code>, the Kolmogorov–Smirnov test is widely used.</li>
+</ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ks.test</span>(x, <span class="st">"pexp"</span>, <span class="at">rate =</span> lambda_mle)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ks.test</span>(x, <span class="st">"pexp"</span>, <span class="at">rate =</span> lambda_mle)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-  Exact one-sample Kolmogorov-Smirnov test
+    Exact one-sample Kolmogorov-Smirnov test
 
 data:  x
 D = 0.10167, p-value = 0.6423
 alternative hypothesis: two-sided</code></pre>
 </div>
-</div></li>
+</div>
+<ul>
 <li><p>It tests whether we should reject the null-hypothesis <span class="math inline">\(H_0\)</span> that the data follows the exponential distribution, against the alternative hypothesis <span class="math inline">\(H_1\)</span> that it does not.</p></li>
 <li><p>As you can see <code>ks.test</code> function has several arguments:</p>
 <ul>
@@ -483,16 +493,17 @@ alternative hypothesis: two-sided</code></pre>
 <li><p>Note that it is always better, firstly, <strong>preallocate</strong> the computer memory for the whole output vector, and then just change values of its coordinates inside the loop. This is much more effective than enlarging the vector with each step of the loop (especially for the vectors of large length).</p></li>
 <li><p>For example, you can preallocate the memory by creating a zero-vector of the needed length <code>m</code>, using R command <code>numeric(m)</code>.</p></li>
 <li><p>The code below solves the followin problem. If we generate <span class="math inline">\(10^4\)</span> random variables distributed normally with <span class="math inline">\(\mathcal{N}(0,1)\)</span> and then calculate the sample mean, the result will differ from the expected value <span class="math inline">\(0\)</span>. However, if we repeat this procedure many times (e.g.&nbsp;<span class="math inline">\(10^3\)</span> times) and record the obtained sample means, we will get values around <span class="math inline">\(0\)</span>.</p></li>
-<li><p>In the code below, <code>i</code> runs from <code>i=1</code> to <code>i=10^3</code>, <code>x</code> is a temporary variable which will be rewritten on every iteration of the loop <code>for</code>, and <code>mean(x)</code> will be assigned to the <code>i</code>-th component of vector <code>means</code>. Vector <code>means</code> was created in advance by preallocating zeros to its components.</p>
+<li><p>In the code below, <code>i</code> runs from <code>i=1</code> to <code>i=10^3</code>, <code>x</code> is a temporary variable which will be rewritten on every iteration of the loop <code>for</code>, and <code>mean(x)</code> will be assigned to the <code>i</code>-th component of vector <code>means</code>. Vector <code>means</code> was created in advance by preallocating zeros to its components.</p></li>
+</ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10</span><span class="sc">**</span><span class="dv">4</span>  <span class="co"># Number of random numbers in each sample</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="dv">10</span><span class="sc">**</span><span class="dv">3</span> <span class="co"># Number of samples</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>means <span class="ot">&lt;-</span> <span class="fu">numeric</span>(m) <span class="co"># Preallocated vector of means</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>m){</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    means[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(x)</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="dv">1</span><span class="sc">:</span>m, means,  <span class="at">xlab=</span><span class="st">"Trials"</span>, <span class="at">ylab=</span><span class="st">"Means"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="dv">10</span><span class="sc">**</span><span class="dv">4</span>  <span class="co"># Number of random numbers in each sample</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  m <span class="ot">&lt;-</span> <span class="dv">10</span><span class="sc">**</span><span class="dv">3</span> <span class="co"># Number of samples</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  means <span class="ot">&lt;-</span> <span class="fu">numeric</span>(m) <span class="co"># Preallocated vector of means</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>m){</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>      x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>      means[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(x)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="dv">1</span><span class="sc">:</span>m, means,  <span class="at">xlab=</span><span class="st">"Trials"</span>, <span class="at">ylab=</span><span class="st">"Means"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -500,8 +511,9 @@ alternative hypothesis: two-sided</code></pre>
 </figure>
 </div>
 </div>
-</div></li>
-<li><p>The plot shows that the obtained means indeed fluctuates around the expected value <span class="math inline">\(0\)</span>.</p></li>
+</div>
+<ul>
+<li>The plot shows that the obtained means indeed fluctuates around the expected value <span class="math inline">\(0\)</span>.</li>
 </ul>
 <section id="section-3" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="section-3"><span class="header-section-number">2.1</span> </h2>
@@ -567,20 +579,20 @@ S^{(k)} = X_1^{(k)}+\ldots+X_{N_k}^{(k)}.
 </div>
 <ul>
 <li><p>Recall that a number <span class="math inline">\(q\)</span> is called <span class="math inline">\(\alpha\)</span>-percentile for a random variable <span class="math inline">\(X\)</span>, if <span class="math inline">\(\mathbb{P}(X\leq q)=\alpha\)</span>. As we discussed in <a href="./Lab1-Solutions.html">Lab 1</a>, in R, it’s called “quantiles”, and the corresponding functions starts with “q”: <code>qexp</code>, <code>qnorm</code> etc.</p></li>
-<li><p>We also discussed on a lecturethe notion of percentiles/quantiles for the data samples: we should order the sample, and find the number which divides it in the proportion <span class="math inline">\(\alpha/(1-\alpha)\)</span>. The corresponding R function is called <code>quantile</code>:</p>
+<li><p>We also discussed on a lecturethe notion of percentiles/quantiles for the data samples: we should order the sample, and find the number which divides it in the proportion <span class="math inline">\(\alpha/(1-\alpha)\)</span>. The corresponding R function is called <code>quantile</code>:</p></li>
+</ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fu">rpois</span>(<span class="at">n =</span> <span class="dv">10</span>, <span class="at">lambda =</span> <span class="dv">100</span>) </span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sort</span>(u) <span class="co"># This command is NOT needed for the quantile R function, it is just for better visualisation of the quantile function</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>  u <span class="ot">&lt;-</span> <span class="fu">rpois</span>(<span class="at">n =</span> <span class="dv">10</span>, <span class="at">lambda =</span> <span class="dv">100</span>) </span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sort</span>(u) <span class="co"># This command is NOT needed for the quantile R function, it is just for better visualisation of the quantile function</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1]  83  92  94  94  95  97 100 103 106 109</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(u,<span class="fl">0.3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">quantile</span>(u,<span class="fl">0.3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>30% 
  94 </code></pre>
 </div>
-</div></li>
-</ul>
+</div>
 </section>
 <section id="section-6" class="level2" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="section-6"><span class="header-section-number">3.3</span> </h2>

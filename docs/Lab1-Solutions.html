@@ -802,9 +802,10 @@ f_X(x) = \lambda e^{-\lambda x}, \qquad x\geq0.
 \boxed{\ \P(a\leq x\leq b)= F_X(b)- F_X(a)\ \vphantom{\biggl(}}
 \tag{1}\]</span></span></p>
 <ul>
-<li><p>For the PDF <span class="math inline">\(f_X(x)\)</span>, we use R-function <code>dexp(x, lambda)</code> where <code>lambda</code> is the value of <span class="math inline">\(\lambda\)</span>. The full code is <code>dexp(x, rate = lambda)</code> but as soon as <code>lambda</code> is on the second position, the word <code>rate</code> can be omitted. The default value of <code>rate</code> is <span class="math inline">\(1\)</span>. The following code gives the value of the PDF for <span class="math inline">\(\lambda=3\)</span> at <span class="math inline">\(x=5\)</span>, i.e.&nbsp;the value <span class="math inline">\(f_X(5) = 3\cdot e^{-3\cdot 5}=3e^{-15}\)</span>:</p>
+<li>For the PDF <span class="math inline">\(f_X(x)\)</span>, we use R-function <code>dexp(x, lambda)</code> where <code>lambda</code> is the value of <span class="math inline">\(\lambda\)</span>. The full code is <code>dexp(x, rate = lambda)</code> but as soon as <code>lambda</code> is on the second position, the word <code>rate</code> can be omitted. The default value of <code>rate</code> is <span class="math inline">\(1\)</span>. The following code gives the value of the PDF for <span class="math inline">\(\lambda=3\)</span> at <span class="math inline">\(x=5\)</span>, i.e.&nbsp;the value <span class="math inline">\(f_X(5) = 3\cdot e^{-3\cdot 5}=3e^{-15}\)</span>:</li>
+</ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dexp</span>(<span class="dv">5</span>, <span class="dv">3</span>) <span class="co"># or, the same, dexp(5, rate = 3)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dexp</span>(<span class="dv">5</span>, <span class="dv">3</span>) <span class="co"># or, the same, dexp(5, rate = 3)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 9.17707e-07</code></pre>
 </div>
@@ -814,8 +815,7 @@ f_X(x) = \lambda e^{-\lambda x}, \qquad x\geq0.
 <div class="cell-output cell-output-stdout">
 <pre><code>0.000000917707</code></pre>
 </div>
-</div></li>
-</ul>
+</div>
 <p>One can check that the value is as expected:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dexp</span>(<span class="dv">5</span>, <span class="dv">3</span>) <span class="sc">==</span> <span class="dv">3</span> <span class="sc">*</span> <span class="fu">exp</span>(<span class="sc">-</span> <span class="dv">3</span><span class="sc">*</span><span class="dv">5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -943,14 +943,14 @@ F_X(a)=F_X(5)-0.4.
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rgamma</span>(<span class="dv">2</span>, <span class="at">shape =</span> <span class="fl">0.1</span>, <span class="at">rate =</span> <span class="fl">0.2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1.619667 1.364637</code></pre>
+<pre><code>[1] 4.901042e-13 1.020787e+00</code></pre>
 </div>
 </div>
 <p>and another output for the same input:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rgamma</span>(<span class="dv">2</span>, <span class="at">shape =</span> <span class="fl">0.1</span>, <span class="at">rate =</span> <span class="fl">0.2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.001953884 0.702667760</code></pre>
+<pre><code>[1] 7.851541e-07 1.417357e+00</code></pre>
 </div>
 </div>
 <p>To fix the output, we should “set a seed”: write the code <code>set.seed(m)</code> with any natural number instead of <code>m</code>. For each <code>m</code>, there will be a fixed output. If you change <code>m</code>, the output will also changes.</p>
